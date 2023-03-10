@@ -1,0 +1,141 @@
+Traceback (most recent call last):
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/asyncio/base_events.py", line 650, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/contextlib.py", line 222, in __aexit__
+    await self.gen.athrow(typ, value, traceback)
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/client.py", line 608, in async_setup_kernel
+    yield
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/kthyng/miniconda3/envs/ciofs/lib/python3.11/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+year = 2016
+run_year(year)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:210[0m, in [0;36mCachingFileManager._acquire_with_cache_info[0;34m(self, needs_lock)[0m
+[1;32m    209[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 210[0m     file [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_cache[49m[43m[[49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_key[49m[43m][49m
+[1;32m    211[0m [38;5;28;01mexcept[39;00m [38;5;167;01mKeyError[39;00m:
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/lru_cache.py:56[0m, in [0;36mLRUCache.__getitem__[0;34m(self, key)[0m
+[1;32m     55[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39m_lock:
+[0;32m---> 56[0m     value [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_cache[49m[43m[[49m[43mkey[49m[43m][49m
+[1;32m     57[0m     [38;5;28mself[39m[38;5;241m.[39m_cache[38;5;241m.[39mmove_to_end(key)
+
+[0;31mKeyError[0m: [<class 'netCDF4._netCDF4.Dataset'>, ('/Users/kthyng/projects/ciofs-hindcast-report/ciofs-hindcast-report/output/river/axiom.ciofs.river.20160201.nc',), 'a', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '5497d236-bf99-4ef5-8479-843271ef87da']
+
+During handling of the above exception, another exception occurred:
+
+[0;31mPermissionError[0m                           Traceback (most recent call last)
+Cell [0;32mIn[40], line 2[0m
+[1;32m      1[0m year [38;5;241m=[39m [38;5;241m2016[39m
+[0;32m----> 2[0m [43mrun_year[49m[43m([49m[43myear[49m[43m)[49m
+
+Cell [0;32mIn[2], line 16[0m, in [0;36mrun_year[0;34m(year)[0m
+[1;32m     14[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m os[38;5;241m.[39mpath[38;5;241m.[39mexists(fname) [38;5;129;01mor[39;00m [38;5;129;01mnot[39;00m os[38;5;241m.[39mpath[38;5;241m.[39mexists(fname[38;5;241m.[39mreplace([38;5;124m"[39m[38;5;124m.nc[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124m.txt[39m[38;5;124m"[39m)):
+[1;32m     15[0m     ds [38;5;241m=[39m create_river_forcing_file(start, end, ndays[38;5;241m=[39m[38;5;241m8[39m, skip_last[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;32m---> 16[0m     [43mds[49m[38;5;241;43m.[39;49m[43mto_netcdf[49m[43m([49m[43mfname[49m[43m)[49m
+[1;32m     18[0m [38;5;28mprint[39m(Code(fname[38;5;241m.[39mreplace([38;5;124m"[39m[38;5;124m.nc[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124m.txt[39m[38;5;124m"[39m)))
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/core/dataset.py:1911[0m, in [0;36mDataset.to_netcdf[0;34m(self, path, mode, format, group, engine, encoding, unlimited_dims, compute, invalid_netcdf)[0m
+[1;32m   1908[0m     encoding [38;5;241m=[39m {}
+[1;32m   1909[0m [38;5;28;01mfrom[39;00m [38;5;21;01mxarray[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mimport[39;00m to_netcdf
+[0;32m-> 1911[0m [38;5;28;01mreturn[39;00m [43mto_netcdf[49m[43m([49m[43m  [49m[38;5;66;43;03m# type: ignore  # mypy cannot resolve the overloads:([39;49;00m
+[1;32m   1912[0m [43m    [49m[38;5;28;43mself[39;49m[43m,[49m
+[1;32m   1913[0m [43m    [49m[43mpath[49m[43m,[49m
+[1;32m   1914[0m [43m    [49m[43mmode[49m[38;5;241;43m=[39;49m[43mmode[49m[43m,[49m
+[1;32m   1915[0m [43m    [49m[38;5;28;43mformat[39;49m[38;5;241;43m=[39;49m[38;5;28;43mformat[39;49m[43m,[49m
+[1;32m   1916[0m [43m    [49m[43mgroup[49m[38;5;241;43m=[39;49m[43mgroup[49m[43m,[49m
+[1;32m   1917[0m [43m    [49m[43mengine[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m
+[1;32m   1918[0m [43m    [49m[43mencoding[49m[38;5;241;43m=[39;49m[43mencoding[49m[43m,[49m
+[1;32m   1919[0m [43m    [49m[43munlimited_dims[49m[38;5;241;43m=[39;49m[43munlimited_dims[49m[43m,[49m
+[1;32m   1920[0m [43m    [49m[43mcompute[49m[38;5;241;43m=[39;49m[43mcompute[49m[43m,[49m
+[1;32m   1921[0m [43m    [49m[43mmultifile[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m   1922[0m [43m    [49m[43minvalid_netcdf[49m[38;5;241;43m=[39;49m[43minvalid_netcdf[49m[43m,[49m
+[1;32m   1923[0m [43m[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/api.py:1200[0m, in [0;36mto_netcdf[0;34m(dataset, path_or_file, mode, format, group, engine, encoding, unlimited_dims, compute, multifile, invalid_netcdf)[0m
+[1;32m   1196[0m     [38;5;28;01melse[39;00m:
+[1;32m   1197[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   1198[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124munrecognized option [39m[38;5;124m'[39m[38;5;124minvalid_netcdf[39m[38;5;124m'[39m[38;5;124m for engine [39m[38;5;132;01m{[39;00mengine[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m   1199[0m         )
+[0;32m-> 1200[0m store [38;5;241m=[39m [43mstore_open[49m[43m([49m[43mtarget[49m[43m,[49m[43m [49m[43mmode[49m[43m,[49m[43m [49m[38;5;28;43mformat[39;49m[43m,[49m[43m [49m[43mgroup[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   1202[0m [38;5;28;01mif[39;00m unlimited_dims [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   1203[0m     unlimited_dims [38;5;241m=[39m dataset[38;5;241m.[39mencoding[38;5;241m.[39mget([38;5;124m"[39m[38;5;124munlimited_dims[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m)
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:382[0m, in [0;36mNetCDF4DataStore.open[0;34m(cls, filename, mode, format, group, clobber, diskless, persist, lock, lock_maker, autoclose)[0m
+[1;32m    376[0m kwargs [38;5;241m=[39m [38;5;28mdict[39m(
+[1;32m    377[0m     clobber[38;5;241m=[39mclobber, diskless[38;5;241m=[39mdiskless, persist[38;5;241m=[39mpersist, [38;5;28mformat[39m[38;5;241m=[39m[38;5;28mformat[39m
+[1;32m    378[0m )
+[1;32m    379[0m manager [38;5;241m=[39m CachingFileManager(
+[1;32m    380[0m     netCDF4[38;5;241m.[39mDataset, filename, mode[38;5;241m=[39mmode, kwargs[38;5;241m=[39mkwargs
+[1;32m    381[0m )
+[0;32m--> 382[0m [38;5;28;01mreturn[39;00m [38;5;28;43mcls[39;49m[43m([49m[43mmanager[49m[43m,[49m[43m [49m[43mgroup[49m[38;5;241;43m=[39;49m[43mgroup[49m[43m,[49m[43m [49m[43mmode[49m[38;5;241;43m=[39;49m[43mmode[49m[43m,[49m[43m [49m[43mlock[49m[38;5;241;43m=[39;49m[43mlock[49m[43m,[49m[43m [49m[43mautoclose[49m[38;5;241;43m=[39;49m[43mautoclose[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:329[0m, in [0;36mNetCDF4DataStore.__init__[0;34m(self, manager, group, mode, lock, autoclose)[0m
+[1;32m    327[0m [38;5;28mself[39m[38;5;241m.[39m_group [38;5;241m=[39m group
+[1;32m    328[0m [38;5;28mself[39m[38;5;241m.[39m_mode [38;5;241m=[39m mode
+[0;32m--> 329[0m [38;5;28mself[39m[38;5;241m.[39mformat [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mds[49m[38;5;241m.[39mdata_model
+[1;32m    330[0m [38;5;28mself[39m[38;5;241m.[39m_filename [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mds[38;5;241m.[39mfilepath()
+[1;32m    331[0m [38;5;28mself[39m[38;5;241m.[39mis_remote [38;5;241m=[39m is_remote_uri([38;5;28mself[39m[38;5;241m.[39m_filename)
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:391[0m, in [0;36mNetCDF4DataStore.ds[0;34m(self)[0m
+[1;32m    389[0m [38;5;129m@property[39m
+[1;32m    390[0m [38;5;28;01mdef[39;00m [38;5;21mds[39m([38;5;28mself[39m):
+[0;32m--> 391[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_acquire[49m[43m([49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:385[0m, in [0;36mNetCDF4DataStore._acquire[0;34m(self, needs_lock)[0m
+[1;32m    384[0m [38;5;28;01mdef[39;00m [38;5;21m_acquire[39m([38;5;28mself[39m, needs_lock[38;5;241m=[39m[38;5;28;01mTrue[39;00m):
+[0;32m--> 385[0m [43m    [49m[38;5;28;43;01mwith[39;49;00m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_manager[49m[38;5;241;43m.[39;49m[43macquire_context[49m[43m([49m[43mneeds_lock[49m[43m)[49m[43m [49m[38;5;28;43;01mas[39;49;00m[43m [49m[43mroot[49m[43m:[49m
+[1;32m    386[0m [43m        [49m[43mds[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43m_nc4_require_group[49m[43m([49m[43mroot[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_group[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_mode[49m[43m)[49m
+[1;32m    387[0m     [38;5;28;01mreturn[39;00m ds
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/contextlib.py:137[0m, in [0;36m_GeneratorContextManager.__enter__[0;34m(self)[0m
+[1;32m    135[0m [38;5;28;01mdel[39;00m [38;5;28mself[39m[38;5;241m.[39margs, [38;5;28mself[39m[38;5;241m.[39mkwds, [38;5;28mself[39m[38;5;241m.[39mfunc
+[1;32m    136[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 137[0m     [38;5;28;01mreturn[39;00m [38;5;28mnext[39m([38;5;28mself[39m[38;5;241m.[39mgen)
+[1;32m    138[0m [38;5;28;01mexcept[39;00m [38;5;167;01mStopIteration[39;00m:
+[1;32m    139[0m     [38;5;28;01mraise[39;00m [38;5;167;01mRuntimeError[39;00m([38;5;124m"[39m[38;5;124mgenerator didn[39m[38;5;124m'[39m[38;5;124mt yield[39m[38;5;124m"[39m) [38;5;28;01mfrom[39;00m [38;5;28mNone[39m
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:198[0m, in [0;36mCachingFileManager.acquire_context[0;34m(self, needs_lock)[0m
+[1;32m    195[0m [38;5;129m@contextlib[39m[38;5;241m.[39mcontextmanager
+[1;32m    196[0m [38;5;28;01mdef[39;00m [38;5;21macquire_context[39m([38;5;28mself[39m, needs_lock[38;5;241m=[39m[38;5;28;01mTrue[39;00m):
+[1;32m    197[0m [38;5;250m    [39m[38;5;124;03m"""Context manager for acquiring a file."""[39;00m
+[0;32m--> 198[0m     file, cached [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_acquire_with_cache_info[49m[43m([49m[43mneeds_lock[49m[43m)[49m
+[1;32m    199[0m     [38;5;28;01mtry[39;00m:
+[1;32m    200[0m         [38;5;28;01myield[39;00m file
+
+File [0;32m~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:216[0m, in [0;36mCachingFileManager._acquire_with_cache_info[0;34m(self, needs_lock)[0m
+[1;32m    214[0m     kwargs [38;5;241m=[39m kwargs[38;5;241m.[39mcopy()
+[1;32m    215[0m     kwargs[[38;5;124m"[39m[38;5;124mmode[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_mode
+[0;32m--> 216[0m file [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_opener[49m[43m([49m[38;5;241;43m*[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_args[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    217[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_mode [38;5;241m==[39m [38;5;124m"[39m[38;5;124mw[39m[38;5;124m"[39m:
+[1;32m    218[0m     [38;5;66;03m# ensure file doesn't get overridden when opened again[39;00m
+[1;32m    219[0m     [38;5;28mself[39m[38;5;241m.[39m_mode [38;5;241m=[39m [38;5;124m"[39m[38;5;124ma[39m[38;5;124m"[39m
+
+File [0;32msrc/netCDF4/_netCDF4.pyx:2449[0m, in [0;36mnetCDF4._netCDF4.Dataset.__init__[0;34m()[0m
+
+File [0;32msrc/netCDF4/_netCDF4.pyx:2012[0m, in [0;36mnetCDF4._netCDF4._ensure_nc_success[0;34m()[0m
+
+[0;31mPermissionError[0m: [Errno 13] Permission denied: '/Users/kthyng/projects/ciofs-hindcast-report/ciofs-hindcast-report/output/river/axiom.ciofs.river.20160201.nc'
+PermissionError: [Errno 13] Permission denied: '/Users/kthyng/projects/ciofs-hindcast-report/ciofs-hindcast-report/output/river/axiom.ciofs.river.20160201.nc'
+

@@ -1,0 +1,1071 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Details about river forcing files &#8212; CIOFS Hindcast Report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'river_forcing_demo';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Make monthly river forcing files for 1998–2018" href="river_forcing_make_files.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Details about river forcing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="river_forcing_make_files.html">Make monthly river forcing files for 1998–2018</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/axiom-data-science/ciofs-hindcast-report" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/axiom-data-science/ciofs-hindcast-report/issues/new?title=Issue%20on%20page%20%2Friver_forcing_demo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/river_forcing_demo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Details about river forcing files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-information">Background information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-approach">General approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discharge">Discharge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#water-temperature">Water temperature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-details">More details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discharge-for-station-15292780">Discharge for Station 15292780</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-variation-of-water-temperature">Geographic variation of water temperature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean-of-gage-data">Rolling mean of gage data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrate-using-the-rating-curve">Demonstrate using the rating curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-time-series">Mean time series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-axiom-and-noaa-versions-of-two-river-forcing-files">Comparing Axiom and NOAA versions of two river forcing files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#december-2022-file">December 2022 file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#january-2023-file">January 2023 file</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dataretrieval.nwis</span> <span class="k">as</span> <span class="nn">nwis</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">create_river_roms</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="details-about-river-forcing-files">
+<h1>Details about river forcing files<a class="headerlink" href="#details-about-river-forcing-files" title="Permalink to this headline">#</a></h1>
+<p>We use the <a class="reference external" href="https://doi-usgs.github.io/dataretrieval-python"><code class="docutils literal notranslate"><span class="pre">dataretrieval-python</span></code></a> package to access USGS NWIS river data.</p>
+<section id="background-information">
+<h2>Background information<a class="headerlink" href="#background-information" title="Permalink to this headline">#</a></h2>
+<p>There is a <a class="reference external" href="https://tidesandcurrents.noaa.gov/ofs/publications/CS_Techrpt_040_SA_CIOFS_2020.pdf">report</a> from the Coast Survey Development Laboratory modeling group’s development of the CIOFS model, and this along with two nowcast rivers forcing files we received from the NOAA OFS modeling group is what we used to create our own river forcing files, trying to follow the same logic when possible.</p>
+<p>Freshwater is included in the CIOFS model as 12 rivers spread over 36 river points. The rivers included are listed in the left column here:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number</p></th>
+<th class="text-left head"><p>River Station in Model</p></th>
+<th class="text-left head"><p>USGS Station Used: Discharge</p></th>
+<th class="text-left head"><p>USGS Station Used: Water temp</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td class="text-left"><p>15295700: <br> Terror River at mouth near Kodiak, AK</p></td>
+<td class="text-left"><p>15295700</p></td>
+<td class="text-left"><p>15295700</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td class="text-left"><p>15239070: <br> Bradley River near Tidewater near Homer, AK</p></td>
+<td class="text-left"><p>15239070</p></td>
+<td class="text-left"><p>15239070</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td class="text-left"><p>15239900: <br> Anchor River near Anchor Point, AK</p></td>
+<td class="text-left"><p>15239900</p></td>
+<td class="text-left"><p>15239900</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td class="text-left"><p>15266300: <br> Kenai River at Soldotna, AK</p></td>
+<td class="text-left"><p>15266300</p></td>
+<td class="text-left"><p>15266300</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td class="text-left"><p>15271000: <br> Sixmile Creek near Hope, AK</p></td>
+<td class="text-left"><p>15271000</p></td>
+<td class="text-left"><p>15258000: <br> Kenai River at Cooper Landing AK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td class="text-left"><p>15274600: <br> Campbell Creek near Spendard, AK</p></td>
+<td class="text-left"><p>15274600</p></td>
+<td class="text-left"><p>15276000: <br> Ship Canal near Anchorage AK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td class="text-left"><p>15275100: <br> Chester Canal at Arctic Boulevard at Anchorage, AK</p></td>
+<td class="text-left"><p>15275100</p></td>
+<td class="text-left"><p>15276000: <br> Ship Canal near Anchorage AK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td class="text-left"><p>15276000: <br> Ship Canal near Anchorage, AK</p></td>
+<td class="text-left"><p>15276000</p></td>
+<td class="text-left"><p>15276000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td class="text-left"><p>15281000: <br> Knik River near Palmer, AK</p></td>
+<td class="text-left"><p>15281000</p></td>
+<td class="text-left"><p>15284000: <br> Matanuska River near Palmer, AK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td class="text-left"><p>15284000: <br> Matanuska River near Palmer, AK</p></td>
+<td class="text-left"><p>15284000</p></td>
+<td class="text-left"><p>15284000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td class="text-left"><p>15290000: <br> Little Susitna River near Palmer, AK</p></td>
+<td class="text-left"><p>15290000</p></td>
+<td class="text-left"><p>15290000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td class="text-left"><p>15292780: <br> Susitna River at Sunshine, AK</p></td>
+<td class="text-left"><p>15292000: <br> Susitna River at Gold Creek AK</p></td>
+<td class="text-left"><p>15292780</p></td>
+<td><p>Discharge from 15292000 is multiplied by 2.</p></td>
+</tr>
+</tbody>
+</table>
+<p>River input locations are shown on this map from the development report:</p>
+<p><img alt="image.png" src="attachment:c5ede5b9-c463-4aa7-a40f-4b778c797163.png" /></p>
+<p>We followed what we saw in two river forcing files from the CIOFS group, and ascertained some details to include in the data processing:</p>
+<ul class="simple">
+<li><p>River salinity is set to 0.005 for all rivers</p></li>
+<li><p>River temperature is never allowed below 1 degree Celsius.</p></li>
+<li><p>Use all data in UTC.</p></li>
+</ul>
+</section>
+<section id="general-approach">
+<h2>General approach<a class="headerlink" href="#general-approach" title="Permalink to this headline">#</a></h2>
+<p>This is a text flow chart of the logic in <code class="docutils literal notranslate"><span class="pre">create_river_roms.py</span></code>. Logic flows first down, then across a line and stops if “Done”, otherwise continues down the list.</p>
+<section id="discharge">
+<h3>Discharge<a class="headerlink" href="#discharge" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li><p>get discharge data.</p></li>
+<li><p>Check for:</p>
+<ol class="arabic simple">
+<li><p>empty → check gage data</p></li>
+<li><p>fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.</p></li>
+<li><p>Reindex to fill all missing times with nans</p></li>
+<li><p>Deal with other flags</p>
+<ol class="arabic simple">
+<li><p>Any questionable flags present (estimate flags: “A, e”, “P, e”)?</p></li>
+<li><p>Is there good (“A” or “P”) gage data during the time period of the questionable flags?</p>
+<ol class="arabic simple">
+<li><p>no? keep questionable data.</p></li>
+<li><p>yes? fill questionable flag data values with nan.</p></li>
+</ol>
+</li>
+<li><p>Any bad flags present? (ice or equipment malfunction: “P, Ice”, “P, Eqp”, “A, Ice”, “A, Eqp”)</p>
+<ol class="arabic simple">
+<li><p>fill bad flags data with nan</p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Check gap lengths.</p></li>
+</ol>
+</li>
+<li><p>Has gaps in data. Process all gaps. If gaps are:</p>
+<ol class="arabic simple">
+<li><p>Less than 8 days → interpolate</p></li>
+<li><p>Over 8 days → check gage data</p></li>
+</ol>
+</li>
+</ol>
+<p>Gage data:</p>
+<ol class="arabic simple">
+<li><p>Get gage data.</p></li>
+<li><p>Check for:</p>
+<ol class="arabic simple">
+<li><p>rating curve data empty or gage data empty → use mean. Done.</p></li>
+<li><p>fully present with good data flags → estimate with gage data. Done.</p></li>
+<li><p>Reindex to fill all missing times with nans</p></li>
+<li><p>Deal with other flags.</p>
+<ol class="arabic simple">
+<li><p>Fill ice flag data with 0s.</p></li>
+<li><p>Fill eqp flag data with nans (to be filled in as gaps).</p></li>
+</ol>
+</li>
+<li><p>Estimate discharge from gage data time series</p></li>
+<li><p>Check gap lengths</p></li>
+</ol>
+</li>
+<li><p>Has gaps in data. Gaps are:</p>
+<ol class="arabic simple">
+<li><p>Less than 8 days → interpolate</p></li>
+<li><p>Over 8 days → use mean data</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="water-temperature">
+<h3>Water temperature<a class="headerlink" href="#water-temperature" title="Permalink to this headline">#</a></h3>
+<ol class="arabic simple">
+<li><p>get temp data.</p></li>
+<li><p>Check for:</p>
+<ol class="arabic simple">
+<li><p>empty → use mean data. Done.</p></li>
+<li><p>fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.</p></li>
+<li><p>Reindex to fill all missing times with nans</p></li>
+<li><p>Check gap lengths.</p></li>
+</ol>
+</li>
+<li><p>Has gaps in data. Process all gaps. If gaps are:</p>
+<ol class="arabic simple">
+<li><p>Less than 8 days → interpolate</p></li>
+<li><p>Over 8 days → use mean data</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="more-details">
+<h2>More details<a class="headerlink" href="#more-details" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Station substitutes are listed in the Station Table above. There is one station substitute for discharge, and more for water temperature.</p></li>
+<li><p>The model development report stated that because the desired Station 15292780 is not available for a long time, they substituted discharge from Station 15292000 and multiplied by 2 to approximate the difference seen between the two stations.</p></li>
+<li><p>The model development report stated that temperatures from Bradley River (Station 15292780) were used for all stations. We decided to allow the water temperature to vary in space.</p></li>
+<li><p>We perform a rolling mean of the gage data</p></li>
+<li><p>We use rating curve data with gage data to estimate discharge when discharge is not available.</p></li>
+<li><p>We use mean time series when neither discharge nor gage data is available for estimating discharge, and for water temperature when real-time data is not available.</p></li>
+</ul>
+<p>Details for each point are below.</p>
+<section id="discharge-for-station-15292780">
+<h3>Discharge for Station 15292780<a class="headerlink" href="#discharge-for-station-15292780" title="Permalink to this headline">#</a></h3>
+<p>The NOAA Report states that they used Station 15292000 discharge multiplied by 2 to replace discharge from Station 15292780 since Station 15292780 has a relatively short lifespan. We do the same in our simulations. Here is the comparison of the daily means for these two time series, including the multiplication factor. The match is reasonable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15292780&quot;</span>
+<span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2012-1-1&quot;</span>
+<span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;2020-12-31&quot;</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_record</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+<span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15292000&quot;</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_record</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="s2">&quot;00060_Mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="s2">&quot;2019&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;15292780&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;00060_Mean&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="s2">&quot;2019&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;15292000 * 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;River discharge [m$^3$/s]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;River discharge [m$^3$/s]&#39;)
+</pre></div>
+</div>
+<img alt="_images/b7c72350f0fae6e22423b2ac4dfad803f56a40f220e770b33d27842b7d1f2086.png" src="_images/b7c72350f0fae6e22423b2ac4dfad803f56a40f220e770b33d27842b7d1f2086.png" />
+</div>
+</div>
+</section>
+<section id="geographic-variation-of-water-temperature">
+<h3>Geographic variation of water temperature<a class="headerlink" href="#geographic-variation-of-water-temperature" title="Permalink to this headline">#</a></h3>
+<p>The development report states that Bradley River (15239070) was used to represent all rivers in the model. We chose to allow for spatially-varying data. This one year of data shows an example of the variation in temperature data across the region. There is a fair amount of variation, but we have run no tests to analyze how impactful the variation is for the final results.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="mi">2015</span>
+<span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;output/river&quot;</span>
+<span class="n">locs</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">/axiom.ciofs.river.</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">*.nc&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">locs</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">})</span>
+
+<span class="n">unique_inds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">station_list_file</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">station_list_file</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrivers</span><span class="p">)]))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">station_list_file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unique_inds</span><span class="p">]</span>
+<span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">river</span><span class="o">=</span><span class="n">unique_inds</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;river_time&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x16434b290&gt;
+</pre></div>
+</div>
+<img alt="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" src="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" />
+</div>
+</div>
+</section>
+<section id="rolling-mean-of-gage-data">
+<h3>Rolling mean of gage data<a class="headerlink" href="#rolling-mean-of-gage-data" title="Permalink to this headline">#</a></h3>
+<p>We include a rolling mean over 24 hours of gage data because it can be jumpy sometimes. This is in addition to a final rolling mean of the resulting discharge and temperature data. As an example as to this effect, we show gage data from Station “15276000” in December 2010 before and after applying a rolling mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;2010-12-1T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-12-31T00:00&quot;</span>
+<span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15276000&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00065&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;00065&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;No rolling mean&quot;</span><span class="p">)</span>
+<span class="c1"># this data is every 15 minutes</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;00065&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;With 24-hour rolling mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gage data [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Station 15276000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Station 15276000&#39;)
+</pre></div>
+</div>
+<img alt="_images/dcef4c82103a3ba420b46a80145dff7bff9e1fddd20a8a77774251813867431e.png" src="_images/dcef4c82103a3ba420b46a80145dff7bff9e1fddd20a8a77774251813867431e.png" />
+</div>
+</div>
+</section>
+<section id="demonstrate-using-the-rating-curve">
+<h3>Demonstrate using the rating curve<a class="headerlink" href="#demonstrate-using-the-rating-curve" title="Permalink to this headline">#</a></h3>
+<p>When discharge data is not available or is flagged as an “estimate”, real-time gage data will be used if available. As described by the <a class="reference external" href="https://www.usgs.gov/faqs/how-rating-curve-used-convert-gage-height-streamflow">USGS</a>, the rating curve gives an empirical relationship between gage height and discharge in the form of a table. We use this data, when available, to convert gage data to a discharge estimate. If necessary, we extrapolate the rating curve up or down with a third-order polynomial to match the gage data, but we <a class="reference external" href="https://kacv.net/brad/nws/lesson7.html">cap it at twice the highest measured discharge</a> and do not allow negative discharge.</p>
+<p>Here is an example which shows the rating curve for Station 15295700 as well as an extrapolation up and down to higher and lower gage values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ratingDataOrig</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_ratings</span><span class="p">(</span><span class="n">site</span><span class="o">=</span><span class="s2">&quot;15295700&quot;</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;exsa&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ratingDataHigher</span> <span class="o">=</span> <span class="n">extrapolate_rating_curve</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">,</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">)</span>
+<span class="n">ratingDataLower</span> <span class="o">=</span> <span class="n">extrapolate_rating_curve</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">,</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;down&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">ratingDataHigher</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;INDEP&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;DEP&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Extrapolates up&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ratingDataLower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;INDEP&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;DEP&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Extrapolates down&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">ratingDataOrig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;INDEP&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;DEP&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original data&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gage height [feet]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Discharge [ft$^3$/s]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Discharge [ft$^3$/s]&#39;)
+</pre></div>
+</div>
+<img alt="_images/e2b5cb693dc24c96c824109da45f637f8f9d72e166250d5e8386ea1bb556dd00.png" src="_images/e2b5cb693dc24c96c824109da45f637f8f9d72e166250d5e8386ea1bb556dd00.png" />
+</div>
+</div>
+<p>Below is a comparison for a time period when both discharge and gage data are available at a station to compare the two methods. They are similar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;2009-05-01T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2009-08-01T00:00&quot;</span>
+<span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15266300&quot;</span>
+<span class="n">gage_data</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00065&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)[</span><span class="s2">&quot;00065&quot;</span><span class="p">]</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span>
+<span class="n">estimate</span> <span class="o">=</span> <span class="n">estimate_discharge_from_gage_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">gage_data</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="n">discharge_data</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00060&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)[</span><span class="s2">&quot;00060&quot;</span><span class="p">]</span>
+
+<span class="n">discharge_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;discharge data&quot;</span><span class="p">)</span>
+<span class="n">estimate</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimate from gage data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Discharge [ft$^3$/s]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164248f10&gt;
+</pre></div>
+</div>
+<img alt="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" src="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" />
+</div>
+</div>
+</section>
+<section id="mean-time-series">
+<h3>Mean time series<a class="headerlink" href="#mean-time-series" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15266300&quot;</span>
+<span class="c1"># start and end are for returning the desired window of values, not for computing the mean time series</span>
+<span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;2010-1-1T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2010-12-31T00:00&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">find_mean_time_series</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00060&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Discharge [ft$^3$/s]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean time series for Station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean time series for Station 15266300&#39;)
+</pre></div>
+</div>
+<img alt="_images/c6ab22bb4d86873da2a3da6dd67698e360427bea2972cf0a20b140ff300eb5aa.png" src="_images/c6ab22bb4d86873da2a3da6dd67698e360427bea2972cf0a20b140ff300eb5aa.png" />
+</div>
+</div>
+<p>The impact of substituting the mean time series data in for the discharge when needed is that there could be a jump between the two signals. We simply perform a 12 hour rolling mean on the discharge signal at the end of processing in order to improve this, but it is a small measure; there will still be some unrealistic jumps in the river signals. However, we think it is worth it to have more freshwater entering the model domain when we know it is present and important to the region.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;1998-11-01T00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;1998-12-31T00:00&quot;</span>
+<span class="n">station</span> <span class="o">=</span> <span class="s2">&quot;15266300&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">find_discharge</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Discharge [ft$^3$/s]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated discharge for Station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Estimated discharge for Station 15266300&#39;)
+</pre></div>
+</div>
+<img alt="_images/dc3fbc97fe24a26c7d69d980db0746afd661787706821c9bcde9a055a1a04adb.png" src="_images/dc3fbc97fe24a26c7d69d980db0746afd661787706821c9bcde9a055a1a04adb.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="comparing-axiom-and-noaa-versions-of-two-river-forcing-files">
+<h2>Comparing Axiom and NOAA versions of two river forcing files<a class="headerlink" href="#comparing-axiom-and-noaa-versions-of-two-river-forcing-files" title="Permalink to this headline">#</a></h2>
+<p>We received two example nowcast river forcing files which we recreate here as a comparison with our methods. Note that in order to compare with the four-day nowcast files we do two things differently from our month-long hindcast forcing files:</p>
+<ol class="arabic simple">
+<li><p>interpolate under 2 days and use gage or mean time series data over 2 days instead of 8 days for both</p></li>
+<li><p>do not apply a rolling mean of 12 hours</p></li>
+</ol>
+<p>The main differences seen below are:</p>
+<ol class="arabic simple">
+<li><p>We estimate discharge if gage data is available and discharge data is unavaiable or unreliable, and if gage data isn’t available but the instrument is not flagged as “iced”, then we include discharge from the statistical mean time series for the station. Because of this, we include much more freshwater input as compared with the example files. NOAA’s file does include an estimate of discharge from gage data from one river, but not from other rivers. Perhaps when running operationally, it is not always possible to estimate the discharge using gage data</p></li>
+<li><p>We used geographically-varying water temperature data, whereas the NOAA groups use data only from Bradley River (Station 15239070). When real-time water temperature data is not available, we use the statistical mean time series for the station. When a station has never had an instrument to measure water data, we have a replacement station as shown in the station table.</p></li>
+<li><p>The nowcast forcing files are created by NOAA at the mid point of the time series such that they use the real-time data up until the start of the simulation, and the second half of the forcing is a simple linear extrapolation of the available data (which is why they appear as straight lines for those times).</p></li>
+</ol>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_comparison</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">dscompare</span><span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+    <span class="n">color_noaa</span> <span class="o">=</span> <span class="s2">&quot;cornflowerblue&quot;</span>
+    <span class="n">color_axiom</span> <span class="o">=</span> <span class="s2">&quot;hotpink&quot;</span>
+    <span class="n">kwargs_line</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">,</span> <span class="s2">&quot;lw&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="n">kwargs_noaa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color_noaa</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;NOAA&quot;</span><span class="p">}</span>
+    <span class="n">kwargs_axiom</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color_axiom</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Axiom&quot;</span><span class="p">,</span> <span class="s2">&quot;ls&quot;</span><span class="p">:</span> <span class="s2">&quot;--&quot;</span><span class="p">}</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
+    <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
+    <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NOAA forcing file&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Axiom recreation&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NOAA-Axiom&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;River discharge&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="n">noaa_discharge</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;river_transport&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">3600</span><span class="o">/</span><span class="mi">1000</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># m^3/s * 3600 s for hour * (1km/1000m)^3</span>
+    <span class="n">axiom_discharge</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dscompare</span><span class="p">[</span><span class="s1">&#39;river_transport&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">3600</span><span class="o">/</span><span class="mi">1000</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># m^3/s * 3600 s for hour</span>
+
+    <span class="n">unique_inds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">station_list_file</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">station_list_file</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrivers</span><span class="p">)]))</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">station_list_file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unique_inds</span><span class="p">]</span>
+    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">river</span><span class="o">=</span><span class="n">unique_inds</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NOAA forcing file: all unique river transport. Total discharge: </span><span class="si">{</span><span class="n">noaa_discharge</span><span class="si">}</span><span class="s2"> km^3.&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">river</span><span class="o">=</span><span class="n">unique_inds</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Axiom forcing file: all unique river transport. Total discharge: </span><span class="si">{</span><span class="n">axiom_discharge</span><span class="si">}</span><span class="s2"> km^3.&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="c1"># pull over rivers that have nonzero transport from original file</span>
+    <span class="n">ibool</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;river_time&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">][</span><span class="n">ibool</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;river_transport&quot;</span>
+    <span class="n">ds</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">river</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_noaa</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+    <span class="n">dscompare</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">river</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_axiom</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;River discharge for nonzero NOAA rivers.&quot;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
+    <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
+    <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NOAA forcing file&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Axiom recreation&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NOAA-Axiom&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;River temperature&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># pull over rivers that have non-one temp from Axiom file</span>
+    <span class="n">ibool</span> <span class="o">=</span> <span class="p">(</span><span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">&quot;river_time&quot;</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">dscompare</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">][</span><span class="n">ibool</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;river_temp&quot;</span>
+    <span class="n">ds</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">river</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_noaa</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+    <span class="n">dscompare</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">s_rho</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">river</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_line</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_axiom</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;River temps for Axiom rivers above 1˚ C.&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="december-2022-file">
+<h3>December 2022 file<a class="headerlink" href="#december-2022-file" title="Permalink to this headline">#</a></h3>
+<p>The total amount of discharge input over the 4 days in the forcing file is much larger from the Axiom file: 0.1 km<span class="math notranslate nohighlight">\(^3\)</span> compared with 0.001 km<span class="math notranslate nohighlight">\(^3\)</span> from the NOAA file. However, for the two rivers that do have discharge from the NOAA file (most are all 0s), we are able to estimate a good match (“River discharge for nonzero NOAA rivers”).</p>
+<p>River temperature data is all 1s in the NOAA file but we allow for spatial variation and see in the comparison (“River temps for Axiom rivers above 1 C”) this variation. Note than any temperatures below 1 degree are set to 1 degree.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;data/nos.ciofs.river.20221216.t00z.nc&#39;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">)</span>
+
+<span class="n">dscompare</span> <span class="o">=</span> <span class="n">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">})</span>
+<span class="n">dscompare</span> <span class="o">=</span> <span class="n">dscompare</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_comparison</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">dscompare</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/46c2b0cbf1079e7bd846b985fe5be0c80887a400e4650181a2ba7e39b0648518.png" src="_images/46c2b0cbf1079e7bd846b985fe5be0c80887a400e4650181a2ba7e39b0648518.png" />
+<img alt="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" src="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" />
+<img alt="_images/4ae9de9603b3ea7d0e66054eb91708e522d43f536060acb022228144c89653d2.png" src="_images/4ae9de9603b3ea7d0e66054eb91708e522d43f536060acb022228144c89653d2.png" />
+<img alt="_images/157ac6cfc3420f42552cf207e0f9093e9d05dbdb566f5c63ed5e2d7a86bc67d7.png" src="_images/157ac6cfc3420f42552cf207e0f9093e9d05dbdb566f5c63ed5e2d7a86bc67d7.png" />
+<img alt="_images/5440cbb8b357a224180114b1b5073a7d503702d7749178bb3c8d10564ea99cd7.png" src="_images/5440cbb8b357a224180114b1b5073a7d503702d7749178bb3c8d10564ea99cd7.png" />
+<img alt="_images/78188a5db85dd46fdfad38e0e00cdd960cb8b17053fcb9608694924105945339.png" src="_images/78188a5db85dd46fdfad38e0e00cdd960cb8b17053fcb9608694924105945339.png" />
+</div>
+</div>
+</section>
+<section id="january-2023-file">
+<h3>January 2023 file<a class="headerlink" href="#january-2023-file" title="Permalink to this headline">#</a></h3>
+<p>For the same reasons previously listed, the discharge is much higher from the Axiom file: 0.09 km<span class="math notranslate nohighlight">\(^3\)</span> compared with 0.001 km<span class="math notranslate nohighlight">\(^3\)</span> from the NOAA file. For the rivers that we estimate in the same way as NOAA, we get similar results.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;data/nos.ciofs.river.20230201.t00z.nc&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">)</span>
+
+<span class="n">dscompare</span> <span class="o">=</span> <span class="n">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">})</span>
+<span class="n">dscompare</span> <span class="o">=</span> <span class="n">dscompare</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;river_time&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_comparison</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">dscompare</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/de26cbd6b9519fbc2fa25c7013b157f5050eae743e1c54387efa469460481355.png" src="_images/de26cbd6b9519fbc2fa25c7013b157f5050eae743e1c54387efa469460481355.png" />
+<img alt="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" src="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" />
+<img alt="_images/f2ebe619a4cfb9e575d4a10b8bfc53e2370e5c3f90877c6e034d72a49ba16ef9.png" src="_images/f2ebe619a4cfb9e575d4a10b8bfc53e2370e5c3f90877c6e034d72a49ba16ef9.png" />
+<img alt="_images/51364c3e565c35f0537811f71432fa2f19e206cd1b4e17cf748738d681bcbc19.png" src="_images/51364c3e565c35f0537811f71432fa2f19e206cd1b4e17cf748738d681bcbc19.png" />
+<img alt="_images/839317c2c870191d2ac4efba9a96e895f020fcfdd2b863b5df45e6b93120e0eb.png" src="_images/839317c2c870191d2ac4efba9a96e895f020fcfdd2b863b5df45e6b93120e0eb.png" />
+<img alt="_images/00d5fa511bee84b9b574c847fa526d4408f2d9f690d90e5114e6cd924e9fd23e.png" src="_images/00d5fa511bee84b9b574c847fa526d4408f2d9f690d90e5114e6cd924e9fd23e.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="river_forcing_make_files.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Make monthly river forcing files for 1998–2018</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-information">Background information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-approach">General approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discharge">Discharge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#water-temperature">Water temperature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-details">More details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discharge-for-station-15292780">Discharge for Station 15292780</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-variation-of-water-temperature">Geographic variation of water temperature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean-of-gage-data">Rolling mean of gage data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrate-using-the-rating-curve">Demonstrate using the rating curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-time-series">Mean time series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-axiom-and-noaa-versions-of-two-river-forcing-files">Comparing Axiom and NOAA versions of two river forcing files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#december-2022-file">December 2022 file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#january-2023-file">January 2023 file</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kristen M. Thyng
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

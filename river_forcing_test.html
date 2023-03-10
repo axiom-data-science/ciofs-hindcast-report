@@ -1,0 +1,1641 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Compare with river files &#8212; CIOFS Hindcast Report</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'river_forcing_test';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="river_forcing_make_files.html">Make monthly river forcing files for 1998–2018</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/axiom-data-science/ciofs-hindcast-report" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/axiom-data-science/ciofs-hindcast-report/issues/new?title=Issue%20on%20page%20%2Friver_forcing_test.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/river_forcing_test.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Compare with river files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Compare with river files</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-monthly-forcing-files-for-1998-and-check-them">Make monthly forcing files for 1998 and check them</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dataretrieval.nwis</span> <span class="k">as</span> <span class="nn">nwis</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Functions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># found these by visual inspection of the `river_transport` variable which has negative signs on the</span>
+<span class="c1"># 0s so I could read them off there.</span>
+<span class="n">river_sign</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
+              <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+              <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">stations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;15276000&#39;</span><span class="p">,</span> <span class="s1">&#39;15290000&#39;</span><span class="p">,</span> <span class="s1">&#39;15271000&#39;</span><span class="p">,</span> <span class="s1">&#39;15239900&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15295700&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;15239070&#39;</span><span class="p">,</span> <span class="s1">&#39;15275100&#39;</span><span class="p">,</span> <span class="s1">&#39;15266300&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">,</span> <span class="s1">&#39;15274600&#39;</span><span class="p">]</span>
+
+<span class="n">station_list_file</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;15295700&#39;</span><span class="p">,</span> <span class="s1">&#39;15239070&#39;</span><span class="p">,</span> <span class="s1">&#39;15239900&#39;</span><span class="p">,</span> <span class="s1">&#39;15266300&#39;</span><span class="p">,</span> <span class="s1">&#39;15266300&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15271000&#39;</span><span class="p">,</span> <span class="s1">&#39;15274600&#39;</span><span class="p">,</span> <span class="s1">&#39;15275100&#39;</span><span class="p">,</span> <span class="s1">&#39;15276000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15281000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">,</span> <span class="s1">&#39;15290000&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;15290000&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">,</span> <span class="s1">&#39;15292780&#39;</span><span class="p">]</span>
+
+<span class="c1"># station &quot;in model&quot;: station actually used</span>
+<span class="n">discharge_stations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;15276000&#39;</span><span class="p">:</span> <span class="s2">&quot;15276000&quot;</span><span class="p">,</span> <span class="s1">&#39;15290000&#39;</span><span class="p">:</span> <span class="s2">&quot;15290000&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15271000&#39;</span><span class="p">:</span> <span class="s2">&quot;15271000&quot;</span><span class="p">,</span> <span class="s1">&#39;15239900&#39;</span><span class="p">:</span> <span class="s2">&quot;15239900&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15281000&#39;</span><span class="p">:</span> <span class="s2">&quot;15281000&quot;</span><span class="p">,</span> <span class="s1">&#39;15295700&#39;</span><span class="p">:</span> <span class="s2">&quot;15295700&quot;</span><span class="p">,</span>
+                      <span class="s1">&#39;15239070&#39;</span><span class="p">:</span> <span class="s2">&quot;15239070&quot;</span><span class="p">,</span> <span class="s1">&#39;15275100&#39;</span><span class="p">:</span> <span class="s2">&quot;15275100&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15266300&#39;</span><span class="p">:</span> <span class="s2">&quot;15266300&quot;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">:</span> <span class="s2">&quot;15284000&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15292780&#39;</span><span class="p">:</span> <span class="s2">&quot;15292000&quot;</span><span class="p">,</span> <span class="s1">&#39;15274600&#39;</span><span class="p">:</span> <span class="s2">&quot;15274600&quot;</span><span class="p">}</span>
+
+<span class="c1"># station &quot;in model&quot;: station actually used</span>
+<span class="n">temp_stations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;15276000&#39;</span><span class="p">:</span> <span class="s2">&quot;15276000&quot;</span><span class="p">,</span> <span class="s1">&#39;15290000&#39;</span><span class="p">:</span> <span class="s2">&quot;15290000&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15271000&#39;</span><span class="p">:</span> <span class="s2">&quot;15258000&quot;</span><span class="p">,</span> <span class="s1">&#39;15239900&#39;</span><span class="p">:</span> <span class="s2">&quot;15239900&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15281000&#39;</span><span class="p">:</span> <span class="s2">&quot;15284000&quot;</span><span class="p">,</span> <span class="s1">&#39;15295700&#39;</span><span class="p">:</span> <span class="s2">&quot;15295700&quot;</span><span class="p">,</span>
+                      <span class="s1">&#39;15239070&#39;</span><span class="p">:</span> <span class="s2">&quot;15239070&quot;</span><span class="p">,</span> <span class="s1">&#39;15275100&#39;</span><span class="p">:</span> <span class="s2">&quot;15276000&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15266300&#39;</span><span class="p">:</span> <span class="s2">&quot;15266300&quot;</span><span class="p">,</span> <span class="s1">&#39;15284000&#39;</span><span class="p">:</span> <span class="s2">&quot;15284000&quot;</span><span class="p">,</span> 
+                      <span class="s1">&#39;15292780&#39;</span><span class="p">:</span> <span class="s2">&quot;15292780&quot;</span><span class="p">,</span> <span class="s1">&#39;15274600&#39;</span><span class="p">:</span> <span class="s2">&quot;15276000&quot;</span><span class="p">}</span>
+
+<span class="n">nsrho</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># number depths</span>
+<span class="n">nrivers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">station_list_file</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">repeat_years_return_range</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Repeat values over years represented in start to end and return subset.</span>
+<span class="sd">    </span>
+<span class="sd">    The year after the year in end will be included in case hours are needed to be interpolated on the end.</span>
+<span class="sd">    </span>
+<span class="sd">    Interpolate to 15 min increments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    values : np.array</span>
+<span class="sd">        values to match days of year 1 to 366 (includes leap year)</span>
+<span class="sd">    start : str</span>
+<span class="sd">        start date time</span>
+<span class="sd">    end : str</span>
+<span class="sd">        end date time</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calculating mean time series&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">366</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;values should be 366 to match days of year with leap year.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># find years covered by requested dates and then repeated stats for necessary </span>
+    <span class="c1"># years coverage</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span><span class="o">.</span><span class="n">year</span><span class="p">)))</span>
+    
+    <span class="c1"># add one more year on so that final day from user date range will for sure have</span>
+    <span class="c1"># hours included in the interpolation. Otherwise if the end date is 12-31, it will </span>
+    <span class="c1"># not have the hours of that day included.</span>
+    <span class="n">years</span> <span class="o">+=</span> <span class="p">[</span><span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-1-1&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-12-31&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_leap_year</span><span class="p">:</span>
+            <span class="n">values_to_use</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">59</span><span class="p">)</span>  <span class="c1"># drop feb 29 if not leap year</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values_to_use</span> <span class="o">=</span> <span class="n">values</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">values_to_use</span><span class="p">)</span>
+        <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        
+    <span class="n">stats_repeated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># import pdb; pdb.set_trace()</span>
+    <span class="n">temps</span> <span class="o">=</span> <span class="n">stats_repeated</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;15T&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">):</span><span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)]</span>
+    
+    <span class="k">return</span> <span class="n">temps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extrapolate_rating_curve</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">,</span> <span class="n">extreme_val</span><span class="p">,</span> <span class="n">which_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+    <span class="n">dd</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># resolution of rating curves</span>
+    
+    <span class="c1"># create a linear fit to the last points of the rating curve to use for extrapolation</span>
+    <span class="k">if</span> <span class="n">which_dir</span> <span class="o">==</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max data value: </span><span class="si">{</span><span class="n">extreme_val</span><span class="si">}</span><span class="s2">, max INDEP value is </span><span class="si">{</span><span class="n">ratingDataOrig</span><span class="p">[</span><span class="s1">&#39;INDEP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">10</span><span class="p">:],</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;DEP&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">10</span><span class="p">:],</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">indep_extension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="n">dd</span><span class="p">,</span> <span class="n">extreme_val</span><span class="o">+</span><span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">dep_extension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">indep_extension</span><span class="p">)</span>
+        <span class="n">df_extension</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;INDEP&quot;</span><span class="p">:</span> <span class="n">indep_extension</span><span class="p">,</span> <span class="s2">&quot;DEP&quot;</span><span class="p">:</span> <span class="n">dep_extension</span><span class="p">})</span>
+        <span class="n">ratingData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ratingDataOrig</span><span class="p">,</span> <span class="n">df_extension</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    
+        
+    <span class="k">elif</span> <span class="n">which_dir</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min data value: </span><span class="si">{</span><span class="n">extreme_val</span><span class="si">}</span><span class="s2">, min INDEP value is </span><span class="si">{</span><span class="n">ratingDataOrig</span><span class="p">[</span><span class="s1">&#39;INDEP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># create a linear fit to the last points of the rating curve to use for extrapolation</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;DEP&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">indep_extension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">extreme_val</span><span class="p">,</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dd</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">indep_extension</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">():</span>
+            <span class="n">indep_extension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">indep_extension</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">dep_extension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">indep_extension</span><span class="p">)</span>
+        <span class="n">df_extension</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;INDEP&quot;</span><span class="p">:</span> <span class="n">indep_extension</span><span class="p">,</span> <span class="s2">&quot;DEP&quot;</span><span class="p">:</span> <span class="n">dep_extension</span><span class="p">})</span>
+        <span class="n">ratingData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_extension</span><span class="p">,</span> <span class="n">ratingDataOrig</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    
+        
+    <span class="k">return</span> <span class="n">ratingData</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>find_na_groups</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_na_groups</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    https://stackoverflow.com/questions/29007830/identifying-consecutive-nans-with-pandas</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : _type_</span>
+<span class="sd">        _description_</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    _type_</span>
+<span class="sd">        _description_</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># actual groups of nans</span>
+    <span class="n">na_groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># # groups of nans plus one on either side (so we can interpolate)</span>
+    <span class="c1"># ind_wide = df.shift(periods=-1, fill_value=False).isna() | df.shift(periods=1, fill_value=False).isna()</span>
+    <span class="c1"># nap1_groups = df.notna().cumsum()[ind_wide]</span>
+    
+    <span class="n">lengths_consecutive_na</span> <span class="o">=</span> <span class="n">na_groups</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">na_groups</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+    
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># make sure dt&#39;s are all equal</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;delta times in indices are not all equal.&quot;</span><span class="p">)</span>
+    
+    <span class="n">times_consecutive_na</span> <span class="o">=</span> <span class="n">lengths_consecutive_na</span><span class="o">*</span><span class="n">dt</span>
+    <span class="k">return</span> <span class="n">na_groups</span><span class="p">,</span> <span class="n">lengths_consecutive_na</span><span class="p">,</span> <span class="n">times_consecutive_na</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_nap1_groups</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    UPDATE</span>
+<span class="sd">    https://stackoverflow.com/questions/29007830/identifying-consecutive-nans-with-pandas</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : _type_</span>
+<span class="sd">        _description_</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    _type_</span>
+<span class="sd">        _description_</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># actual groups of nans</span>
+    <span class="c1"># na_groups = df.notna().cumsum()[df.isna()]</span>
+    <span class="c1"># import pdb; pdb.set_trace()</span>
+    <span class="c1"># # groups of nans plus one on either side (so we can interpolate)</span>
+    <span class="n">ind_wide</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> \
+               <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> \
+               <span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="c1"># ind_wide = df.shift(periods=-1, fill_value=False).isna() | df.shift(periods=1, fill_value=False).isna()</span>
+    <span class="n">na_groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind_wide</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">lengths_consecutive_na</span> <span class="o">=</span> <span class="n">na_groups</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">na_groups</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+    
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># make sure dt&#39;s are all equal</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;delta times in indices are not all equal.&quot;</span><span class="p">)</span>
+    
+    <span class="n">times_consecutive_na</span> <span class="o">=</span> <span class="n">lengths_consecutive_na</span><span class="o">*</span><span class="n">dt</span>
+    <span class="k">return</span> <span class="n">na_groups</span><span class="p">,</span> <span class="n">lengths_consecutive_na</span><span class="p">,</span> <span class="n">times_consecutive_na</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_iv</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">parameterCd</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_mean_time_series</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;in 15 min intervals</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    station : str</span>
+<span class="sd">        _description_</span>
+<span class="sd">    start : str</span>
+<span class="sd">        _description_</span>
+<span class="sd">    end : str</span>
+<span class="sd">        _description_</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.Series</span>
+<span class="sd">        _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># if data is not available at all (outside window of availability) use annual mean</span>
+    <span class="c1"># Retrieve the statistics</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_stats</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">parameterCd</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span> <span class="n">statReportType</span><span class="o">=</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="n">statTypeCd</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">discharge</span> <span class="o">=</span> <span class="n">repeat_years_return_range</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;mean_va&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">discharge</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_discharge_from_gage_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">gage_data</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    
+    <span class="c1"># try to use gage data instead, but need rating curve data to do so</span>
+    <span class="n">ratingDataOrig</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_ratings</span><span class="p">(</span><span class="n">site</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;exsa&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># create estimate using rating curve and gage height if discharge data not fully available</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ratingDataOrig</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        
+        <span class="c1"># see if rating curve needs to be extrapolated. Maybe have a warning to check the reasonableness of the</span>
+        <span class="c1"># output in this case</span>
+        <span class="k">if</span> <span class="n">gage_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extrapolating ratingData upward for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="n">ratingData</span> <span class="o">=</span> <span class="n">extrapolate_rating_curve</span><span class="p">(</span><span class="n">ratingDataOrig</span><span class="p">,</span> <span class="n">gage_data</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s2">&quot;up&quot;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ratingData</span> <span class="o">=</span> <span class="n">ratingDataOrig</span>
+
+        <span class="k">if</span> <span class="n">gage_data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">ratingData</span><span class="p">[</span><span class="s2">&quot;INDEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extrapolating ratingData downward for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+            <span class="n">ratingData2</span> <span class="o">=</span> <span class="n">extrapolate_rating_curve</span><span class="p">(</span><span class="n">ratingData</span><span class="p">,</span> <span class="n">gage_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s2">&quot;down&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ratingData2</span> <span class="o">=</span> <span class="n">ratingData</span>
+            
+        <span class="c1"># Do a little rolling mean to smooth the data — sometimes it&#39;s really jumpy</span>
+        <span class="n">gage_data</span> <span class="o">=</span> <span class="n">gage_data</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="s2">&quot;24H&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">streamflow_estimate_for_gage_data</span> <span class="o">=</span> <span class="n">ratingData2</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;INDEP&quot;</span><span class="p">)[</span><span class="s2">&quot;DEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gage_data</span><span class="p">[</span><span class="n">gage_data</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+
+        <span class="c1"># cap values more than twice the max measured discharge value</span>
+        <span class="c1"># https://kacv.net/brad/nws/lesson7.html</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">streamflow_estimate_for_gage_data</span> <span class="o">&gt;</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;DEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">ind</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some estimated discharge values from gage data were capped at twice the rating curve max.&quot;</span><span class="p">)</span>
+            <span class="n">streamflow_estimate_for_gage_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">ratingDataOrig</span><span class="p">[</span><span class="s2">&quot;DEP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span>
+        
+        <span class="c1"># cap min values at 0</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">streamflow_estimate_for_gage_data</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">ind</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some estimated discharge values from gage data were brought to 0.&quot;</span><span class="p">)</span>
+            <span class="n">streamflow_estimate_for_gage_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># combine. Use streamflow estimate anywhere discharge_data has nan&#39;s</span>
+        <span class="c1"># streamflow_estimate_for_gage_data.index = data.index</span>
+        <span class="n">streamflow_estimate_for_gage_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gage_data</span><span class="p">[</span><span class="n">gage_data</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span>
+        
+        <span class="c1"># reindex to full set of indices</span>
+        <span class="n">streamflow_estimate_for_gage_data</span> <span class="o">=</span> <span class="n">streamflow_estimate_for_gage_data</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">streamflow_estimate_for_gage_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">streamflow_estimate_for_gage_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ndays = 8</span>
+
+<span class="k">def</span> <span class="nf">replace_over_with_function</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">function_inputs</span><span class="p">,</span> <span class="n">ndays</span><span class="p">):</span>
+    <span class="c1"># characterize groups of consecutive nans</span>
+    <span class="n">na_groups</span><span class="p">,</span> <span class="n">lengths_consecutive_na</span><span class="p">,</span> <span class="n">times_consecutive_na</span> <span class="o">=</span> <span class="n">find_na_groups</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
+    
+    <span class="c1"># only use gage data if consecutive nan&#39;s over ndays days. In this case create estimate for full time range</span>
+    <span class="c1"># (as available) and then use whichever parts of it are needed.</span>
+    <span class="k">if</span> <span class="n">times_consecutive_na</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">):</span>
+        <span class="c1"># print(f&quot;fill consecutive nan gaps of over {ndays} days with function {function}.&quot;)</span>
+        
+        <span class="n">other_time_series</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">function_inputs</span><span class="p">)</span>
+                    
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">times_consecutive_na</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">na_groups</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">)</span>
+        <span class="n">ind2</span> <span class="o">=</span> <span class="n">na_groups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fill consecutive nan gaps of over </span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days with function </span><span class="si">{</span><span class="n">function</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dates replaced: </span><span class="si">{</span><span class="n">ind2</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        
+        <span class="n">time_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span> <span class="o">=</span> <span class="n">other_time_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span>
+
+        <span class="c1"># # rolling mean of start and stop of new time series to stick in, to ease transitions</span>
+        <span class="c1"># time_series.loc[ind2] = time_series.rolling(window=f&quot;{ndays}D&quot;, center=True).mean().loc[ind2]</span>
+
+    <span class="k">return</span> <span class="n">time_series</span>
+
+
+<span class="k">def</span> <span class="nf">replace_under_with_interpolation</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">ndays</span><span class="p">):</span>
+    <span class="c1"># characterize groups of consecutive nans</span>
+    <span class="n">na_groups</span><span class="p">,</span> <span class="n">lengths_consecutive_na</span><span class="p">,</span> <span class="n">times_consecutive_na</span> <span class="o">=</span> <span class="n">find_na_groups</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
+
+    <span class="c1"># import pdb; pdb.set_trace()</span>
+    <span class="c1"># check for under 2 days gaps for interpolation</span>
+    <span class="k">if</span> <span class="n">times_consecutive_na</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">):</span>
+        <span class="c1"># print(&quot;interpolation&quot;)</span>
+        
+        <span class="c1"># characterize groups of consecutive nans (plus one on either side so we can interpolate!)</span>
+        <span class="n">na_groupsp1</span><span class="p">,</span> <span class="n">lengths_consecutive_nap1</span><span class="p">,</span> <span class="n">times_consecutive_nap1</span> <span class="o">=</span> <span class="n">find_nap1_groups</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
+
+        <span class="c1"># a little more time since have an extra index on either side of the window, not exact</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">times_consecutive_nap1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">na_groupsp1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="o">+</span><span class="mf">.1</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">)</span>
+        <span class="n">ind2</span> <span class="o">=</span> <span class="n">na_groupsp1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind</span><span class="o">.</span><span class="n">values</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fill consecutive nan gaps of under </span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days by interpolating.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dates replaced: </span><span class="si">{</span><span class="n">ind2</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># time_series.loc[ind2].interpolate(inplace=True)</span>
+        <span class="n">time_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">time_series</span>
+
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">discharge_from_gage_or_mean</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ndays</span><span class="p">):</span>
+
+    <span class="c1"># Read in gage data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00065&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessed gage data.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if empty use mean data for discharge</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gage dataset is empty. Use mean time series.&quot;</span><span class="p">)</span>
+        <span class="n">discharge_mean</span> <span class="o">=</span> <span class="n">find_mean_time_series</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00060&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">discharge_mean</span>
+        
+    <span class="c1"># Make sure there is a row for every 15 min in the time range</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;15T&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+   
+    <span class="c1"># Fill ice flags with 0s</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P, Ice&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A, Ice&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replacing gage values flagged as iced with nan.&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,:]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+    <span class="c1"># Fill Eqp flags with nans (to be filled in later)</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P, Eqp&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A, Eqp&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replacing gage values flagged as equipment values with nan.&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    
+    <span class="c1"># Calculate estimate</span>
+    <span class="n">discharge_estimate</span> <span class="o">=</span> <span class="n">estimate_discharge_from_gage_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;00065&quot;</span><span class="p">],</span> <span class="n">index</span><span class="p">)</span>
+    
+    <span class="n">discharge_estimate</span> <span class="o">=</span> <span class="n">replace_over_with_function</span><span class="p">(</span><span class="n">discharge_estimate</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">find_mean_time_series</span><span class="p">,</span> <span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00060&quot;</span><span class="p">),</span> <span class="n">ndays</span><span class="p">)</span>
+    
+    <span class="n">discharge_estimate</span> <span class="o">=</span> <span class="n">replace_under_with_interpolation</span><span class="p">(</span><span class="n">discharge_estimate</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ndays</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">discharge_estimate</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_discharge</span><span class="p">(</span><span class="n">discharge_data</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;processing final discharge data</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># average to hourly</span>
+    <span class="n">dischargeh</span> <span class="o">=</span> <span class="n">discharge_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;1H&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s2">&quot;numeric_only&quot;</span><span class="p">)</span>
+
+    <span class="c1"># convert from cubic feet per second to cubic meters per second</span>
+    <span class="n">dischargeh</span> <span class="o">*=</span> <span class="mf">0.3048</span><span class="o">**</span><span class="mi">3</span>
+
+    <span class="c1"># messes up the end points</span>
+    <span class="c1"># # Do a little rolling mean to smooth the data — sometimes it&#39;s really jumpy</span>
+    <span class="c1"># # 3 hours is 3 data points</span>
+    <span class="c1"># 24 hours is 24*4 data points</span>
+    <span class="n">dischargeh</span> <span class="o">=</span> <span class="n">dischargeh</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="c1"># dischargeh = dischargeh.rolling(window=3, center=True).mean()</span>
+    
+    <span class="c1"># fill in nan&#39;s if less than 8 days on front or back</span>
+    <span class="n">dischargeh</span> <span class="o">=</span> <span class="n">dischargeh</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">dischargeh</span> <span class="o">=</span> <span class="n">dischargeh</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">dischargeh</span>
+
+
+<span class="k">def</span> <span class="nf">process_temp</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;processing final temp data</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># bump temps below 1 up to 1 to match NOAA file</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+     
+    <span class="c1"># average to hourly</span>
+    <span class="n">temph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;1H&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s2">&quot;numeric_only&quot;</span><span class="p">)</span>
+
+    <span class="c1"># messes up the end points</span>
+    <span class="c1"># # Do a little rolling mean to smooth the data — sometimes it&#39;s really jumpy</span>
+    <span class="c1"># # 4 hours is 4 data points</span>
+    <span class="n">temph</span> <span class="o">=</span> <span class="n">temph</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># fill in nan&#39;s if less than 8 days on front or back</span>
+    <span class="n">temph</span> <span class="o">=</span> <span class="n">temph</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">temph</span> <span class="o">=</span> <span class="n">temph</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">temph</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Discharge function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_discharge</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing discharge for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">UserWarning</span><span class="p">(</span><span class="s2">&quot;Time range for file creation is shorter than cutoff for interpolation vs. alternative time series.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># CHANGE VARIABLE NAMES ONCE UPDATED. Also update function names.</span>
+    <span class="c1"># Read in streamflow data</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00060&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessed discharge data.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Check for different scenarios for streamflow data</span>
+    
+    <span class="c1"># if empty try gage data for full time range</span>
+    <span class="k">if</span> <span class="n">data1</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Discharge dataset is empty. Check for gage data or use mean time series.&quot;</span><span class="p">)</span>
+        <span class="n">discharge</span> <span class="o">=</span> <span class="n">discharge_from_gage_or_mean</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">)</span>  <span class="c1"># for full time range</span>
+        <span class="c1"># dischargeh = process_discharge(discharge, window=window)</span>
+        <span class="c1"># return dischargeh</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        
+        <span class="c1"># there might be missing times in the return index</span>
+        <span class="c1"># Make sure there is a row for every 15 min in the time range</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;15T&quot;</span><span class="p">)</span>
+        <span class="n">data1</span> <span class="o">=</span> <span class="n">data1</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            
+            
+        <span class="c1"># are all flags &quot;A&quot; or &quot;P&quot;?</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All discharge flags are good.&quot;</span><span class="p">)</span>
+            <span class="n">discharge</span> <span class="o">=</span> <span class="n">data1</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;00060&quot;</span><span class="p">]</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># check for questionable estimated data</span>
+            <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A, e&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P, e&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some questionable flags present for discharge data.&quot;</span><span class="p">)</span>
+                
+                <span class="c1"># is there good gage data during estimated times?</span>
+                <span class="n">data2</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00065&quot;</span><span class="p">,</span> 
+                                        <span class="n">data1</span><span class="p">[</span><span class="n">flags</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">),</span> 
+                                        <span class="n">data1</span><span class="p">[</span><span class="n">flags</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%MZ&quot;</span><span class="p">))</span>
+                
+                <span class="c1"># is there gage data and if so, is it good when flags True? (at least 75%)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">data2</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">((</span><span class="n">data2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,</span> <span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,</span> <span class="s2">&quot;00065_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">])</span><span class="o">*</span><span class="mf">.75</span><span class="p">:</span>
+                        
+                        <span class="c1"># then fill questionable discharge data with nans</span>
+                        <span class="n">data1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is over 75 percent good gage data for the time range of the questionable flags, so naning out the discharge data to use gage data instead.&quot;</span><span class="p">)</span>
+                    
+                    <span class="c1"># otherwise we are just keeping the questionable data</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Keeping the discharge data with questionable flags.&quot;</span><span class="p">)</span>
+                    
+            <span class="c1"># check for bad flag data and fill any with nans</span>
+            <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P, Ice&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P, Eqp&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A, Ice&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060_cd&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A, Eqp&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replacing discharge values flagged as iced with nan.&quot;</span><span class="p">)</span>
+                <span class="n">data1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flags</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            
+            <span class="n">discharge</span> <span class="o">=</span> <span class="n">replace_over_with_function</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;00060&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">discharge_from_gage_or_mean</span><span class="p">,</span> <span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">),</span> <span class="n">ndays</span><span class="p">)</span>
+            
+            <span class="n">discharge</span> <span class="o">=</span> <span class="n">replace_under_with_interpolation</span><span class="p">(</span><span class="n">discharge</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ndays</span><span class="p">)</span>
+    
+    <span class="n">dischargeh</span> <span class="o">=</span> <span class="n">process_discharge</span><span class="p">(</span><span class="n">discharge</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+    
+    <span class="c1"># check if there are any nan&#39;s left</span>
+    <span class="k">if</span> <span class="n">dischargeh</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;STILL NANS&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dischargeh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Temperature function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_temp</span><span class="p">(</span><span class="n">station</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing temp for station </span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ndays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">UserWarning</span><span class="p">(</span><span class="s2">&quot;Time range for file creation is shorter than cutoff for interpolation vs. alternative time series.&quot;</span><span class="p">)</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">return_nwis_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="s2">&quot;00010&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessed temp data.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">station</span> <span class="o">==</span> <span class="s2">&quot;15239900&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this station has temp data for several years but the stats don&#39;t contain a realistic mean so we have to calculate it ourselves&quot;</span><span class="p">)</span>
+        <span class="n">start_local</span> <span class="o">=</span> <span class="s2">&quot;2018-4-22T00:00Z&quot;</span>
+        <span class="n">end_local</span> <span class="o">=</span> <span class="s2">&quot;2023-3-1T00:00Z&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_iv</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="s2">&quot;15239900&quot;</span><span class="p">,</span> <span class="n">parameterCd</span><span class="o">=</span><span class="s2">&quot;00010&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start_local</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_local</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># catch all non-data values in data and make sure they are nans</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mf">999999.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>        
+        
+        <span class="c1"># get mean temps by day of year</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">repeat_years_return_range</span><span class="p">(</span><span class="n">vals</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+ 
+
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temp dataset is empty. Use mean time series.&quot;</span><span class="p">)</span>
+        <span class="c1"># print(f&quot;Using stats for station {station}&quot;)</span>
+        <span class="c1"># if data is not available at all (outside window of availability) use annual mean</span>
+        <span class="c1"># Retrieve the statistics</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">find_mean_time_series</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00010&quot;</span><span class="p">)</span>
+        <span class="c1"># stats = nwis.get_stats(sites=station, parameterCd=&quot;00010&quot;, statReportType=&quot;daily&quot;, statTypeCd=&quot;mean&quot;)[0]</span>
+        <span class="c1"># temps = repeat_years_return_range(stats[&quot;mean_va&quot;].values, start, end)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="c1"># this will hold the final combined time series</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># name will break groupby since starts with 0</span>
+        <span class="c1"># https://github.com/pandas-dev/pandas/issues/51818</span>
+        <span class="n">temps</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># catch all non-data values in data and make sure they are nans</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">temps</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">temps</span> <span class="o">!=</span> <span class="o">-</span><span class="mf">999999.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        
+        <span class="c1"># might be missing data</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;15T&quot;</span><span class="p">)</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">temps</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="c1"># replace long gaps with mean signal</span>
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">replace_over_with_function</span><span class="p">(</span><span class="n">temps</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">find_mean_time_series</span><span class="p">,</span> <span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00010&quot;</span><span class="p">),</span> <span class="n">ndays</span><span class="p">)</span>
+        
+        <span class="n">temps</span> <span class="o">=</span> <span class="n">replace_under_with_interpolation</span><span class="p">(</span><span class="n">temps</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ndays</span><span class="p">)</span>
+
+    <span class="c1"># processing</span>
+    <span class="n">temph</span> <span class="o">=</span> <span class="n">process_temp</span><span class="p">(</span><span class="n">temps</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+   
+    <span class="c1"># check if there are any nan&#39;s left</span>
+    <span class="k">if</span> <span class="n">temph</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;STILL NANS&#39;</span><span class="p">)</span>
+
+    <span class="c1"># # If there are still nan&#39;s, fill with 1s</span>
+    <span class="c1"># temps = temps.fillna(1)</span>
+        
+    <span class="k">return</span> <span class="n">temph</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="compare-with-river-files">
+<h1>Compare with river files<a class="headerlink" href="#compare-with-river-files" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">skip_last</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        
+    <span class="c1"># create arrays to input in the netcdf files</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">skip_last</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+    <span class="n">ntimes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="c1"># get river data for the time period</span>
+    <span class="n">station_discharge</span><span class="p">,</span> <span class="n">station_temp</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">discharge_stations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">station_discharge</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_discharge</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">temp_stations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">station_temp</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_temp</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="n">river_transport</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ntimes</span><span class="p">,</span> <span class="n">nrivers</span><span class="p">))</span>
+    <span class="n">river_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ntimes</span><span class="p">,</span> <span class="n">nsrho</span><span class="p">,</span> <span class="n">nrivers</span><span class="p">))</span>
+
+    <span class="c1"># stations are repeated in a certain order in station_list_file</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">station_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">station_list_file</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">discharge_stations</span><span class="p">[</span><span class="n">station_file</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;15292780&quot;</span><span class="p">:</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">nrepeats</span> <span class="o">=</span> <span class="n">station_list_file</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">station_file</span><span class="p">)</span>
+        <span class="n">river_transport</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span><span class="o">*</span><span class="n">river_sign</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">station_discharge</span><span class="p">[</span><span class="n">discharge_stations</span><span class="p">[</span><span class="n">station_file</span><span class="p">]]</span><span class="o">/</span><span class="n">nrepeats</span>
+        <span class="n">river_temp</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">station_temp</span><span class="p">[</span><span class="n">temp_stations</span><span class="p">[</span><span class="n">station_file</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">nsrho</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># create netcdf files starting from the acquired data</span>
+    <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;../data/nos.ciofs.river.20221216.t00z.nc&#39;</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+    
+    <span class="n">vars_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;river_names&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Xposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Eposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_direction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;river_flag&quot;</span><span class="p">,</span> <span class="s2">&quot;river_sign&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Vshape&quot;</span><span class="p">]</span>
+    <span class="n">dsnew</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">vars_to_keep</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># add new variables that include time</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;river&quot;</span><span class="p">),</span> <span class="n">river_transport</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_transport&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;s_rho&quot;</span><span class="p">,</span><span class="s2">&quot;river&quot;</span><span class="p">),</span> <span class="n">river_temp</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_salt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">],</span> <span class="mf">0.005</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_pass&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">dsnew</span><span class="p">[</span><span class="s2">&quot;river_temp&quot;</span><span class="p">],</span> <span class="mf">9.96921e+36</span><span class="p">)</span>
+    <span class="n">new_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;river_time&quot;</span><span class="p">,</span> <span class="s2">&quot;river_transport&quot;</span><span class="p">,</span> <span class="s2">&quot;river_temp&quot;</span><span class="p">,</span> <span class="s2">&quot;river_salt&quot;</span><span class="p">,</span> <span class="s2">&quot;river_pass&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">new_vars</span><span class="p">:</span>
+        <span class="n">dsnew</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span>
+    
+    <span class="c1"># Update global attributes</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;data_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;River discharge from USGS real time, estimated using gage height and rating curve, or from daily statistical mean.&quot;</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;Temp_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;River T from USGS real time or daily statistical mean.&quot;</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;Salt_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Always 0.005&quot;</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;institution&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Axiom Data Science&quot;</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;history&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Created </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">. Run using `dataretrieval-python` package and code from Axiom Data Science.&quot;</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;axiom.ciofs.river.%Y%m</span><span class="si">%d</span><span class="s2">.nc&quot;</span><span class="p">)</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;River Forcing file: </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;source_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Created using Axiom Data Science software.&quot;</span>
+    <span class="n">dsnew</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Created by Kristen M. Thyng, Axiom Data Science.&quot;</span>
+
+    <span class="k">return</span> <span class="n">dsnew</span><span class="p">,</span> <span class="n">fname</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="make-monthly-forcing-files-for-1998-and-check-them">
+<h1>Make monthly forcing files for 1998 and check them<a class="headerlink" href="#make-monthly-forcing-files-for-1998-and-check-them" title="Permalink to this headline">#</a></h1>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start_overall, end_overall = &quot;1998-1-1T00:00&quot;, &quot;1998-12-31T23:00&quot;</span>
+<span class="n">year</span> <span class="o">=</span> <span class="mi">1998</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">-1T00&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="s2">-1T00&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">-1T00&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">-1T00&quot;</span>
+
+    <span class="n">ds</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">skip_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing discharge for station 15276000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+fill consecutive nan gaps of over 8 days with function &lt;function discharge_from_gage_or_mean at 0x16043b560&gt;.
+Dates replaced: DatetimeIndex([&#39;1998-01-01 00:00:00&#39;, &#39;1998-01-01 00:15:00&#39;,
+               &#39;1998-01-01 00:30:00&#39;, &#39;1998-01-01 00:45:00&#39;,
+               &#39;1998-01-01 01:00:00&#39;, &#39;1998-01-01 01:15:00&#39;,
+               &#39;1998-01-01 01:30:00&#39;, &#39;1998-01-01 01:45:00&#39;,
+               &#39;1998-01-01 02:00:00&#39;, &#39;1998-01-01 02:15:00&#39;,
+               ...
+               &#39;1998-01-30 06:30:00&#39;, &#39;1998-01-30 06:45:00&#39;,
+               &#39;1998-01-30 07:00:00&#39;, &#39;1998-01-30 07:15:00&#39;,
+               &#39;1998-01-30 07:30:00&#39;, &#39;1998-01-30 07:45:00&#39;,
+               &#39;1998-01-30 08:00:00&#39;, &#39;1998-01-30 08:15:00&#39;,
+               &#39;1998-01-30 08:30:00&#39;, &#39;1998-01-30 08:45:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, length=2820, freq=&#39;15T&#39;).
+processing final discharge data
+
+Processing discharge for station 15290000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15271000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15239900 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15281000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15295700 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+fill consecutive nan gaps of under 8 days by interpolating.
+Dates replaced: DatetimeIndex([&#39;1998-01-01 00:00:00&#39;, &#39;1998-01-01 00:15:00&#39;,
+               &#39;1998-01-01 00:30:00&#39;, &#39;1998-01-01 00:45:00&#39;,
+               &#39;1998-01-01 01:00:00&#39;, &#39;1998-01-01 01:15:00&#39;,
+               &#39;1998-01-01 01:30:00&#39;, &#39;1998-01-01 01:45:00&#39;,
+               &#39;1998-01-01 02:00:00&#39;, &#39;1998-01-01 02:15:00&#39;,
+               &#39;1998-01-01 02:30:00&#39;, &#39;1998-01-01 02:45:00&#39;,
+               &#39;1998-01-01 03:00:00&#39;, &#39;1998-01-01 03:15:00&#39;,
+               &#39;1998-01-01 03:30:00&#39;, &#39;1998-01-01 03:45:00&#39;,
+               &#39;1998-01-01 04:00:00&#39;, &#39;1998-01-01 04:15:00&#39;,
+               &#39;1998-01-01 04:30:00&#39;, &#39;1998-01-01 04:45:00&#39;,
+               &#39;1998-01-01 05:00:00&#39;, &#39;1998-01-01 05:15:00&#39;,
+               &#39;1998-01-01 05:30:00&#39;, &#39;1998-01-01 05:45:00&#39;,
+               &#39;1998-01-01 06:00:00&#39;, &#39;1998-01-01 06:15:00&#39;,
+               &#39;1998-01-01 06:30:00&#39;, &#39;1998-01-01 06:45:00&#39;,
+               &#39;1998-01-01 07:00:00&#39;, &#39;1998-01-01 07:15:00&#39;,
+               &#39;1998-01-01 07:30:00&#39;, &#39;1998-01-01 07:45:00&#39;,
+               &#39;1998-01-01 08:00:00&#39;, &#39;1998-01-01 08:15:00&#39;,
+               &#39;1998-01-01 08:30:00&#39;, &#39;1998-01-01 08:45:00&#39;,
+               &#39;1998-01-01 09:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;15T&#39;).
+processing final discharge data
+
+Processing discharge for station 15239070 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15275100 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15266300 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15284000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15292000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing discharge for station 15274600 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed discharge data.
+Discharge dataset is empty. Check for gage data or use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed gage data.
+Gage dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final discharge data
+
+Processing temp for station 15276000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15290000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15258000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15239900 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+this station has temp data for several years but the stats don&#39;t contain a realistic mean so we have to calculate it ourselves
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15284000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15295700 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15239070 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15276000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15266300 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15284000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15292780 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+
+Processing temp for station 15276000 from 1998-1-1T00 to 1998-01-31T23:00.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
+Temp dataset is empty. Use mean time series.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
+processing final temp data
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:210,</span> in <span class="ni">CachingFileManager._acquire_with_cache_info</span><span class="nt">(self, needs_lock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">210</span>     <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/lru_cache.py:56,</span> in <span class="ni">LRUCache.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/kthyng/projects/ciofs-hindcast-report/data/nos.ciofs.river.20221216.t00z.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;12a6da32-37cf-46cd-84b8-b70967f863e6&#39;]
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">-1T00&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">-1T00&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">ds</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">skip_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+<span class="nn">Cell In[15], line 33,</span> in <span class="ni">create_river_forcing_file</span><span class="nt">(start, end, ndays, window, skip_last)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="c1"># create netcdf files starting from the acquired data</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;../data/nos.ciofs.river.20221216.t00z.nc&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">33</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">vars_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;river_names&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Xposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Eposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_direction&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="s2">&quot;river_flag&quot;</span><span class="p">,</span> <span class="s2">&quot;river_sign&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Vshape&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">dsnew</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">vars_to_keep</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/api.py:526,</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span> <span class="n">decoders</span> <span class="o">=</span> <span class="n">_resolve_decoders_kwargs</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="n">decode_cf</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">open_backend_dataset_parameters</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">open_dataset_parameters</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span>     <span class="n">decode_coords</span><span class="o">=</span><span class="n">decode_coords</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="n">overwrite_encoded_chunks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;overwrite_encoded_chunks&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">526</span> <span class="n">backend_ds</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">528</span>     <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span>     <span class="o">**</span><span class="n">decoders</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">_dataset_from_backend_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="n">backend_ds</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span> <span class="k">return</span> <span class="n">ds</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:577,</span> in <span class="ni">NetCDF4BackendEntrypoint.open_dataset</span><span class="nt">(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta, group, mode, format, clobber, diskless, persist, lock, autoclose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">557</span> <span class="k">def</span> <span class="nf">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">559</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="n">autoclose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span>     <span class="n">filename_or_obj</span> <span class="o">=</span> <span class="n">_normalize_path</span><span class="p">(</span><span class="n">filename_or_obj</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">577</span>     <span class="n">store</span> <span class="o">=</span> <span class="n">NetCDF4DataStore</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span>         <span class="n">filename_or_obj</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">579</span>         <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">580</span>         <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">581</span>         <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">582</span>         <span class="n">clobber</span><span class="o">=</span><span class="n">clobber</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">583</span>         <span class="n">diskless</span><span class="o">=</span><span class="n">diskless</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>         <span class="n">persist</span><span class="o">=</span><span class="n">persist</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span>         <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">586</span>         <span class="n">autoclose</span><span class="o">=</span><span class="n">autoclose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">589</span>     <span class="n">store_entrypoint</span> <span class="o">=</span> <span class="n">StoreBackendEntrypoint</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span>     <span class="k">with</span> <span class="n">close_on_error</span><span class="p">(</span><span class="n">store</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:382,</span> in <span class="ni">NetCDF4DataStore.open</span><span class="nt">(cls, filename, mode, format, group, clobber, diskless, persist, lock, lock_maker, autoclose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span>     <span class="n">clobber</span><span class="o">=</span><span class="n">clobber</span><span class="p">,</span> <span class="n">diskless</span><span class="o">=</span><span class="n">diskless</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="n">persist</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="nb">format</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">379</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">CachingFileManager</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span>     <span class="n">netCDF4</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">382</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span> <span class="n">autoclose</span><span class="o">=</span><span class="n">autoclose</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:329,</span> in <span class="ni">NetCDF4DataStore.__init__</span><span class="nt">(self, manager, group, mode, lock, autoclose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span> <span class="o">=</span> <span class="n">group</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="n">mode</span>
+<span class="ne">--&gt; </span><span class="mi">329</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">data_model</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">filepath</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_remote</span> <span class="o">=</span> <span class="n">is_remote_uri</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:391,</span> in <span class="ni">NetCDF4DataStore.ds</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span> <span class="nd">@property</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span> <span class="k">def</span> <span class="nf">ds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">391</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquire</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:385,</span> in <span class="ni">NetCDF4DataStore._acquire</span><span class="nt">(self, needs_lock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span> <span class="k">def</span> <span class="nf">_acquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needs_lock</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">385</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manager</span><span class="o">.</span><span class="n">acquire_context</span><span class="p">(</span><span class="n">needs_lock</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span>         <span class="n">ds</span> <span class="o">=</span> <span class="n">_nc4_require_group</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">387</span>     <span class="k">return</span> <span class="n">ds</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/contextlib.py:137,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;generator didn&#39;t yield&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:198,</span> in <span class="ni">CachingFileManager.acquire_context</span><span class="nt">(self, needs_lock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="k">def</span> <span class="nf">acquire_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needs_lock</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Context manager for acquiring a file.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">198</span>     <span class="n">file</span><span class="p">,</span> <span class="n">cached</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquire_with_cache_info</span><span class="p">(</span><span class="n">needs_lock</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span>         <span class="k">yield</span> <span class="n">file</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:216,</span> in <span class="ni">CachingFileManager._acquire_with_cache_info</span><span class="nt">(self, needs_lock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
+<span class="ne">--&gt; </span><span class="mi">216</span> <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opener</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># ensure file doesn&#39;t get overridden when opened again</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+
+<span class="nn">File src/netCDF4/_netCDF4.pyx:2449,</span> in <span class="ni">netCDF4._netCDF4.Dataset.__init__</span><span class="nt">()</span>
+
+<span class="nn">File src/netCDF4/_netCDF4.pyx:2012,</span> in <span class="ni">netCDF4._netCDF4._ensure_nc_success</span><span class="nt">()</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/kthyng/projects/ciofs-hindcast-report/data/nos.ciofs.river.20221216.t00z.nc&#39;
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Compare with river files</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-monthly-forcing-files-for-1998-and-check-them">Make monthly forcing files for 1998 and check them</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kristen M. Thyng
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
