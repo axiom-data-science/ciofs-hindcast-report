@@ -781,6 +781,9 @@ def create_river_forcing_file(start: str, end: str, ndays: int, window: int=24, 
     dsnew.attrs["source_code"] = "Created using create_river_roms.py."
     dsnew.attrs["reference"] = "Created by Kristen M. Thyng, Axiom Data Science."
 
-    handlers[0].close()  # stop logging
-    
+    # stop logging!
+    log = logging.getLogger() 
+    log.removeHandler(handlers[0])
+    handlers[0].flush()
+    handlers[0].close()
     return dsnew
