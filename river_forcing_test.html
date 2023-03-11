@@ -149,11 +149,12 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    CIOFS Hindcast Report
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="river_forcing_demo.html">Details about river forcing files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="river_forcing_make_files.html">Make monthly river forcing files for 1998–2018</a></li>
 </ul>
 
@@ -1099,7 +1100,7 @@ Gage dataset is empty. Use mean time series.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
-fill consecutive nan gaps of over 8 days with function &lt;function discharge_from_gage_or_mean at 0x16043b560&gt;.
+fill consecutive nan gaps of over 8 days with function &lt;function discharge_from_gage_or_mean at 0x15e107560&gt;.
 Dates replaced: DatetimeIndex([&#39;1998-01-01 00:00:00&#39;, &#39;1998-01-01 00:15:00&#39;,
                &#39;1998-01-01 00:30:00&#39;, &#39;1998-01-01 00:45:00&#39;,
                &#39;1998-01-01 01:00:00&#39;, &#39;1998-01-01 01:15:00&#39;,
@@ -1369,169 +1370,166 @@ Temp dataset is empty. Use mean time series.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
-processing final temp data
-
-Processing temp for station 15284000 from 1998-1-1T00 to 1998-01-31T23:00.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
-Temp dataset is empty. Use mean time series.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
-processing final temp data
-
-Processing temp for station 15292780 from 1998-1-1T00 to 1998-01-31T23:00.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
-Temp dataset is empty. Use mean time series.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
-processing final temp data
-
-Processing temp for station 15276000 from 1998-1-1T00 to 1998-01-31T23:00.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accessed temp data.
-Temp dataset is empty. Use mean time series.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calculating mean time series
-processing final temp data
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:210,</span> in <span class="ni">CachingFileManager._acquire_with_cache_info</span><span class="nt">(self, needs_lock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">210</span>     <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/lru_cache.py:56,</span> in <span class="ni">LRUCache.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: [&lt;class &#39;netCDF4._netCDF4.Dataset&#39;&gt;, (&#39;/Users/kthyng/projects/ciofs-hindcast-report/data/nos.ciofs.river.20221216.t00z.nc&#39;,), &#39;r&#39;, ((&#39;clobber&#39;, True), (&#39;diskless&#39;, False), (&#39;format&#39;, &#39;NETCDF4&#39;), (&#39;persist&#39;, False)), &#39;12a6da32-37cf-46cd-84b8-b70967f863e6&#39;]
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">-1T00&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">-1T00&quot;</span>
 <span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">ds</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">create_river_forcing_file</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">skip_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
-<span class="nn">Cell In[15], line 33,</span> in <span class="ni">create_river_forcing_file</span><span class="nt">(start, end, ndays, window, skip_last)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="c1"># create netcdf files starting from the acquired data</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;../data/nos.ciofs.river.20221216.t00z.nc&#39;</span>
-<span class="ne">---&gt; </span><span class="mi">33</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">vars_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;river_names&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Xposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Eposition&quot;</span><span class="p">,</span> <span class="s2">&quot;river_direction&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="s2">&quot;river_flag&quot;</span><span class="p">,</span> <span class="s2">&quot;river_sign&quot;</span><span class="p">,</span> <span class="s2">&quot;river_Vshape&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">dsnew</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">vars_to_keep</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nn">Cell In[15], line 16,</span> in <span class="ni">create_river_forcing_file</span><span class="nt">(start, end, ndays, window, skip_last)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">station_discharge</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_discharge</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">temp_stations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">station_temp</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_temp</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ndays</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">river_transport</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ntimes</span><span class="p">,</span> <span class="n">nrivers</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="n">river_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ntimes</span><span class="p">,</span> <span class="n">nsrho</span><span class="p">,</span> <span class="n">nrivers</span><span class="p">))</span>
 
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/api.py:526,</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span> <span class="n">decoders</span> <span class="o">=</span> <span class="n">_resolve_decoders_kwargs</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="n">decode_cf</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">open_backend_dataset_parameters</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">open_dataset_parameters</span><span class="p">,</span>
+<span class="nn">Cell In[14], line 34,</span> in <span class="ni">find_temp</span><span class="nt">(station, start, end, ndays, window)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temp dataset is empty. Use mean time series.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="c1"># print(f&quot;Using stats for station {station}&quot;)</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="c1"># if data is not available at all (outside window of availability) use annual mean</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="c1"># Retrieve the statistics</span>
+<span class="ne">---&gt; </span><span class="mi">34</span>     <span class="n">temps</span> <span class="o">=</span> <span class="n">find_mean_time_series</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="s2">&quot;00010&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="c1"># stats = nwis.get_stats(sites=station, parameterCd=&quot;00010&quot;, statReportType=&quot;daily&quot;, statTypeCd=&quot;mean&quot;)[0]</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="c1"># temps = repeat_years_return_range(stats[&quot;mean_va&quot;].values, start, end)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> 
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="c1"># this will hold the final combined time series</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="n">temps</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;00010&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nn">Cell In[8], line 22,</span> in <span class="ni">find_mean_time_series</span><span class="nt">(station, start, end, parameter)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># if data is not available at all (outside window of availability) use annual mean</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># Retrieve the statistics</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">nwis</span><span class="o">.</span><span class="n">get_stats</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">station</span><span class="p">,</span> <span class="n">parameterCd</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span> <span class="n">statReportType</span><span class="o">=</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="n">statTypeCd</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">22</span> <span class="n">discharge</span> <span class="o">=</span> <span class="n">repeat_years_return_range</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;mean_va&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">return</span> <span class="n">discharge</span>
+
+<span class="nn">Cell In[3], line 44,</span> in <span class="ni">repeat_years_return_range</span><span class="nt">(values, start, end)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="n">stats_repeated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># import pdb; pdb.set_trace()</span>
+<span class="ne">---&gt; </span><span class="mi">44</span> <span class="n">temps</span> <span class="o">=</span> <span class="n">stats_repeated</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;15T&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">):</span><span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)]</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">return</span> <span class="n">temps</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexing.py:1073,</span> in <span class="ni">_LocationIndexer.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1072</span> <span class="n">maybe_callable</span> <span class="o">=</span> <span class="n">com</span><span class="o">.</span><span class="n">apply_if_callable</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1073</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_axis</span><span class="p">(</span><span class="n">maybe_callable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexing.py:1290,</span> in <span class="ni">_LocIndexer._getitem_axis</span><span class="nt">(self, key, axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1288</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1289</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_validate_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1290</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_slice_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1291</span> <span class="k">elif</span> <span class="n">com</span><span class="o">.</span><span class="n">is_bool_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1292</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getbool_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexing.py:1324,</span> in <span class="ni">_LocIndexer._get_slice_axis</span><span class="nt">(self, slice_obj, axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1321</span>     <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1323</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_get_axis</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1324</span> <span class="n">indexer</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">slice_indexer</span><span class="p">(</span><span class="n">slice_obj</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">slice_obj</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">slice_obj</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1326</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1327</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:809,</span> in <span class="ni">DatetimeIndex.slice_indexer</span><span class="nt">(self, start, end, step, kind)</span>
+<span class="g g-Whitespace">    </span><span class="mi">801</span> <span class="c1"># GH#33146 if start and end are combinations of str and None and Index is not</span>
+<span class="g g-Whitespace">    </span><span class="mi">802</span> <span class="c1"># monotonic, we can not use Index.slice_indexer because it does not honor the</span>
+<span class="g g-Whitespace">    </span><span class="mi">803</span> <span class="c1"># actual elements, is only searching for start and end</span>
+<span class="g g-Whitespace">    </span><span class="mi">804</span> <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">805</span>     <span class="n">check_str_or_none</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">806</span>     <span class="ow">or</span> <span class="n">check_str_or_none</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">807</span>     <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_monotonic_increasing</span>
+<span class="g g-Whitespace">    </span><span class="mi">808</span> <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">809</span>     <span class="k">return</span> <span class="n">Index</span><span class="o">.</span><span class="n">slice_indexer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">811</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span> <span class="n">deprecation_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/base.py:6559,</span> in <span class="ni">Index.slice_indexer</span><span class="nt">(self, start, end, step, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6516</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6517</span><span class="sd"> Compute the slice indexer for input labels and step.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6518</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6555</span><span class="sd"> slice(1, 3, None)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6556</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6557</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deprecated_arg</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">,</span> <span class="s2">&quot;slice_indexer&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6559</span> <span class="n">start_slice</span><span class="p">,</span> <span class="n">end_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice_locs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6561</span> <span class="c1"># return a slice</span>
+<span class="g g-Whitespace">   </span><span class="mi">6562</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_scalar</span><span class="p">(</span><span class="n">start_slice</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/base.py:6773,</span> in <span class="ni">Index.slice_locs</span><span class="nt">(self, start, end, step, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6771</span> <span class="n">end_slice</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">6772</span> <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">6773</span>     <span class="n">end_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_slice_bound</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6774</span> <span class="k">if</span> <span class="n">end_slice</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6775</span>     <span class="n">end_slice</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/base.py:6676,</span> in <span class="ni">Index.get_slice_bound</span><span class="nt">(self, label, side, kind)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6672</span> <span class="n">original_label</span> <span class="o">=</span> <span class="n">label</span>
+<span class="g g-Whitespace">   </span><span class="mi">6674</span> <span class="c1"># For datetime indices label may be a string that has to be converted</span>
+<span class="g g-Whitespace">   </span><span class="mi">6675</span> <span class="c1"># to datetime boundary according to its resolution.</span>
+<span class="ne">-&gt; </span><span class="mi">6676</span> <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_slice_bound</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">side</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6678</span> <span class="c1"># we need to look up the label</span>
+<span class="g g-Whitespace">   </span><span class="mi">6679</span> <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:767,</span> in <span class="ni">DatetimeIndex._maybe_cast_slice_bound</span><span class="nt">(self, label, side, kind)</span>
+<span class="g g-Whitespace">    </span><span class="mi">762</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">763</span>     <span class="c1"># Pandas supports slicing with dates, treated as datetimes at midnight.</span>
+<span class="g g-Whitespace">    </span><span class="mi">764</span>     <span class="c1"># https://github.com/pandas-dev/pandas/issues/31501</span>
+<span class="g g-Whitespace">    </span><span class="mi">765</span>     <span class="n">label</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">767</span> <span class="n">label</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_maybe_cast_slice_bound</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">side</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">768</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deprecate_mismatched_indexing</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">769</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_for_get_loc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/datetimelike.py:317,</span> in <span class="ni">DatetimeIndexOpsMixin._maybe_cast_slice_bound</span><span class="nt">(self, label, side, kind)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span>     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>         <span class="c1"># DTI -&gt; parsing.DateParseError</span>
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="c1"># TDI -&gt; &#39;unit abbreviation w/o a number&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span>         <span class="c1"># PI -&gt; string cannot be parsed as datetime-like</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invalid_indexer</span><span class="p">(</span><span class="s2">&quot;slice&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="ne">--&gt; </span><span class="mi">317</span>     <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_string_to_bounds</span><span class="p">(</span><span class="n">reso</span><span class="p">,</span> <span class="n">parsed</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span>     <span class="k">return</span> <span class="n">lower</span> <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span> <span class="k">else</span> <span class="n">upper</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span> <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">_recognized_scalars</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:636,</span> in <span class="ni">DatetimeIndex._parsed_string_to_bounds</span><span class="nt">(self, reso, parsed)</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span> <span class="k">def</span> <span class="nf">_parsed_string_to_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reso</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">,</span> <span class="n">parsed</span><span class="p">:</span> <span class="n">datetime</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span><span class="sd">     Calculate datetime bounds for parsed time string and its resolution.</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span><span class="sd">     lower, upper: pd.Timestamp</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">636</span>     <span class="n">per</span> <span class="o">=</span> <span class="n">Period</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">reso</span><span class="o">.</span><span class="n">attr_abbrev</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">637</span>     <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">per</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span> <span class="n">per</span><span class="o">.</span><span class="n">end_time</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>     <span class="c1"># GH 24076</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span>     <span class="c1"># If an incoming date string contained a UTC offset, need to localize</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span>     <span class="c1"># the parsed date to this offset first before aligning with the index&#39;s</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span>     <span class="c1"># timezone</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/_libs/tslibs/period.pyx:2526,</span> in <span class="ni">pandas._libs.tslibs.period.Period.__new__</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/_libs/tslibs/period.pyx:1640,</span> in <span class="ni">pandas._libs.tslibs.period._Period._maybe_convert_freq</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/_libs/tslibs/offsets.pyx:3972,</span> in <span class="ni">pandas._libs.tslibs.offsets.to_offset</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/pandas/_libs/tslibs/offsets.pyx:1069,</span> in <span class="ni">pandas._libs.tslibs.offsets.Tick.__mul__</span><span class="nt">()</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">isclose</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/numpy/core/numeric.py:2363,</span> in <span class="ni">isclose</span><span class="nt">(a, b, rtol, atol, equal_nan)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2360</span>     <span class="k">with</span> <span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">),</span> <span class="n">_no_nep50_warning</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">2361</span>         <span class="k">return</span> <span class="n">less_equal</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">),</span> <span class="n">atol</span> <span class="o">+</span> <span class="n">rtol</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="ne">-&gt; </span><span class="mi">2363</span> <span class="n">x</span> <span class="o">=</span> <span class="n">asanyarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2364</span> <span class="n">y</span> <span class="o">=</span> <span class="n">asanyarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2366</span> <span class="c1"># Make sure y is an inexact type to avoid bad behavior on abs(MIN_INT).</span>
+<span class="g g-Whitespace">   </span><span class="mi">2367</span> <span class="c1"># This will cause casting of x later. Also, make sure to allow subclasses</span>
+<span class="g g-Whitespace">   </span><span class="mi">2368</span> <span class="c1"># (e.g., for numpy.ma).</span>
    <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span>     <span class="n">decode_coords</span><span class="o">=</span><span class="n">decode_coords</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="n">overwrite_encoded_chunks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;overwrite_encoded_chunks&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">526</span> <span class="n">backend_ds</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">528</span>     <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">529</span>     <span class="o">**</span><span class="n">decoders</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">532</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">_dataset_from_backend_dataset</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="n">backend_ds</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">544</span> <span class="k">return</span> <span class="n">ds</span>
+<span class="g g-Whitespace">   </span><span class="mi">2371</span> <span class="c1">#       timedelta works if `atol` is an integer or also a timedelta.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2372</span> <span class="c1">#       Although, the default tolerances are unlikely to be useful</span>
 
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:577,</span> in <span class="ni">NetCDF4BackendEntrypoint.open_dataset</span><span class="nt">(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta, group, mode, format, clobber, diskless, persist, lock, autoclose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">557</span> <span class="k">def</span> <span class="nf">open_dataset</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">558</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="n">autoclose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">575</span> <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span>     <span class="n">filename_or_obj</span> <span class="o">=</span> <span class="n">_normalize_path</span><span class="p">(</span><span class="n">filename_or_obj</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">577</span>     <span class="n">store</span> <span class="o">=</span> <span class="n">NetCDF4DataStore</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">578</span>         <span class="n">filename_or_obj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">579</span>         <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">580</span>         <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">581</span>         <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">582</span>         <span class="n">clobber</span><span class="o">=</span><span class="n">clobber</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">583</span>         <span class="n">diskless</span><span class="o">=</span><span class="n">diskless</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">584</span>         <span class="n">persist</span><span class="o">=</span><span class="n">persist</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">585</span>         <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">586</span>         <span class="n">autoclose</span><span class="o">=</span><span class="n">autoclose</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">589</span>     <span class="n">store_entrypoint</span> <span class="o">=</span> <span class="n">StoreBackendEntrypoint</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span>     <span class="k">with</span> <span class="n">close_on_error</span><span class="p">(</span><span class="n">store</span><span class="p">):</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:382,</span> in <span class="ni">NetCDF4DataStore.open</span><span class="nt">(cls, filename, mode, format, group, clobber, diskless, persist, lock, lock_maker, autoclose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span>     <span class="n">clobber</span><span class="o">=</span><span class="n">clobber</span><span class="p">,</span> <span class="n">diskless</span><span class="o">=</span><span class="n">diskless</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="n">persist</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="nb">format</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">379</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">CachingFileManager</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">380</span>     <span class="n">netCDF4</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">381</span> <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">382</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">,</span> <span class="n">autoclose</span><span class="o">=</span><span class="n">autoclose</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:329,</span> in <span class="ni">NetCDF4DataStore.__init__</span><span class="nt">(self, manager, group, mode, lock, autoclose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span> <span class="o">=</span> <span class="n">group</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="n">mode</span>
-<span class="ne">--&gt; </span><span class="mi">329</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">data_model</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">filepath</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_remote</span> <span class="o">=</span> <span class="n">is_remote_uri</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:391,</span> in <span class="ni">NetCDF4DataStore.ds</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">389</span> <span class="nd">@property</span>
-<span class="g g-Whitespace">    </span><span class="mi">390</span> <span class="k">def</span> <span class="nf">ds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">391</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquire</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/netCDF4_.py:385,</span> in <span class="ni">NetCDF4DataStore._acquire</span><span class="nt">(self, needs_lock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">384</span> <span class="k">def</span> <span class="nf">_acquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needs_lock</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">385</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manager</span><span class="o">.</span><span class="n">acquire_context</span><span class="p">(</span><span class="n">needs_lock</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">386</span>         <span class="n">ds</span> <span class="o">=</span> <span class="n">_nc4_require_group</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">387</span>     <span class="k">return</span> <span class="n">ds</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/contextlib.py:137,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;generator didn&#39;t yield&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:198,</span> in <span class="ni">CachingFileManager.acquire_context</span><span class="nt">(self, needs_lock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="k">def</span> <span class="nf">acquire_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needs_lock</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Context manager for acquiring a file.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">198</span>     <span class="n">file</span><span class="p">,</span> <span class="n">cached</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquire_with_cache_info</span><span class="p">(</span><span class="n">needs_lock</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span>         <span class="k">yield</span> <span class="n">file</span>
-
-<span class="nn">File ~/miniconda3/envs/ciofs/lib/python3.11/site-packages/xarray/backends/file_manager.py:216,</span> in <span class="ni">CachingFileManager._acquire_with_cache_info</span><span class="nt">(self, needs_lock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
-<span class="ne">--&gt; </span><span class="mi">216</span> <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opener</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># ensure file doesn&#39;t get overridden when opened again</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
-
-<span class="nn">File src/netCDF4/_netCDF4.pyx:2449,</span> in <span class="ni">netCDF4._netCDF4.Dataset.__init__</span><span class="nt">()</span>
-
-<span class="nn">File src/netCDF4/_netCDF4.pyx:2012,</span> in <span class="ni">netCDF4._netCDF4._ensure_nc_success</span><span class="nt">()</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/kthyng/projects/ciofs-hindcast-report/data/nos.ciofs.river.20221216.t00z.nc&#39;
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

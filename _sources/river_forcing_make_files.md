@@ -12,10 +12,6 @@ kernelspec:
 ---
 
 ```{code-cell} ipython3
-# import dataretrieval.nwis as nwis
-# import xarray as xr
-# import numpy as np
-# import pandas as pd
 import matplotlib.pyplot as plt
 
 from create_river_roms import *
