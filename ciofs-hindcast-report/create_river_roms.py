@@ -18,8 +18,11 @@ river_sign = [-1, 1, -1, -1, -1, 1, -1, -1, -1, -1,
               -1, -1, -1, -1, -1, -1, -1, -1, -1, 1,
               1, 1, 1, 1, 1, 1]
 
-stations = ['15276000', '15290000', '15271000', '15239900', '15281000', '15295700',
-            '15239070', '15275100', '15266300', '15284000', '15292780', '15274600']
+# stations = ['15276000', '15290000', '15271000', '15239900', '15281000', '15295700',
+#             '15239070', '15275100', '15266300', '15284000', '15292780', '15274600']
+
+stations = ['15295700', '15239070', '15239900', '15266300', '15271000', '15274600',
+            '15275100', '15276000', '15281000', '15284000', '15290000', '15292780']
 
 station_list_file = ['15295700', '15239070', '15239900', '15266300', '15266300',
                      '15271000', '15274600', '15275100', '15276000', '15281000',
@@ -574,7 +577,7 @@ def find_discharge(station: str, start: str, end: str, ndays: int, window: int =
                 
                 # is there gage data and if so, is it good when flags True? (at least 75%)
                 if not data2.empty:
-                    if ((data2.loc[flags, "00065_cd"] == "A") | (data2.loc[flags, "00065_cd"] == "P")).sum() > len(data2.loc[flags])*.75:
+                    if ((data2.loc[:, "00065_cd"] == "A") | (data2.loc[:, "00065_cd"] == "P")).sum() > len(data2)*.75:
                         
                         # then fill questionable discharge data with nans
                         data1.loc[flags,:] = np.nan
@@ -743,7 +746,8 @@ def create_river_forcing_file(start: str, end: str, ndays: int, window: int=24, 
 
     # stations are repeated in a certain order in station_list_file
     for i, station_file in enumerate(station_list_file):
-        if discharge_stations[station_file] == "15292780":
+        if station_file == "15292780":
+            logging.info("Using factor of 2 for making station 15292780")
             factor = 2
         else:
             factor = 1
