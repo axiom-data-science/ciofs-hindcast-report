@@ -488,7 +488,7 @@ document.write(`
 </tbody>
 </table>
 <p>River input locations are shown on this map from the development report:</p>
-<p><img alt="image.png" src="attachment:c5ede5b9-c463-4aa7-a40f-4b778c797163.png" /></p>
+<p><img alt="image.png" src="_images/river_inputs.png" /></p>
 <p>We followed what we saw in two river forcing files from the CIOFS group, and ascertained some details to include in the data processing:</p>
 <ul class="simple">
 <li><p>River salinity is set to 0.005 for all rivers</p></li>
@@ -606,15 +606,15 @@ document.write(`
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="s2">&quot;00060_Mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="s2">&quot;2019&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;15292780&quot;</span><span class="p">)</span>
 <span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;00060_Mean&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="s2">&quot;2019&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;15292000 * 2&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;River discharge [m$^3$/s]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;River discharge [ft$^3$/s]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;River discharge [m$^3$/s]&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;River discharge [ft$^3$/s]&#39;)
 </pre></div>
 </div>
-<img alt="_images/b7c72350f0fae6e22423b2ac4dfad803f56a40f220e770b33d27842b7d1f2086.png" src="_images/b7c72350f0fae6e22423b2ac4dfad803f56a40f220e770b33d27842b7d1f2086.png" />
+<img alt="_images/f3390f5b59849c35859e7934e6e8e89ce4ea408120cd914afdd8fe6fe4370a20.png" src="_images/f3390f5b59849c35859e7934e6e8e89ce4ea408120cd914afdd8fe6fe4370a20.png" />
 </div>
 </div>
 </section>
@@ -643,7 +643,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x16434b290&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164437410&gt;
 </pre></div>
 </div>
 <img alt="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" src="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" />
@@ -662,7 +662,7 @@ document.write(`
 <span class="c1"># this data is every 15 minutes</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;00065&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;With 24-hour rolling mean&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gage data [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gage data [ft]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Station 15276000&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -671,7 +671,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Station 15276000&#39;)
 </pre></div>
 </div>
-<img alt="_images/dcef4c82103a3ba420b46a80145dff7bff9e1fddd20a8a77774251813867431e.png" src="_images/dcef4c82103a3ba420b46a80145dff7bff9e1fddd20a8a77774251813867431e.png" />
+<img alt="_images/f2e21540825ea843bc8254b5373b5a00efc232e615f9be0adfe630bdfc967f4c.png" src="_images/f2e21540825ea843bc8254b5373b5a00efc232e615f9be0adfe630bdfc967f4c.png" />
 </div>
 </div>
 </section>
@@ -718,7 +718,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164248f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1644d15d0&gt;
 </pre></div>
 </div>
 <img alt="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" src="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" />
@@ -888,12 +888,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/46c2b0cbf1079e7bd846b985fe5be0c80887a400e4650181a2ba7e39b0648518.png" src="_images/46c2b0cbf1079e7bd846b985fe5be0c80887a400e4650181a2ba7e39b0648518.png" />
+<img alt="_images/43f05fb8c6428cfa9739f6458fd79be24c803fa8ea32a490fe9e56da96e067fa.png" src="_images/43f05fb8c6428cfa9739f6458fd79be24c803fa8ea32a490fe9e56da96e067fa.png" />
 <img alt="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" src="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" />
-<img alt="_images/4ae9de9603b3ea7d0e66054eb91708e522d43f536060acb022228144c89653d2.png" src="_images/4ae9de9603b3ea7d0e66054eb91708e522d43f536060acb022228144c89653d2.png" />
-<img alt="_images/157ac6cfc3420f42552cf207e0f9093e9d05dbdb566f5c63ed5e2d7a86bc67d7.png" src="_images/157ac6cfc3420f42552cf207e0f9093e9d05dbdb566f5c63ed5e2d7a86bc67d7.png" />
-<img alt="_images/5440cbb8b357a224180114b1b5073a7d503702d7749178bb3c8d10564ea99cd7.png" src="_images/5440cbb8b357a224180114b1b5073a7d503702d7749178bb3c8d10564ea99cd7.png" />
-<img alt="_images/78188a5db85dd46fdfad38e0e00cdd960cb8b17053fcb9608694924105945339.png" src="_images/78188a5db85dd46fdfad38e0e00cdd960cb8b17053fcb9608694924105945339.png" />
+<img alt="_images/41bca70f8826f913bd05eb12aee846aa83e61ab9ccc3cf75effeafdffd1d5b2d.png" src="_images/41bca70f8826f913bd05eb12aee846aa83e61ab9ccc3cf75effeafdffd1d5b2d.png" />
+<img alt="_images/f96846ee95f5a97a33b2109ea6f37df447ca043da22476e1807095f93f28efc6.png" src="_images/f96846ee95f5a97a33b2109ea6f37df447ca043da22476e1807095f93f28efc6.png" />
+<img alt="_images/23d10f40ed4a9d032e21969a0a05bbba0ae5a2ff8c33c3c2eef560796166c951.png" src="_images/23d10f40ed4a9d032e21969a0a05bbba0ae5a2ff8c33c3c2eef560796166c951.png" />
+<img alt="_images/6985c7ce832fae36e13eab908583625ec657d3777b6bc0210986bfbddd5acc0e.png" src="_images/6985c7ce832fae36e13eab908583625ec657d3777b6bc0210986bfbddd5acc0e.png" />
 </div>
 </div>
 </section>
@@ -923,12 +923,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/de26cbd6b9519fbc2fa25c7013b157f5050eae743e1c54387efa469460481355.png" src="_images/de26cbd6b9519fbc2fa25c7013b157f5050eae743e1c54387efa469460481355.png" />
+<img alt="_images/8cbd8d39bc9e296fbb62b0051efc1ca5ac34667a0db8d676575320ec6649caec.png" src="_images/8cbd8d39bc9e296fbb62b0051efc1ca5ac34667a0db8d676575320ec6649caec.png" />
 <img alt="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" src="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" />
-<img alt="_images/f2ebe619a4cfb9e575d4a10b8bfc53e2370e5c3f90877c6e034d72a49ba16ef9.png" src="_images/f2ebe619a4cfb9e575d4a10b8bfc53e2370e5c3f90877c6e034d72a49ba16ef9.png" />
-<img alt="_images/51364c3e565c35f0537811f71432fa2f19e206cd1b4e17cf748738d681bcbc19.png" src="_images/51364c3e565c35f0537811f71432fa2f19e206cd1b4e17cf748738d681bcbc19.png" />
-<img alt="_images/839317c2c870191d2ac4efba9a96e895f020fcfdd2b863b5df45e6b93120e0eb.png" src="_images/839317c2c870191d2ac4efba9a96e895f020fcfdd2b863b5df45e6b93120e0eb.png" />
-<img alt="_images/00d5fa511bee84b9b574c847fa526d4408f2d9f690d90e5114e6cd924e9fd23e.png" src="_images/00d5fa511bee84b9b574c847fa526d4408f2d9f690d90e5114e6cd924e9fd23e.png" />
+<img alt="_images/8db75107a7e5242bd636324eadf77e6ba2f043d0aeba72f6203fcad382d49a32.png" src="_images/8db75107a7e5242bd636324eadf77e6ba2f043d0aeba72f6203fcad382d49a32.png" />
+<img alt="_images/1c1808d87673ece6f3a659003ade344b74bc89c2a96161ac63f5b7cd384f6068.png" src="_images/1c1808d87673ece6f3a659003ade344b74bc89c2a96161ac63f5b7cd384f6068.png" />
+<img alt="_images/dc9f75e5d0ec1841ff3a0166830b9e3c16bfca7f5bf8e00165cdda92a690257f.png" src="_images/dc9f75e5d0ec1841ff3a0166830b9e3c16bfca7f5bf8e00165cdda92a690257f.png" />
+<img alt="_images/04fda617fcfa04bb9d882b12908087d4e10753c5ab4336cdba01eeead3baac82.png" src="_images/04fda617fcfa04bb9d882b12908087d4e10753c5ab4336cdba01eeead3baac82.png" />
 </div>
 </div>
 </section>

@@ -51,7 +51,7 @@ Number | River Station in Model | USGS Station Used: Discharge | USGS Station Us
 
 River input locations are shown on this map from the development report:
 
-![image.png](attachment:c5ede5b9-c463-4aa7-a40f-4b778c797163.png)
+![image.png](inputs/river_inputs.png)
 
 We followed what we saw in two river forcing files from the CIOFS group, and ascertained some details to include in the data processing:
 
@@ -145,7 +145,7 @@ df2 = nwis.get_record(sites=station, service='dv', start=start, end=end)
 ax = df1["00060_Mean"].loc[:"2019"].plot(figsize=(15,5), label="15292780")
 (df2["00060_Mean"]*2).loc[:"2019"].plot(ax=ax, label="15292000 * 2")
 plt.legend()
-plt.ylabel("River discharge [m$^3$/s]")
+plt.ylabel("River discharge [ft$^3$/s]")
 ```
 
 ### Geographic variation of water temperature
@@ -179,7 +179,7 @@ df["00065"].plot(label="No rolling mean")
 # this data is every 15 minutes
 df["00065"].rolling(center=True, window=24*4).mean().plot(label="With 24-hour rolling mean")
 plt.legend()
-plt.ylabel('Gage data [m]')
+plt.ylabel('Gage data [ft]')
 plt.title("Station 15276000")
 ```
 
@@ -371,16 +371,4 @@ dscompare = dscompare.swap_dims({"time": "river_time"})
 
 ```{code-cell} ipython3
 plot_comparison(ds, dscompare)
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
 ```
