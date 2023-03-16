@@ -38,7 +38,7 @@ def run_year(year):
         fname = f"{base}/{fname}"
         
         if not os.path.exists(fname) or not os.path.exists(fname.replace(".nc",".txt")):
-            ds = create_river_forcing_file(start, end, ndays=8, skip_last=True)
+            ds = create_river_forcing_file(start, end, ndays=30, skip_last=True)
             ds.to_netcdf(fname)
         
         print(Code(fname.replace(".nc",".txt")))

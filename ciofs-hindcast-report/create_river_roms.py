@@ -393,6 +393,8 @@ def replace_under_with_interpolation(time_series: pd.Series, ndays: int) -> pd.S
 
 def discharge_from_gage_or_mean(station: str, start: str, end: str, ndays) -> pd.Series:
     """Find discharge from either gage estimate or mean time series.
+    
+    NOT USED ANYMORE.
 
     Parameters
     ----------
@@ -542,60 +544,36 @@ def find_discharge(station: str, start: str, end: str, ndays: int, window: int =
         raise UserWarning("Time range for file creation is shorter than cutoff for interpolation vs. alternative time series.")
     
     # Read in streamflow data
-    data1 = return_nwis_data(station, "00060", start, end)
+    data = return_nwis_data(station, "00060", start, end)
     logging.info("Accessed discharge data.")
     
     # if empty try gage data for full time range
-    if data1.empty:
-        logging.info("Discharge dataset is empty. Check for gage data or use mean time series.")
-        discharge = discharge_from_gage_or_mean(station, start, end, ndays)  # for full time range
+    if data.empty:
+        logging.info("Discharge dataset is empty. Use mean time series.")
+        discharge = find_mean_time_series(station, start, end, "00060")
         
     else:
         
         # there might be missing times in the return index
         # Make sure there is a row for every 15 min in the time range
         index = pd.date_range(start.replace("Z",""), end.replace("Z",""), freq="15T")
-        data1 = data1.reindex(index)
-            
-            
-        # are all flags "A" or "P"?
-        if ((data1["00060_cd"] == "A") | (data1["00060_cd"] == "P")).all():
-            logging.info("All discharge flags are good.")
-            discharge = data1.loc[:,"00060"]
-            
-        else:
+        data = data.reindex(index)
 
-            # check for questionable estimated data
-            flags = (data1["00060_cd"] == "A, e") | (data1["00060_cd"] == "P, e")
-            if flags.any():
-                logging.info("Some questionable flags present for discharge data.")
-                
-                # is there good gage data during estimated times?
-                data2 = return_nwis_data(station, "00065", 
-                                        data1[flags].index[0].strftime("%Y-%m-%dT%H:%MZ"), 
-                                        data1[flags].index[-1].strftime("%Y-%m-%dT%H:%MZ"))
-                
-                # is there gage data and if so, is it good when flags True? (at least 75%)
-                if not data2.empty:
-                    if ((data2.loc[:, "00065_cd"] == "A") | (data2.loc[:, "00065_cd"] == "P")).sum() > len(data2)*.75:
-                        
-                        # then fill questionable discharge data with nans
-                        data1.loc[flags,:] = np.nan
-                        logging.info("There is over 75 percent good gage data for the time range of the questionable flags, so naning out the discharge data to use gage data instead.")
-                    
-                    # otherwise we are just keeping the questionable data
-                    else:
-                        logging.info("Keeping the discharge data with questionable flags.")
-                    
-            # check for bad flag data and fill any with nans
-            flags = (data1["00060_cd"] == "P, Ice") | (data1["00060_cd"] == "P, Eqp") | (data1["00060_cd"] == "A, Ice") | (data1["00060_cd"] == "A, Eqp")
-            if flags.any():
-                logging.info("Replacing discharge values flagged as iced with nan.")
-                data1.loc[flags,:] = np.nan
-            
-            discharge = replace_over_with_function(data1["00060"].copy(), discharge_from_gage_or_mean, (station, start, end, ndays), ndays)
-            
-            discharge = replace_under_with_interpolation(discharge.copy(), ndays)
+        # Fill ice flags with 0s
+        flags = (data["00060_cd"] == "P, Ice") | (data["00060_cd"] == "A, Ice")
+        if flags.any():
+            logging.info("Replacing discharge values flagged as iced with 0.")
+            data.loc[flags, "00060"] = 0.0
+        
+        # Fill Eqp flags with nans (to be filled in later)
+        flags = (data["00060_cd"] == "P, Eqp") | (data["00060_cd"] == "A, Eqp")
+        if flags.any():
+            logging.info("Replacing discharge values flagged as equipment malfunction values with nan.")
+            data.loc[flags, "00060"] = np.nan
+        
+        discharge = replace_over_with_function(data["00060"].copy(), find_mean_time_series, (station, start, end, "00060"), ndays)
+        
+        discharge = replace_under_with_interpolation(discharge.copy(), ndays)
     
     dischargeh = process_discharge(discharge, window=window)
     
