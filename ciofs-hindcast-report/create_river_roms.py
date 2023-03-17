@@ -242,6 +242,8 @@ def find_mean_time_series(station: str, start: str, end: str, parameter: str) ->
 
 def estimate_discharge_from_gage_data(station: str, gage_data: pd.Series, index: pd.Index) -> pd.Series:
     """Estimate discharge using gage data and the rating curve.
+    
+    NOT USED ANYMORE.
 
     Parameters
     ----------
@@ -559,17 +561,17 @@ def find_discharge(station: str, start: str, end: str, ndays: int, window: int =
         index = pd.date_range(start.replace("Z",""), end.replace("Z",""), freq="15T")
         data = data.reindex(index)
 
-        # Fill ice flags with 0s
-        flags = (data["00060_cd"] == "P, Ice") | (data["00060_cd"] == "A, Ice")
+        # Fill ice and equipment flags with nans (to be filled in later by mean time series)
+        flags = (data["00060_cd"] == "P, Ice") | (data["00060_cd"] == "A, Ice") | (data["00060_cd"] == "P, Eqp") | (data["00060_cd"] == "A, Eqp")
         if flags.any():
-            logging.info("Replacing discharge values flagged as iced with 0.")
-            data.loc[flags, "00060"] = 0.0
-        
-        # Fill Eqp flags with nans (to be filled in later)
-        flags = (data["00060_cd"] == "P, Eqp") | (data["00060_cd"] == "A, Eqp")
-        if flags.any():
-            logging.info("Replacing discharge values flagged as equipment malfunction values with nan.")
+            logging.info("Replacing discharge values flagged as iced or equipment malfunction with nan.")
             data.loc[flags, "00060"] = np.nan
+        
+        # # Fill Eqp flags with nans (to be filled in later)
+        # flags = (data["00060_cd"] == "P, Eqp") | (data["00060_cd"] == "A, Eqp")
+        # if flags.any():
+        #     logging.info("Replacing discharge values flagged as equipment malfunction values with nan.")
+        #     data.loc[flags, "00060"] = np.nan
         
         discharge = replace_over_with_function(data["00060"].copy(), find_mean_time_series, (station, start, end, "00060"), ndays)
         
