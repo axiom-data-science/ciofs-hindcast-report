@@ -69,6 +69,21 @@ This is a text flow chart of the logic in `create_river_roms.py`. Logic flows fi
 
 1. get discharge data.
 1. Check for:
+    1. empty → Use mean time series
+    1. fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.
+    1. Reindex to fill all missing times with nans
+    1. Deal with other flags
+        1. Fill ice flag data with 0s.
+        1. Fill eqp flag data with nans (to be filled in as gaps).
+    1. Check gap lengths.
+1. Has gaps in data. Process all gaps. If gaps are:
+    1. Less than 8 days → interpolate
+    1. Over 8 days → Use mean time series.
+
+
+
+1. get discharge data.
+1. Check for:
     1. empty → check gage data
     1. fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.
     1. Reindex to fill all missing times with nans

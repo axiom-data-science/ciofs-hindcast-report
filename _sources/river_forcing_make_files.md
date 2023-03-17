@@ -38,7 +38,7 @@ def run_year(year):
         fname = f"{base}/{fname}"
         
         if not os.path.exists(fname) or not os.path.exists(fname.replace(".nc",".txt")):
-            ds = create_river_forcing_file(start, end, ndays=8, skip_last=True)
+            ds = create_river_forcing_file(start, end, ndays=7, skip_last=True)
             ds.to_netcdf(fname)
         
         print(Code(fname.replace(".nc",".txt")))
@@ -94,8 +94,11 @@ plot_year(year)
 ## 2000
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2000
 run_year(year)
 ```
@@ -107,8 +110,11 @@ plot_year(year)
 ## 2001
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2001
 run_year(year)
 ```
@@ -120,8 +126,11 @@ plot_year(year)
 ## 2002
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2002
 run_year(year)
 ```
@@ -133,8 +142,11 @@ plot_year(year)
 ## 2003
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2003
 run_year(year)
 ```
@@ -146,8 +158,11 @@ plot_year(year)
 ## 2004
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2004
 run_year(year)
 ```
@@ -159,8 +174,11 @@ plot_year(year)
 ## 2005
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2005
 run_year(year)
 ```
@@ -172,8 +190,11 @@ plot_year(year)
 ## 2006
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2006
 run_year(year)
 ```
@@ -185,8 +206,11 @@ plot_year(year)
 ## 2007
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2007
 run_year(year)
 ```
@@ -198,8 +222,11 @@ plot_year(year)
 ## 2008
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2008
 run_year(year)
 ```
@@ -211,8 +238,11 @@ plot_year(year)
 ## 2009
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2009
 run_year(year)
 ```
@@ -224,8 +254,11 @@ plot_year(year)
 ## 2010
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2010
 run_year(year)
 ```
@@ -237,8 +270,11 @@ plot_year(year)
 ## 2011
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2011
 run_year(year)
 ```
@@ -250,8 +286,11 @@ plot_year(year)
 ## 2012
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2012
 run_year(year)
 ```
@@ -263,8 +302,11 @@ plot_year(year)
 ## 2013
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2013
 run_year(year)
 ```
@@ -276,8 +318,11 @@ plot_year(year)
 ## 2014
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2014
 run_year(year)
 ```
@@ -289,8 +334,11 @@ plot_year(year)
 ## 2015
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2015
 run_year(year)
 ```
@@ -302,8 +350,11 @@ plot_year(year)
 ## 2016
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2016
 run_year(year)
 ```
@@ -315,8 +366,11 @@ plot_year(year)
 ## 2017
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2017
 run_year(year)
 ```
@@ -328,12 +382,19 @@ plot_year(year)
 ## 2018
 
 ```{code-cell} ipython3
-:tags: [hide-output]
-
+---
+jupyter:
+  outputs_hidden: true
+tags: [hide-output]
+---
 year = 2018
 run_year(year)
 ```
 
 ```{code-cell} ipython3
 plot_year(year)
+```
+
+```{code-cell} ipython3
+
 ```

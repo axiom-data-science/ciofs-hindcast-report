@@ -505,6 +505,27 @@ document.write(`
 <li><p>get discharge data.</p></li>
 <li><p>Check for:</p>
 <ol class="arabic simple">
+<li><p>empty → Use mean time series</p></li>
+<li><p>fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.</p></li>
+<li><p>Reindex to fill all missing times with nans</p></li>
+<li><p>Deal with other flags</p>
+<ol class="arabic simple">
+<li><p>Fill ice flag data with 0s.</p></li>
+<li><p>Fill eqp flag data with nans (to be filled in as gaps).</p></li>
+</ol>
+</li>
+<li><p>Check gap lengths.</p></li>
+</ol>
+</li>
+<li><p>Has gaps in data. Process all gaps. If gaps are:</p>
+<ol class="arabic simple">
+<li><p>Less than 8 days → interpolate</p></li>
+<li><p>Over 8 days → Use mean time series.</p></li>
+</ol>
+</li>
+<li><p>get discharge data.</p></li>
+<li><p>Check for:</p>
+<ol class="arabic simple">
 <li><p>empty → check gage data</p></li>
 <li><p>fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.</p></li>
 <li><p>Reindex to fill all missing times with nans</p></li>
@@ -643,7 +664,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164437410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1669abc50&gt;
 </pre></div>
 </div>
 <img alt="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" src="_images/7fe34a05655f9e65af037b37f73c0c7ac27131e7e70b1a55b0cb8a0bad479376.png" />
@@ -718,7 +739,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1644d15d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1673dfed0&gt;
 </pre></div>
 </div>
 <img alt="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" src="_images/9c09fa66f324222451a0e9af37e7a164eb09466f9ab55555aa681253dbd10425.png" />
@@ -888,10 +909,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43f05fb8c6428cfa9739f6458fd79be24c803fa8ea32a490fe9e56da96e067fa.png" src="_images/43f05fb8c6428cfa9739f6458fd79be24c803fa8ea32a490fe9e56da96e067fa.png" />
+<img alt="_images/86e6160972e720ff9ef675c26e5aa0a7ed3f80deeb7d37ab40b363e76df4a10d.png" src="_images/86e6160972e720ff9ef675c26e5aa0a7ed3f80deeb7d37ab40b363e76df4a10d.png" />
 <img alt="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" src="_images/4ad7d1192883fe98013341f1dc8f95cfe78460666e261121adc6850311d7ce67.png" />
-<img alt="_images/41bca70f8826f913bd05eb12aee846aa83e61ab9ccc3cf75effeafdffd1d5b2d.png" src="_images/41bca70f8826f913bd05eb12aee846aa83e61ab9ccc3cf75effeafdffd1d5b2d.png" />
-<img alt="_images/f96846ee95f5a97a33b2109ea6f37df447ca043da22476e1807095f93f28efc6.png" src="_images/f96846ee95f5a97a33b2109ea6f37df447ca043da22476e1807095f93f28efc6.png" />
+<img alt="_images/058d85d157292a2ee73d164673d6c95671c5a9ddb3d266c5eee7d3554db95d65.png" src="_images/058d85d157292a2ee73d164673d6c95671c5a9ddb3d266c5eee7d3554db95d65.png" />
+<img alt="_images/d18cbb0f81c1a89b3828773ae8e8cb70b886a0536ef11b91298147c6ab8e1faf.png" src="_images/d18cbb0f81c1a89b3828773ae8e8cb70b886a0536ef11b91298147c6ab8e1faf.png" />
 <img alt="_images/23d10f40ed4a9d032e21969a0a05bbba0ae5a2ff8c33c3c2eef560796166c951.png" src="_images/23d10f40ed4a9d032e21969a0a05bbba0ae5a2ff8c33c3c2eef560796166c951.png" />
 <img alt="_images/6985c7ce832fae36e13eab908583625ec657d3777b6bc0210986bfbddd5acc0e.png" src="_images/6985c7ce832fae36e13eab908583625ec657d3777b6bc0210986bfbddd5acc0e.png" />
 </div>
@@ -923,9 +944,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8cbd8d39bc9e296fbb62b0051efc1ca5ac34667a0db8d676575320ec6649caec.png" src="_images/8cbd8d39bc9e296fbb62b0051efc1ca5ac34667a0db8d676575320ec6649caec.png" />
+<img alt="_images/80236e1399c1e7cdf44620151a113f063788459c5898604d92b3334262414354.png" src="_images/80236e1399c1e7cdf44620151a113f063788459c5898604d92b3334262414354.png" />
 <img alt="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" src="_images/79d0b37ccd3066b51ab285170efc91e9c5ca75f1ae08f4c8e5b2ea9f2f57d68e.png" />
-<img alt="_images/8db75107a7e5242bd636324eadf77e6ba2f043d0aeba72f6203fcad382d49a32.png" src="_images/8db75107a7e5242bd636324eadf77e6ba2f043d0aeba72f6203fcad382d49a32.png" />
+<img alt="_images/d177724630a5ca776041062b685a184d1c8c4964851be89e08451277eb105b41.png" src="_images/d177724630a5ca776041062b685a184d1c8c4964851be89e08451277eb105b41.png" />
 <img alt="_images/1c1808d87673ece6f3a659003ade344b74bc89c2a96161ac63f5b7cd384f6068.png" src="_images/1c1808d87673ece6f3a659003ade344b74bc89c2a96161ac63f5b7cd384f6068.png" />
 <img alt="_images/dc9f75e5d0ec1841ff3a0166830b9e3c16bfca7f5bf8e00165cdda92a690257f.png" src="_images/dc9f75e5d0ec1841ff3a0166830b9e3c16bfca7f5bf8e00165cdda92a690257f.png" />
 <img alt="_images/04fda617fcfa04bb9d882b12908087d4e10753c5ab4336cdba01eeead3baac82.png" src="_images/04fda617fcfa04bb9d882b12908087d4e10753c5ab4336cdba01eeead3baac82.png" />
