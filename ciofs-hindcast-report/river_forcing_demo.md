@@ -63,7 +63,7 @@ We followed what we saw in two river forcing files from the CIOFS group, and asc
 
 ## General approach
 
-This is a text flow chart of the logic in `create_river_roms.py`. Logic flows first down, then across a line and stops if "Done", otherwise continues down the list.
+This is a text flow chart of the logic in `create_river_roms.py`. Logic flows first down, then across a line and stops if "Done", otherwise continues down the list. No gage data is used in this analysis.
 
 ### Discharge
 
@@ -72,48 +72,11 @@ This is a text flow chart of the logic in `create_river_roms.py`. Logic flows fi
     1. empty → Use mean time series
     1. fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.
     1. Reindex to fill all missing times with nans
-    1. Deal with other flags
-        1. Fill ice flag data with 0s.
-        1. Fill eqp flag data with nans (to be filled in as gaps).
+    1. Deal with other flags (ice or equipment malfunction): fill all with nan ("A, e" or "P, e" flags are ok)
     1. Check gap lengths.
 1. Has gaps in data. Process all gaps. If gaps are:
-    1. Less than 8 days → interpolate
-    1. Over 8 days → Use mean time series.
-
-
-
-1. get discharge data.
-1. Check for:
-    1. empty → check gage data
-    1. fully present (all time stamps for date range) with good data flags (“A” or “P” flag) → use, done.
-    1. Reindex to fill all missing times with nans
-    1. Deal with other flags
-        1. Any questionable flags present (estimate flags: “A, e”, “P, e”)?
-        1. Is there good (“A” or “P”) gage data during the time period of the questionable flags?
-            1. no? keep questionable data.
-            1. yes? fill questionable flag data values with nan.
-        1. Any bad flags present? (ice or equipment malfunction: “P, Ice”, “P, Eqp”, “A, Ice”, “A, Eqp”)
-            1. fill bad flags data with nan
-    1. Check gap lengths.
-1. Has gaps in data. Process all gaps. If gaps are:
-    1. Less than 8 days → interpolate
-    1. Over 8 days → check gage data
-
-Gage data:
-
-1. Get gage data. 
-1. Check for:
-    1. rating curve data empty or gage data empty → use mean. Done.
-    1. fully present with good data flags → estimate with gage data. Done.
-    1. Reindex to fill all missing times with nans
-    1. Deal with other flags.
-        1. Fill ice flag data with 0s.
-        1. Fill eqp flag data with nans (to be filled in as gaps).
-    1. Estimate discharge from gage data time series
-    1. Check gap lengths
-1. Has gaps in data. Gaps are:
-    1. Less than 8 days → interpolate
-    1. Over 8 days → use mean data
+    1. Less than 7 days → interpolate
+    1. Over 7 days → Use mean time series.
 
 
 ### Water temperature
@@ -135,9 +98,7 @@ Gage data:
 * Station substitutes are listed in the Station Table above. There is one station substitute for discharge, and more for water temperature.
 * The model development report stated that because the desired Station 15292780 is not available for a long time, they substituted discharge from Station 15292000 and multiplied by 2 to approximate the difference seen between the two stations.
 * The model development report stated that temperatures from Bradley River (Station 15292780) were used for all stations. We decided to allow the water temperature to vary in space.
-* We perform a rolling mean of the gage data
-* We use rating curve data with gage data to estimate discharge when discharge is not available.
-* We use mean time series when neither discharge nor gage data is available for estimating discharge, and for water temperature when real-time data is not available.
+* We use mean time series for water temperature and discharge when real-time data is not available.
 
 
 Details for each point are below.
@@ -182,56 +143,6 @@ ds["river_temp"].isel(s_rho=0, river=unique_inds).plot.line(x="river_time", lw=3
 plt.legend(labels)
 ```
 
-### Rolling mean of gage data
-
-We include a rolling mean over 24 hours of gage data because it can be jumpy sometimes. This is in addition to a final rolling mean of the resulting discharge and temperature data. As an example as to this effect, we show gage data from Station "15276000" in December 2010 before and after applying a rolling mean.
-
-```{code-cell} ipython3
-start, end = "2010-12-1T00:00", "2010-12-31T00:00"
-station = "15276000"
-df = return_nwis_data(station, "00065", start, end)
-df["00065"].plot(label="No rolling mean")
-# this data is every 15 minutes
-df["00065"].rolling(center=True, window=24*4).mean().plot(label="With 24-hour rolling mean")
-plt.legend()
-plt.ylabel('Gage data [ft]')
-plt.title("Station 15276000")
-```
-
-### Demonstrate using the rating curve
-
-When discharge data is not available or is flagged as an "estimate", real-time gage data will be used if available. As described by the [USGS](https://www.usgs.gov/faqs/how-rating-curve-used-convert-gage-height-streamflow), the rating curve gives an empirical relationship between gage height and discharge in the form of a table. We use this data, when available, to convert gage data to a discharge estimate. If necessary, we extrapolate the rating curve up or down with a third-order polynomial to match the gage data, but we [cap it at twice the highest measured discharge](https://kacv.net/brad/nws/lesson7.html) and do not allow negative discharge.
-
-Here is an example which shows the rating curve for Station 15295700 as well as an extrapolation up and down to higher and lower gage values.
-
-```{code-cell} ipython3
-ratingDataOrig = nwis.get_ratings(site="15295700", file_type="exsa")[0]
-ratingDataHigher = extrapolate_rating_curve(ratingDataOrig, ratingDataOrig["INDEP"].max() + 2, "up")
-ratingDataLower = extrapolate_rating_curve(ratingDataOrig, ratingDataOrig["INDEP"].min() -1, "down")
-
-ax = ratingDataHigher.plot(x="INDEP", y="DEP", label="Extrapolates up", ls="--")
-ratingDataLower.plot(x="INDEP", y="DEP", ax=ax, label="Extrapolates down", ls=":")
-ratingDataOrig.plot(x="INDEP", y="DEP", ax=ax, label="Original data")
-ax.set_xlabel("Gage height [feet]")
-ax.set_ylabel("Discharge [ft$^3$/s]")
-```
-
-Below is a comparison for a time period when both discharge and gage data are available at a station to compare the two methods. They are similar.
-
-```{code-cell} ipython3
-start, end = "2009-05-01T00:00", "2009-08-01T00:00"
-station = "15266300"
-gage_data = return_nwis_data(station, "00065", start, end)["00065"]
-index = pd.date_range(start, end, freq="1H")
-estimate = estimate_discharge_from_gage_data(station, gage_data, index)
-discharge_data = return_nwis_data(station, "00060", start, end)["00060"]
-
-discharge_data.plot(label="discharge data")
-estimate.plot(label="estimate from gage data")
-plt.ylabel("Discharge [ft$^3$/s]")
-plt.legend()
-```
-
 ### Mean time series
 
 ```{code-cell} ipython3
@@ -262,7 +173,7 @@ We received two example nowcast river forcing files which we recreate here as a 
 1. do not apply a rolling mean of 12 hours
 
 The main differences seen below are:
-1. We estimate discharge if gage data is available and discharge data is unavaiable or unreliable, and if gage data isn't available but the instrument is not flagged as "iced", then we include discharge from the statistical mean time series for the station. Because of this, we include much more freshwater input as compared with the example files. NOAA's file does include an estimate of discharge from gage data from one river, but not from other rivers. Perhaps when running operationally, it is not always possible to estimate the discharge using gage data
+1. We do not estimate discharge from gage data, but we do include discharge from the statistical mean time series for the station if there are any iced or equipment malfunction flags. Because of this, we include much more freshwater input as compared with the example files. NOAA's file does include an estimate of discharge from gage data from one river, but not from other rivers.
 1. We used geographically-varying water temperature data, whereas the NOAA groups use data only from Bradley River (Station 15239070). When real-time water temperature data is not available, we use the statistical mean time series for the station. When a station has never had an instrument to measure water data, we have a replacement station as shown in the station table.
 1. The nowcast forcing files are created by NOAA at the mid point of the time series such that they use the real-time data up until the start of the simulation, and the second half of the forcing is a simple linear extrapolation of the available data (which is why they appear as straight lines for those times).
 
@@ -342,7 +253,7 @@ def plot_comparison(ds, dscompare):
 
 ### December 2022 file
 
-The total amount of discharge input over the 4 days in the forcing file is much larger from the Axiom file: 0.1 km$^3$ compared with 0.001 km$^3$ from the NOAA file. However, for the two rivers that do have discharge from the NOAA file (most are all 0s), we are able to estimate a good match ("River discharge for nonzero NOAA rivers").
+The total amount of discharge input over the 4 days in the forcing file is much larger from the Axiom file: 0.07 km$^3$ compared with 0.001 km$^3$ from the NOAA file. However, for the two rivers that do have discharge from the NOAA file (most are all 0s), we are able to estimate a good match ("River discharge for nonzero NOAA rivers").
 
 River temperature data is all 1s in the NOAA file but we allow for spatial variation and see in the comparison ("River temps for Axiom rivers above 1 C") this variation. Note than any temperatures below 1 degree are set to 1 degree.
 
@@ -367,7 +278,7 @@ plot_comparison(ds, dscompare)
 
 ### January 2023 file
 
-For the same reasons previously listed, the discharge is much higher from the Axiom file: 0.09 km$^3$ compared with 0.001 km$^3$ from the NOAA file. For the rivers that we estimate in the same way as NOAA, we get similar results.
+For the same reasons previously listed, the discharge is much higher from the Axiom file: 0.06 km$^3$ compared with 0.001 km$^3$ from the NOAA file. For the rivers that we estimate in the same way as NOAA, we get similar results.
 
 ```{code-cell} ipython3
 :tags: [hide-output]
