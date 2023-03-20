@@ -413,20 +413,6 @@ document.write(`
             <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
         
         <span class="nb">print</span><span class="p">(</span><span class="n">Code</span><span class="p">(</span><span class="n">fname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">,</span><span class="s2">&quot;.txt&quot;</span><span class="p">)))</span>
-<span class="c1">#     for i in range(1,13):</span>
-<span class="c1">#         if i == 12:</span>
-<span class="c1">#             start, end = f&quot;{year}-{i}-1T00&quot;, f&quot;{year+1}-{1}-1T00&quot;</span>
-<span class="c1">#         else:</span>
-<span class="c1">#             start, end = f&quot;{year}-{i}-1T00&quot;, f&quot;{year}-{i+1}-1T00&quot;</span>
-
-<span class="c1">#         fname = pd.Timestamp(start).strftime(&quot;axiom.ciofs.river.%Y%m%d.nc&quot;)</span>
-<span class="c1">#         fname = f&quot;{base}/{fname}&quot;</span>
-        
-<span class="c1">#         if not os.path.exists(fname) or not os.path.exists(fname.replace(&quot;.nc&quot;,&quot;.txt&quot;)):</span>
-<span class="c1">#             ds = create_river_forcing_file(start, end, ndays=7, skip_last=True)</span>
-<span class="c1">#             ds.to_netcdf(fname)</span>
-        
-<span class="c1">#         print(Code(fname.replace(&quot;.nc&quot;,&quot;.txt&quot;)))</span>
 
         
 <span class="k">def</span> <span class="nf">plot_year</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>

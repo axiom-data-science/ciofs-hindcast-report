@@ -38,20 +38,6 @@ def run_year(year):
             ds.to_netcdf(fname)
         
         print(Code(fname.replace(".nc",".txt")))
-#     for i in range(1,13):
-#         if i == 12:
-#             start, end = f"{year}-{i}-1T00", f"{year+1}-{1}-1T00"
-#         else:
-#             start, end = f"{year}-{i}-1T00", f"{year}-{i+1}-1T00"
-
-#         fname = pd.Timestamp(start).strftime("axiom.ciofs.river.%Y%m%d.nc")
-#         fname = f"{base}/{fname}"
-        
-#         if not os.path.exists(fname) or not os.path.exists(fname.replace(".nc",".txt")):
-#             ds = create_river_forcing_file(start, end, ndays=7, skip_last=True)
-#             ds.to_netcdf(fname)
-        
-#         print(Code(fname.replace(".nc",".txt")))
 
         
 def plot_year(year):
