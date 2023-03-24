@@ -4,12 +4,20 @@ Report for running and validating the CIOFS hindcast simulation and comparing wi
 
 ## Usage
 
-### Building the book
-
 If you'd like to develop and/or build the CIOFS Hindcast Report, you should:
 
 1. Clone this repository
 2. Build the Anaconda environment with `conda env create -f environment.yml`
+
+
+### Install the report code
+
+It is adequate to install the report package locally to be able to then use files located in `ciofs_hindcast_report/code`. You can do this with:
+
+    pip install -e .
+
+
+### Make a new page
 
 
 To make new report pages:
@@ -17,10 +25,19 @@ To make new report pages:
 1. Decide if you want to write a markdown or notebook file. Markdown files will be rendered statically whereas notebooks can be run.
 2. Make a new notebook or markdown file in `ciofs_hindcast_report/report` or `ciofs_hindcast_report/appendix`, as appropriate.
 3. Add new chapter to `_toc.yml` for your new file.
-4. For our workflow, if you want to run code, write a notebook and then convert it to a Myst NB file. Then convert it with `jupytext NOTEBOOK_NAME.ipynb --to myst` to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
-5. Run `jupyter-book clean ciofs_hindcast_report/` to remove any existing builds (though maybe this would remove caches?)
-6. Run `jupyter-book build ciofs_hindcast_report/` to build the report
-7. Be sure to commit your markdown file (not ipynb file) to the repository.
+
+
+### Building the book
+
+1. For our workflow, if you want to run code when the report is compiled, convert your notebook to a Myst NB file with:
+   
+    `jupytext NOTEBOOK_NAME.ipynb --to myst` 
+    
+to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
+
+2. Run `jupyter-book clean ciofs_hindcast_report/` to remove any existing builds (though maybe this would remove caches?)
+3. Run `jupyter-book build ciofs_hindcast_report/` to build the report
+4. Be sure to commit your markdown file (not ipynb file) to the repository.
 
 A fully-rendered HTML version of the book will be built in `ciofs_hindcast_report/_build/html/`.
 
