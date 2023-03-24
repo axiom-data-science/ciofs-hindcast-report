@@ -18,8 +18,8 @@ To make new report pages:
 2. Make a new notebook or markdown file in `ciofs_hindcast_report/report` or `ciofs_hindcast_report/appendix`, as appropriate.
 3. Add new chapter to `_toc.yml` for your new file.
 4. For our workflow, if you want to run code, write a notebook and then convert it to a Myst NB file. Then convert it with `jupytext NOTEBOOK_NAME.ipynb --to myst` to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
-5. Run `jupyter-book clean ciofs-hindcast-report/` to remove any existing builds
-6. Run `jupyter-book build ciofs-hindcast-report/` to build the report
+5. Run `jupyter-book clean ciofs_hindcast_report/` to remove any existing builds (though maybe this would remove caches?)
+6. Run `jupyter-book build ciofs_hindcast_report/` to build the report
 7. Be sure to commit your markdown file (not ipynb file) to the repository.
 
 A fully-rendered HTML version of the book will be built in `ciofs_hindcast_report/_build/html/`.
