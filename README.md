@@ -9,6 +9,8 @@ If you'd like to develop and/or build the CIOFS Hindcast Report, you should:
 1. Clone this repository
 2. Build the Anaconda environment with `conda env create -f environment.yml`
 
+The repository is currently cloned onto `lakes02` and is set up there with all necessary support files to be able to build the report. Also, miniconda3 is installed for Python 3.10 which was used to create the `ciofs` environment for the axiom user.
+
 
 ### Install the report code
 
