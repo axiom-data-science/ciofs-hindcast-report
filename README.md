@@ -29,11 +29,9 @@ To make new report pages:
 
 ### Building the book
 
-1. For our workflow, if you want to run code when the report is compiled, convert your notebook to a Myst NB file with:
+1. For our workflow, if you want to run code when the report is compiled, convert your notebook to a Myst NB file with the following to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
    
     `jupytext NOTEBOOK_NAME.ipynb --to myst` 
-    
-to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
 
 2. Run `jupyter-book clean ciofs_hindcast_report/` to remove any existing builds (though maybe this would remove caches?)
 3. Run `jupyter-book build ciofs_hindcast_report/` to build the report
@@ -54,6 +52,8 @@ Once you get the report in the form you want, with changes in the main branch, y
 ### Troubleshooting
 
 If a notebook absolutely cannot be run by the Jupyter book compilation, you can instead run the notebook yourself and commit the .ipynb file itself to the repository. The notebook will be rendered into html but not run.
+
+If you get issues related to a notebook not being valid JSON, you need to do some combination of moving the notebook files away from where they can be seen by the book compilation and maybe change `_toc.yml` to not include any related files, clean, rebuild, and then put everything back in place afterward.
 
 ## Credits
 
