@@ -5,15 +5,19 @@ dependencies:
   # Required for full project functionality (don't remove)
   - pytest
   # Examples (remove and add as needed)
+  - cf-pandas
   - dask
   - dataretrieval
   - ghp-import
+  - intake-axds
+  - intake-erddap
   - jupyterbook
   - netcdf4
   - numpy
   - matplotlib-base
+  - ocean-model-skill-assessor
   - pandas
   - pip
   - xarray
   - pip:
-    # - git+https://github.com/axiom-data-science/intake-coops
+    - git+https://github.com/axiom-data-science/intake-coops
