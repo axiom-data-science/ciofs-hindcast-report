@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import ciofs_hindcast_report as chr
+
 import logging
 
 logging.captureWarnings(True)
@@ -695,7 +697,7 @@ def create_river_forcing_file(start: str, end: str, ndays: int, window: int=24, 
 
     # create log file for each river forcing file
     fname = pd.Timestamp(start).strftime("axiom.ciofs.river.%Y%m%d.txt")
-    fname = f"output/river/{fname}"
+    fname = f"{chr.PATH_OUTPUTS_RIVER}/{fname}"
     file_handler = logging.FileHandler(filename=fname, mode="w")
     handlers = [file_handler]
 
@@ -736,7 +738,7 @@ def create_river_forcing_file(start: str, end: str, ndays: int, window: int=24, 
         river_temp[:,:,i] = station_temp[temp_stations[station_file]].values[:,np.newaxis].repeat(nsrho, axis=1)
 
     # create netcdf files starting from the acquired data
-    loc = 'data/nos.ciofs.river.20221216.t00z.nc'
+    loc = f'{chr.PATH_INPUTS_RIVER}/nos.ciofs.river.20221216.t00z.nc'
     ds = xr.open_dataset(loc)
     
     vars_to_keep = ["river_names", "river_Xposition", "river_Eposition", "river_direction",

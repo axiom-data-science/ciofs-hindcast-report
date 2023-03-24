@@ -13,4 +13,7 @@ dependencies:
   - numpy
   - matplotlib-base
   - pandas
+  - pip
   - xarray
+  - pip:
+    # - git+https://github.com/axiom-data-science/intake-coops

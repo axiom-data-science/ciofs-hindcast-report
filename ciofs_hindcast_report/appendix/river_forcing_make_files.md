@@ -6,7 +6,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.5
 kernelspec:
-  display_name: Python 3 (ipykernel)
+  display_name: Python 3.11.0 ('ciofs')
   language: python
   name: python3
 ---
@@ -14,7 +14,9 @@ kernelspec:
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
-from create_river_roms import *
+from ciofs_hindcast_report.code.create_river_roms import *
+import ciofs_hindcast_report as chr
+
 import os
 from IPython.display import Code
 
@@ -24,7 +26,7 @@ plt.rc('font', size=16)
 # Make monthly river forcing files for 1998–2018
 
 ```{code-cell} ipython3
-base = "output/river"
+base = chr.PATH_OUTPUTS_RIVER
 
 def run_year(year):
     

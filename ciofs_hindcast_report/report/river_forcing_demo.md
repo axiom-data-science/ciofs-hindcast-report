@@ -18,14 +18,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from create_river_roms import *
+from ciofs_hindcast_report.code.create_river_roms import *
+
+import ciofs_hindcast_report as chr
 ```
 
 # Details about river forcing files
 
 We use the [`dataretrieval-python`](https://doi-usgs.github.io/dataretrieval-python) package to access USGS NWIS river data.
 
-+++
++++ {"user_expressions": []}
 
 ## Background information
 
@@ -49,17 +51,19 @@ Number | River Station in Model | USGS Station Used: Discharge | USGS Station Us
 11     | 15290000: <br> Little Susitna River near Palmer, AK | 15290000 | 15290000 | 
 12     | 15292780: <br> Susitna River at Sunshine, AK | 15292000: <br> Susitna River at Gold Creek AK | 15292780 | Discharge from 15292000 is multiplied by 2.
 
-River input locations are shown on this map from the development report:
-
-![image.png](inputs/river_inputs.png)
-
 We followed what we saw in two river forcing files from the CIOFS group, and ascertained some details to include in the data processing:
 
 * River salinity is set to 0.005 for all rivers
 * River temperature is never allowed below 1 degree Celsius.
 * Use all data in UTC.
 
-+++
+
+River input locations are shown on this map from the development report:
+
+```{code-cell} ipython3
+from IPython import display
+display.Image(f"{chr.PATH_INPUTS_RIVER}/river_inputs.png")
+```
 
 ## General approach
 
@@ -118,8 +122,8 @@ end = "2020-12-31"
 df1 = nwis.get_record(sites=station, service='dv', start=start, end=end)
 station = "15292000"
 df2 = nwis.get_record(sites=station, service='dv', start=start, end=end)
-ax = df1["00060_Mean"].loc[:"2019"].plot(figsize=(15,5), label="15292780")
-(df2["00060_Mean"]*2).loc[:"2019"].plot(ax=ax, label="15292000 * 2")
+ax = df1["00060_Mean"].loc[:"2019"].plot(figsize=(15,5), label="15292780", lw=3)
+(df2["00060_Mean"]*2).loc[:"2019"].plot(ax=ax, label="15292000 * 2", lw=3)
 plt.legend()
 plt.ylabel("River discharge [ft$^3$/s]")
 ```
@@ -132,9 +136,8 @@ The development report states that Bradley River (15239070) was used to represen
 :tags: [hide-input]
 
 year = 2015
-base = "output/river"
-locs = f"{base}/axiom.ciofs.river.{year}*.nc"
-ds = xr.open_mfdataset(locs, concat_dim="time", combine='nested', engine="netcdf4")
+loc = f"{chr.PATH_OUTPUTS_RIVER}/axiom.ciofs.river.20150101.nc"
+ds = xr.open_dataset(loc)#, concat_dim="time", combine='nested', engine="netcdf4")
 ds = ds.swap_dims({"time": "river_time"})
 
 unique_inds = list(set([station_list_file.index(station_list_file[i]) for i in range(nrivers)]))
@@ -260,7 +263,7 @@ River temperature data is all 1s in the NOAA file but we allow for spatial varia
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-loc = f'data/nos.ciofs.river.20221216.t00z.nc'
+loc = f'{chr.PATH_INPUTS_RIVER}/nos.ciofs.river.20221216.t00z.nc'
 ds = xr.open_dataset(loc)
 
 start = pd.Timestamp(ds["river_time"].values[0]).strftime("%Y-%m-%dT%H:%MZ")
@@ -283,7 +286,7 @@ For the same reasons previously listed, the discharge is much higher from the Ax
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-loc = "data/nos.ciofs.river.20230201.t00z.nc"
+loc = f"{chr.PATH_INPUTS_RIVER}/nos.ciofs.river.20230201.t00z.nc"
 ds = xr.open_dataset(loc)
 
 start = pd.Timestamp(ds["river_time"].values[0]).strftime("%Y-%m-%dT%H:%MZ")
