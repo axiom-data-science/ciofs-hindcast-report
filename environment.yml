@@ -13,6 +13,7 @@ dependencies:
   - intake-erddap
   - jupyterbook
   - netcdf4
+  - noaa_coops  # should be included with intake-coops in the future
   - numpy
   - matplotlib-base
   - ocean-model-skill-assessor
