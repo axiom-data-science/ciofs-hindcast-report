@@ -27,6 +27,13 @@ A fully-rendered HTML version of the book will be built in `ciofs_hindcast_repor
 Use the directories `inputs`, `outputs`, and `code` for placing dependencies or outputs. Add to the paths in `__init__.py` if you add a subdirectory, so that it can be referenced similarly to other paths in the report. 
 
 
+### Push static compiled files to update the report on github
+
+Once you get the report in the form you want, with changes in the main branch, you can run the following to push the compiled html files to update the report at https://axiom-data-science.github.io/ciofs-hindcast-report:
+
+    ghp-import -n -p -f ciofs_hindcast_report/_build/html
+
+
 ### Troubleshooting
 
 If a notebook absolutely cannot be run by the Jupyter book compilation, you can instead run the notebook yourself and commit the .ipynb file itself to the repository. The notebook will be rendered into html but not run.
