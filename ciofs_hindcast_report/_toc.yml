@@ -6,7 +6,11 @@ root: intro
 parts:
 - caption: Report
   chapters:
+  - file: report/summarize_datasets
   - file: report/river_forcing_demo
 - caption: Appendix
   chapters:
   - file: appendix/river_forcing_make_files
+  - file: appendix/included_datasets
+    sections:
+    - glob: outputs/pages/data/*

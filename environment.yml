@@ -1,14 +1,18 @@
 name: ciofs
 channels:
   - conda-forge
+  - pyviz
 dependencies:
   # Required for full project functionality (don't remove)
   - pytest
   # Examples (remove and add as needed)
+  - cartopy
   - cf_pandas
   - dask
   - dataretrieval
+  - geoviews
   - ghp-import
+  - hvplot
   - intake-axds
   - intake-erddap
   - jupyter-book
@@ -19,6 +23,7 @@ dependencies:
   - pandas
   - pip
   - xarray
+  # - xcmocean
   - pip:
     - noaa_coops  # should be included with intake-coops in the future
     - git+https://github.com/axiom-data-science/intake-coops
