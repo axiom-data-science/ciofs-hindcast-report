@@ -15,7 +15,7 @@ import ocean_model_skill_assessor as omsa
 import pandas as pd
 ```
 
-# Lower Cook Inlet Mooring
+# KBNERR: Lower Cook Inlet Mooring
 
 * CTD Moored 2006-2008 - KBNERR
 * ctd_moored_kbnerr
@@ -57,12 +57,28 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
 ## Deployment1
         
 
++++
+
+            
+|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
+|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
+|  0 | timeSeries    | point     |       59.2027 |       -151.848 | 2006-10-28T10:22:00.000000000 |       59.2027 |       -151.848 | 2006-08-12T18:22:00.000000000 |
+
+
 ```{code-cell}
 cat['Deployment1'].plot.data()
 ```
 
 ## Deployment2
         
+
++++
+
+            
+|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
+|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
+|  0 | timeSeries    | point     |       59.2027 |       -151.848 | 2008-02-25T05:28:00.000000000 |       59.2027 |       -151.848 | 2007-06-20T21:00:00.000000000 |
+
 
 ```{code-cell}
 cat['Deployment2'].plot.data()

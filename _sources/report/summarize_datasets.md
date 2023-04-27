@@ -18,22 +18,28 @@ import numpy as np
 
 ## Table of All Datasets
 
-|    | description                                                                                  | slug                      | project_name                                  | time                                                                       | featuretype       | included   | notes                                                                                                                                                                                                       |
-|---:|:---------------------------------------------------------------------------------------------|:--------------------------|:----------------------------------------------|:---------------------------------------------------------------------------|:------------------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  1 | Six repeat transects in Cook Inlet                                                           | ctd_profiles_gwa          | CTD profiles 2012-2021 - GWA                  | Quarterly repeats from 2012 to 2021                                        | trajectoryProfile | True       | Not used in the NWGOA model/data comparison.                                                                                                                                                                |
-|  2 | Single CTD profiles across Cook Inlet                                                        | ctd_profiles_2005_noaa    | CTD profiles 2005 - NOAA                      | One-off CTD profiles in June and July 2005                                 | profile           | True       |                                                                                                                                                                                                             |
-|  3 | Single CTD profiles across Cook Inlet                                                        | ctd_profiles_usgs_boem    | CTD profiles - USGS BOEM                      | One-off CTD profiles from 2016 to 2021 in July                             | profile           | True       |                                                                                                                                                                                                             |
-|  4 | Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths     | ctd_towed_otf_kbnerr      | CTD Towed 2003 - OTF KBNERR                   | July 2003, 5min sampling frequency                                         | trajectoryProfile | True       | Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency. |
-|  5 | Towed CTD on ferry at nominal 4m depth                                                       | ctd_towed_ferry_noaa_pmel | CTD Towed 2004-2008 Ferry in-line - NOAA PMEL | Continuous 2004 to 2008, 5min sampling frequency                           | trajectory        | True       | The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency.                                                    |
-|  6 | Repeat CTD transect from Anchor Point in Cook Inlet                                          | ctd_profiles_otf_kbnerr   | CTD profiles 2003-2006 - OTF KBNERR           | Daily in July, 2003 to 2006                                                | trajectoryProfile | True       | These data were not included in the NWGOA model/data comparison                                                                                                                                             |
-|  7 | CTD transect from East Foreland Lighthouse in Cook Inlet                                     | ctd_profiles_cmi_uaf      | CTD profiles 2004-2005 - CMI UAF              | 10 cruises, approximately monthly for summer months, in 2004 and 2005      | trajectoryProfile | True       | Used in the NWGOA model/data comparison.                                                                                                                                                                    |
-|  8 | Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet | ctd_profiles_cmi_kbnerr   | CTD profiles 2004-2006 - CMI KBNERR           | From 2004 to 2006                                                          | trajectoryProfile | True       | Used in the NWGOA model/data comparison.                                                                                                                                                                    |
-|  9 | Central Cook Inlet Mooring                                                                   | ctd_moored_circac         | CTD Moored 2006 - CIRCAC                      | Two weeks in August 2006, 15 min sampling                                  | timeSeries        | True       |                                                                                                                                                                                                             |
-| 10 | Lower Cook Inlet Mooring                                                                     | ctd_moored_kbnerr         | CTD Moored 2006-2008 - KBNERR                 | Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling                 | timeSeries        | True       |                                                                                                                                                                                                             |
-| 11 | Repeat CTD profile transect along an east-west section in central Cook Inlet                 | ctd_time_series_uaf       | CTD time series UAF                           | 26-hour period on 9-10 August 2003                                         | trajectoryProfile | True       | Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.                                                                                                                |
-| 12 | Time series of CTD profiles at several locations in Cook Inlet                               | ctd_profiles_2005_osu     | CTD profiles 2005 - OSU                       | June 2005                                                                  | timeSeriesProfile | False      | Locations given are too low resolution.                                                                                                                                                                     |
-| 13 | Towed CTD at nominal 7m depth                                                                | ctd_towed_gwa             | CTD Towed 2017-2019 - GWA                     | Approximately monthly in summer from 2017 to 2020, 5min sampling frequency | trajectory        | True       | Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min.                          |
-| 14 | Towed CTD at nominal 7m depth                                                                | temp_towed_gwa            | Temperature towed 2011-2016 - GWA             | Approximately monthly in summer from 2011 to 2016, 5min sampling frequency | trajectory        | True       | Converted some local times, ship track outside domain is not included.                                                                                                                                      |
+|    | description                                                                                                                                                        | slug                       | project_name                                                                                | time                                                                       | featuretype       | included   | notes                                                                                                                                                                                                       |
+|---:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------|:------------------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  1 | GWA: Six repeat transects in Cook Inlet                                                                                                                            | ctd_profiles_gwa           | CTD profiles 2012-2021 - GWA                                                                | Quarterly repeats from 2012 to 2021                                        | trajectoryProfile | True       | Not used in the NWGOA model/data comparison.                                                                                                                                                                |
+|  2 | NOAA: Single CTD profiles across Cook Inlet                                                                                                                        | ctd_profiles_2005_noaa     | CTD profiles 2005 - NOAA                                                                    | One-off CTD profiles in June and July 2005                                 | profile           | True       |                                                                                                                                                                                                             |
+|  3 | USGS BOEM: Single CTD profiles across Cook Inlet                                                                                                                   | ctd_profiles_usgs_boem     | CTD profiles - USGS BOEM                                                                    | One-off CTD profiles from 2016 to 2021 in July                             | profile           | True       |                                                                                                                                                                                                             |
+|  4 | OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths                                                               | ctd_towed_otf_kbnerr       | CTD Towed 2003 - OTF KBNERR                                                                 | July 2003, 5min sampling frequency                                         | trajectoryProfile | True       | Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency. |
+|  5 | NOAA PMEL: Towed CTD on ferry at nominal 4m depth                                                                                                                  | ctd_towed_ferry_noaa_pmel  | CTD Towed 2004-2008 Ferry in-line - NOAA PMEL                                               | Continuous 2004 to 2008, 5min sampling frequency                           | trajectory        | True       | The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency.                                                    |
+|  6 | OTF KBNERR: Repeat CTD transect from Anchor Point in Cook Inlet                                                                                                    | ctd_profiles_otf_kbnerr    | CTD profiles 2003-2006 - OTF KBNERR                                                         | Daily in July, 2003 to 2006                                                | trajectoryProfile | True       | These data were not included in the NWGOA model/data comparison                                                                                                                                             |
+|  7 | CMI UAF: CTD transect from East Foreland Lighthouse in Cook Inlet                                                                                                  | ctd_profiles_cmi_uaf       | CTD profiles 2004-2005 - CMI UAF                                                            | 10 cruises, approximately monthly for summer months, in 2004 and 2005      | trajectoryProfile | True       | Used in the NWGOA model/data comparison.                                                                                                                                                                    |
+|  8 | CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet                                                           | ctd_profiles_cmi_kbnerr    | CTD profiles 2004-2006 - CMI KBNERR                                                         | From 2004 to 2006                                                          | trajectoryProfile | True       | Used in the NWGOA model/data comparison.                                                                                                                                                                    |
+|  9 | CIRCAC: Central Cook Inlet Mooring                                                                                                                                 | ctd_moored_circac          | CTD Moored 2006 - CIRCAC                                                                    | Two weeks in August 2006, 15 min sampling                                  | timeSeries        | True       |                                                                                                                                                                                                             |
+| 10 | KBNERR: Lower Cook Inlet Mooring                                                                                                                                   | ctd_moored_kbnerr          | CTD Moored 2006-2008 - KBNERR                                                               | Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling                 | timeSeries        | True       |                                                                                                                                                                                                             |
+| 11 | UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet                                                                                  | ctd_time_series_uaf        | CTD time series UAF                                                                         | 26-hour period on 9-10 August 2003                                         | trajectoryProfile | True       | Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.                                                                                                                |
+| 12 | OSU: Time series of CTD profiles at several locations in Cook Inlet                                                                                                | ctd_profiles_2005_osu      | CTD profiles 2005 - OSU                                                                     | June 2005                                                                  | timeSeriesProfile | False      | Locations given are too low resolution making them incorrectly on land.                                                                                                                                     |
+| 13 | GWA: Towed CTD at nominal 7m depth                                                                                                                                 | ctd_towed_gwa              | CTD Towed 2017-2019 - GWA                                                                   | Approximately monthly in summer from 2017 to 2020, 5min sampling frequency | trajectory        | True       | Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min.                          |
+| 14 | GWA: Towed CTD at nominal 7m depth, temperature only                                                                                                               | temp_towed_gwa             | Temperature towed 2011-2016 - GWA                                                           | Approximately monthly in summer from 2011 to 2016, 5min sampling frequency | trajectory        | True       | Converted some local times, ship track outside domain is not included.                                                                                                                                      |
+| 15 | UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet                                                                                                           | moorings_uaf               | Moorings from University of Alaska Fairbanks (UAF)                                          | From 2013 to present, variable                                             | timeSeries        | True       |                                                                                                                                                                                                             |
+| 16 | NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet                                                                                                          | moorings_nps               | Moorings from National Parks Service (NPS)                                                  | From 2018 to 2019, variable                                                | timeSeries        | True       |                                                                                                                                                                                                             |
+| 17 | NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait | moorings_noaa              | Moorings from NOAA                                                                          | From 1999 (and earlier) to 2023, variable                                  | timeSeries        | True       |                                                                                                                                                                                                             |
+| 18 | CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet                                                                                                           | moorings_aoos_cdip         | Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP) | From , variable                                                            | timeSeries        | True       |                                                                                                                                                                                                             |
+| 19 | OTF ADF&G: Long term station sampling                                                                                                                              | surface_otf_adfg           | surface Temp Sal - OTF ADF&G                                                                | Daily sampling mostly in July 1979 to 2021                                 | trajectoryProfile | False      | Not used because no times associated with data.                                                                                                                                                             |
+| 20 | Historical KBNERR Moorings: Kachemak Bay                                                                                                                           | moorings_kbnerr_historical | Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)          | From 2001 to 2003, variable                                                | timeSeries        | True       | These are accessed from Research Workspace.                                                                                                                                                                 |
 
 ## Summary of Each Dataset
 
@@ -42,7 +48,7 @@ import numpy as np
 
 ### CTD profiles 2012-2021 - GWA
 
-* Six repeat transects in Cook Inlet
+* GWA: Six repeat transects in Cook Inlet
 * Quarterly repeats from 2012 to 2021
 * Slug: ctd_profiles_gwa
 * Included: True
@@ -70,7 +76,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_gwa")("ctd_profiles_gwa")
 
 ### CTD profiles 2005 - NOAA
 
-* Single CTD profiles across Cook Inlet
+* NOAA: Single CTD profiles across Cook Inlet
 * One-off CTD profiles in June and July 2005
 * Slug: ctd_profiles_2005_noaa
 * Included: True
@@ -93,7 +99,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_2005_noaa")("ctd_profiles_200
 
 ### CTD profiles - USGS BOEM
 
-* Single CTD profiles across Cook Inlet
+* USGS BOEM: Single CTD profiles across Cook Inlet
 * One-off CTD profiles from 2016 to 2021 in July
 * Slug: ctd_profiles_usgs_boem
 * Included: True
@@ -120,7 +126,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_usgs_boem")("ctd_profiles_usg
 
 ### CTD Towed 2003 - OTF KBNERR
 
-* Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths
+* OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths
 * July 2003, 5min sampling frequency
 * Slug: ctd_towed_otf_kbnerr
 * Included: True
@@ -143,7 +149,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_towed_otf_kbnerr")("ctd_towed_otf_kbne
 
 ### CTD Towed 2004-2008 Ferry in-line - NOAA PMEL
 
-* Towed CTD on ferry at nominal 4m depth
+* NOAA PMEL: Towed CTD on ferry at nominal 4m depth
 * Continuous 2004 to 2008, 5min sampling frequency
 * Slug: ctd_towed_ferry_noaa_pmel
 * Included: True
@@ -186,7 +192,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_towed_ferry_noaa_pmel")("ctd_towed_fer
 
 ### CTD profiles 2003-2006 - OTF KBNERR
 
-* Repeat CTD transect from Anchor Point in Cook Inlet
+* OTF KBNERR: Repeat CTD transect from Anchor Point in Cook Inlet
 * Daily in July, 2003 to 2006
 * Slug: ctd_profiles_otf_kbnerr
 * Included: True
@@ -216,7 +222,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_otf_kbnerr")("ctd_profiles_ot
 
 ### CTD profiles 2004-2005 - CMI UAF
 
-* CTD transect from East Foreland Lighthouse in Cook Inlet
+* CMI UAF: CTD transect from East Foreland Lighthouse in Cook Inlet
 * 10 cruises, approximately monthly for summer months, in 2004 and 2005
 * Slug: ctd_profiles_cmi_uaf
 * Included: True
@@ -250,7 +256,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_cmi_uaf")("ctd_profiles_cmi_u
 
 ### CTD profiles 2004-2006 - CMI KBNERR
 
-* Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet
+* CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet
 * From 2004 to 2006
 * Slug: ctd_profiles_cmi_kbnerr
 * Included: True
@@ -296,7 +302,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_cmi_kbnerr")("ctd_profiles_cm
 
 ### CTD Moored 2006 - CIRCAC
 
-* Central Cook Inlet Mooring
+* CIRCAC: Central Cook Inlet Mooring
 * Two weeks in August 2006, 15 min sampling
 * Slug: ctd_moored_circac
 * Included: True
@@ -335,7 +341,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_circac")("ctd_moored_circac")
 
 ### CTD Moored 2006-2008 - KBNERR
 
-* Lower Cook Inlet Mooring
+* KBNERR: Lower Cook Inlet Mooring
 * Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling
 * Slug: ctd_moored_kbnerr
 * Included: True
@@ -372,7 +378,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
 
 ### CTD time series UAF
 
-* Repeat CTD profile transect along an east-west section in central Cook Inlet
+* UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet
 * 26-hour period on 9-10 August 2003
 * Slug: ctd_time_series_uaf
 * Included: True
@@ -405,7 +411,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_time_series_uaf")("ctd_time_series_uaf
 
 ### CTD profiles 2005 - OSU
 
-* Time series of CTD profiles at several locations in Cook Inlet
+* OSU: Time series of CTD profiles at several locations in Cook Inlet
 * June 2005
 * Slug: ctd_profiles_2005_osu
 * Included: False
@@ -415,7 +421,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_time_series_uaf")("ctd_time_series_uaf
 
 Notes:
 
-Locations given are too low resolution.
+Locations given are too low resolution making them incorrectly on land.
 
 **Map of Repeat CTD Profiles at Several Locations**
 
@@ -427,7 +433,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_2005_osu")("ctd_profiles_2005
 
 ### CTD Towed 2017-2019 - GWA
 
-* Towed CTD at nominal 7m depth
+* GWA: Towed CTD at nominal 7m depth
 * Approximately monthly in summer from 2017 to 2020, 5min sampling frequency
 * Slug: ctd_towed_gwa
 * Included: True
@@ -456,7 +462,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_towed_gwa")("ctd_towed_gwa")
 
 ### Temperature towed 2011-2016 - GWA
 
-* Towed CTD at nominal 7m depth
+* GWA: Towed CTD at nominal 7m depth, temperature only
 * Approximately monthly in summer from 2011 to 2016, 5min sampling frequency
 * Slug: temp_towed_gwa
 * Included: True
@@ -479,5 +485,151 @@ Converted some local times, ship track outside domain is not included.
 
 ```{code-cell}
 getattr(chr.src.plot_dataset_on_map, "temp_towed_gwa")("temp_towed_gwa")
+        
+```
+
+
+### Moorings from University of Alaska Fairbanks (UAF)
+
+* UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet
+* From 2013 to present, variable
+* Slug: moorings_uaf
+* Included: True
+* Feature type: timeSeries
+
+Moorings from UAF
+
+
+Notes:
+
+
+
+**Map of Moorings**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "moorings_uaf")("moorings_uaf")
+        
+```
+
+
+### Moorings from National Parks Service (NPS)
+
+* NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet
+* From 2018 to 2019, variable
+* Slug: moorings_nps
+* Included: True
+* Feature type: timeSeries
+
+Moorings from NPS
+
+
+Notes:
+
+
+
+**Map of Moorings**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "moorings_nps")("moorings_nps")
+        
+```
+
+
+### Moorings from NOAA
+
+* NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait
+* From 1999 (and earlier) to 2023, variable
+* Slug: moorings_noaa
+* Included: True
+* Feature type: timeSeries
+
+Moorings from NOAA
+
+
+Notes:
+
+
+
+**Map of Moorings**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "moorings_noaa")("moorings_noaa")
+        
+```
+
+
+### Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)
+
+* CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet
+* From , variable
+* Slug: moorings_aoos_cdip
+* Included: True
+* Feature type: timeSeries
+
+Moorings from AOOS/CDIP
+
+
+Notes:
+
+
+
+**Map of Moorings**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "moorings_aoos_cdip")("moorings_aoos_cdip")
+        
+```
+
+
+### surface Temp Sal - OTF ADF&G
+
+* OTF ADF&G: Long term station sampling
+* Daily sampling mostly in July 1979 to 2021
+* Slug: surface_otf_adfg
+* Included: False
+* Feature type: trajectoryProfile
+
+Long term surface sampling
+
+This project used a vessel of opportunity to collect physical oceanographic and fisheries data at six stations along a transect across lower Cook Inlet from Anchor Point (AP) to the Red River delta each day during July. Logistical support for the field sampling was provided in part by the Alaska Department of Fish and Game which has chartered a drift gillnet vessel annually to fish along this transect providing inseason projections of the size of sockeye salmon runs entering Cook Inlet. This project funded collection of physical oceanographic data on board the chartered vessel to help identify intrusions of the Alaska Coastal Current (ACC) into Cook Inlet and test six hypotheses regarding effects of changing oceanographic conditions on migratory behavior and catchability of sockeye salmon entering Cook Inlet. In 2003-2007, a conductivity-temperature-depth profiler was deployed at each station. In 2003-2005, current velocities were estimated along the transect using a towed acoustic Doppler current profiler, and salmon relative abundance and vertical distribution was estimated using towed fisheries acoustic equipment.
+
+Willette, T.M., W.S. Pegau, and R.D. DeCino. 2010. Monitoring dynamics of the Alaska coastal current and development of applications for management of Cook Inlet salmon - a pilot study. Exxon Valdez Oil Spill Gulf Ecosystem Monitoring and Research Project Final Report (GEM Project 030670), Alaska Department of Fish and Game, Commercial Fisheries Division, Soldotna, Alaska.
+
+Report: https://evostc.state.ak.us/media/2176/2004-040670-final.pdf
+
+
+Notes:
+
+Not used because no times associated with data.
+
+**Map of Stations**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "surface_otf_adfg")("surface_otf_adfg")
+        
+```
+
+
+### Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
+
+* Historical KBNERR Moorings: Kachemak Bay
+* From 2001 to 2003, variable
+* Slug: moorings_kbnerr_historical
+* Included: True
+* Feature type: timeSeries
+
+Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
+    
+More information: https://accs.uaa.alaska.edu/kbnerr/
+
+
+Notes:
+
+These are accessed from Research Workspace.
+
+**Map of Moorings**
+
+```{code-cell}
+getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbnerr_historical")
         
 ```

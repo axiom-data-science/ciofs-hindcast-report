@@ -15,7 +15,7 @@ import ocean_model_skill_assessor as omsa
 import pandas as pd
 ```
 
-# Central Cook Inlet Mooring
+# CIRCAC: Central Cook Inlet Mooring
 
 * CTD Moored 2006 - CIRCAC
 * ctd_moored_circac
@@ -58,6 +58,14 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_circac")("ctd_moored_circac")
 
 ## ctd_moored_circac
         
+
++++
+
+            
+|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
+|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
+|  0 | timeSeries    | point     |       60.7617 |       -151.505 | 2006-08-28T18:32:00.000000000 |       60.7617 |       -151.505 | 2006-08-11T23:32:00.000000000 |
+
 
 ```{code-cell}
 cat['ctd_moored_circac'].plot.data()
