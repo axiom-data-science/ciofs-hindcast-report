@@ -13,6 +13,7 @@ import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
+import cmocean.cm as cmo
 ```
 
 # CIRCAC: Central Cook Inlet Mooring
@@ -42,6 +43,10 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 
+Dataset metadata:
+|    | Dataset           | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
+|---:|:------------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
+|  0 | ctd_moored_circac | timeSeries    |       60.7617 |       -151.505 | 2006-08-28 18:32:00 |       60.7617 |       -151.505 | 2006-08-11 23:32:00 |
     
 
 ```{code-cell}
@@ -58,14 +63,6 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_circac")("ctd_moored_circac")
 
 ## ctd_moored_circac
         
-
-+++
-
-            
-|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | timeSeries    | point     |       60.7617 |       -151.505 | 2006-08-28T18:32:00.000000000 |       60.7617 |       -151.505 | 2006-08-11T23:32:00.000000000 |
-
 
 ```{code-cell}
 cat['ctd_moored_circac'].plot.data()

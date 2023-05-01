@@ -164,6 +164,10 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../appendix/river_forcing_make_files.html">Make monthly river forcing files for 1998–2018</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../appendix/included_datasets.html">Included Datasets</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/adcp_moored_noaa_coi_2005.html">NOAA ADCP survey Cook Inlet: 2005</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/adcp_moored_noaa_coi_other.html">NOAA ADCP survey Cook Inlet: multiple years</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/adcp_moored_noaa_kod_1.html">NOAA ADCP survey Kodiak Island: Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/adcp_moored_noaa_kod_2.html">NOAA ADCP survey Kodiak Island: Set 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/ctd_moored_circac.html">CIRCAC: Central Cook Inlet Mooring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/ctd_moored_kbnerr.html">KBNERR: Lower Cook Inlet Mooring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/ctd_profiles_2005_noaa.html">NOAA: Single CTD profiles across Cook Inlet</a></li>
@@ -177,9 +181,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/ctd_towed_gwa.html">GWA: Towed CTD at nominal 7m depth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/ctd_towed_otf_kbnerr.html">OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_aoos_cdip.html">CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_kbnerr.html">KBNERR Moorings: Kachemak Bay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_kbnerr_bear_cove_seldovia.html">KBNERR Moorings: Kachemak Bay, Bear Cove and Seldovia</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_kbnerr_historical.html">Historical KBNERR Moorings: Kachemak Bay</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_noaa.html">NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_kbnerr_homer.html">KBNERR Moorings: Kachemak Bay, Homer stations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_noaa.html">NOAA Moorings: Miscellaneous locations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_nps.html">NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/moorings_uaf.html">UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../outputs/pages/data/temp_towed_gwa.html">GWA: Towed CTD at nominal 7m depth, temperature only</a></li>
@@ -380,6 +385,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-all-datasets">Table of All Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-each-dataset">Summary of Each Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-university-of-alaska-fairbanks-uaf">Moorings from University of Alaska Fairbanks (UAF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-national-parks-service-nps">Moorings from National Parks Service (NPS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-noaa">Moorings from NOAA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2012-2021-gwa">CTD profiles 2012-2021 - GWA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2005-noaa">CTD profiles 2005 - NOAA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-usgs-boem">CTD profiles - USGS BOEM</a></li>
@@ -394,12 +405,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2005-osu">CTD profiles 2005 - OSU</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-towed-2017-2019-gwa">CTD Towed 2017-2019 - GWA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-towed-2011-2016-gwa">Temperature towed 2011-2016 - GWA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-university-of-alaska-fairbanks-uaf">Moorings from University of Alaska Fairbanks (UAF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-national-parks-service-nps">Moorings from National Parks Service (NPS)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-noaa">Moorings from NOAA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-temp-sal-otf-adf-g">surface Temp Sal - OTF ADF&amp;G</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cook-inlet-2005-current-survey">Cook Inlet 2005 Current Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cook-inlet-2002-2003-2004-2008-2012-current-survey">Cook Inlet 2002/2003/2004/2008/2012 Current Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kodiak-island-2009-current-survey-1">Kodiak Island 2009 Current Survey (1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kodiak-island-2009-current-survey-2">Kodiak Island 2009 Current Survey (2)</a></li>
 </ul>
 </li>
 </ul>
@@ -441,132 +452,6 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-right"><p>1</p></td>
-<td class="text-left"><p>GWA: Six repeat transects in Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_gwa</p></td>
-<td class="text-left"><p>CTD profiles 2012-2021 - GWA</p></td>
-<td class="text-left"><p>Quarterly repeats from 2012 to 2021</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Not used in the NWGOA model/data comparison.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>2</p></td>
-<td class="text-left"><p>NOAA: Single CTD profiles across Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_2005_noaa</p></td>
-<td class="text-left"><p>CTD profiles 2005 - NOAA</p></td>
-<td class="text-left"><p>One-off CTD profiles in June and July 2005</p></td>
-<td class="text-left"><p>profile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>3</p></td>
-<td class="text-left"><p>USGS BOEM: Single CTD profiles across Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_usgs_boem</p></td>
-<td class="text-left"><p>CTD profiles - USGS BOEM</p></td>
-<td class="text-left"><p>One-off CTD profiles from 2016 to 2021 in July</p></td>
-<td class="text-left"><p>profile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>4</p></td>
-<td class="text-left"><p>OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths</p></td>
-<td class="text-left"><p>ctd_towed_otf_kbnerr</p></td>
-<td class="text-left"><p>CTD Towed 2003 - OTF KBNERR</p></td>
-<td class="text-left"><p>July 2003, 5min sampling frequency</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency.</p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>5</p></td>
-<td class="text-left"><p>NOAA PMEL: Towed CTD on ferry at nominal 4m depth</p></td>
-<td class="text-left"><p>ctd_towed_ferry_noaa_pmel</p></td>
-<td class="text-left"><p>CTD Towed 2004-2008 Ferry in-line - NOAA PMEL</p></td>
-<td class="text-left"><p>Continuous 2004 to 2008, 5min sampling frequency</p></td>
-<td class="text-left"><p>trajectory</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>6</p></td>
-<td class="text-left"><p>OTF KBNERR: Repeat CTD transect from Anchor Point in Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_otf_kbnerr</p></td>
-<td class="text-left"><p>CTD profiles 2003-2006 - OTF KBNERR</p></td>
-<td class="text-left"><p>Daily in July, 2003 to 2006</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>These data were not included in the NWGOA model/data comparison</p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>7</p></td>
-<td class="text-left"><p>CMI UAF: CTD transect from East Foreland Lighthouse in Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_cmi_uaf</p></td>
-<td class="text-left"><p>CTD profiles 2004-2005 - CMI UAF</p></td>
-<td class="text-left"><p>10 cruises, approximately monthly for summer months, in 2004 and 2005</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Used in the NWGOA model/data comparison.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>8</p></td>
-<td class="text-left"><p>CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_cmi_kbnerr</p></td>
-<td class="text-left"><p>CTD profiles 2004-2006 - CMI KBNERR</p></td>
-<td class="text-left"><p>From 2004 to 2006</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Used in the NWGOA model/data comparison.</p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>9</p></td>
-<td class="text-left"><p>CIRCAC: Central Cook Inlet Mooring</p></td>
-<td class="text-left"><p>ctd_moored_circac</p></td>
-<td class="text-left"><p>CTD Moored 2006 - CIRCAC</p></td>
-<td class="text-left"><p>Two weeks in August 2006, 15 min sampling</p></td>
-<td class="text-left"><p>timeSeries</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>10</p></td>
-<td class="text-left"><p>KBNERR: Lower Cook Inlet Mooring</p></td>
-<td class="text-left"><p>ctd_moored_kbnerr</p></td>
-<td class="text-left"><p>CTD Moored 2006-2008 - KBNERR</p></td>
-<td class="text-left"><p>Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling</p></td>
-<td class="text-left"><p>timeSeries</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>11</p></td>
-<td class="text-left"><p>UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet</p></td>
-<td class="text-left"><p>ctd_time_series_uaf</p></td>
-<td class="text-left"><p>CTD time series UAF</p></td>
-<td class="text-left"><p>26-hour period on 9-10 August 2003</p></td>
-<td class="text-left"><p>trajectoryProfile</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>12</p></td>
-<td class="text-left"><p>OSU: Time series of CTD profiles at several locations in Cook Inlet</p></td>
-<td class="text-left"><p>ctd_profiles_2005_osu</p></td>
-<td class="text-left"><p>CTD profiles 2005 - OSU</p></td>
-<td class="text-left"><p>June 2005</p></td>
-<td class="text-left"><p>timeSeriesProfile</p></td>
-<td class="text-left"><p>False</p></td>
-<td class="text-left"><p>Locations given are too low resolution making them incorrectly on land.</p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>13</p></td>
-<td class="text-left"><p>GWA: Towed CTD at nominal 7m depth</p></td>
-<td class="text-left"><p>ctd_towed_gwa</p></td>
-<td class="text-left"><p>CTD Towed 2017-2019 - GWA</p></td>
-<td class="text-left"><p>Approximately monthly in summer from 2017 to 2020, 5min sampling frequency</p></td>
-<td class="text-left"><p>trajectory</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>14</p></td>
-<td class="text-left"><p>GWA: Towed CTD at nominal 7m depth, temperature only</p></td>
-<td class="text-left"><p>temp_towed_gwa</p></td>
-<td class="text-left"><p>Temperature towed 2011-2016 - GWA</p></td>
-<td class="text-left"><p>Approximately monthly in summer from 2011 to 2016, 5min sampling frequency</p></td>
-<td class="text-left"><p>trajectory</p></td>
-<td class="text-left"><p>True</p></td>
-<td class="text-left"><p>Converted some local times, ship track outside domain is not included.</p></td>
-</tr>
-<tr class="row-even"><td class="text-right"><p>15</p></td>
 <td class="text-left"><p>UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet</p></td>
 <td class="text-left"><p>moorings_uaf</p></td>
 <td class="text-left"><p>Moorings from University of Alaska Fairbanks (UAF)</p></td>
@@ -575,7 +460,7 @@ document.write(`
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>16</p></td>
+<tr class="row-odd"><td class="text-right"><p>2</p></td>
 <td class="text-left"><p>NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet</p></td>
 <td class="text-left"><p>moorings_nps</p></td>
 <td class="text-left"><p>Moorings from National Parks Service (NPS)</p></td>
@@ -584,8 +469,8 @@ document.write(`
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-right"><p>17</p></td>
-<td class="text-left"><p>NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait</p></td>
+<tr class="row-even"><td class="text-right"><p>3</p></td>
+<td class="text-left"><p>NOAA Moorings: Miscellaneous locations</p></td>
 <td class="text-left"><p>moorings_noaa</p></td>
 <td class="text-left"><p>Moorings from NOAA</p></td>
 <td class="text-left"><p>From 1999 (and earlier) to 2023, variable</p></td>
@@ -593,7 +478,7 @@ document.write(`
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>18</p></td>
+<tr class="row-odd"><td class="text-right"><p>4</p></td>
 <td class="text-left"><p>CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet</p></td>
 <td class="text-left"><p>moorings_aoos_cdip</p></td>
 <td class="text-left"><p>Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)</p></td>
@@ -602,7 +487,151 @@ document.write(`
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p></p></td>
 </tr>
+<tr class="row-even"><td class="text-right"><p>5</p></td>
+<td class="text-left"><p>KBNERR Moorings: Kachemak Bay, Bear Cove and Seldovia</p></td>
+<td class="text-left"><p>moorings_kbnerr_bear_cove_seldovia</p></td>
+<td class="text-left"><p>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</p></td>
+<td class="text-left"><p>From 2004 to present day, variable</p></td>
+<td class="text-left"><p>timeSeries</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>These are accessed through AOOS portal/ERDDAP server.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>6</p></td>
+<td class="text-left"><p>KBNERR Moorings: Kachemak Bay, Homer stations</p></td>
+<td class="text-left"><p>moorings_kbnerr_homer</p></td>
+<td class="text-left"><p>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</p></td>
+<td class="text-left"><p>From 2003 to present day, variable</p></td>
+<td class="text-left"><p>timeSeries</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>These are accessed through AOOS portal/ERDDAP server.</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>7</p></td>
+<td class="text-left"><p>GWA: Six repeat transects in Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_gwa</p></td>
+<td class="text-left"><p>CTD profiles 2012-2021 - GWA</p></td>
+<td class="text-left"><p>Quarterly repeats from 2012 to 2021</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Not used in the NWGOA model/data comparison.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>8</p></td>
+<td class="text-left"><p>NOAA: Single CTD profiles across Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_2005_noaa</p></td>
+<td class="text-left"><p>CTD profiles 2005 - NOAA</p></td>
+<td class="text-left"><p>One-off CTD profiles in June and July 2005</p></td>
+<td class="text-left"><p>profile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>9</p></td>
+<td class="text-left"><p>USGS BOEM: Single CTD profiles across Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_usgs_boem</p></td>
+<td class="text-left"><p>CTD profiles - USGS BOEM</p></td>
+<td class="text-left"><p>One-off CTD profiles from 2016 to 2021 in July</p></td>
+<td class="text-left"><p>profile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>10</p></td>
+<td class="text-left"><p>OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths</p></td>
+<td class="text-left"><p>ctd_towed_otf_kbnerr</p></td>
+<td class="text-left"><p>CTD Towed 2003 - OTF KBNERR</p></td>
+<td class="text-left"><p>July 2003, 5min sampling frequency</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency.</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>11</p></td>
+<td class="text-left"><p>NOAA PMEL: Towed CTD on ferry at nominal 4m depth</p></td>
+<td class="text-left"><p>ctd_towed_ferry_noaa_pmel</p></td>
+<td class="text-left"><p>CTD Towed 2004-2008 Ferry in-line - NOAA PMEL</p></td>
+<td class="text-left"><p>Continuous 2004 to 2008, 5min sampling frequency</p></td>
+<td class="text-left"><p>trajectory</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>12</p></td>
+<td class="text-left"><p>OTF KBNERR: Repeat CTD transect from Anchor Point in Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_otf_kbnerr</p></td>
+<td class="text-left"><p>CTD profiles 2003-2006 - OTF KBNERR</p></td>
+<td class="text-left"><p>Daily in July, 2003 to 2006</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>These data were not included in the NWGOA model/data comparison</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>13</p></td>
+<td class="text-left"><p>CMI UAF: CTD transect from East Foreland Lighthouse in Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_cmi_uaf</p></td>
+<td class="text-left"><p>CTD profiles 2004-2005 - CMI UAF</p></td>
+<td class="text-left"><p>10 cruises, approximately monthly for summer months, in 2004 and 2005</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Used in the NWGOA model/data comparison.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>14</p></td>
+<td class="text-left"><p>CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_cmi_kbnerr</p></td>
+<td class="text-left"><p>CTD profiles 2004-2006 - CMI KBNERR</p></td>
+<td class="text-left"><p>From 2004 to 2006</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Used in the NWGOA model/data comparison.</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>15</p></td>
+<td class="text-left"><p>CIRCAC: Central Cook Inlet Mooring</p></td>
+<td class="text-left"><p>ctd_moored_circac</p></td>
+<td class="text-left"><p>CTD Moored 2006 - CIRCAC</p></td>
+<td class="text-left"><p>Two weeks in August 2006, 15 min sampling</p></td>
+<td class="text-left"><p>timeSeries</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>16</p></td>
+<td class="text-left"><p>KBNERR: Lower Cook Inlet Mooring</p></td>
+<td class="text-left"><p>ctd_moored_kbnerr</p></td>
+<td class="text-left"><p>CTD Moored 2006-2008 - KBNERR</p></td>
+<td class="text-left"><p>Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling</p></td>
+<td class="text-left"><p>timeSeries</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>17</p></td>
+<td class="text-left"><p>UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet</p></td>
+<td class="text-left"><p>ctd_time_series_uaf</p></td>
+<td class="text-left"><p>CTD time series UAF</p></td>
+<td class="text-left"><p>26-hour period on 9-10 August 2003</p></td>
+<td class="text-left"><p>trajectoryProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>18</p></td>
+<td class="text-left"><p>OSU: Time series of CTD profiles at several locations in Cook Inlet</p></td>
+<td class="text-left"><p>ctd_profiles_2005_osu</p></td>
+<td class="text-left"><p>CTD profiles 2005 - OSU</p></td>
+<td class="text-left"><p>June 2005</p></td>
+<td class="text-left"><p>timeSeriesProfile</p></td>
+<td class="text-left"><p>False</p></td>
+<td class="text-left"><p>Locations given are too low resolution making them incorrectly on land.</p></td>
+</tr>
 <tr class="row-even"><td class="text-right"><p>19</p></td>
+<td class="text-left"><p>GWA: Towed CTD at nominal 7m depth</p></td>
+<td class="text-left"><p>ctd_towed_gwa</p></td>
+<td class="text-left"><p>CTD Towed 2017-2019 - GWA</p></td>
+<td class="text-left"><p>Approximately monthly in summer from 2017 to 2020, 5min sampling frequency</p></td>
+<td class="text-left"><p>trajectory</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>20</p></td>
+<td class="text-left"><p>GWA: Towed CTD at nominal 7m depth, temperature only</p></td>
+<td class="text-left"><p>temp_towed_gwa</p></td>
+<td class="text-left"><p>Temperature towed 2011-2016 - GWA</p></td>
+<td class="text-left"><p>Approximately monthly in summer from 2011 to 2016, 5min sampling frequency</p></td>
+<td class="text-left"><p>trajectory</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p>Converted some local times, ship track outside domain is not included.</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>21</p></td>
 <td class="text-left"><p>OTF ADF&amp;G: Long term station sampling</p></td>
 <td class="text-left"><p>surface_otf_adfg</p></td>
 <td class="text-left"><p>surface Temp Sal - OTF ADF&amp;G</p></td>
@@ -611,7 +640,7 @@ document.write(`
 <td class="text-left"><p>False</p></td>
 <td class="text-left"><p>Not used because no times associated with data.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>20</p></td>
+<tr class="row-odd"><td class="text-right"><p>22</p></td>
 <td class="text-left"><p>Historical KBNERR Moorings: Kachemak Bay</p></td>
 <td class="text-left"><p>moorings_kbnerr_historical</p></td>
 <td class="text-left"><p>Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</p></td>
@@ -620,11 +649,208 @@ document.write(`
 <td class="text-left"><p>True</p></td>
 <td class="text-left"><p>These are accessed from Research Workspace.</p></td>
 </tr>
+<tr class="row-even"><td class="text-right"><p>23</p></td>
+<td class="text-left"><p>NOAA ADCP survey Cook Inlet: 2005</p></td>
+<td class="text-left"><p>adcp_moored_noaa_coi_2005</p></td>
+<td class="text-left"><p>Cook Inlet 2005 Current Survey</p></td>
+<td class="text-left"><p>2005, each for one or a few months</p></td>
+<td class="text-left"><p>timeSeriesProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>24</p></td>
+<td class="text-left"><p>NOAA ADCP survey Cook Inlet: multiple years</p></td>
+<td class="text-left"><p>adcp_moored_noaa_coi_other</p></td>
+<td class="text-left"><p>Cook Inlet 2002/2003/2004/2008/2012 Current Survey</p></td>
+<td class="text-left"><p>From 2002 to 2012, each for one or a few months</p></td>
+<td class="text-left"><p>timeSeriesProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>25</p></td>
+<td class="text-left"><p>NOAA ADCP survey Kodiak Island: Set 1</p></td>
+<td class="text-left"><p>adcp_moored_noaa_kod_1</p></td>
+<td class="text-left"><p>Kodiak Island 2009 Current Survey (1)</p></td>
+<td class="text-left"><p>2009, each for one or a few months</p></td>
+<td class="text-left"><p>timeSeriesProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>26</p></td>
+<td class="text-left"><p>NOAA ADCP survey Kodiak Island: Set 2</p></td>
+<td class="text-left"><p>adcp_moored_noaa_kod_2</p></td>
+<td class="text-left"><p>Kodiak Island 2009 Current Survey (2)</p></td>
+<td class="text-left"><p>2009, each for one or a few months</p></td>
+<td class="text-left"><p>timeSeriesProfile</p></td>
+<td class="text-left"><p>True</p></td>
+<td class="text-left"><p></p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="summary-of-each-dataset">
 <h2>Summary of Each Dataset<a class="headerlink" href="#summary-of-each-dataset" title="Permalink to this headline">#</a></h2>
+<section id="moorings-from-university-of-alaska-fairbanks-uaf">
+<h3>Moorings from University of Alaska Fairbanks (UAF)<a class="headerlink" href="#moorings-from-university-of-alaska-fairbanks-uaf" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet</p></li>
+<li><p>From 2013 to present, variable</p></li>
+<li><p>Slug: moorings_uaf</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from UAF</p>
+<p>Notes:</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_uaf&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_uaf&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a25b83af2e9fa889fc5149c8947416aabc3d3a9dd7ced1474866dce98fbcc90c.png" src="../_images/a25b83af2e9fa889fc5149c8947416aabc3d3a9dd7ced1474866dce98fbcc90c.png" />
+</div>
+</div>
+</section>
+<section id="moorings-from-national-parks-service-nps">
+<h3>Moorings from National Parks Service (NPS)<a class="headerlink" href="#moorings-from-national-parks-service-nps" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet</p></li>
+<li><p>From 2018 to 2019, variable</p></li>
+<li><p>Slug: moorings_nps</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from NPS</p>
+<p>Notes:</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_nps&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_nps&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e8f0df5ca14b2692b2ed75701d82acb82a38ec48ea3b201d79318bb23a40346e.png" src="../_images/e8f0df5ca14b2692b2ed75701d82acb82a38ec48ea3b201d79318bb23a40346e.png" />
+</div>
+</div>
+</section>
+<section id="moorings-from-noaa">
+<h3>Moorings from NOAA<a class="headerlink" href="#moorings-from-noaa" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NOAA Moorings: Miscellaneous locations</p></li>
+<li><p>From 1999 (and earlier) to 2023, variable</p></li>
+<li><p>Slug: moorings_noaa</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from NOAA</p>
+<p>Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait</p>
+<p>Notes:</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_noaa&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_noaa&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/19339b18d7a33b8cd21672f2ff05f400de70ab8cb0ef0277e03895849ab424fa.png" src="../_images/19339b18d7a33b8cd21672f2ff05f400de70ab8cb0ef0277e03895849ab424fa.png" />
+</div>
+</div>
+</section>
+<section id="moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">
+<h3>Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)<a class="headerlink" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet</p></li>
+<li><p>From , variable</p></li>
+<li><p>Slug: moorings_aoos_cdip</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from AOOS/CDIP</p>
+<p>Notes:</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_aoos_cdip&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_aoos_cdip&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e93f65e7bba9c0523c34da31fb7b20bf765a02836d9e138ec4bb2a4bef8c5677.png" src="../_images/e93f65e7bba9c0523c34da31fb7b20bf765a02836d9e138ec4bb2a4bef8c5677.png" />
+</div>
+</div>
+</section>
+<section id="moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">
+<h3>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)<a class="headerlink" href="#moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>KBNERR Moorings: Kachemak Bay, Bear Cove and Seldovia</p></li>
+<li><p>From 2004 to present day, variable</p></li>
+<li><p>Slug: moorings_kbnerr_bear_cove_seldovia</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</p>
+<p>Station mappings from AOOS/ERDDAP to KBNERR station list:</p>
+<ul class="simple">
+<li><p>nerrs_kacsdwq :: kacsdwq</p></li>
+<li><p>nerrs_kacsswq :: kacsswq</p></li>
+<li><p>cdmo_nerrs_bearcove :: This is a different station than kacbcwq, which was active 2002-2003 while this is in 2015. They are also in different locations.</p></li>
+</ul>
+<p>More information: <a class="reference external" href="https://accs.uaa.alaska.edu/kbnerr/">https://accs.uaa.alaska.edu/kbnerr/</a></p>
+<p>Notes:</p>
+<p>These are accessed through AOOS portal/ERDDAP server.</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_kbnerr_bear_cove_seldovia&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_kbnerr_bear_cove_seldovia&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/25a349fe0e4be295440e8f3900622c197ff9b86c01fcfc423c4b5adaaef62ff2.png" src="../_images/25a349fe0e4be295440e8f3900622c197ff9b86c01fcfc423c4b5adaaef62ff2.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>KBNERR Moorings: Kachemak Bay, Homer stations</p></li>
+<li><p>From 2003 to present day, variable</p></li>
+<li><p>Slug: moorings_kbnerr_homer</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeries</p></li>
+</ul>
+<p>Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</p>
+<p>Station mappings from AOOS/ERDDAP to KBNERR station list:</p>
+<ul class="simple">
+<li><p>nerrs_kachdwq :: kachdwq</p></li>
+<li><p>homer-dolphin-surface-water-q :: kachswq</p></li>
+<li><p>nerrs_kach3wq :: kach3wq</p></li>
+</ul>
+<p>More information: <a class="reference external" href="https://accs.uaa.alaska.edu/kbnerr/">https://accs.uaa.alaska.edu/kbnerr/</a></p>
+<p>Notes:</p>
+<p>These are accessed through AOOS portal/ERDDAP server.</p>
+<p><strong>Map of Moorings</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_kbnerr_homer&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_kbnerr_homer&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4d7405903f022353487c4c1bedcf90aea102447a648263d6bca013f8ae96c1b7.png" src="../_images/4d7405903f022353487c4c1bedcf90aea102447a648263d6bca013f8ae96c1b7.png" />
+</div>
+</div>
+</section>
 <section id="ctd-profiles-2012-2021-gwa">
 <h3>CTD profiles 2012-2021 - GWA<a class="headerlink" href="#ctd-profiles-2012-2021-gwa" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
@@ -648,49 +874,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;ctd_profiles_gwa&quot;</span><span class="p">)(</span><span class="s2">&quot;ctd_profiles_gwa&quot;</span><span class="p">)</span>
-
-<span class="nn">File ~/projects/ciofs-hindcast-report/ciofs_hindcast_report/src/plot_dataset_on_map.py:47,</span> in <span class="ni">ctd_profiles_gwa</span><span class="nt">(slug)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">sn</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="c1"># import pdb; pdb.set_trace()</span>
-<span class="ne">---&gt; </span><span class="mi">47</span>     <span class="n">maps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
-<span class="g g-Whitespace">     </span><span class="mi">48</span>                  <span class="n">df</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span>                  <span class="sa">f</span><span class="s2">&quot;Transect </span><span class="si">{</span><span class="n">sn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># maps = np.vstack((ds.cf[&quot;longitude&quot;].values, ds.cf[&quot;longitude&quot;].values, </span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="c1">#                   ds.cf[&quot;latitude&quot;].values, ds.cf[&quot;latitude&quot;].values,</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1">#                   [&quot;&quot;] * len(ds.cf[&quot;longitude&quot;]),</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="c1">#                   [&quot;point&quot;] * len(ds.cf[&quot;longitude&quot;]),</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="c1">#                  )).T</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">omsa</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">plot_map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">maps</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>                        <span class="n">figname</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Map of </span><span class="si">{</span><span class="n">slug</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>                               <span class="n">label_with_station_name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>                               <span class="n">map_font_size</span><span class="o">=</span><span class="nb">chr</span><span class="o">.</span><span class="n">map_font_size</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>                               <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">File ~/projects/cf-pandas/cf_pandas/accessor.py:109,</span> in <span class="ni">CFAccessor.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="n">valid_keys</span> <span class="o">=</span> <span class="n">_COORD_NAMES</span> <span class="o">+</span> <span class="n">_AXIS_NAMES</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">valid_keys</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">109</span>     <span class="n">col_names</span> <span class="o">=</span> <span class="n">_get_axis_coord</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span>     <span class="n">col_names</span> <span class="o">=</span> <span class="n">_get_custom_criteria</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-
-<span class="nn">File ~/projects/cf-pandas/cf_pandas/accessor.py:382,</span> in <span class="ni">_get_axis_coord</span><span class="nt">(obj, key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">coordinate_criteria</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="k">for</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">coordinate_criteria</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">379</span>         <span class="c1"># allow for the column header having a space in it that separate</span>
-<span class="g g-Whitespace">    </span><span class="mi">380</span>         <span class="c1"># the name from the units, for example</span>
-<span class="g g-Whitespace">    </span><span class="mi">381</span>         <span class="c1"># import pdb; pdb.set_trace()</span>
-<span class="ne">--&gt; </span><span class="mi">382</span>         <span class="n">strings</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">384</span>             <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;split&#39;
-</pre></div>
-</div>
+<img alt="../_images/014b4a109ceec87b622a2dc18622297d516b129ce8d9f0625498036d3912f022.png" src="../_images/014b4a109ceec87b622a2dc18622297d516b129ce8d9f0625498036d3912f022.png" />
 </div>
 </div>
 </section>
@@ -712,6 +896,9 @@ document.write(`
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02d99d7f48d6ed8ec877b84a1c01b62c7bd531bb85a56c2a1877268342e084fd.png" src="../_images/02d99d7f48d6ed8ec877b84a1c01b62c7bd531bb85a56c2a1877268342e084fd.png" />
 </div>
 </div>
 </section>
@@ -736,6 +923,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/689c9f8ede2604af80e2a7d66ccc8735373067e8eddda1df9acd18f7b1dab843.png" src="../_images/689c9f8ede2604af80e2a7d66ccc8735373067e8eddda1df9acd18f7b1dab843.png" />
+<img alt="../_images/2ffc616022460aee86daac8007dacdc7a0b411a26d25cb8fc9ed5aafd539851f.png" src="../_images/2ffc616022460aee86daac8007dacdc7a0b411a26d25cb8fc9ed5aafd539851f.png" />
+<img alt="../_images/1fdaa21f0a31398b5db3d7622b50a65ed56214322fafbc8a98d1533af6b0e0cd.png" src="../_images/1fdaa21f0a31398b5db3d7622b50a65ed56214322fafbc8a98d1533af6b0e0cd.png" />
+<img alt="../_images/f7d531cf4590aa8d6174a8ed70ce7e062d95d01dd6aabf0ee45d5cb8440a8fb6.png" src="../_images/f7d531cf4590aa8d6174a8ed70ce7e062d95d01dd6aabf0ee45d5cb8440a8fb6.png" />
+<img alt="../_images/7d6b31915bb50a6efb348d24768978daa7cf9decee5528f04495bbf7620af627.png" src="../_images/7d6b31915bb50a6efb348d24768978daa7cf9decee5528f04495bbf7620af627.png" />
+</div>
 </div>
 </section>
 <section id="ctd-towed-2003-otf-kbnerr">
@@ -757,6 +951,9 @@ document.write(`
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a5beed5c3b35f6d7dbaf895a221bd6512118bee09ab4bfe0de4a9d2f052b0cff.png" src="../_images/a5beed5c3b35f6d7dbaf895a221bd6512118bee09ab4bfe0de4a9d2f052b0cff.png" />
 </div>
 </div>
 </section>
@@ -795,6 +992,9 @@ Edward D. Cokelet, Calvin W. Mordy, Antonio J. Jenkins, W. Scott Pegau
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f38e1004aa7e6b64b4900483f3f3321719e09c7d22099d5a49c04baebba4d78.png" src="../_images/9f38e1004aa7e6b64b4900483f3f3321719e09c7d22099d5a49c04baebba4d78.png" />
+</div>
 </div>
 </section>
 <section id="ctd-profiles-2003-2006-otf-kbnerr">
@@ -820,6 +1020,9 @@ Project description: <a class="reference external" href="https://evostc.state.ak
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9c8a562e8c311b8ec74f22f3553abe993d3f14c120ea94f851199d7ba0232d64.png" src="../_images/9c8a562e8c311b8ec74f22f3553abe993d3f14c120ea94f851199d7ba0232d64.png" />
 </div>
 </div>
 </section>
@@ -851,6 +1054,9 @@ Report: <a class="reference external" href="https://researchworkspace.com/file/3
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dca2d4d88fd577774a7fb5a1722ba6530fbf70f693a9eb93eb7ae55d25daf5bc.png" src="../_images/dca2d4d88fd577774a7fb5a1722ba6530fbf70f693a9eb93eb7ae55d25daf5bc.png" />
 </div>
 </div>
 </section>
@@ -892,6 +1098,9 @@ Report: <a class="reference external" href="https://researchworkspace.com/file/3
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/0582fdbcbdb8325ebd32c38610e9fd4129cbea6b35b56e88c508d4f8926c9bfc.png" src="../_images/0582fdbcbdb8325ebd32c38610e9fd4129cbea6b35b56e88c508d4f8926c9bfc.png" />
+</div>
 </div>
 </section>
 <section id="ctd-moored-2006-circac">
@@ -924,6 +1133,9 @@ Report: <a class="reference external" href="https://researchworkspace.com/file/3
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/7e36e0720d593d7b7facd9d26c0d194728121a9fdca1f54bbb7def04f79e1c21.png" src="../_images/7e36e0720d593d7b7facd9d26c0d194728121a9fdca1f54bbb7def04f79e1c21.png" />
+</div>
 </div>
 </section>
 <section id="ctd-moored-2006-2008-kbnerr">
@@ -955,6 +1167,9 @@ Report: <a class="reference external" href="https://researchworkspace.com/file/3
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/7291043535c82486e806ee744614369bef5745dec31f617b94372d3d3db8638d.png" src="../_images/7291043535c82486e806ee744614369bef5745dec31f617b94372d3d3db8638d.png" />
+</div>
 </div>
 </section>
 <section id="ctd-time-series-uaf">
@@ -985,6 +1200,9 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/3de64f7d0fb27b7f86c494e07ea9ec9d1bcedb8993da0fe428fa9830c2d59819.png" src="../_images/3de64f7d0fb27b7f86c494e07ea9ec9d1bcedb8993da0fe428fa9830c2d59819.png" />
+</div>
 </div>
 </section>
 <section id="ctd-profiles-2005-osu">
@@ -1005,6 +1223,9 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b7e93f33d8ddef97cb2c17d0bf281b35a54043b1bb8eedbe265ff94d6d83753.png" src="../_images/2b7e93f33d8ddef97cb2c17d0bf281b35a54043b1bb8eedbe265ff94d6d83753.png" />
 </div>
 </div>
 </section>
@@ -1031,6 +1252,9 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/3f6a1a17558a440cace2ca5815056ceecfc37a62ab8e3b9cbae35d19ebea4e75.png" src="../_images/3f6a1a17558a440cace2ca5815056ceecfc37a62ab8e3b9cbae35d19ebea4e75.png" />
+</div>
 </div>
 </section>
 <section id="temperature-towed-2011-2016-gwa">
@@ -1056,89 +1280,8 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
 </pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="moorings-from-university-of-alaska-fairbanks-uaf">
-<h3>Moorings from University of Alaska Fairbanks (UAF)<a class="headerlink" href="#moorings-from-university-of-alaska-fairbanks-uaf" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet</p></li>
-<li><p>From 2013 to present, variable</p></li>
-<li><p>Slug: moorings_uaf</p></li>
-<li><p>Included: True</p></li>
-<li><p>Feature type: timeSeries</p></li>
-</ul>
-<p>Moorings from UAF</p>
-<p>Notes:</p>
-<p><strong>Map of Moorings</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_uaf&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_uaf&quot;</span><span class="p">)</span>
-        
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="moorings-from-national-parks-service-nps">
-<h3>Moorings from National Parks Service (NPS)<a class="headerlink" href="#moorings-from-national-parks-service-nps" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet</p></li>
-<li><p>From 2018 to 2019, variable</p></li>
-<li><p>Slug: moorings_nps</p></li>
-<li><p>Included: True</p></li>
-<li><p>Feature type: timeSeries</p></li>
-</ul>
-<p>Moorings from NPS</p>
-<p>Notes:</p>
-<p><strong>Map of Moorings</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_nps&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_nps&quot;</span><span class="p">)</span>
-        
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="moorings-from-noaa">
-<h3>Moorings from NOAA<a class="headerlink" href="#moorings-from-noaa" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait</p></li>
-<li><p>From 1999 (and earlier) to 2023, variable</p></li>
-<li><p>Slug: moorings_noaa</p></li>
-<li><p>Included: True</p></li>
-<li><p>Feature type: timeSeries</p></li>
-</ul>
-<p>Moorings from NOAA</p>
-<p>Notes:</p>
-<p><strong>Map of Moorings</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_noaa&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_noaa&quot;</span><span class="p">)</span>
-        
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">
-<h3>Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)<a class="headerlink" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet</p></li>
-<li><p>From , variable</p></li>
-<li><p>Slug: moorings_aoos_cdip</p></li>
-<li><p>Included: True</p></li>
-<li><p>Feature type: timeSeries</p></li>
-</ul>
-<p>Moorings from AOOS/CDIP</p>
-<p>Notes:</p>
-<p><strong>Map of Moorings</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;moorings_aoos_cdip&quot;</span><span class="p">)(</span><span class="s2">&quot;moorings_aoos_cdip&quot;</span><span class="p">)</span>
-        
-</pre></div>
-</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6bea19eb0b6ea19a3f9629635fb1ac94b83be6b0bb3dad2e9415cf8f79e289a3.png" src="../_images/6bea19eb0b6ea19a3f9629635fb1ac94b83be6b0bb3dad2e9415cf8f79e289a3.png" />
 </div>
 </div>
 </section>
@@ -1165,6 +1308,9 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/486dd43c88a73f09e6a10a79e54fbf723c7bc6c325ad138b5adf4d200bde7854.png" src="../_images/486dd43c88a73f09e6a10a79e54fbf723c7bc6c325ad138b5adf4d200bde7854.png" />
+</div>
 </div>
 </section>
 <section id="historical-moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">
@@ -1187,6 +1333,105 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
         
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0f65883ad1eb338db053e19395230269407c636d98549a16ceca0966ad489640.png" src="../_images/0f65883ad1eb338db053e19395230269407c636d98549a16ceca0966ad489640.png" />
+</div>
+</div>
+</section>
+<section id="cook-inlet-2005-current-survey">
+<h3>Cook Inlet 2005 Current Survey<a class="headerlink" href="#cook-inlet-2005-current-survey" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NOAA ADCP survey Cook Inlet: 2005</p></li>
+<li><p>2005, each for one or a few months</p></li>
+<li><p>Slug: adcp_moored_noaa_coi_2005</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeriesProfile</p></li>
+</ul>
+<p>Moored NOAA ADCP surveys in Cook Inlet</p>
+<p>Notes:</p>
+<p><strong>Map of Moored ADCPs</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;adcp_moored_noaa_coi_2005&quot;</span><span class="p">)(</span><span class="s2">&quot;adcp_moored_noaa_coi_2005&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/374b9dc57361b85e3d9eb9a525b6737dfb9e2e6abd7c4ee626acf5e0584a9f92.png" src="../_images/374b9dc57361b85e3d9eb9a525b6737dfb9e2e6abd7c4ee626acf5e0584a9f92.png" />
+</div>
+</div>
+</section>
+<section id="cook-inlet-2002-2003-2004-2008-2012-current-survey">
+<h3>Cook Inlet 2002/2003/2004/2008/2012 Current Survey<a class="headerlink" href="#cook-inlet-2002-2003-2004-2008-2012-current-survey" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NOAA ADCP survey Cook Inlet: multiple years</p></li>
+<li><p>From 2002 to 2012, each for one or a few months</p></li>
+<li><p>Slug: adcp_moored_noaa_coi_other</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeriesProfile</p></li>
+</ul>
+<p>Moored NOAA ADCP surveys in Cook Inlet</p>
+<p>Notes:</p>
+<p><strong>Map of Moored ADCPs</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;adcp_moored_noaa_coi_other&quot;</span><span class="p">)(</span><span class="s2">&quot;adcp_moored_noaa_coi_other&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/094df598719c429d89cb20ebcd18579bc5020faa4a29ba6f0815bcd4b45d86ec.png" src="../_images/094df598719c429d89cb20ebcd18579bc5020faa4a29ba6f0815bcd4b45d86ec.png" />
+</div>
+</div>
+</section>
+<section id="kodiak-island-2009-current-survey-1">
+<h3>Kodiak Island 2009 Current Survey (1)<a class="headerlink" href="#kodiak-island-2009-current-survey-1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NOAA ADCP survey Kodiak Island: Set 1</p></li>
+<li><p>2009, each for one or a few months</p></li>
+<li><p>Slug: adcp_moored_noaa_kod_1</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeriesProfile</p></li>
+</ul>
+<p>Moored NOAA ADCP surveys in Cook Inlet</p>
+<p>Notes:</p>
+<p><strong>Map of Moored ADCPs</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;adcp_moored_noaa_kod_1&quot;</span><span class="p">)(</span><span class="s2">&quot;adcp_moored_noaa_kod_1&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/646e96b407369940557ed4763a77687212a302cd3dfabf5479d8844390c78075.png" src="../_images/646e96b407369940557ed4763a77687212a302cd3dfabf5479d8844390c78075.png" />
+</div>
+</div>
+</section>
+<section id="kodiak-island-2009-current-survey-2">
+<h3>Kodiak Island 2009 Current Survey (2)<a class="headerlink" href="#kodiak-island-2009-current-survey-2" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>NOAA ADCP survey Kodiak Island: Set 2</p></li>
+<li><p>2009, each for one or a few months</p></li>
+<li><p>Slug: adcp_moored_noaa_kod_2</p></li>
+<li><p>Included: True</p></li>
+<li><p>Feature type: timeSeriesProfile</p></li>
+</ul>
+<p>Moored NOAA ADCP surveys in Cook Inlet</p>
+<p>Notes:</p>
+<p><strong>Map of Moored ADCPs</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="nb">chr</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">plot_dataset_on_map</span><span class="p">,</span> <span class="s2">&quot;adcp_moored_noaa_kod_2&quot;</span><span class="p">)(</span><span class="s2">&quot;adcp_moored_noaa_kod_2&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3d885d4a8df8f6ed53e1b2722f4ee758cf3d930bedab8507648addf2d6785013.png" src="../_images/3d885d4a8df8f6ed53e1b2722f4ee758cf3d930bedab8507648addf2d6785013.png" />
 </div>
 </div>
 </section>
@@ -1262,6 +1507,12 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-all-datasets">Table of All Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-each-dataset">Summary of Each Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-university-of-alaska-fairbanks-uaf">Moorings from University of Alaska Fairbanks (UAF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-national-parks-service-nps">Moorings from National Parks Service (NPS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-noaa">Moorings from NOAA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2012-2021-gwa">CTD profiles 2012-2021 - GWA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2005-noaa">CTD profiles 2005 - NOAA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-usgs-boem">CTD profiles - USGS BOEM</a></li>
@@ -1276,12 +1527,12 @@ Report: <a class="reference external" href="https://www.circac.org/wp-content/up
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-profiles-2005-osu">CTD profiles 2005 - OSU</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ctd-towed-2017-2019-gwa">CTD Towed 2017-2019 - GWA</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-towed-2011-2016-gwa">Temperature towed 2011-2016 - GWA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-university-of-alaska-fairbanks-uaf">Moorings from University of Alaska Fairbanks (UAF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-national-parks-service-nps">Moorings from National Parks Service (NPS)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-noaa">Moorings from NOAA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moorings-from-alaska-ocean-observing-system-aoos-coastal-data-information-program-cdip">Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-temp-sal-otf-adf-g">surface Temp Sal - OTF ADF&amp;G</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-moorings-from-kachemak-bay-national-estuarine-research-reserve-kbnerr">Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cook-inlet-2005-current-survey">Cook Inlet 2005 Current Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cook-inlet-2002-2003-2004-2008-2012-current-survey">Cook Inlet 2002/2003/2004/2008/2012 Current Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kodiak-island-2009-current-survey-1">Kodiak Island 2009 Current Survey (1)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kodiak-island-2009-current-survey-2">Kodiak Island 2009 Current Survey (2)</a></li>
 </ul>
 </li>
 </ul>

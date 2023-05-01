@@ -13,6 +13,7 @@ import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
+import cmocean.cm as cmo
 ```
 
 # UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet
@@ -36,6 +37,18 @@ Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-c
 
 Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.
 
+Dataset metadata:
+|    | Dataset     | featuretype       |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
+|---:|:------------|:------------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
+|  0 | Transect_01 | trajectoryProfile |       60.4837 |       -151.3   | 2003-08-09 23:03:00 |       60.4815 |       -151.8   | 2003-08-09 20:36:00 |
+|  1 | Transect_02 | trajectoryProfile |       60.4843 |       -151.301 | 2003-08-10 01:25:00 |       60.4816 |       -151.765 | 2003-08-09 23:12:00 |
+|  2 | Transect_03 | trajectoryProfile |       60.4842 |       -151.336 | 2003-08-10 04:06:00 |       60.4827 |       -151.8   | 2003-08-10 01:35:00 |
+|  3 | Transect_04 | trajectoryProfile |       60.4858 |       -151.3   | 2003-08-10 07:06:00 |       60.4823 |       -151.766 | 2003-08-10 04:14:00 |
+|  4 | Transect_05 | trajectoryProfile |       60.4836 |       -151.334 | 2003-08-10 10:02:00 |       60.4827 |       -151.799 | 2003-08-10 07:16:00 |
+|  5 | Transect_06 | trajectoryProfile |       60.4833 |       -151.3   | 2003-08-10 12:37:00 |       60.4825 |       -151.766 | 2003-08-10 10:11:00 |
+|  6 | Transect_07 | trajectoryProfile |       60.4842 |       -151.3   | 2003-08-10 16:58:00 |       60.4823 |       -151.8   | 2003-08-10 14:01:00 |
+|  7 | Transect_08 | trajectoryProfile |       60.4845 |       -151.3   | 2003-08-10 20:17:00 |       60.482  |       -151.767 | 2003-08-10 17:09:00 |
+|  8 | Transect_09 | trajectoryProfile |       60.484  |       -151.317 | 2003-08-10 22:59:00 |       60.4827 |       -151.8   | 2003-08-10 20:26:00 |
     
 
 ```{code-cell}
@@ -53,28 +66,12 @@ getattr(chr.src.plot_dataset_on_map, "ctd_time_series_uaf")("ctd_time_series_uaf
 ## Transect_01
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4837 |         -151.3 | 2003-08-09T23:03:00.000000000 |       60.4815 |         -151.8 | 2003-08-09T20:36:00.000000000 |
-
-
 ```{code-cell}
 cat['Transect_01'].plot.salt() + cat['Transect_01'].plot.temp()
 ```
 
 ## Transect_02
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4843 |       -151.301 | 2003-08-10T01:25:00.000000000 |       60.4816 |       -151.765 | 2003-08-09T23:12:00.000000000 |
-
 
 ```{code-cell}
 cat['Transect_02'].plot.salt() + cat['Transect_02'].plot.temp()
@@ -83,28 +80,12 @@ cat['Transect_02'].plot.salt() + cat['Transect_02'].plot.temp()
 ## Transect_03
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4842 |       -151.336 | 2003-08-10T04:06:00.000000000 |       60.4827 |         -151.8 | 2003-08-10T01:35:00.000000000 |
-
-
 ```{code-cell}
 cat['Transect_03'].plot.salt() + cat['Transect_03'].plot.temp()
 ```
 
 ## Transect_04
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4858 |         -151.3 | 2003-08-10T07:06:00.000000000 |       60.4823 |       -151.766 | 2003-08-10T04:14:00.000000000 |
-
 
 ```{code-cell}
 cat['Transect_04'].plot.salt() + cat['Transect_04'].plot.temp()
@@ -113,28 +94,12 @@ cat['Transect_04'].plot.salt() + cat['Transect_04'].plot.temp()
 ## Transect_05
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4836 |       -151.334 | 2003-08-10T10:02:00.000000000 |       60.4827 |       -151.799 | 2003-08-10T07:16:00.000000000 |
-
-
 ```{code-cell}
 cat['Transect_05'].plot.salt() + cat['Transect_05'].plot.temp()
 ```
 
 ## Transect_06
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4833 |         -151.3 | 2003-08-10T12:37:00.000000000 |       60.4825 |       -151.766 | 2003-08-10T10:11:00.000000000 |
-
 
 ```{code-cell}
 cat['Transect_06'].plot.salt() + cat['Transect_06'].plot.temp()
@@ -143,14 +108,6 @@ cat['Transect_06'].plot.salt() + cat['Transect_06'].plot.temp()
 ## Transect_07
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4842 |         -151.3 | 2003-08-10T16:58:00.000000000 |       60.4823 |         -151.8 | 2003-08-10T14:01:00.000000000 |
-
-
 ```{code-cell}
 cat['Transect_07'].plot.salt() + cat['Transect_07'].plot.temp()
 ```
@@ -158,28 +115,12 @@ cat['Transect_07'].plot.salt() + cat['Transect_07'].plot.temp()
 ## Transect_08
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |       60.4845 |         -151.3 | 2003-08-10T20:17:00.000000000 |        60.482 |       -151.767 | 2003-08-10T17:09:00.000000000 |
-
-
 ```{code-cell}
 cat['Transect_08'].plot.salt() + cat['Transect_08'].plot.temp()
 ```
 
 ## Transect_09
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | line      |        60.484 |       -151.317 | 2003-08-10T22:59:00.000000000 |       60.4827 |         -151.8 | 2003-08-10T20:26:00.000000000 |
-
 
 ```{code-cell}
 cat['Transect_09'].plot.salt() + cat['Transect_09'].plot.temp()

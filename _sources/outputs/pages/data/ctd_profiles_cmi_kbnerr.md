@@ -13,6 +13,7 @@ import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
+import cmocean.cm as cmo
 ```
 
 # CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet
@@ -49,6 +50,83 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 Used in the NWGOA model/data comparison.
 
+Dataset metadata:
+|    | Dataset                      | featuretype       |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
+|---:|:-----------------------------|:------------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
+|  0 | Kbay_timeseries              | trajectoryProfile |       59.5833 |       -151.75  | 2006-04-23 17:33:00 |       59.5833 |       -151.75  | 2006-04-22 17:06:00 |
+|  1 | cmi_full_v2-Cruise_00-Line_3 | trajectoryProfile |       59.4917 |       -151.65  | 2004-03-13 12:41:00 |       59.4917 |       -151.65  | 2004-03-13 12:41:00 |
+|  2 | cmi_full_v2-Cruise_00-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2004-03-13 12:27:00 |       59.5083 |       -151.65  | 2004-03-13 10:40:00 |
+|  3 | cmi_full_v2-Cruise_01-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-04-20 18:20:00 |       58.65   |       -152.333 | 2004-04-20 08:45:00 |
+|  4 | cmi_full_v2-Cruise_01-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2004-04-19 23:10:00 |       58.6133 |       -152.817 | 2004-04-19 20:37:00 |
+|  5 | cmi_full_v2-Cruise_01-Line_3 | trajectoryProfile |       59.9967 |       -151.65  | 2004-05-27 05:46:00 |       59.4917 |       -152.537 | 2004-04-18 21:36:00 |
+|  6 | cmi_full_v2-Cruise_01-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2004-05-27 08:04:00 |       59.5083 |       -151.65  | 2004-04-21 07:29:00 |
+|  7 | cmi_full_v2-Cruise_02-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-05-26 21:07:00 |       58.65   |       -152.333 | 2004-05-26 11:50:00 |
+|  8 | cmi_full_v2-Cruise_02-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2004-05-26 09:39:00 |       58.6133 |       -152.817 | 2004-05-26 07:18:00 |
+|  9 | cmi_full_v2-Cruise_02-Line_3 | trajectoryProfile |       59.9967 |       -151.65  | 2004-05-27 05:46:00 |       59.4917 |       -152.537 | 2004-05-25 11:41:00 |
+| 10 | cmi_full_v2-Cruise_02-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2004-05-27 08:04:00 |       59.5169 |       -151.65  | 2004-05-27 05:59:00 |
+| 11 | cmi_full_v2-Cruise_03-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-06-13 20:35:00 |       58.65   |       -152.333 | 2004-06-13 11:34:00 |
+| 12 | cmi_full_v2-Cruise_03-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2004-06-14 00:10:00 |       58.6133 |       -152.817 | 2004-06-13 22:11:00 |
+| 13 | cmi_full_v2-Cruise_03-Line_3 | trajectoryProfile |       59.9967 |       -151.65  | 2004-06-14 23:46:00 |       59.4917 |       -152.537 | 2004-06-14 13:39:00 |
+| 14 | cmi_full_v2-Cruise_03-Line_4 | trajectoryProfile |       59.6417 |       -151.65  | 2004-06-15 02:01:00 |       59.5083 |       -151.65  | 2004-06-14 23:59:00 |
+| 15 | cmi_full_v2-Cruise_04-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-07-18 11:34:00 |       58.735  |       -152.267 | 2004-07-18 11:34:00 |
+| 16 | cmi_full_v2-Cruise_04-Line_2 | trajectoryProfile |       58.665  |       -152.633 | 2004-07-18 22:46:00 |       58.6133 |       -152.767 | 2004-07-18 22:11:00 |
+| 17 | cmi_full_v2-Cruise_04-Line_3 | trajectoryProfile |       59.9567 |       -151.65  | 2004-07-18 23:46:00 |       59.4917 |       -152.422 | 2004-07-17 13:24:00 |
+| 18 | cmi_full_v2-Cruise_04-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2004-07-18 23:46:00 |       59.525  |       -151.65  | 2004-07-18 23:46:00 |
+| 19 | cmi_full_v2-Cruise_05-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-09-11 03:19:00 |       58.65   |       -152.333 | 2004-08-17 13:00:00 |
+| 20 | cmi_full_v2-Cruise_05-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2004-08-17 08:13:00 |       58.6133 |       -152.817 | 2004-08-17 06:26:00 |
+| 21 | cmi_full_v2-Cruise_05-Line_3 | trajectoryProfile |       59.9967 |       -151.65  | 2004-08-18 04:09:00 |       59.4917 |       -152.537 | 2004-08-16 10:22:00 |
+| 22 | cmi_full_v2-Cruise_05-Line_4 | trajectoryProfile |       59.6417 |       -151.65  | 2004-08-18 06:08:00 |       59.5083 |       -151.65  | 2004-08-18 04:21:00 |
+| 23 | cmi_full_v2-Cruise_06-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2004-09-08 09:39:00 |       58.65   |       -152.333 | 2004-09-07 23:19:00 |
+| 24 | cmi_full_v2-Cruise_06-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2004-09-08 16:41:00 |       58.6133 |       -152.817 | 2004-09-08 14:33:00 |
+| 25 | cmi_full_v2-Cruise_06-Line_3 | trajectoryProfile |       59.9967 |       -151.65  | 2004-09-09 20:24:00 |       59.4917 |       -152.537 | 2004-09-09 09:03:00 |
+| 26 | cmi_full_v2-Cruise_06-Line_4 | trajectoryProfile |       59.6417 |       -151.65  | 2004-09-09 20:03:00 |       59.5083 |       -151.65  | 2004-09-09 17:54:00 |
+| 27 | cmi_full_v2-Cruise_07-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-01-09 06:16:00 |       58.65   |       -152.333 | 2005-01-08 19:06:00 |
+| 28 | cmi_full_v2-Cruise_07-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-01-09 10:39:00 |       58.6133 |       -152.817 | 2005-01-09 08:10:00 |
+| 29 | cmi_full_v2-Cruise_07-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-01-10 09:01:00 |       59.7717 |       -152.567 | 2005-01-10 03:07:00 |
+| 30 | cmi_full_v2-Cruise_07-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-01-10 14:03:00 |       59.4917 |       -151.65  | 2005-01-10 11:04:00 |
+| 31 | cmi_full_v2-Cruise_08-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-04-26 07:23:00 |       58.65   |       -152.333 | 2005-04-25 20:05:00 |
+| 32 | cmi_full_v2-Cruise_08-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-04-26 14:45:00 |       58.6133 |       -152.817 | 2005-04-26 12:43:00 |
+| 33 | cmi_full_v2-Cruise_08-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-04-27 10:50:00 |       59.7717 |       -152.567 | 2005-04-27 04:33:00 |
+| 34 | cmi_full_v2-Cruise_08-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-04-25 17:42:00 |       59.4917 |       -151.65  | 2005-04-25 14:49:00 |
+| 35 | cmi_full_v2-Cruise_09-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-06-14 18:18:00 |       58.65   |       -152.333 | 2005-06-14 10:26:00 |
+| 36 | cmi_full_v2-Cruise_09-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-06-15 01:24:00 |       58.6133 |       -152.817 | 2005-06-14 23:37:00 |
+| 37 | cmi_full_v2-Cruise_09-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-06-15 20:28:00 |       59.7717 |       -152.567 | 2005-06-15 15:55:00 |
+| 38 | cmi_full_v2-Cruise_09-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-06-16 20:48:00 |       59.4917 |       -151.65  | 2005-06-16 18:46:00 |
+| 39 | cmi_full_v2-Cruise_10-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-07-30 06:56:00 |       58.65   |       -152.333 | 2005-07-29 17:13:00 |
+| 40 | cmi_full_v2-Cruise_10-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-07-29 12:14:00 |       58.6133 |       -152.817 | 2005-07-29 10:43:00 |
+| 41 | cmi_full_v2-Cruise_10-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-07-28 17:57:00 |       59.7717 |       -152.567 | 2005-07-28 11:09:00 |
+| 42 | cmi_full_v2-Cruise_10-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-07-30 18:02:00 |       59.4917 |       -151.65  | 2005-07-30 16:08:00 |
+| 43 | cmi_full_v2-Cruise_11-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-09-05 02:18:00 |       58.65   |       -152.333 | 2005-09-04 18:41:00 |
+| 44 | cmi_full_v2-Cruise_11-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-09-05 12:13:00 |       58.6133 |       -152.817 | 2005-09-05 10:42:00 |
+| 45 | cmi_full_v2-Cruise_11-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-09-06 08:02:00 |       59.7717 |       -152.567 | 2005-09-06 02:46:00 |
+| 46 | cmi_full_v2-Cruise_11-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-09-06 11:29:00 |       59.4917 |       -151.65  | 2005-09-06 09:35:00 |
+| 47 | cmi_full_v2-Cruise_12-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2005-10-13 22:35:00 |       58.65   |       -152.333 | 2005-10-13 15:26:00 |
+| 48 | cmi_full_v2-Cruise_12-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2005-10-14 01:40:00 |       58.6133 |       -152.817 | 2005-10-14 00:06:00 |
+| 49 | cmi_full_v2-Cruise_12-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2005-10-14 19:04:00 |       59.7717 |       -152.567 | 2005-10-14 14:47:00 |
+| 50 | cmi_full_v2-Cruise_12-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2005-10-14 22:50:00 |       59.4917 |       -151.65  | 2005-10-14 20:44:00 |
+| 51 | cmi_full_v2-Cruise_13-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2006-07-27 02:55:00 |       58.65   |       -152.333 | 2006-07-26 19:07:00 |
+| 52 | cmi_full_v2-Cruise_13-Line_3 | trajectoryProfile |       60.0067 |       -151.987 | 2006-07-26 03:26:00 |       59.81   |       -152.567 | 2006-07-26 00:02:00 |
+| 53 | cmi_full_v2-Cruise_13-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2006-07-28 14:32:00 |       59.4917 |       -151.65  | 2006-07-28 12:41:00 |
+| 54 | cmi_full_v2-Cruise_13-Line_6 | trajectoryProfile |       59.2117 |       -151.925 | 2006-07-28 02:39:00 |       58.865  |       -153.24  | 2006-07-27 16:41:00 |
+| 55 | cmi_full_v2-Cruise_13-Line_7 | trajectoryProfile |       59.35   |       -152     | 2006-07-26 16:48:00 |       59.3083 |       -153.302 | 2006-07-26 09:08:00 |
+| 56 | cmi_full_v2-Cruise_14-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2006-08-06 10:16:00 |       58.65   |       -152.333 | 2006-08-06 03:41:00 |
+| 57 | cmi_full_v2-Cruise_14-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2006-08-06 19:17:00 |       58.6133 |       -152.817 | 2006-08-06 17:40:00 |
+| 58 | cmi_full_v2-Cruise_14-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2006-08-05 14:02:00 |       59.7717 |       -152.567 | 2006-08-05 10:04:00 |
+| 59 | cmi_full_v2-Cruise_14-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2006-08-07 14:57:00 |       59.4917 |       -151.65  | 2006-08-07 13:11:00 |
+| 60 | cmi_full_v2-Cruise_14-Line_6 | trajectoryProfile |       59.2117 |       -151.925 | 2006-08-07 08:22:00 |       58.865  |       -153.24  | 2006-08-06 23:14:00 |
+| 61 | cmi_full_v2-Cruise_14-Line_7 | trajectoryProfile |       59.355  |       -152     | 2006-08-06 02:06:00 |       59.3083 |       -153.302 | 2006-08-05 19:22:00 |
+| 62 | cmi_full_v2-Cruise_15-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2006-08-13 02:41:00 |       58.65   |       -152.333 | 2006-08-12 19:38:00 |
+| 63 | cmi_full_v2-Cruise_15-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2006-08-12 04:36:00 |       59.7717 |       -152.567 | 2006-08-12 00:23:00 |
+| 64 | cmi_full_v2-Cruise_15-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2006-08-14 13:27:00 |       59.4917 |       -151.65  | 2006-08-14 11:46:00 |
+| 65 | cmi_full_v2-Cruise_15-Line_6 | trajectoryProfile |       59.2117 |       -151.925 | 2006-08-14 03:21:00 |       58.865  |       -153.24  | 2006-08-13 17:40:00 |
+| 66 | cmi_full_v2-Cruise_15-Line_7 | trajectoryProfile |       59.355  |       -152     | 2006-08-12 17:34:00 |       59.3083 |       -153.302 | 2006-08-12 10:17:00 |
+| 67 | cmi_full_v2-Cruise_16-Line_1 | trajectoryProfile |       59.2033 |       -151.875 | 2006-09-12 13:16:00 |       58.65   |       -152.333 | 2006-09-12 06:48:00 |
+| 68 | cmi_full_v2-Cruise_16-Line_2 | trajectoryProfile |       58.6867 |       -152.633 | 2006-09-13 01:43:00 |       58.6133 |       -152.817 | 2006-09-13 00:12:00 |
+| 69 | cmi_full_v2-Cruise_16-Line_3 | trajectoryProfile |       60.0067 |       -151.883 | 2006-09-11 16:22:00 |       59.7717 |       -152.567 | 2006-09-11 12:16:00 |
+| 70 | cmi_full_v2-Cruise_16-Line_4 | trajectoryProfile |       59.625  |       -151.65  | 2006-09-13 19:04:00 |       59.4917 |       -151.65  | 2006-09-13 17:18:00 |
+| 71 | cmi_full_v2-Cruise_16-Line_6 | trajectoryProfile |       59.2117 |       -151.925 | 2006-09-13 15:03:00 |       58.865  |       -153.24  | 2006-09-13 06:13:00 |
+| 72 | cmi_full_v2-Cruise_16-Line_7 | trajectoryProfile |       59.355  |       -152     | 2006-09-12 05:27:00 |       59.3083 |       -153.302 | 2006-09-11 22:06:00 |
+| 73 | sue_shelikof                 | trajectoryProfile |       58.6133 |       -152.633 | 2006-09-12 22:04:00 |       58.3505 |       -152.898 | 2006-09-12 19:41:00 |
     
 
 ```{code-cell}
@@ -70,14 +148,6 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_cmi_kbnerr")("ctd_profiles_cm
 Kbay_timeseries
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.5833 |        -151.75 | 2006-04-23T17:33:00.000000000 |       59.5833 |        -151.75 | 2006-04-22T17:06:00.000000000 |
-
-
 ```{code-cell}
 cat['Kbay_timeseries'].plot.salt() + cat['Kbay_timeseries'].plot.temp()
 ```
@@ -89,28 +159,12 @@ cat['Kbay_timeseries'].plot.salt() + cat['Kbay_timeseries'].plot.temp()
 cmi_full_v2-Cruise_00-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.4917 |        -151.65 | 2004-03-13T12:41:00.000000000 |       59.4917 |        -151.65 | 2004-03-13T12:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_00-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_00-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_00-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2004-03-13T12:27:00.000000000 |       59.5083 |        -151.65 | 2004-03-13T10:40:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_00-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_00-Line_4'].plot.temp()
@@ -123,28 +177,12 @@ cat['cmi_full_v2-Cruise_00-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_00-Lin
 cmi_full_v2-Cruise_01-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-04-20T18:20:00.000000000 |         58.65 |       -152.333 | 2004-04-20T08:45:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_01-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_01-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_01-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2004-04-19T23:10:00.000000000 |       58.6133 |       -152.817 | 2004-04-19T20:37:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_01-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_01-Line_2'].plot.temp()
@@ -153,28 +191,12 @@ cat['cmi_full_v2-Cruise_01-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_01-Lin
 cmi_full_v2-Cruise_01-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9967 |        -151.65 | 2004-05-27T05:46:00.000000000 |       59.4917 |       -152.537 | 2004-04-18T21:36:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_01-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_01-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_01-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2004-05-27T08:04:00.000000000 |       59.5083 |        -151.65 | 2004-04-21T07:29:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_01-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_01-Line_4'].plot.temp()
@@ -187,28 +209,12 @@ cat['cmi_full_v2-Cruise_01-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_01-Lin
 cmi_full_v2-Cruise_02-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-05-26T21:07:00.000000000 |         58.65 |       -152.333 | 2004-05-26T11:50:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_02-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_02-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_02-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2004-05-26T09:39:00.000000000 |       58.6133 |       -152.817 | 2004-05-26T07:18:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_02-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_02-Line_2'].plot.temp()
@@ -217,28 +223,12 @@ cat['cmi_full_v2-Cruise_02-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_02-Lin
 cmi_full_v2-Cruise_02-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9967 |        -151.65 | 2004-05-27T05:46:00.000000000 |       59.4917 |       -152.537 | 2004-05-25T11:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_02-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_02-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_02-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2004-05-27T08:04:00.000000000 |       59.5169 |        -151.65 | 2004-05-27T05:59:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_02-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_02-Line_4'].plot.temp()
@@ -251,28 +241,12 @@ cat['cmi_full_v2-Cruise_02-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_02-Lin
 cmi_full_v2-Cruise_03-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-06-13T20:35:00.000000000 |         58.65 |       -152.333 | 2004-06-13T11:34:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_03-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_03-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_03-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2004-06-14T00:10:00.000000000 |       58.6133 |       -152.817 | 2004-06-13T22:11:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_03-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_03-Line_2'].plot.temp()
@@ -281,28 +255,12 @@ cat['cmi_full_v2-Cruise_03-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_03-Lin
 cmi_full_v2-Cruise_03-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9967 |        -151.65 | 2004-06-14T23:46:00.000000000 |       59.4917 |       -152.537 | 2004-06-14T13:39:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_03-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_03-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_03-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.6417 |        -151.65 | 2004-06-15T02:01:00.000000000 |       59.5083 |        -151.65 | 2004-06-14T23:59:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_03-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_03-Line_4'].plot.temp()
@@ -315,28 +273,12 @@ cat['cmi_full_v2-Cruise_03-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_03-Lin
 cmi_full_v2-Cruise_04-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-07-18T11:34:00.000000000 |        58.735 |       -152.267 | 2004-07-18T11:34:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_04-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_04-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_04-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        58.665 |       -152.633 | 2004-07-18T22:46:00.000000000 |       58.6133 |       -152.767 | 2004-07-18T22:11:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_04-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_04-Line_2'].plot.temp()
@@ -345,28 +287,12 @@ cat['cmi_full_v2-Cruise_04-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_04-Lin
 cmi_full_v2-Cruise_04-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9567 |        -151.65 | 2004-07-18T23:46:00.000000000 |       59.4917 |       -152.422 | 2004-07-17T13:24:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_04-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_04-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_04-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2004-07-18T23:46:00.000000000 |        59.525 |        -151.65 | 2004-07-18T23:46:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_04-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_04-Line_4'].plot.temp()
@@ -379,28 +305,12 @@ cat['cmi_full_v2-Cruise_04-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_04-Lin
 cmi_full_v2-Cruise_05-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-09-11T03:19:00.000000000 |         58.65 |       -152.333 | 2004-08-17T13:00:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_05-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_05-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_05-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2004-08-17T08:13:00.000000000 |       58.6133 |       -152.817 | 2004-08-17T06:26:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_05-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_05-Line_2'].plot.temp()
@@ -409,28 +319,12 @@ cat['cmi_full_v2-Cruise_05-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_05-Lin
 cmi_full_v2-Cruise_05-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9967 |        -151.65 | 2004-08-18T04:09:00.000000000 |       59.4917 |       -152.537 | 2004-08-16T10:22:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_05-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_05-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_05-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.6417 |        -151.65 | 2004-08-18T06:08:00.000000000 |       59.5083 |        -151.65 | 2004-08-18T04:21:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_05-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_05-Line_4'].plot.temp()
@@ -443,28 +337,12 @@ cat['cmi_full_v2-Cruise_05-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_05-Lin
 cmi_full_v2-Cruise_06-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2004-09-08T09:39:00.000000000 |         58.65 |       -152.333 | 2004-09-07T23:19:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_06-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_06-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_06-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2004-09-08T16:41:00.000000000 |       58.6133 |       -152.817 | 2004-09-08T14:33:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_06-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_06-Line_2'].plot.temp()
@@ -473,28 +351,12 @@ cat['cmi_full_v2-Cruise_06-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_06-Lin
 cmi_full_v2-Cruise_06-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.9967 |        -151.65 | 2004-09-09T20:24:00.000000000 |       59.4917 |       -152.537 | 2004-09-09T09:03:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_06-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_06-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_06-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.6417 |        -151.65 | 2004-09-09T20:03:00.000000000 |       59.5083 |        -151.65 | 2004-09-09T17:54:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_06-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_06-Line_4'].plot.temp()
@@ -507,28 +369,12 @@ cat['cmi_full_v2-Cruise_06-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_06-Lin
 cmi_full_v2-Cruise_07-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-01-09T06:16:00.000000000 |         58.65 |       -152.333 | 2005-01-08T19:06:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_07-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_07-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_07-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-01-09T10:39:00.000000000 |       58.6133 |       -152.817 | 2005-01-09T08:10:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_07-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_07-Line_2'].plot.temp()
@@ -537,28 +383,12 @@ cat['cmi_full_v2-Cruise_07-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_07-Lin
 cmi_full_v2-Cruise_07-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-01-10T09:01:00.000000000 |       59.7717 |       -152.567 | 2005-01-10T03:07:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_07-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_07-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_07-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-01-10T14:03:00.000000000 |       59.4917 |        -151.65 | 2005-01-10T11:04:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_07-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_07-Line_4'].plot.temp()
@@ -571,28 +401,12 @@ cat['cmi_full_v2-Cruise_07-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_07-Lin
 cmi_full_v2-Cruise_08-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-04-26T07:23:00.000000000 |         58.65 |       -152.333 | 2005-04-25T20:05:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_08-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_08-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_08-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-04-26T14:45:00.000000000 |       58.6133 |       -152.817 | 2005-04-26T12:43:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_08-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_08-Line_2'].plot.temp()
@@ -601,28 +415,12 @@ cat['cmi_full_v2-Cruise_08-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_08-Lin
 cmi_full_v2-Cruise_08-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-04-27T10:50:00.000000000 |       59.7717 |       -152.567 | 2005-04-27T04:33:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_08-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_08-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_08-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-04-25T17:42:00.000000000 |       59.4917 |        -151.65 | 2005-04-25T14:49:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_08-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_08-Line_4'].plot.temp()
@@ -635,28 +433,12 @@ cat['cmi_full_v2-Cruise_08-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_08-Lin
 cmi_full_v2-Cruise_09-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-06-14T18:18:00.000000000 |         58.65 |       -152.333 | 2005-06-14T10:26:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_09-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_09-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_09-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-06-15T01:24:00.000000000 |       58.6133 |       -152.817 | 2005-06-14T23:37:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_09-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_09-Line_2'].plot.temp()
@@ -665,28 +447,12 @@ cat['cmi_full_v2-Cruise_09-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_09-Lin
 cmi_full_v2-Cruise_09-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-06-15T20:28:00.000000000 |       59.7717 |       -152.567 | 2005-06-15T15:55:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_09-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_09-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_09-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-06-16T20:48:00.000000000 |       59.4917 |        -151.65 | 2005-06-16T18:46:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_09-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_09-Line_4'].plot.temp()
@@ -699,28 +465,12 @@ cat['cmi_full_v2-Cruise_09-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_09-Lin
 cmi_full_v2-Cruise_10-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-07-30T06:56:00.000000000 |         58.65 |       -152.333 | 2005-07-29T17:13:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_10-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_10-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_10-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-07-29T12:14:00.000000000 |       58.6133 |       -152.817 | 2005-07-29T10:43:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_10-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_10-Line_2'].plot.temp()
@@ -729,28 +479,12 @@ cat['cmi_full_v2-Cruise_10-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_10-Lin
 cmi_full_v2-Cruise_10-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-07-28T17:57:00.000000000 |       59.7717 |       -152.567 | 2005-07-28T11:09:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_10-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_10-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_10-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-07-30T18:02:00.000000000 |       59.4917 |        -151.65 | 2005-07-30T16:08:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_10-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_10-Line_4'].plot.temp()
@@ -763,28 +497,12 @@ cat['cmi_full_v2-Cruise_10-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_10-Lin
 cmi_full_v2-Cruise_11-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-09-05T02:18:00.000000000 |         58.65 |       -152.333 | 2005-09-04T18:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_11-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_11-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_11-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-09-05T12:13:00.000000000 |       58.6133 |       -152.817 | 2005-09-05T10:42:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_11-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_11-Line_2'].plot.temp()
@@ -793,28 +511,12 @@ cat['cmi_full_v2-Cruise_11-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_11-Lin
 cmi_full_v2-Cruise_11-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-09-06T08:02:00.000000000 |       59.7717 |       -152.567 | 2005-09-06T02:46:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_11-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_11-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_11-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-09-06T11:29:00.000000000 |       59.4917 |        -151.65 | 2005-09-06T09:35:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_11-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_11-Line_4'].plot.temp()
@@ -827,28 +529,12 @@ cat['cmi_full_v2-Cruise_11-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_11-Lin
 cmi_full_v2-Cruise_12-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2005-10-13T22:35:00.000000000 |         58.65 |       -152.333 | 2005-10-13T15:26:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_12-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_12-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_12-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2005-10-14T01:40:00.000000000 |       58.6133 |       -152.817 | 2005-10-14T00:06:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_12-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_12-Line_2'].plot.temp()
@@ -857,28 +543,12 @@ cat['cmi_full_v2-Cruise_12-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_12-Lin
 cmi_full_v2-Cruise_12-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2005-10-14T19:04:00.000000000 |       59.7717 |       -152.567 | 2005-10-14T14:47:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_12-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_12-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_12-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2005-10-14T22:50:00.000000000 |       59.4917 |        -151.65 | 2005-10-14T20:44:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_12-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_12-Line_4'].plot.temp()
@@ -891,28 +561,12 @@ cat['cmi_full_v2-Cruise_12-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_12-Lin
 cmi_full_v2-Cruise_13-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2006-07-27T02:55:00.000000000 |         58.65 |       -152.333 | 2006-07-26T19:07:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_13-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_13-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_13-Line_3
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.987 | 2006-07-26T03:26:00.000000000 |         59.81 |       -152.567 | 2006-07-26T00:02:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_13-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_13-Line_3'].plot.temp()
@@ -921,14 +575,6 @@ cat['cmi_full_v2-Cruise_13-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_13-Lin
 cmi_full_v2-Cruise_13-Line_4
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2006-07-28T14:32:00.000000000 |       59.4917 |        -151.65 | 2006-07-28T12:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_13-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_13-Line_4'].plot.temp()
 ```
@@ -936,28 +582,12 @@ cat['cmi_full_v2-Cruise_13-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_13-Lin
 cmi_full_v2-Cruise_13-Line_6
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2117 |       -151.925 | 2006-07-28T02:39:00.000000000 |        58.865 |        -153.24 | 2006-07-27T16:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_13-Line_6'].plot.salt() + cat['cmi_full_v2-Cruise_13-Line_6'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_13-Line_7
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |         59.35 |           -152 | 2006-07-26T16:48:00.000000000 |       59.3083 |       -153.302 | 2006-07-26T09:08:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_13-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_13-Line_7'].plot.temp()
@@ -970,28 +600,12 @@ cat['cmi_full_v2-Cruise_13-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_13-Lin
 cmi_full_v2-Cruise_14-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2006-08-06T10:16:00.000000000 |         58.65 |       -152.333 | 2006-08-06T03:41:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_14-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2006-08-06T19:17:00.000000000 |       58.6133 |       -152.817 | 2006-08-06T17:40:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_2'].plot.temp()
@@ -1000,28 +614,12 @@ cat['cmi_full_v2-Cruise_14-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_14-Lin
 cmi_full_v2-Cruise_14-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2006-08-05T14:02:00.000000000 |       59.7717 |       -152.567 | 2006-08-05T10:04:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_14-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2006-08-07T14:57:00.000000000 |       59.4917 |        -151.65 | 2006-08-07T13:11:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_4'].plot.temp()
@@ -1030,28 +628,12 @@ cat['cmi_full_v2-Cruise_14-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_14-Lin
 cmi_full_v2-Cruise_14-Line_6
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2117 |       -151.925 | 2006-08-07T08:22:00.000000000 |        58.865 |        -153.24 | 2006-08-06T23:14:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_6'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_6'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_14-Line_7
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.355 |           -152 | 2006-08-06T02:06:00.000000000 |       59.3083 |       -153.302 | 2006-08-05T19:22:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_14-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_14-Line_7'].plot.temp()
@@ -1064,28 +646,12 @@ cat['cmi_full_v2-Cruise_14-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_14-Lin
 cmi_full_v2-Cruise_15-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2006-08-13T02:41:00.000000000 |         58.65 |       -152.333 | 2006-08-12T19:38:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_15-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_15-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_15-Line_3
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2006-08-12T04:36:00.000000000 |       59.7717 |       -152.567 | 2006-08-12T00:23:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_15-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_15-Line_3'].plot.temp()
@@ -1094,14 +660,6 @@ cat['cmi_full_v2-Cruise_15-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_15-Lin
 cmi_full_v2-Cruise_15-Line_4
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2006-08-14T13:27:00.000000000 |       59.4917 |        -151.65 | 2006-08-14T11:46:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_15-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_15-Line_4'].plot.temp()
 ```
@@ -1109,28 +667,12 @@ cat['cmi_full_v2-Cruise_15-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_15-Lin
 cmi_full_v2-Cruise_15-Line_6
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2117 |       -151.925 | 2006-08-14T03:21:00.000000000 |        58.865 |        -153.24 | 2006-08-13T17:40:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_15-Line_6'].plot.salt() + cat['cmi_full_v2-Cruise_15-Line_6'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_15-Line_7
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.355 |           -152 | 2006-08-12T17:34:00.000000000 |       59.3083 |       -153.302 | 2006-08-12T10:17:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_15-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_15-Line_7'].plot.temp()
@@ -1143,28 +685,12 @@ cat['cmi_full_v2-Cruise_15-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_15-Lin
 cmi_full_v2-Cruise_16-Line_1
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2033 |       -151.875 | 2006-09-12T13:16:00.000000000 |         58.65 |       -152.333 | 2006-09-12T06:48:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_1'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_1'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_16-Line_2
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6867 |       -152.633 | 2006-09-13T01:43:00.000000000 |       58.6133 |       -152.817 | 2006-09-13T00:12:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_2'].plot.temp()
@@ -1173,28 +699,12 @@ cat['cmi_full_v2-Cruise_16-Line_2'].plot.salt() + cat['cmi_full_v2-Cruise_16-Lin
 cmi_full_v2-Cruise_16-Line_3
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       60.0067 |       -151.883 | 2006-09-11T16:22:00.000000000 |       59.7717 |       -152.567 | 2006-09-11T12:16:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_3'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_3'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_16-Line_4
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.625 |        -151.65 | 2006-09-13T19:04:00.000000000 |       59.4917 |        -151.65 | 2006-09-13T17:18:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_4'].plot.temp()
@@ -1203,28 +713,12 @@ cat['cmi_full_v2-Cruise_16-Line_4'].plot.salt() + cat['cmi_full_v2-Cruise_16-Lin
 cmi_full_v2-Cruise_16-Line_6
         
 
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       59.2117 |       -151.925 | 2006-09-13T15:03:00.000000000 |        58.865 |        -153.24 | 2006-09-13T06:13:00.000000000 |
-
-
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_6'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_6'].plot.temp()
 ```
 
 cmi_full_v2-Cruise_16-Line_7
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |        59.355 |           -152 | 2006-09-12T05:27:00.000000000 |       59.3083 |       -153.302 | 2006-09-11T22:06:00.000000000 |
-
 
 ```{code-cell}
 cat['cmi_full_v2-Cruise_16-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_16-Line_7'].plot.temp()
@@ -1236,14 +730,6 @@ cat['cmi_full_v2-Cruise_16-Line_7'].plot.salt() + cat['cmi_full_v2-Cruise_16-Lin
 
 sue_shelikof
         
-
-+++
-
-            
-|    | featuretype       | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:------------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | trajectoryProfile | point     |       58.6133 |       -152.633 | 2006-09-12T22:04:00.000000000 |       58.3505 |       -152.898 | 2006-09-12T19:41:00.000000000 |
-
 
 ```{code-cell}
 cat['sue_shelikof'].plot.salt() + cat['sue_shelikof'].plot.temp()

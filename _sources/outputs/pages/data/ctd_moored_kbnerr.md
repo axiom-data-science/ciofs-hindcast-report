@@ -13,6 +13,7 @@ import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
+import cmocean.cm as cmo
 ```
 
 # KBNERR: Lower Cook Inlet Mooring
@@ -40,6 +41,11 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 
+Dataset metadata:
+|    | Dataset     | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
+|---:|:------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
+|  0 | Deployment1 | timeSeries    |       59.2027 |       -151.848 | 2006-10-28 10:22:00 |       59.2027 |       -151.848 | 2006-08-12 18:22:00 |
+|  1 | Deployment2 | timeSeries    |       59.2027 |       -151.848 | 2008-02-25 05:28:00 |       59.2027 |       -151.848 | 2007-06-20 21:00:00 |
     
 
 ```{code-cell}
@@ -57,28 +63,12 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
 ## Deployment1
         
 
-+++
-
-            
-|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | timeSeries    | point     |       59.2027 |       -151.848 | 2006-10-28T10:22:00.000000000 |       59.2027 |       -151.848 | 2006-08-12T18:22:00.000000000 |
-
-
 ```{code-cell}
 cat['Deployment1'].plot.data()
 ```
 
 ## Deployment2
         
-
-+++
-
-            
-|    | featuretype   | maptype   |   maxLatitude |   maxLongitude | maxTime                       |   minLatitude |   minLongitude | minTime                       |
-|---:|:--------------|:----------|--------------:|---------------:|:------------------------------|--------------:|---------------:|:------------------------------|
-|  0 | timeSeries    | point     |       59.2027 |       -151.848 | 2008-02-25T05:28:00.000000000 |       59.2027 |       -151.848 | 2007-06-20T21:00:00.000000000 |
-
 
 ```{code-cell}
 cat['Deployment2'].plot.data()
