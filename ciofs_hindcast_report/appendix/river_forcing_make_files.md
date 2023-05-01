@@ -6,7 +6,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.14.5
 kernelspec:
-  display_name: Python 3.11.0 ('ciofs')
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -14,7 +14,7 @@ kernelspec:
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
-from ciofs_hindcast_report.code.create_river_roms import *
+from ciofs_hindcast_report.src.create_river_roms import *
 import ciofs_hindcast_report as chr
 
 import os

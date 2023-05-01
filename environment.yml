@@ -1,4 +1,4 @@
-name: ciofs
+name: ciofs2
 channels:
   - conda-forge
   - pyviz
@@ -8,22 +8,27 @@ dependencies:
   # Examples (remove and add as needed)
   - cartopy
   - cf_pandas
+  - cmocean
   - dask
   - dataretrieval
+  # - datashader  # need dev github version of holoviews to avoid nanosecond bug using datashader with ADCP plots: https://github.com/holoviz/holoviews/pull/5662
   - geoviews
   - ghp-import
   - hvplot
-  - intake-axds
-  - intake-erddap
+  # - intake-axds  # going to install locally
+  # - intake-erddap  # going to install locally
   - jupyter-book
   - netcdf4
   - numpy
   - matplotlib-base
-  - ocean-model-skill-assessor
+  # - ocean-model-skill-assessor  # get from pypi until conda-forge is updated
   - pandas
   - pip
   - xarray
   # - xcmocean
   - pip:
+    - jupyter_bokeh
+    - ocean-model-skill-assessor
     - noaa_coops  # should be included with intake-coops in the future
     - git+https://github.com/axiom-data-science/intake-coops
+    - git+https://github.com/intake/intake

@@ -5,6 +5,22 @@ import ciofs_hindcast_report as chr
 import pandas as pd
 
 
+def make_source_metadata_table(cat):
+    source_names = chr.src.utils.get_source_names(cat)
+    mdfs = []
+    for source_name in source_names:
+        metadata_no_plots = {"Dataset": source_name}
+        metadata_no_plots.update({key:values for key, values in cat[source_name].metadata.items() if key != "plots" and key != "catalog_dir" and key != "maptype" and key != "deployments"})
+        # format times better
+        metadata_no_plots.update({key: str(pd.Timestamp(metadata_no_plots[key])) for key, values in metadata_no_plots.items() if (("time" in key.lower()) or ("good_data" in key.lower())) and not "zone" in key.lower()})
+        mdfs.append(pd.DataFrame.from_dict(metadata_no_plots, orient="index"))
+        # print(metadata_no_plots)
+        # source_metadata_table.update(metadata_no_plots)
+    mdf = pd.concat(mdfs, axis=1)
+    mdf = mdf.T.reset_index(drop=True)
+    return mdf
+
+
 def generate_dataset_notebook(slug, desc, metadata):
 # def generate_dataset_notebook(slug, project_name, map_desc, summary, plottypes, header_names):
 
@@ -19,7 +35,8 @@ import intake
 import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
-import pandas as pd"""
+import pandas as pd
+import cmocean.cm as cmo"""
 
     text = f"""\
 # {desc}
@@ -32,6 +49,8 @@ import pandas as pd"""
 
 {metadata["notes"]}
 
+Dataset metadata:
+{make_source_metadata_table(intake.open_catalog(chr.CAT_NAME(slug))).to_markdown()}
     """
 
     # Open catalog
@@ -81,13 +100,27 @@ getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
             source_md_1 = f"""\
 {source_name}
         """
-            nb['cells'].extend([nbf.v4.new_markdown_cell(source_md_1),])
 
         else:
             source_md_1 = f"""\
 ## {source_name}
         """
-            nb['cells'].extend([nbf.v4.new_markdown_cell(source_md_1),])
+        
+#         # next include source metadata
+#         metadata_no_plots = {key:values for key, values in cat[source_name].metadata.items() if key != "plots" and key != "catalog_dir"}
+#         text = f"""\
+            
+# {pd.DataFrame.from_dict(metadata_no_plots, orient="index").T.to_markdown()}
+
+# """
+
+        # Add these cells to the notebook
+        nb['cells'].extend([nbf.v4.new_markdown_cell(source_md_1)])
+        #  # Add these cells to the notebook
+        # nb['cells'].extend([nbf.v4.new_markdown_cell(source_md_1),
+        #             nbf.v4.new_markdown_cell(text),
+        #             ])
+        
         
         source_code_1 = ""
         if "map" in cat[source_name].metadata["plots"]:
@@ -178,6 +211,7 @@ getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
 if __name__ == "__main__":
     from time import time
     for slug in chr.slugs:
+        print(slug)
         cat = intake.open_catalog(chr.CAT_NAME(slug))
         # only make page if including dataset
         if cat.metadata["included"]:

@@ -79,7 +79,7 @@ class DatasetTransform(GenericTransform):
 
 
 def ctd_profiles_gwa(df, transect, date):
-    df["jday"] = calculate_julian_days(df.cf["T"])
+    # df["jday"] = calculate_julian_days(df.cf["T"])
     itransect = df["Transect"] == str(transect)
     dft = df.loc[itransect]
     idate = dft["Date_Time"].dt.strftime("%Y-%m-%d") == str(date)
@@ -355,3 +355,39 @@ def ctd_profiles_2005_osu(df, date, lon=None, lat=None):
         return df[(df.cf["longitude"] == lon) & (df.cf["latitude"] == lat)]
     else:
         return df
+
+
+def adcp_moored_noaa(ds, theta):
+    u = np.cos(np.deg2rad(ds.cf["dir"]))*ds.cf["speed"]/100
+    v = np.sin(np.deg2rad(ds.cf["dir"]))*ds.cf["speed"]/100
+    # u = np.cos(np.deg2rad(ds["direction"]))*ds["speed"]/100
+    # v = np.sin(np.deg2rad(ds["direction"]))*ds["speed"]/100
+    # theta = cat[list(cat)[0]].metadata["flood_direction_degrees"]
+    ds["ualong"] = u*np.cos(np.deg2rad(theta)) + v*np.sin(np.deg2rad(theta))
+    ds["vacross"] = -u*np.sin(np.deg2rad(theta)) + v*np.cos(np.deg2rad(theta))
+    return ds
+
+
+# this is now in intake-erddap directly
+# def erddap_cat(df):
+#     """Apply QA flags if available to limit returned data 
+    
+#     to flags 1 (pass) and 2 (not evaluated) and to drop rows if data columns all have nans.
+#     """
+    
+#     # find data columns which are what we'll use in the final step to drop nan's
+#     # don't include dimension/coordinates-type columns (dimcols) nor qc_agg columns (qccols)
+#     dimcols = []
+#     for key in ["T", "longitude","latitude","Z"]:
+#         dimcols.append(df.cf[key].name)
+#     qccols = list(df.columns[df.columns.str.contains("_qc_agg")])
+    
+#     datacols = [col for col in df.columns if col not in dimcols + qccols]
+    
+#     # if a data column has an associated qc column, use it to weed out bad data by
+#     # setting it to nan. Then the final line drops nan rows based on the data columns.
+#     for datacol in datacols:
+#         qccol = f"{datacol}_qc_agg"
+#         if qccol in df.columns:
+#             df.loc[~df[qccol].isin([1,2]), datacol] = pd.NA
+#     return df.dropna(subset=datacols).reset_index(drop=True)

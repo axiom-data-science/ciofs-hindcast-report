@@ -7,7 +7,7 @@ import pathlib
 import numpy as np
 
 
-def line_depth_dict(x, y, dd):
+def line_depth_dict(x, y, dd, hover=True):
     """for property(ies) vs. depth"""
 
     d = {"kind": "line",
@@ -19,39 +19,46 @@ def line_depth_dict(x, y, dd):
         "width": 300,
         "height": 400,
         "shared_axes": False,
+        "hover": hover,
     }
     return d
 
 
-def line_time_dict(x, y, dd):
+def line_time_dict(x, y, dd=None, hover=True):
     """for property(ies) vs. time"""
-    # import pdb; pdb.set_trace()
-    # print([dd.cf[ele].name for ele in y] if isinstance(y, list) else dd.cf[y].name)
-    # print([dd.cf[ele].name for ele in x] if isinstance(x, list) else dd.cf[x].name)
+    if dd is None:
+        xuse = x
+        yuse = y
+    elif dd is not None:
+        xuse = [dd.cf[ele].name for ele in x] if isinstance(x, list) else dd.cf[x].name
+        yuse = [dd.cf[ele].name for ele in y] if isinstance(y, list) else dd.cf[y].name
     d = {"kind": "line",
-        "y": [dd.cf[ele].name for ele in y] if isinstance(y, list) else dd.cf[y].name,
-        "x": [dd.cf[ele].name for ele in x] if isinstance(x, list) else dd.cf[x].name,
+        "y": yuse,
+        "x": xuse,
         # "invert": True,
         # "flip_yaxis": True,
         "subplots": True,
-        "width": 400,
+        "width": 600,
         "height": 300,
         "shared_axes": False,
+        "hover": hover,
     }
     return d
 
 
-def scatter_dict(var, dd, x, y, flip_yaxis=False):
+def scatter_dict(var, dd, x, y, flip_yaxis=False, hover=False):
     d = {"kind": "scatter",
           "x": dd.cf[x].name,
           "y": dd.cf[y].name,
-          "c": dd.cf[var].name,
+          "c": [dd.cf[ele].name for ele in var] if isinstance(var, list) else dd.cf[var].name,
           "clabel": dd.cf[var].name,
           "cmap": chr.cmap[var],
           "width": 400,# 500,
           "height": 300,#400,
           "flip_yaxis": flip_yaxis,
-          "shared_axes": False,}
+          "shared_axes": False,
+          "hover": hover,
+          }
     return d
 
 
@@ -66,6 +73,36 @@ def map_dict(dd):
          "height": 300,#400, 
          "title": f"Locations",
          "aspect": 'equal',}
+    return d
+
+
+def quadmesh_dict(var, x, y, cmap=None, flip_yaxis=True,dd=None, ):
+    if dd is None:
+        varuse = var
+        xuse = x
+        yuse = y
+        cmapuse = cmap
+    elif dd is not None:
+        xuse = dd.cf[x].name
+        yuse = dd.cf[y].name
+        varuse = [dd.cf[ele].name for ele in var] if isinstance(var, list) else dd.cf[var].name
+        cmapuse = chr.cmap[var]
+        
+    d = {"kind": "quadmesh",
+          "x": xuse,
+          "y": yuse,
+          "z": varuse,
+          "clabel": varuse,
+          "cmap": cmapuse,
+          "width": 500,# 500,
+          "height": 300,#400,
+          "flip_yaxis": flip_yaxis,
+        #   "rasterize": True,
+          "shared_axes": False,
+          "symmetric": True,
+          "hover": False,
+          "rasterize": True,
+          }
     return d
 
 
@@ -298,7 +335,7 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
     # read in data 
     df = pd.read_csv(url, **csv_kwargs)
     df = getattr(chr.src.process, slug)(df)
-    df = df.sort_values("date_time")
+    df = df.sort_values(df.cf["T"].name)
 
     # split into single CTD cast units by station
     stations = sorted(list(set(df["station_number"])))
@@ -312,7 +349,6 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
         name = f"{station}"
         # name = f"station_{station}"
         # title = f"Station {station}" 
-
         # process dataframe so can get metadata
         ddf = df[df["station_number"] == station]
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf),}}
@@ -1320,7 +1356,10 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
                                  description=overall_desc,
                                  use_source_constraints=True,
                                  start_time = "1999-01-01T00:00:00Z",
-                                 open_kwargs=open_kwargs)
+                                 open_kwargs=open_kwargs,
+                                 dropna=True,
+                                 mask_failed_qartod=True,
+                                 )
     source_names = chr.src.utils.get_source_names(cat)
     
     for source_name in source_names:
@@ -1333,12 +1372,19 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
         # add some metadata
         # first find which variables are available to use in plots for metadata
         all_vars = ["ssh","temp","salt","u","v","speed"]
-        vars_to_use = []
+        vars_to_use, var_names = [], []
+        # start with time, longitude, latitude, and depth
+        for key in ["T", "longitude","latitude","Z"]:
+            var_names.append(ddf.cf[key].name)
         for Var in all_vars:
             try:
                 # print(source_name, Var, ddf.cf[Var].shape)
                 ddf.cf[Var].name
                 vars_to_use.append(Var)
+                var_names.append(ddf.cf[Var].name)
+                qc_var = ddf.cf[Var].name + "_qc_agg"
+                if qc_var in ddf.columns:
+                    var_names.append(qc_var)
             except ValueError:
                 pass
 
@@ -1346,61 +1392,10 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
                                      "featuretype": featuretype,
                                      "plots": {"data": line_time_dict("T", vars_to_use, ddf),}})
 
-    # more catalog-level metadata
-    cat_meta = {"map_description": map_description,
-                "summary": summary,
-                "header_names": header_names,
-                "project_name": project_name,
-                "time": time,
-                "included": included,
-                "notes": notes,
-                "featuretype": featuretype,
-                }
-    cat.metadata.update(cat_meta)
-    cat.save(chr.CAT_NAME(slug))
-
-
-def make_axds_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
-                        header_names, map_description, summary, stations, open_kwargs):
-    
-    cat = intake.open_axds_cat(datatype="sensor_station", 
-                           search_for=stations, 
-                           page_size=1,
-                        query_type="union",
-                        name=slug,
-                        description=overall_desc,
-                        )
-    
-    # cat = intake.open_erddap_cat(server="https://erddap.sensors.ioos.us/erddap", 
-    #                              search_for=stations, 
-    #                              query_type="union",
-    #                              name=slug,
-    #                              description=overall_desc,
-    #                              use_source_constraints=True,
-    #                              start_time = "1999-01-01T00:00:00Z",
-    #                              open_kwargs=open_kwargs)
-    source_names = chr.src.utils.get_source_names(cat)
-    
-    for source_name in source_names:
-        # this creates an empty DataFrame with column names of the variables in the dataset
-        # these can be checked with cf-pandas to fill in variable names in the metadata plots
-        ddf = pd.DataFrame(columns=cat[source_name].metadata["variables"] + ["Time [s]",])
+        cat[source_name].describe()["args"].update({"variables": var_names})
         
-        # add some metadata
-        # first find which variables are available to use in plots for metadata
-        all_vars = ["ssh","temp","salt","u","v","speed"]
-        vars_to_use = []
-        for Var in all_vars:
-            try:
-                # print(source_name, Var, ddf.cf[Var].shape)
-                ddf.cf[Var].name
-                vars_to_use.append(Var)
-            except ValueError:
-                pass
-
-        cat[source_name].describe()["metadata"].update({"maptype": maptype,
-                                     "featuretype": featuretype,
-                                     "plots": {"data": line_time_dict("T", vars_to_use, ddf),}})
+        # read in the last 2 hours of data and make another entry that is exactly like this one but subsampled
+        # for plotting
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1414,6 +1409,62 @@ def make_axds_catalog(slug, project_name, overall_desc, time, included, notes, m
                 }
     cat.metadata.update(cat_meta)
     cat.save(chr.CAT_NAME(slug))
+
+
+# def make_axds_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
+#                         header_names, map_description, summary, stations, open_kwargs):
+    
+#     cat = intake.open_axds_cat(datatype="sensor_station", 
+#                            search_for=stations, 
+#                            page_size=1,
+#                         query_type="union",
+#                         name=slug,
+#                         description=overall_desc,
+#                         )
+    
+#     # cat = intake.open_erddap_cat(server="https://erddap.sensors.ioos.us/erddap", 
+#     #                              search_for=stations, 
+#     #                              query_type="union",
+#     #                              name=slug,
+#     #                              description=overall_desc,
+#     #                              use_source_constraints=True,
+#     #                              start_time = "1999-01-01T00:00:00Z",
+#     #                              open_kwargs=open_kwargs)
+#     source_names = chr.src.utils.get_source_names(cat)
+    
+#     for source_name in source_names:
+#         # this creates an empty DataFrame with column names of the variables in the dataset
+#         # these can be checked with cf-pandas to fill in variable names in the metadata plots
+#         ddf = pd.DataFrame(columns=cat[source_name].metadata["variables"] + ["Time [s]",])
+        
+#         # add some metadata
+#         # first find which variables are available to use in plots for metadata
+#         all_vars = ["ssh","temp","salt","u","v","speed"]
+#         vars_to_use = []
+#         for Var in all_vars:
+#             try:
+#                 # print(source_name, Var, ddf.cf[Var].shape)
+#                 ddf.cf[Var].name
+#                 vars_to_use.append(Var)
+#             except ValueError:
+#                 pass
+
+#         cat[source_name].describe()["metadata"].update({"maptype": maptype,
+#                                      "featuretype": featuretype,
+#                                      "plots": {"data": line_time_dict("T", vars_to_use, ddf),}})
+
+#     # more catalog-level metadata
+#     cat_meta = {"map_description": map_description,
+#                 "summary": summary,
+#                 "header_names": header_names,
+#                 "project_name": project_name,
+#                 "time": time,
+#                 "included": included,
+#                 "notes": notes,
+#                 "featuretype": featuretype,
+#                 }
+#     cat.metadata.update(cat_meta)
+#     cat.save(chr.CAT_NAME(slug))
 
 
 def moorings_aoos_cdip(slug):
@@ -1440,7 +1491,7 @@ def moorings_aoos_cdip(slug):
 
 def moorings_noaa(slug):
     project_name = "Moorings from NOAA"
-    overall_desc = "NOAA Moorings: Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait"
+    overall_desc = "NOAA Moorings: Miscellaneous locations"
     time = "From 1999 (and earlier) to 2023, variable"
     included = True
     notes = ""
@@ -1449,6 +1500,8 @@ def moorings_noaa(slug):
     header_names = None
     map_description = "Moorings"
     summary = f"""Moorings from NOAA
+
+Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Seldovia, Old Harbor, Boulder Point, Albatross Banks, Shelikof Strait
 """
 
     stations = ["geese-island-gps-tide-buoy", # ssh
@@ -1460,7 +1513,7 @@ def moorings_noaa(slug):
                 "noaa_nos_co_ops_9455500",
                 "old-harbor-1",
                 "boulder-point",
-                "wmo_46078",
+                # "wmo_46078",  # outside domain
                 "wmo_46077",]
     open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}
     
@@ -1510,9 +1563,39 @@ def moorings_uaf(slug):
                         header_names, map_description, summary, stations, open_kwargs)
     
     
-def moorings_kbnerr(slug):
+def moorings_kbnerr_bear_cove_seldovia(slug):
     project_name = "Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
-    overall_desc = "KBNERR Moorings: Kachemak Bay"
+    overall_desc = "KBNERR Moorings: Kachemak Bay, Bear Cove and Seldovia"
+    time = "From 2004 to present day, variable"
+    included = True
+    notes = "These are accessed through AOOS portal/ERDDAP server."
+    maptype = "point"
+    featuretype = "timeSeries"
+    header_names = None
+    map_description = "Moorings"
+    summary = f"""Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
+    
+Station mappings from AOOS/ERDDAP to KBNERR station list:
+* nerrs_kacsdwq :: kacsdwq
+* nerrs_kacsswq :: kacsswq
+
+* cdmo_nerrs_bearcove :: This is a different station than kacbcwq, which was active 2002-2003 while this is in 2015. They are also in different locations.
+    
+More information: https://accs.uaa.alaska.edu/kbnerr/
+"""
+
+    stations = ["cdmo_nerrs_bearcove",
+                "nerrs_kacsdwq",
+                "nerrs_kacsswq"]
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}
+    
+    make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
+                        header_names, map_description, summary, stations, open_kwargs)
+    
+    
+def moorings_kbnerr_homer(slug):
+    project_name = "Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
+    overall_desc = "KBNERR Moorings: Kachemak Bay, Homer stations"
     time = "From 2003 to present day, variable"
     included = True
     notes = "These are accessed through AOOS portal/ERDDAP server."
@@ -1523,23 +1606,16 @@ def moorings_kbnerr(slug):
     summary = f"""Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
     
 Station mappings from AOOS/ERDDAP to KBNERR station list:
-nerrs_kacsdwq :: kacsdwq
-nerrs_kachdwq :: kachdwq
-homer-dolphin-surface-water-q :: kachswq
-nerrs_kach3wq :: kach3wq
-nerrs_kacsswq :: kacsswq
-
-cdmo_nerrs_bearcove :: This is a different station than kacbcwq, which was active 2002-2003 while this is in 2015. They are also in different locations.
+* nerrs_kachdwq :: kachdwq
+* homer-dolphin-surface-water-q :: kachswq
+* nerrs_kach3wq :: kach3wq
     
 More information: https://accs.uaa.alaska.edu/kbnerr/
 """
 
-    stations = ["cdmo_nerrs_bearcove",
-                "nerrs_kachdwq",
+    stations = ["nerrs_kachdwq",
                 "homer-dolphin-surface-water-q",
-                "nerrs_kacsdwq",
-                "nerrs_kach3wq",
-                "nerrs_kacsswq"]
+                "nerrs_kach3wq",]
     open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
@@ -1616,6 +1692,204 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
     save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
+def adcp_moored_noaa_coi_2005(slug):
+    project_name = "Cook Inlet 2005 Current Survey"
+    overall_desc = "NOAA ADCP survey Cook Inlet: 2005"
+    time = "2005, each for one or a few months"
+    included = True
+    notes = ""
+    maptype = "point"
+    featuretype = "timeSeriesProfile"
+    header_names = None
+    map_description = "Moored ADCPs"
+    summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+"""
+
+    station_list = ["COI0501", "COI0502", "COI0503", "COI0504", "COI0505",
+                "COI0506", "COI0507", "COI0508", "COI0509", "COI0510", "COI0511",
+                "COI0512", "COI0513", "COI0514", "COI0515", "COI0516", "COI0517",
+                "COI0518", "COI0519", "COI0520", "COI0521", "COI0522", "COI0523",
+                "COI0524"]
+    
+    cat = intake.open_coops_cat(station_list, include_source_metadata=True, description=overall_desc,
+                                name=slug, process_adcp=True)
+    
+    source_names = chr.src.utils.get_source_names(cat)
+    for source_name in source_names:
+        md_new = {"minLongitude": cat[source_name].metadata["lon"],
+                    "maxLongitude": cat[source_name].metadata["lon"],
+                    "minLatitude": cat[source_name].metadata["lat"],
+                    "maxLatitude": cat[source_name].metadata["lat"],
+                    "maptype": maptype,
+                    "featuretype": featuretype,}
+        md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+        cat[source_name].describe()["metadata"].update(md_new)
+
+    # more catalog-level metadata
+    cat_meta = {"map_description": map_description,
+                "summary": summary,
+                "header_names": header_names,
+                "project_name": project_name,
+                "time": time,
+                "included": included,
+                "notes": notes,
+                "featuretype": featuretype,
+                }
+    cat_meta.update(cat.metadata)
+    cat.metadata.update(cat_meta)
+    cat.save(chr.CAT_NAME(slug))
+
+
+def adcp_moored_noaa_coi_other(slug):
+    project_name = "Cook Inlet 2002/2003/2004/2008/2012 Current Survey"
+    overall_desc = "NOAA ADCP survey Cook Inlet: multiple years"
+    time = "From 2002 to 2012, each for one or a few months"
+    included = True
+    notes = ""
+    maptype = "point"
+    featuretype = "timeSeriesProfile"
+    header_names = None
+    map_description = "Moored ADCPs"
+    summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+"""
+
+    station_list = ["COI0206", "COI0207", "COI0213", "COI0301", "COI0302", "COI0303",
+                "COI0306", "COI0307", "COI0418", "COI0419", "COI0420", "COI0421",
+                "COI0422", "COI0801", "COI0802", "COI1201", "COI1202", "COI1203",
+                "COI1204", "COI1205", "COI1207", "COI1208", "COI1209", "COI1210"]
+    
+    cat = intake.open_coops_cat(station_list, include_source_metadata=True, description=overall_desc,
+                                name=slug, process_adcp=True)
+    
+    source_names = chr.src.utils.get_source_names(cat)
+    for source_name in source_names:
+        md_new = {"minLongitude": cat[source_name].metadata["lon"],
+                    "maxLongitude": cat[source_name].metadata["lon"],
+                    "minLatitude": cat[source_name].metadata["lat"],
+                    "maxLatitude": cat[source_name].metadata["lat"],
+                    "maptype": maptype,
+                    "featuretype": featuretype,}
+        md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+        cat[source_name].describe()["metadata"].update(md_new)
+
+    # more catalog-level metadata
+    cat_meta = {"map_description": map_description,
+                "summary": summary,
+                "header_names": header_names,
+                "project_name": project_name,
+                "time": time,
+                "included": included,
+                "notes": notes,
+                "featuretype": featuretype,
+                }
+    cat_meta.update(cat.metadata)
+    cat.metadata.update(cat_meta)
+    cat.save(chr.CAT_NAME(slug))
+
+
+def adcp_moored_noaa_kod_1(slug):
+    project_name = "Kodiak Island 2009 Current Survey (1)"
+    overall_desc = "NOAA ADCP survey Kodiak Island: Set 1"
+    time = "2009, each for one or a few months"
+    included = True
+    notes = ""
+    maptype = "point"
+    featuretype = "timeSeriesProfile"
+    header_names = None
+    map_description = "Moored ADCPs"
+    summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+"""
+
+    station_list = ["KOD0901", "KOD0902", "KOD0903", "KOD0904", "KOD0905", "KOD0906", "KOD0907", 
+                    "KOD0910", "KOD0911", "KOD0912", "KOD0913", 
+                    # "KOD0914", "KOD0915", "KOD0916", "KOD0917", "KOD0918", "KOD0919", "KOD0920",  # just outside domain
+                    "KOD0921", "KOD0922", "KOD0923", "KOD0924", "KOD0925", ]
+                    # "KOD0924", "KOD0925", "KOD0926", "KOD0927", "KOD0928", "KOD0929", "KOD0930", 
+                    # "KOD0931", "KOD0932", "KOD0933", "KOD0934", "KOD0935", "KOD0936", "KOD0937", 
+                    # "KOD0938", "KOD0939", "KOD0940", "KOD0941", "KOD0942", "KOD0943", "KOD0944", ]
+    
+    cat = intake.open_coops_cat(station_list, include_source_metadata=True, description=overall_desc,
+                                name=slug, process_adcp=True)
+    
+    source_names = chr.src.utils.get_source_names(cat)
+    for source_name in source_names:
+        md_new = {"minLongitude": cat[source_name].metadata["lon"],
+                    "maxLongitude": cat[source_name].metadata["lon"],
+                    "minLatitude": cat[source_name].metadata["lat"],
+                    "maxLatitude": cat[source_name].metadata["lat"],
+                    "maptype": maptype,
+                    "featuretype": featuretype,}
+        md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+        cat[source_name].describe()["metadata"].update(md_new)
+
+    # more catalog-level metadata
+    cat_meta = {"map_description": map_description,
+                "summary": summary,
+                "header_names": header_names,
+                "project_name": project_name,
+                "time": time,
+                "included": included,
+                "notes": notes,
+                "featuretype": featuretype,
+                }
+    cat_meta.update(cat.metadata)
+    cat.metadata.update(cat_meta)
+    cat.save(chr.CAT_NAME(slug))
+
+
+def adcp_moored_noaa_kod_2(slug):
+    project_name = "Kodiak Island 2009 Current Survey (2)"
+    overall_desc = "NOAA ADCP survey Kodiak Island: Set 2"
+    time = "2009, each for one or a few months"
+    included = True
+    notes = ""
+    maptype = "point"
+    featuretype = "timeSeriesProfile"
+    header_names = None
+    map_description = "Moored ADCPs"
+    summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+"""
+
+    station_list = [
+                    # "KOD0901", "KOD0902", "KOD0903", "KOD0904", "KOD0905", "KOD0906", "KOD0907", 
+                    # "KOD0910", "KOD0911", "KOD0912", "KOD0913", "KOD0914", "KOD0915", "KOD0916", 
+                    # "KOD0917", "KOD0918", "KOD0919", "KOD0920", "KOD0921", "KOD0922", "KOD0923", 
+                    "KOD0926", "KOD0927", "KOD0928", "KOD0929", "KOD0930", 
+                    "KOD0931", "KOD0932", "KOD0933", "KOD0934", "KOD0935", "KOD0936", "KOD0937", 
+                    "KOD0938", "KOD0939", "KOD0940", "KOD0941", "KOD0942", "KOD0943", "KOD0944", ]
+    
+    cat = intake.open_coops_cat(station_list, include_source_metadata=True, description=overall_desc,
+                                name=slug, process_adcp=True)
+    
+    source_names = chr.src.utils.get_source_names(cat)
+    for source_name in source_names:
+        md_new = {"minLongitude": cat[source_name].metadata["lon"],
+                    "maxLongitude": cat[source_name].metadata["lon"],
+                    "minLatitude": cat[source_name].metadata["lat"],
+                    "maxLatitude": cat[source_name].metadata["lat"],
+                    "maptype": maptype,
+                    "featuretype": featuretype,}
+        md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+        cat[source_name].describe()["metadata"].update(md_new)
+
+    # more catalog-level metadata
+    cat_meta = {"map_description": map_description,
+                "summary": summary,
+                "header_names": header_names,
+                "project_name": project_name,
+                "time": time,
+                "included": included,
+                "notes": notes,
+                "featuretype": featuretype,
+                }
+    cat_meta.update(cat.metadata)
+    cat.metadata.update(cat_meta)
+    cat.save(chr.CAT_NAME(slug))
+   
 
 # Generate all catalogs
 if __name__ == "__main__":

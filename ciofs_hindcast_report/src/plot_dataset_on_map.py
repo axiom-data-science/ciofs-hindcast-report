@@ -535,9 +535,13 @@ def moorings_noaa(slug):
                                 project_name="",
                                 label_with_station_name=True, 
                                 extent=chr.extent_whole,
+                                legend=True,
+                                colors_data=select_colorsdata(),
+                                annotate=False,
+                                markersize=7,
                                 # two_maps=two_maps,
                                 # dd=dds, 
-                                # annotate_fontsize=10, 
+                                annotate_fontsize=10, 
                                 figsize=chr.figsize, 
                                 map_font_size=chr.map_font_size)
 
@@ -559,12 +563,31 @@ def moorings_aoos_cdip(slug):
                                 map_font_size=chr.map_font_size)
 
 
-def moorings_kbnerr(slug):
+def moorings_kbnerr_bear_cove_seldovia(slug):
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152, -150.5, 59, 60],
                     width_ratios=[0.9, 1.1])
     
-    dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
+    dds = [(-20000, 5000), (0, -6000), (0, 4000)]
+    # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
+
+    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
+                                project_name="",
+                                label_with_station_name=True, 
+                                two_maps=two_maps,
+                                dd=dds, 
+                                # annotate_fontsize=10, 
+                                figsize=chr.figsize, 
+                                map_font_size=chr.map_font_size)
+
+
+def moorings_kbnerr_homer(slug):
+
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152, -150.5, 59, 60],
+                    width_ratios=[0.9, 1.1])
+    
+    dds = [(-10000, 11000), (0, -6000), (0, 4000), ]
+    # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
                                 project_name="",
@@ -588,10 +611,6 @@ def moorings_kbnerr_historical(slug):
     # strip white space
     sites["Station Code"] = sites["Station Code"].str.strip()
     station_names = ["kacbcwq", "kacdlwq", "kachowq", "kacpgwq", "kacsewq"]
-    loc = "https://researchworkspace.com/files/40335130/sampling_stations.csv"
-    sites = pd.read_csv(loc, encoding = "ISO-8859-1")
-    # strip white space
-    sites["Station Code"] = sites["Station Code"].str.strip()
     sites[" Longitude"] *= -1
     ll = sites[sites["Station Code"].isin(station_names)][["Latitude "," Longitude"]].values.tolist()
     lat, lon = zip(*ll)
@@ -609,3 +628,116 @@ def moorings_kbnerr_historical(slug):
                                 #   colors_data=select_colorsdata(),
                                   annotate=True,
                            )
+
+
+def adcp_moored_noaa_coi_2005(slug):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+    maps = []
+    for source_name in source_names:
+        maps.append([cat[source_name].metadata["minLongitude"],
+                            cat[source_name].metadata["maxLongitude"],
+                            cat[source_name].metadata["minLatitude"],
+                            cat[source_name].metadata["maxLatitude"],
+                            source_name[5:],
+                            # source_name.replace("05","YY"),
+                            cat[source_name].metadata["maptype"]])
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.6, -151, 58.4, 61],
+                    width_ratios=[1, 1])
+    dds = [(-10000,10000), (0,10000), (5000, 10000), (0,0),(0,0),(0,0),(0,0),(0,0), 
+           (0,0),(0,0),(0,0),(0,0),(0,0), (0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),
+           (0,-10000), (0,10000), (5000,5000), (10000,0)]
+    omsa.plot.map.plot_map(np.asarray(maps),
+                           figname=f"Map of {slug}",
+                                  label_with_station_name=True, 
+                                  two_maps=two_maps,
+                                  figsize=chr.figsize, 
+                                  map_font_size=chr.map_font_size,
+                                  legend=False,
+                                  annotate_fontsize=10,
+                                  dd=dds,
+                                  annotate=True,
+                                  tight_layout=True,
+                           )
+
+
+def adcp_moored_noaa_coi_other(slug):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+    maps = []
+    for source_name in source_names:
+        maps.append([cat[source_name].metadata["minLongitude"],
+                            cat[source_name].metadata["maxLongitude"],
+                            cat[source_name].metadata["minLatitude"],
+                            cat[source_name].metadata["maxLatitude"],
+                            source_name,
+                            # source_name.replace("05","YY"),
+                            cat[source_name].metadata["maptype"]])
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.5, -149.5, 58.83, 61.33],
+                    width_ratios=[1, 1])
+    # dds = [(-10000,10000), (0,10000), (5000, 10000), (0,0),(0,0),(0,0),(0,0),(0,0), 
+    #        (0,0),(0,0),(0,0),(0,0),(0,0), (0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),
+    #        (0,-10000), (0,10000), (5000,5000), (10000,0)]
+    omsa.plot.map.plot_map(np.asarray(maps),
+                           figname=f"Map of {slug}",
+                                  label_with_station_name=True, 
+                                  two_maps=two_maps,
+                                  figsize=chr.figsize, 
+                                  map_font_size=chr.map_font_size,
+                                  legend=True,
+                                  annotate_fontsize=9,
+                                #   dd=dds,
+                                  annotate=False,
+                                  tight_layout=True,
+                           colors_data=select_colorsdata(),
+                           loc = "lower right",
+                           markersize=8,
+                           )
+
+
+def adcp_moored_noaa_kod_1(slug):
+
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-155.75, -152, 56.6, 57.9],
+                    width_ratios=[0.4, 1.6])
+    
+    # dds = [(-10000, 11000), (0, -6000), (0, 4000), ]
+    # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
+
+    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
+                                project_name="",
+                                label_with_station_name=True, 
+                                two_maps=two_maps,
+                                # dd=dds, 
+                                # annotate_fontsize=10, 
+                                legend=True,
+                                annotate=False,
+                                loc="upper left",
+                                colors_data=select_colorsdata(),
+                                markersize=8,
+                                figsize=chr.figsize, 
+                                map_font_size=chr.map_font_size)
+
+
+def adcp_moored_noaa_kod_2(slug):
+
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-154.0, -151.75, 57.8, 58.75],
+                    width_ratios=[0.4, 1.6])
+    
+    dds = [(-10000, 11000), (0, -6000), (0, 4000), ]
+    # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
+
+    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
+                                project_name="",
+                                label_with_station_name=True, 
+                                two_maps=two_maps,
+                                # dd=dds, 
+                                # annotate_fontsize=10, 
+                                legend=True,
+                                annotate=False,
+                                loc="upper left",
+                                colors_data=select_colorsdata(),
+                                markersize=8,
+                                figsize=chr.figsize, 
+                                map_font_size=chr.map_font_size)

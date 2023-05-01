@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from ciofs_hindcast_report.code.create_river_roms import *
+from ciofs_hindcast_report.src.create_river_roms import *
 
 import ciofs_hindcast_report as chr
 ```

@@ -31,6 +31,17 @@ To make new report pages:
 
 ### Building the book
 
+There is now a script to handle the building: `run.sh` that you can use to run all the following steps EXCEPT you need to choose what level of cleaning you do ahead of time. For a full restart, delete all of the catalog files, clean all with 
+
+    >>> jupyter-book clean --all ciofs_hindcast_report/ 
+
+then run the script:
+
+    >>> ./run.sh 
+
+--- 
+
+Instructions for when not using `run.sh`:
 1. For our workflow, if you want to run code when the report is compiled, convert your notebook to a Myst NB file with the following to get a myst-flavored markdown file. (You can also convert the other way with `jupytext MARKDOWN.md --to ipynb`.)
    
     `jupytext NOTEBOOK_NAME.ipynb --to myst` 
