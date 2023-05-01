@@ -1800,6 +1800,8 @@ def adcp_moored_noaa_kod_1(slug):
     header_names = None
     map_description = "Moored ADCPs"
     summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+
+Stations "KOD0914", "KOD0915", "KOD0916", "KOD0917", "KOD0918", "KOD0919", "KOD0920" are not included because they are just outside or along the model domain boundary.
 """
 
     station_list = ["KOD0901", "KOD0902", "KOD0903", "KOD0904", "KOD0905", "KOD0906", "KOD0907", 

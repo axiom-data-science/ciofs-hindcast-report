@@ -1,6 +1,9 @@
 # CIOFS Hindcast Report
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by/4.0/)
 
 Report for running and validating the CIOFS hindcast simulation and comparing with NWGOA
+
+--------
 
 ## Usage
 
