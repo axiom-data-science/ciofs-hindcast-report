@@ -1,4 +1,5 @@
 name: ciofs2
+channel_priority: strict
 channels:
   - conda-forge
   - pyviz
@@ -12,7 +13,7 @@ dependencies:
   - dask
   - dataretrieval
   # - datashader  # need dev github version of holoviews to avoid nanosecond bug using datashader with ADCP plots: https://github.com/holoviz/holoviews/pull/5662
-  - geoviews
+  # - geoviews
   - ghp-import
   - hvplot
   # - intake-axds  # going to install locally
@@ -27,6 +28,7 @@ dependencies:
   - xarray
   # - xcmocean
   - pip:
+    - datashader
     - jupyter_bokeh
     - ocean-model-skill-assessor
     - noaa_coops  # should be included with intake-coops in the future

@@ -1,5 +1,7 @@
 import pandas as pd
 import xarray as xr
+import pyproj
+import numpy as np
 
 
 def get_source_names(cat):
@@ -29,3 +31,13 @@ def resample(dd, to="5T"):
         # as coordinates afterward.
         # Not sure this solution will work for gridded datasets — might need another case for that
         return dd.reset_coords([zkey, ykey, xkey]).resample({tkey: to}).mean(keep_attrs=True).assign_coords({xkey: dd[xkey], ykey: dd[ykey], zkey: dd[zkey]})
+    
+
+def calculate_distance(lons, lats):
+    """Calculate distance (km), esp for transects."""
+
+    G = pyproj.Geod(ellps='WGS84')
+    distance = G.inv(lons[:-1], lats[:-1], lons[1:], lats[1:], )[2]
+    distance = np.hstack((np.array([0]), distance))
+    distance = distance.cumsum()/1000 # km
+    return distance

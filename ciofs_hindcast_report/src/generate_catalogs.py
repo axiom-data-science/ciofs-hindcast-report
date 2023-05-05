@@ -140,10 +140,9 @@ def save_catalog(entries, cat_name, cat_desc=None, cat_meta=None):
 
 
 def ctd_profiles_gwa(slug):
-    # make catalog
     slug = "ctd_profiles_gwa"
     project_name = "CTD profiles 2012-2021 - GWA"  
-    overall_desc = "GWA: Six repeat transects in Cook Inlet"
+    overall_desc = "CTD Transects (GWA): Six repeat transects in Cook Inlet"
     time = "Quarterly repeats from 2012 to 2021"
     included = True
     notes = "Not used in the NWGOA model/data comparison."
@@ -207,8 +206,8 @@ Project files and further description can be found here: https://gulf-of-alaska.
             # select transect/date to get metadata
             ddf = getattr(chr.src.process, slug)(df, transect, date)
 
-            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="T", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", ddf, x="T", y="Z", flip_yaxis=True),}}
+            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
             entries[name] = {"description": f"Transect {transect}, {date}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
@@ -236,9 +235,8 @@ Project files and further description can be found here: https://gulf-of-alaska.
 
 
 def ctd_profiles_2005_noaa(slug):
-
     project_name = "CTD profiles 2005 - NOAA"
-    overall_desc = "NOAA: Single CTD profiles across Cook Inlet"
+    overall_desc = "CTD Profiles (NOAA): Single CTD profiles across Cook Inlet"
     time = "One-off CTD profiles in June and July 2005"
     included = True
     notes = ""
@@ -310,9 +308,8 @@ def ctd_profiles_2005_noaa(slug):
 
 
 def ctd_profiles_usgs_boem(slug):
-    # slug = "ctd_profiles_usgs_boem"
     project_name = "CTD profiles - USGS BOEM"
-    overall_desc = "USGS BOEM: Single CTD profiles across Cook Inlet"
+    overall_desc = "CTD Profiles (USGS BOEM): Single CTD profiles across Cook Inlet"
     time = "One-off CTD profiles from 2016 to 2021 in July"
     included = True
     notes = ""
@@ -379,9 +376,8 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
 
 
 def ctd_towed_otf_kbnerr(slug):
-
     project_name = "CTD Towed 2003 - OTF KBNERR"
-    overall_desc = "OTF KBNERR: Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths"
+    overall_desc = "Towed CTD (OTF KBNERR): Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths"
     time = "July 2003, 5min sampling frequency"
     included = True
     notes = "Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency."
@@ -416,8 +412,8 @@ def ctd_towed_otf_kbnerr(slug):
         df = pd.read_csv(url, **csv_kwargs)
         df = getattr(chr.src.process, slug)(df)
 
-        metadata = {"plots": {"salt": scatter_dict("salt", df, x="T", y="Z", flip_yaxis=True),
-                            "temp": scatter_dict("temp", df, x="T", y="Z", flip_yaxis=True),
+        metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
+                            "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),
                             "map": map_dict(df),}}
         metadata.update(add_metadata(df, maptype, featuretype))
         entries[name] = {"description": f"File {name}",
@@ -446,9 +442,8 @@ def ctd_towed_otf_kbnerr(slug):
     
 
 def ctd_towed_ferry_noaa_pmel(slug):
-    
     project_name = "CTD Towed 2004-2008 Ferry in-line - NOAA PMEL"
-    overall_desc = "NOAA PMEL: Towed CTD on ferry at nominal 4m depth"
+    overall_desc = "Underway CTD (NOAA PMEL): Towed CTD on ferry at nominal 4m depth"
     time = "Continuous 2004 to 2008, 5min sampling frequency"
     included = True
     notes = "The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency."
@@ -552,9 +547,8 @@ Archive: https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noa
 
 
 def ctd_profiles_otf_kbnerr(slug):
-
     project_name = "CTD profiles 2003-2006 - OTF KBNERR"
-    overall_desc = "OTF KBNERR: Repeat CTD transect from Anchor Point in Cook Inlet"
+    overall_desc = "CTD Transect (OTF KBNERR): Repeat CTD transect from Anchor Point in Cook Inlet"
     time = "Daily in July, 2003 to 2006"
     included = True
     notes = "These data were not included in the NWGOA model/data comparison"
@@ -603,8 +597,8 @@ Project description: https://evostc.state.ak.us/restoration-projects/project-sea
                 continue
             # ddf = df.set_index("date_time").loc[f"{year}-{month}-{day}"].reset_index()
 
-            metadata = {"plots": {"salt": scatter_dict("salt", df, x="T", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", df, x="T", y="Z", flip_yaxis=True),}}
+            metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
+                                "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),}}
             # metadata.update({"minLongitude": minlon, "minLatitude": minlat, 
             #                  "maxLongitude": maxlon, "maxLatitude": maxlat,
             #                  "minTime": str(ddf.cf["T"].values.min()),
@@ -638,7 +632,7 @@ Project description: https://evostc.state.ak.us/restoration-projects/project-sea
 
 def ctd_profiles_cmi_uaf(slug):
     project_name = "CTD profiles 2004-2005 - CMI UAF"
-    overall_desc = "CMI UAF: CTD transect from East Foreland Lighthouse in Cook Inlet"
+    overall_desc = "CTD Transect (CMI UAF): CTD transect from East Foreland Lighthouse in Cook Inlet"
     time = "10 cruises, approximately monthly for summer months, in 2004 and 2005"
     included = True
     notes = "Used in the NWGOA model/data comparison."
@@ -657,7 +651,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 """
 
     entries = {}
@@ -675,8 +669,8 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
         ddf = getattr(chr.src.process, slug)(df, cruise)
         name = f"Cruise-{str(cruise).zfill(2)}_{str(ddf.cf['T'].iloc[0].date())}"
 
-        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="T", y="Z", flip_yaxis=True),
-                            "temp": scatter_dict("temp", ddf, x="T", y="Z", flip_yaxis=True),}}
+        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                            "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
 
         entries[name] = {"description": f"Cruise {cruise}",
@@ -705,9 +699,8 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 def ctd_profiles_cmi_kbnerr(slug):
-    
     project_name = "CTD profiles 2004-2006 - CMI KBNERR"
-    overall_desc = "CMI KBNERR: Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet"
+    overall_desc = "CTD Transects, 1 Moored CTD (CMI KBNERR): Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet"
     time = "From 2004 to 2006"
     included = True
     notes = "Used in the NWGOA model/data comparison."
@@ -737,7 +730,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 """
@@ -759,8 +752,8 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
     # sue_shelikof
     name, ind = "sue_shelikof", 2
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
-    metadata = {"plots": {"salt": scatter_dict("salt", df, x="T", y="Z", flip_yaxis=True),
-                        "temp": scatter_dict("temp", df, x="T", y="Z", flip_yaxis=True),}}
+    metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
+                        "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),}}
     metadata.update(add_metadata(df, maptype, featuretype))
     entries[name] = {"description": f"{name} line",
                     "driver": "csv",
@@ -785,15 +778,24 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
     cruises = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     # stations making up lines/transects
     lines = {1: np.arange(1,23).tolist(),
-            2: np.arange(23,29).tolist(),
+            2: np.arange(23,39).tolist(),
             3: np.arange(39,56).tolist(),
             4: np.arange(56,66).tolist(),
             6: np.arange(90,118).tolist(),
             7: np.arange(66,90).tolist(),
             }
+    # easier to use this way
+    inverse_lines = { v: k for k, l in lines.items() for v in l }
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
     df.cf["longitude"] -= 360
     df = df.sort_values("date_time").reset_index(drop=True)
+    df["line"] = [inverse_lines[station] for station in df["Station"]]
+    
+    # data to delete:
+    # Line 4 in May 2004 is repeated under Cruise 1 when it should only be under Cruise 2
+    inds = df.index[(df["date_time"] > "2004-05") & (df["date_time"] < "2004-06") & (df["Cruise"] == 1) & (df["line"] == 4)]
+    df.drop(index=inds, inplace=True)
+    
     entries[f"{name}_base"] = {"description": f"Base for {name} sources",
                                "driver": "csv",
                                "args": {"urlpath": urls[ind],
@@ -807,8 +809,8 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
             # some cruise-line combinations don't exist
             if len(ddf)==0:
                 continue
-            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="T", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", ddf, x="T", y="Z", flip_yaxis=True),}}
+            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
             entries[name_line] = {"description": f"{name_line}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
@@ -832,9 +834,8 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 def ctd_moored_circac(slug):
-    
     project_name = "CTD Moored 2006 - CIRCAC"
-    overall_desc = "CIRCAC: Central Cook Inlet Mooring"
+    overall_desc = "Mooring (CIRCAC): Central Cook Inlet Mooring"
     time = "Two weeks in August 2006, 15 min sampling"
     included = True
     notes = ""
@@ -855,7 +856,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 
@@ -900,7 +901,7 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 def ctd_moored_kbnerr(slug):
     
     project_name = "CTD Moored 2006-2008 - KBNERR"
-    overall_desc = "KBNERR: Lower Cook Inlet Mooring"
+    overall_desc = "Mooring (KBNERR): Lower Cook Inlet Mooring"
     time = "Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling"
     included = True
     notes = ""
@@ -919,7 +920,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 
@@ -967,7 +968,7 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 def ctd_time_series_uaf(slug):
     project_name = "CTD time series UAF"
-    overall_desc = "UAF: Repeat CTD profile transect along an east-west section in central Cook Inlet"
+    overall_desc = "CTD Transects (UAF): Repeat CTD profile transect along an east-west section in central Cook Inlet"
     time = "26-hour period on 9-10 August 2003"
     included = True
     notes = "Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison."
@@ -999,8 +1000,8 @@ Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-c
     for transect in transects:
         name = f"Transect_{str(transect).zfill(2)}"
         ddf = df[df["transect"] == transect]
-        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="T", y="Z", flip_yaxis=True),
-                              "temp": scatter_dict("temp", ddf, x="T", y="Z", flip_yaxis=True),}}
+        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                              "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         entries[name] = {"description": f"{name}",
                          "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
@@ -1028,9 +1029,8 @@ Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-c
 
 
 def ctd_profiles_2005_osu(slug):
-    
     project_name = "CTD profiles 2005 - OSU"
-    overall_desc = "OSU: Time series of CTD profiles at several locations in Cook Inlet"
+    overall_desc = "Moored CTDs (OSU): Time series of CTD profiles at several locations in Cook Inlet"
     time = "June 2005"
     included = False
     notes = "Locations given are too low resolution making them incorrectly on land."
@@ -1108,7 +1108,7 @@ def ctd_profiles_2005_osu(slug):
 
 def ctd_towed_gwa(slug):
     project_name = "CTD Towed 2017-2019 - GWA"
-    overall_desc = "GWA: Towed CTD at nominal 7m depth"
+    overall_desc = "Underway CTD (GWA): Towed CTD at nominal 7m depth"
     time = "Approximately monthly in summer from 2017 to 2020, 5min sampling frequency"
     included = True
     notes = "Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min."
@@ -1202,7 +1202,7 @@ Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d
 
 def temp_towed_gwa(slug):
     project_name = "Temperature towed 2011-2016 - GWA"
-    overall_desc = "GWA: Towed CTD at nominal 7m depth, temperature only"
+    overall_desc = "Underway CTD (GWA): Towed CTD at nominal 7m depth, temperature only"
     time = "Approximately monthly in summer from 2011 to 2016, 5min sampling frequency"
     included = True
     notes = "Converted some local times, ship track outside domain is not included."
@@ -1312,7 +1312,7 @@ Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d
 
 def surface_otf_adfg(slug):
     project_name = "surface Temp Sal - OTF ADF&G"
-    overall_desc = "OTF ADF&G: Long term station sampling"
+    overall_desc = "Station Sampling (OTF ADF&G): Long term station sampling"
     time = "Daily sampling mostly in July 1979 to 2021"
     included = False
     notes = "Not used because no times associated with data."
@@ -1469,8 +1469,8 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
 
 def moorings_aoos_cdip(slug):
     project_name = "Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)"
-    overall_desc = "CDIP Buoys: Lower Cook Inlet, Kodiak, Central Cook Inlet"
-    time = "From , variable"
+    overall_desc = "Moorings (CDIP): Lower Cook Inlet, Kodiak, Central Cook Inlet"
+    time = "From 2011 to 2023, variable"
     included = True
     notes = ""
     maptype = "point"
@@ -1491,7 +1491,7 @@ def moorings_aoos_cdip(slug):
 
 def moorings_noaa(slug):
     project_name = "Moorings from NOAA"
-    overall_desc = "NOAA Moorings: Miscellaneous locations"
+    overall_desc = "Moorings (NOAA): Miscellaneous locations"
     time = "From 1999 (and earlier) to 2023, variable"
     included = True
     notes = ""
@@ -1523,7 +1523,7 @@ Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Se
 
 def moorings_nps(slug):
     project_name = "Moorings from National Parks Service (NPS)"
-    overall_desc = "NPS Moorings: Chinitna Bay and Aguchik Island, Cook Inlet"
+    overall_desc = "Moorings (NPS): Chinitna Bay and Aguchik Island, Cook Inlet"
     time = "From 2018 to 2019, variable"
     included = True
     notes = ""
@@ -1543,7 +1543,7 @@ def moorings_nps(slug):
 
 def moorings_uaf(slug):
     project_name = "Moorings from University of Alaska Fairbanks (UAF)"
-    overall_desc = "UAF Moorings: Kodiak Island and Peterson Bay, Cook Inlet"
+    overall_desc = "Moorings (UAF): Kodiak Island and Peterson Bay, Cook Inlet"
     time = "From 2013 to present, variable"
     included = True
     notes = ""
@@ -1565,7 +1565,7 @@ def moorings_uaf(slug):
     
 def moorings_kbnerr_bear_cove_seldovia(slug):
     project_name = "Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
-    overall_desc = "KBNERR Moorings: Kachemak Bay, Bear Cove and Seldovia"
+    overall_desc = "Moorings (KBNERR): Kachemak Bay, Bear Cove and Seldovia"
     time = "From 2004 to present day, variable"
     included = True
     notes = "These are accessed through AOOS portal/ERDDAP server."
@@ -1595,7 +1595,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
     
 def moorings_kbnerr_homer(slug):
     project_name = "Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
-    overall_desc = "KBNERR Moorings: Kachemak Bay, Homer stations"
+    overall_desc = "Moorings (KBNERR): Kachemak Bay, Homer stations"
     time = "From 2003 to present day, variable"
     included = True
     notes = "These are accessed through AOOS portal/ERDDAP server."
@@ -1624,7 +1624,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
     
 def moorings_kbnerr_historical(slug):
     project_name = "Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
-    overall_desc = "Historical KBNERR Moorings: Kachemak Bay"
+    overall_desc = "Moorings (KBNERR): Historical, Kachemak Bay"
     time = "From 2001 to 2003, variable"
     included = True
     notes = "These are accessed from Research Workspace."
@@ -1694,7 +1694,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
 
 def adcp_moored_noaa_coi_2005(slug):
     project_name = "Cook Inlet 2005 Current Survey"
-    overall_desc = "NOAA ADCP survey Cook Inlet: 2005"
+    overall_desc = "Moored ADCP (NOAA): ADCP survey Cook Inlet 2005"
     time = "2005, each for one or a few months"
     included = True
     notes = ""
@@ -1743,7 +1743,7 @@ def adcp_moored_noaa_coi_2005(slug):
 
 def adcp_moored_noaa_coi_other(slug):
     project_name = "Cook Inlet 2002/2003/2004/2008/2012 Current Survey"
-    overall_desc = "NOAA ADCP survey Cook Inlet: multiple years"
+    overall_desc = "Moored ADCP (NOAA): ADCP survey Cook Inlet, multiple years"
     time = "From 2002 to 2012, each for one or a few months"
     included = True
     notes = ""
@@ -1791,7 +1791,7 @@ def adcp_moored_noaa_coi_other(slug):
 
 def adcp_moored_noaa_kod_1(slug):
     project_name = "Kodiak Island 2009 Current Survey (1)"
-    overall_desc = "NOAA ADCP survey Kodiak Island: Set 1"
+    overall_desc = "Moored ADCP (NOAA): ADCP survey Kodiak Island, Set 1"
     time = "2009, each for one or a few months"
     included = True
     notes = ""
@@ -1844,7 +1844,7 @@ Stations "KOD0914", "KOD0915", "KOD0916", "KOD0917", "KOD0918", "KOD0919", "KOD0
 
 def adcp_moored_noaa_kod_2(slug):
     project_name = "Kodiak Island 2009 Current Survey (2)"
-    overall_desc = "NOAA ADCP survey Kodiak Island: Set 2"
+    overall_desc = "Moored ADCP (NOAA): ADCP survey Kodiak Island, Set 2"
     time = "2009, each for one or a few months"
     included = True
     notes = ""

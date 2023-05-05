@@ -97,6 +97,8 @@ vocab.make_entry("jday", ["julian", "yearday"], attr="name")  # julian or decima
 vocab.make_entry("station", ["station", "Station"], attr="name")
 vocab.make_entry("transect", ["transect","line"], attr="name")
 vocab.make_entry("cruise", ["cruise", "Cruise"], attr="name")
+vocab.make_entry("distance", ["distance"], attr="name")
+
 # vocab.make_entry("longitude", ["(?i)x?(?=.*lon)[a-z0-9]*"], attr="name")
 # vocab.make_entry("latitude", ["(?i)x?(?=.*lat)[a-z0-9]*"], attr="name")
 

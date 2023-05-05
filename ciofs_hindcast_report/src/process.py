@@ -12,7 +12,7 @@ import numpy as np
 import ciofs_hindcast_report as chr
 import xarray as xr
 
-from .utils import calculate_julian_days, resample
+from .utils import calculate_julian_days, resample, calculate_distance
 
 
 class DataFrameTransform(GenericTransform):
@@ -83,6 +83,8 @@ def ctd_profiles_gwa(df, transect, date):
     itransect = df["Transect"] == str(transect)
     dft = df.loc[itransect]
     idate = dft["Date_Time"].dt.strftime("%Y-%m-%d") == str(date)
+    dft["distance [km]"] = calculate_distance(dft.cf["longitude"], 
+                                         dft.cf["latitude"])
     return dft[idate]
 
 
@@ -107,6 +109,8 @@ def ctd_towed_otf_kbnerr(df):
     df.columns = df.columns.str.replace(r'\s', '', regex=True)
     df = df.dropna(axis=0, subset='lat').reset_index(drop=True)
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     return df
 
 
@@ -120,6 +124,8 @@ def ctd_towed_ferry_noaa_pmel(ds, yearmonth=None, doresampling=True):
     ds = xr.where(inbox, ds, np.nan)
     ds = ds.dropna(dim=ds.cf["T"].name)
     ds["jday"] = calculate_julian_days(ds.cf["T"])
+    ds["distance [km]"] = calculate_distance(ds.cf["longitude"], 
+                                         ds.cf["latitude"])
 
     if yearmonth is not None:
         year, month = yearmonth
@@ -135,6 +141,8 @@ def ctd_towed_ferry_noaa_pmel(ds, yearmonth=None, doresampling=True):
 
 
 def ctd_profiles_otf_kbnerr(df, year, day):
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                        df.cf["latitude"])
     return df.set_index("date_time").loc[f"{year}-07-{day}"].reset_index()    
 
 
@@ -160,6 +168,8 @@ def ctd_towed_gwa_2017(df):
         df.cf["T"] = df.cf["T"].dt.tz_localize("US/Alaska").dt.tz_convert("UTC").dt.tz_localize(None)
         df.rename(columns={df.cf["T"].name: df.cf["T"].name.replace("Alaska","UTC")}, inplace=True)
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     return df
 
 
@@ -172,6 +182,8 @@ def ctd_towed_gwa_2018(df, month=None):
     df[df.cf["longitude"] > -150.5] = np.nan  # discard points outside domain
     df = df.dropna().reset_index(drop=True)
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     if month is not None:
         return df.set_index(df.cf["T"].name).loc[f"2018-{month}"].reset_index()  # april, may, june, july
     else:
@@ -189,6 +201,8 @@ def ctd_towed_gwa_2019(df, month=None):
     df["depth [m]"] = 7
     df = resample(df, to="5T")
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     if month is not None:
         return df.set_index(df.cf["T"].name).loc[f"2019-{month}"].reset_index()
     else:
@@ -205,6 +219,8 @@ def ctd_towed_gwa_2020(df, month=None):
     df = df.dropna(subset="latitude_degN", axis=0).reset_index(drop=True)
     df = resample(df, to="5T")
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     if month is not None:
         return df.set_index(df.cf["T"].name).loc[f"2020-{month}"].reset_index()
     else:
@@ -221,6 +237,8 @@ def temp_towed_gwa_2011(df, month=None):
     df[df.cf["longitude"] > -150.5] = np.nan  # discard points outside domain
     df = df.dropna().sort_values(by="date_time", axis=0).reset_index(drop=True)
     df["jday"] = calculate_julian_days(df.cf["T"])
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     # temp name seems to be causing an issue
     df.rename(columns={df.cf["temp"].name: "temperature"}, inplace=True)
     df.cf["temp"] = df.cf["temp"].astype(np.float64)
@@ -250,6 +268,8 @@ def temp_towed_gwa_others(df):
     if converttoUTC:
         df.cf["T"] = df.cf["T"].dt.tz_localize("US/Alaska").dt.tz_convert("UTC").dt.tz_localize(None)
     df["depth"] = 7
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     df = df.reset_index(drop=True)
     year, month = df.cf["T"].dt.year[0], df.cf["T"].dt.month[0]
     return df.set_index(df.cf["T"].name).loc[f"{year}-{month}"].reset_index()
@@ -269,6 +289,8 @@ def add_location_columns(df, lon, lat):
 def ctd_profiles_cmi_uaf(df, cruise=None):
     df["date_time"] = pd.to_datetime(df["Month"].str.zfill(2)+df["Day"].str.zfill(2)+df["Year"]+df["Hour"].str.zfill(2)+df["Minute"].str.zfill(2), format="%m%d%Y%H%M", exact=False)
     df.drop(columns=["Month","Day","Year","Hour","Minute"], inplace=True)
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     if cruise is not None:
         return df[df["Cruise"] == cruise]
     else:
@@ -319,10 +341,18 @@ def ctd_profiles_cmi_kbnerr(df, cruise, line, stations):
     df.cf["longitude"] -= 360
     df["line"] = line
     df = df.sort_values("date_time").reset_index(drop=True)
+    # data to delete:
+    # Line 4 in May 2004 is repeated under Cruise 1 when it should only be under Cruise 2
+    inds = df.index[(df["date_time"] > "2004-05") & (df["date_time"] < "2004-06") & (df["Cruise"] == 1) & (df["line"] == 4)]
+    df.drop(index=inds, inplace=True)
+
     if line == 4:
         station65lat = (df[df["Station"] == 64].cf["latitude"] + 0.0167).iloc[0]
         df.loc[df["Station"] == 65, "Latitude [degrees_north]"] = station65lat
-    return df[(df["Cruise"] == cruise) & (df.Station.isin(stations))]
+    dff = df[(df["Cruise"] == cruise) & (df.Station.isin(stations))].copy()
+    dff["distance [km]"] = calculate_distance(dff.cf["longitude"], 
+                                         dff.cf["latitude"])
+    return dff
 
 
 def ctd_time_series_uaf(df, transect=None):
@@ -340,6 +370,8 @@ def ctd_time_series_uaf(df, transect=None):
     for transectloop in transects:
         df.loc[df["Station"].isin(transects[transectloop]), "transect"] = transectloop
     df["transect"] = df["transect"].astype(int)
+    df["distance [km]"] = calculate_distance(df.cf["longitude"], 
+                                         df.cf["latitude"])
     
     if transect is not None:
         return df[df["transect"] == transect]
