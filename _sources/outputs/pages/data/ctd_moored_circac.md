@@ -8,6 +8,8 @@ jupytext:
 ---
 
 ```{code-cell}
+:tags: [remove-input]
+
 import intake
 import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
@@ -16,7 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
-# CIRCAC: Central Cook Inlet Mooring
+# Mooring (CIRCAC): Central Cook Inlet Mooring
 
 * CTD Moored 2006 - CIRCAC
 * ctd_moored_circac
@@ -35,7 +37,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 
@@ -43,11 +45,15 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 
-Dataset metadata:
-|    | Dataset           | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
-|---:|:------------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
-|  0 | ctd_moored_circac | timeSeries    |       60.7617 |       -151.505 | 2006-08-28 18:32:00 |       60.7617 |       -151.505 | 2006-08-11 23:32:00 |
-    
+<details><summary>Dataset metadata:</summary>
+
+|    | Dataset           | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                           |
+|---:|:------------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------|
+|  0 | ctd_moored_circac | timeSeries    |       60.7617 |       -151.505 | 2006-08-28 18:32:00 |       60.7617 |       -151.505 | 2006-08-11 23:32:00 | https://researchworkspace.com/files/39886029/xto_mooring_2006.txt |
+
+</details>
+
+
 
 ```{code-cell}
 cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_circac"))
@@ -65,5 +71,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_circac")("ctd_moored_circac")
         
 
 ```{code-cell}
-cat['ctd_moored_circac'].plot.data()
+:tags: [full-width]
+
+(cat['ctd_moored_circac'].plot.data()).cols(1)
 ```

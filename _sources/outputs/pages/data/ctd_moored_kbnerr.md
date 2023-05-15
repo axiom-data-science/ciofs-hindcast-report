@@ -8,6 +8,8 @@ jupytext:
 ---
 
 ```{code-cell}
+:tags: [remove-input]
+
 import intake
 import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
@@ -16,7 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
-# KBNERR: Lower Cook Inlet Mooring
+# Mooring (KBNERR): Lower Cook Inlet Mooring
 
 * CTD Moored 2006-2008 - KBNERR
 * ctd_moored_kbnerr
@@ -33,7 +35,7 @@ Co-principal Investigators: Scott Pegau Susan Saupe
 Final Report
 OCS Study MMS 2009-041
 August 2009
-Report: https://researchworkspace.com/file/39885971/2009_041.pdf
+Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 
@@ -41,12 +43,16 @@ Report: https://researchworkspace.com/file/39885971/2009_041.pdf
 
 
 
-Dataset metadata:
-|    | Dataset     | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
-|---:|:------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
-|  0 | Deployment1 | timeSeries    |       59.2027 |       -151.848 | 2006-10-28 10:22:00 |       59.2027 |       -151.848 | 2006-08-12 18:22:00 |
-|  1 | Deployment2 | timeSeries    |       59.2027 |       -151.848 | 2008-02-25 05:28:00 |       59.2027 |       -151.848 | 2007-06-20 21:00:00 |
-    
+<details><summary>Dataset metadata:</summary>
+
+|    | Dataset     | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                          |
+|---:|:------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:---------------------------------------------------------------------------------|
+|  0 | Deployment1 | timeSeries    |       59.2027 |       -151.848 | 2006-10-28 10:22:00 |       59.2027 |       -151.848 | 2006-08-12 18:22:00 | https://researchworkspace.com/files/39886044/chrome_bay_mooring_deployment_1.txt |
+|  1 | Deployment2 | timeSeries    |       59.2027 |       -151.848 | 2008-02-25 05:28:00 |       59.2027 |       -151.848 | 2007-06-20 21:00:00 | https://researchworkspace.com/files/39886045/chrome_bay_mooring_deployment_2.txt |
+
+</details>
+
+
 
 ```{code-cell}
 cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_kbnerr"))
@@ -64,12 +70,16 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
         
 
 ```{code-cell}
-cat['Deployment1'].plot.data()
+:tags: [full-width]
+
+(cat['Deployment1'].plot.data()).cols(1)
 ```
 
 ## Deployment2
         
 
 ```{code-cell}
-cat['Deployment2'].plot.data()
+:tags: [full-width]
+
+(cat['Deployment2'].plot.data()).cols(1)
 ```

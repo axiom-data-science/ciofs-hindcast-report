@@ -8,6 +8,8 @@ jupytext:
 ---
 
 ```{code-cell}
+:tags: [remove-input]
+
 import intake
 import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
@@ -16,7 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
-# USGS BOEM: Single CTD profiles across Cook Inlet
+# CTD Profiles (USGS BOEM): across Cook Inlet
 
 * CTD profiles - USGS BOEM
 * ctd_profiles_usgs_boem
@@ -31,88 +33,92 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
 
 
 
-Dataset metadata:
-|    |    Dataset | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
-|---:|-----------:|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
-|  0 | 2016102001 | profile       |       60.2743 |       -152.356 | 2016-07-17 11:16:00 |       60.2743 |       -152.356 | 2016-07-17 11:16:00 |
-|  1 | 2016106001 | profile       |       59.8774 |       -152.579 | 2016-07-18 16:13:00 |       59.8774 |       -152.579 | 2016-07-18 16:13:00 |
-|  2 | 2016120001 | profile       |       60.3062 |       -152.192 | 2016-07-17 08:33:00 |       60.3062 |       -152.192 | 2016-07-17 08:33:00 |
-|  3 | 2016122201 | profile       |       60.1779 |       -151.915 | 2016-07-17 15:56:00 |       60.1779 |       -151.915 | 2016-07-17 15:56:00 |
-|  4 | 2016123001 | profile       |       60.057  |       -152.524 | 2016-07-16 08:12:00 |       60.057  |       -152.524 | 2016-07-16 08:12:00 |
-|  5 | 2016123002 | profile       |       60.1052 |       -152.241 | 2016-07-16 11:11:00 |       60.1052 |       -152.241 | 2016-07-16 11:11:00 |
-|  6 | 2016125001 | profile       |       59.9135 |       -152.194 | 2016-07-14 14:43:00 |       59.9135 |       -152.194 | 2016-07-14 14:43:00 |
-|  7 | 2016126001 | profile       |       59.8026 |       -152.757 | 2016-07-18 19:19:00 |       59.8026 |       -152.757 | 2016-07-18 19:19:00 |
-|  8 | 2016126002 | profile       |       59.8295 |       -152.538 | 2016-07-19 11:15:00 |       59.8295 |       -152.538 | 2016-07-19 11:15:00 |
-|  9 | 2016205701 | profile       |       59.6646 |       -151.233 | 2016-07-23 14:10:00 |       59.6646 |       -151.233 | 2016-07-23 14:10:00 |
-| 10 | 2016206001 | profile       |       59.5644 |       -151.393 | 2016-07-29 10:23:00 |       59.5644 |       -151.393 | 2016-07-29 10:23:00 |
-| 11 | 2016221001 | profile       |       59.6698 |       -151.985 | 2016-07-28 11:22:00 |       59.6698 |       -151.985 | 2016-07-28 11:22:00 |
-| 12 | 2016223001 | profile       |       59.5834 |       -151.446 | 2016-07-24 09:39:00 |       59.5834 |       -151.446 | 2016-07-24 09:39:00 |
-| 13 | 2016223002 | profile       |       59.5713 |       -151.716 | 2016-07-24 12:10:00 |       59.5713 |       -151.716 | 2016-07-24 12:10:00 |
-| 14 | 2016224001 | profile       |       59.5006 |       -151.889 | 2016-07-26 11:25:00 |       59.5006 |       -151.889 | 2016-07-26 11:25:00 |
-| 15 | 2016225001 | profile       |       59.4217 |       -152.025 | 2016-07-26 18:55:00 |       59.4217 |       -152.025 | 2016-07-26 18:55:00 |
-| 16 | 2016226001 | profile       |       59.3211 |       -152.102 | 2016-07-27 10:49:00 |       59.3211 |       -152.102 | 2016-07-27 10:49:00 |
-| 17 | 2017101001 | profile       |       60.358  |       -152.214 | 2017-07-26 08:52:00 |       60.358  |       -152.214 | 2017-07-26 08:52:00 |
-| 18 | 2017103001 | profile       |       60.1284 |       -152.493 | 2017-07-25 09:49:00 |       60.1284 |       -152.493 | 2017-07-25 09:49:00 |
-| 19 | 2017120001 | profile       |       60.3292 |       -152.177 | 2017-07-26 13:12:00 |       60.3292 |       -152.177 | 2017-07-26 13:12:00 |
-| 20 | 2017122001 | profile       |       60.231  |       -152.285 | 2017-07-26 14:38:00 |       60.231  |       -152.285 | 2017-07-26 14:38:00 |
-| 21 | 2017123001 | profile       |       60.0473 |       -152.52  | 2017-07-23 07:29:00 |       60.0473 |       -152.52  | 2017-07-23 07:29:00 |
-| 22 | 2017124001 | profile       |       59.9828 |       -152.263 | 2017-07-27 10:56:00 |       59.9828 |       -152.263 | 2017-07-27 10:56:00 |
-| 23 | 2017125001 | profile       |       59.919  |       -152.27  | 2017-07-22 12:41:00 |       59.919  |       -152.27  | 2017-07-22 12:41:00 |
-| 24 | 2017125002 | profile       |       59.9439 |       -151.941 | 2017-07-22 16:08:00 |       59.9439 |       -151.941 | 2017-07-22 16:08:00 |
-| 25 | 2017201001 | profile       |       59.6637 |       -151.801 | 2017-07-31 11:03:00 |       59.6637 |       -151.801 | 2017-07-31 11:03:00 |
-| 26 | 2017204001 | profile       |       59.6447 |       -151.282 | 2017-07-20 11:57:00 |       59.6447 |       -151.282 | 2017-07-20 11:57:00 |
-| 27 | 2017205001 | profile       |       59.6727 |       -151.197 | 2017-07-19 15:35:00 |       59.6727 |       -151.197 | 2017-07-19 15:35:00 |
-| 28 | 2017206001 | profile       |       59.6599 |       -151.224 | 2017-07-19 11:39:00 |       59.6599 |       -151.224 | 2017-07-19 11:39:00 |
-| 29 | 2017207001 | profile       |       59.5196 |       -151.462 | 2017-07-20 16:40:00 |       59.5196 |       -151.462 | 2017-07-20 16:40:00 |
-| 30 | 2017212001 | profile       |       59.3781 |       -151.891 | 2017-07-28 17:05:00 |       59.3781 |       -151.891 | 2017-07-28 17:05:00 |
-| 31 | 2017214001 | profile       |       59.5773 |       -151.363 | 2017-07-18 15:56:00 |       59.5773 |       -151.363 | 2017-07-18 15:56:00 |
-| 32 | 2017220001 | profile       |       59.7454 |       -151.998 | 2017-07-31 14:42:00 |       59.7454 |       -151.998 | 2017-07-31 14:42:00 |
-| 33 | 2017223001 | profile       |       59.5842 |       -151.512 | 2017-07-30 10:12:00 |       59.5842 |       -151.512 | 2017-07-30 10:12:00 |
-| 34 | 2017224001 | profile       |       59.4971 |       -151.843 | 2017-07-30 17:34:00 |       59.4971 |       -151.843 | 2017-07-30 17:34:00 |
-| 35 | 2017225001 | profile       |       59.3998 |       -152.119 | 2017-07-28 12:41:00 |       59.3998 |       -152.119 | 2017-07-28 12:41:00 |
-| 36 | 2018104001 | profile       |       60.0669 |       -152.537 | 2018-07-14 19:31:00 |       60.0669 |       -152.537 | 2018-07-14 19:31:00 |
-| 37 | 2018120001 | profile       |       60.2993 |       -152.223 | 2018-07-17 11:20:00 |       60.2993 |       -152.223 | 2018-07-17 11:20:00 |
-| 38 | 2018121001 | profile       |       60.2658 |       -152.178 | 2018-07-17 16:39:00 |       60.2658 |       -152.178 | 2018-07-17 16:39:00 |
-| 39 | 2018122001 | profile       |       60.166  |       -152.476 | 2018-07-15 18:53:00 |       60.166  |       -152.476 | 2018-07-15 18:53:00 |
-| 40 | 2018123001 | profile       |       60.0947 |       -151.961 | 2018-07-15 14:06:00 |       60.0947 |       -151.961 | 2018-07-15 14:06:00 |
-| 41 | 2018124001 | profile       |       59.9949 |       -152.297 | 2018-07-18 10:10:00 |       59.9949 |       -152.297 | 2018-07-18 10:10:00 |
-| 42 | 2018125001 | profile       |       59.8945 |       -151.986 | 2018-07-18 14:30:00 |       59.8945 |       -151.986 | 2018-07-18 14:30:00 |
-| 43 | 2018126001 | profile       |       59.8347 |       -152.416 | 2018-07-19 11:23:00 |       59.8347 |       -152.416 | 2018-07-19 11:23:00 |
-| 44 | 2018203001 | profile       |       59.5806 |       -151.52  | 2018-07-12 17:20:00 |       59.5806 |       -151.52  | 2018-07-12 17:20:00 |
-| 45 | 2018203002 | profile       |       59.5905 |       -151.423 | 2018-07-25 09:26:00 |       59.5905 |       -151.423 | 2018-07-25 09:26:00 |
-| 46 | 2018205001 | profile       |       59.6932 |       -151.157 | 2018-07-24 15:53:00 |       59.6932 |       -151.157 | 2018-07-24 15:53:00 |
-| 47 | 2018208001 | profile       |       59.5375 |       -151.518 | 2018-07-13 17:48:00 |       59.5375 |       -151.518 | 2018-07-13 17:48:00 |
-| 48 | 2018214002 | profile       |       59.5746 |       -151.339 | 2018-07-13 11:28:00 |       59.5746 |       -151.339 | 2018-07-13 11:28:00 |
-| 49 | 2018221001 | profile       |       59.6566 |       -151.881 | 2018-07-26 20:01:00 |       59.6566 |       -151.881 | 2018-07-26 20:01:00 |
-| 50 | 2018223001 | profile       |       59.5818 |       -151.473 | 2018-07-23 11:19:00 |       59.5818 |       -151.473 | 2018-07-23 11:19:00 |
-| 51 | 2018223002 | profile       |       59.5737 |       -151.73  | 2018-07-25 16:34:00 |       59.5737 |       -151.73  | 2018-07-25 16:34:00 |
-| 52 | 2018225001 | profile       |       59.4071 |       -152.014 | 2018-07-27 14:49:00 |       59.4071 |       -152.014 | 2018-07-27 14:49:00 |
-| 53 | 2019106001 | profile       |       59.8465 |       -152.807 | 2019-07-21 10:03:00 |       59.8465 |       -152.807 | 2019-07-21 10:03:00 |
-| 54 | 2019121001 | profile       |       60.1817 |       -152.209 | 2019-07-19 09:35:00 |       60.1817 |       -152.209 | 2019-07-19 09:35:00 |
-| 55 | 2019122001 | profile       |       60.1561 |       -152.379 | 2019-07-19 11:59:00 |       60.1561 |       -152.379 | 2019-07-19 11:59:00 |
-| 56 | 2019123001 | profile       |       60.0269 |       -151.982 | 2019-07-19 13:32:00 |       60.0269 |       -151.982 | 2019-07-19 13:32:00 |
-| 57 | 2019125001 | profile       |       59.928  |       -152.179 | 2019-07-17 12:43:00 |       59.928  |       -152.179 | 2019-07-17 12:43:00 |
-| 58 | 2019126001 | profile       |       59.8979 |       -151.898 | 2019-07-21 17:38:00 |       59.8979 |       -151.898 | 2019-07-21 17:38:00 |
-| 59 | 2019205001 | profile       |       59.6756 |       -151.205 | 2019-07-28 11:24:00 |       59.6756 |       -151.205 | 2019-07-28 11:24:00 |
-| 60 | 2019210001 | profile       |       59.4996 |       -151.735 | 2019-07-26 12:20:00 |       59.4996 |       -151.735 | 2019-07-26 12:20:00 |
-| 61 | 2019221001 | profile       |       59.6465 |       -152.216 | 2019-07-22 13:47:00 |       59.6465 |       -152.216 | 2019-07-22 13:47:00 |
-| 62 | 2019223001 | profile       |       59.5795 |       -151.4   | 2019-07-24 13:01:00 |       59.5795 |       -151.4   | 2019-07-24 13:01:00 |
-| 63 | 2019223002 | profile       |       59.5726 |       -151.765 | 2019-07-27 16:45:00 |       59.5726 |       -151.765 | 2019-07-27 16:45:00 |
-| 64 | 2019226001 | profile       |       59.3545 |       -152.231 | 2019-07-27 11:06:00 |       59.3545 |       -152.231 | 2019-07-27 11:06:00 |
-| 65 | 2021105001 | profile       |       60.0328 |       -152.547 | 2021-07-18 17:37:00 |       60.0328 |       -152.547 | 2021-07-18 17:37:00 |
-| 66 | 2021122001 | profile       |       60.1651 |       -152.314 | 2021-07-20 15:17:00 |       60.1651 |       -152.314 | 2021-07-20 15:17:00 |
-| 67 | 2021123001 | profile       |       60.0727 |       -152.062 | 2021-07-21 16:40:00 |       60.0727 |       -152.062 | 2021-07-21 16:40:00 |
-| 68 | 2021124001 | profile       |       60.0058 |       -152.25  | 2021-07-21 11:20:00 |       60.0058 |       -152.25  | 2021-07-21 11:20:00 |
-| 69 | 2021125001 | profile       |       59.8989 |       -151.97  | 2021-07-18 10:13:00 |       59.8989 |       -151.97  | 2021-07-18 10:13:00 |
-| 70 | 2021126001 | profile       |       59.8513 |       -152.565 | 2021-07-23 10:20:00 |       59.8513 |       -152.565 | 2021-07-23 10:20:00 |
-| 71 | 2021205001 | profile       |       59.7194 |       -151.104 | 2021-07-25 09:01:00 |       59.7194 |       -151.104 | 2021-07-25 09:01:00 |
-| 72 | 2021210001 | profile       |       59.5051 |       -151.586 | 2021-07-27 19:09:00 |       59.5051 |       -151.586 | 2021-07-27 19:09:00 |
-| 73 | 2021221001 | profile       |       59.667  |       -152.202 | 2021-07-30 15:41:00 |       59.667  |       -152.202 | 2021-07-30 15:41:00 |
-| 74 | 2021223001 | profile       |       59.582  |       -151.579 | 2021-07-29 11:48:00 |       59.582  |       -151.579 | 2021-07-29 11:48:00 |
-| 75 | 2021223002 | profile       |       59.5683 |       -151.419 | 2021-07-29 17:10:00 |       59.5683 |       -151.419 | 2021-07-29 17:10:00 |
-| 76 | 2021224001 | profile       |       59.4972 |       -152.164 | 2021-07-26 14:43:00 |       59.4972 |       -152.164 | 2021-07-26 14:43:00 |
-| 77 | 2021226001 | profile       |       59.3349 |       -152.047 | 2021-07-27 12:25:00 |       59.3349 |       -152.047 | 2021-07-27 12:25:00 |
-    
+<details><summary>Dataset metadata:</summary>
+
+|    |    Dataset | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                 |
+|---:|-----------:|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------------|
+|  0 | 2016102001 | profile       |       60.2743 |       -152.356 | 2016-07-17 11:16:00 |       60.2743 |       -152.356 | 2016-07-17 11:16:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  1 | 2016106001 | profile       |       59.8774 |       -152.579 | 2016-07-18 16:13:00 |       59.8774 |       -152.579 | 2016-07-18 16:13:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  2 | 2016120001 | profile       |       60.3062 |       -152.192 | 2016-07-17 08:33:00 |       60.3062 |       -152.192 | 2016-07-17 08:33:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  3 | 2016122201 | profile       |       60.1779 |       -151.915 | 2016-07-17 15:56:00 |       60.1779 |       -151.915 | 2016-07-17 15:56:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  4 | 2016123001 | profile       |       60.057  |       -152.524 | 2016-07-16 08:12:00 |       60.057  |       -152.524 | 2016-07-16 08:12:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  5 | 2016123002 | profile       |       60.1052 |       -152.241 | 2016-07-16 11:11:00 |       60.1052 |       -152.241 | 2016-07-16 11:11:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  6 | 2016125001 | profile       |       59.9135 |       -152.194 | 2016-07-14 14:43:00 |       59.9135 |       -152.194 | 2016-07-14 14:43:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  7 | 2016126001 | profile       |       59.8026 |       -152.757 | 2016-07-18 19:19:00 |       59.8026 |       -152.757 | 2016-07-18 19:19:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  8 | 2016126002 | profile       |       59.8295 |       -152.538 | 2016-07-19 11:15:00 |       59.8295 |       -152.538 | 2016-07-19 11:15:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+|  9 | 2016205701 | profile       |       59.6646 |       -151.233 | 2016-07-23 14:10:00 |       59.6646 |       -151.233 | 2016-07-23 14:10:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 10 | 2016206001 | profile       |       59.5644 |       -151.393 | 2016-07-29 10:23:00 |       59.5644 |       -151.393 | 2016-07-29 10:23:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 11 | 2016221001 | profile       |       59.6698 |       -151.985 | 2016-07-28 11:22:00 |       59.6698 |       -151.985 | 2016-07-28 11:22:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 12 | 2016223001 | profile       |       59.5834 |       -151.446 | 2016-07-24 09:39:00 |       59.5834 |       -151.446 | 2016-07-24 09:39:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 13 | 2016223002 | profile       |       59.5713 |       -151.716 | 2016-07-24 12:10:00 |       59.5713 |       -151.716 | 2016-07-24 12:10:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 14 | 2016224001 | profile       |       59.5006 |       -151.889 | 2016-07-26 11:25:00 |       59.5006 |       -151.889 | 2016-07-26 11:25:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 15 | 2016225001 | profile       |       59.4217 |       -152.025 | 2016-07-26 18:55:00 |       59.4217 |       -152.025 | 2016-07-26 18:55:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 16 | 2016226001 | profile       |       59.3211 |       -152.102 | 2016-07-27 10:49:00 |       59.3211 |       -152.102 | 2016-07-27 10:49:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 17 | 2017101001 | profile       |       60.358  |       -152.214 | 2017-07-26 08:52:00 |       60.358  |       -152.214 | 2017-07-26 08:52:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 18 | 2017103001 | profile       |       60.1284 |       -152.493 | 2017-07-25 09:49:00 |       60.1284 |       -152.493 | 2017-07-25 09:49:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 19 | 2017120001 | profile       |       60.3292 |       -152.177 | 2017-07-26 13:12:00 |       60.3292 |       -152.177 | 2017-07-26 13:12:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 20 | 2017122001 | profile       |       60.231  |       -152.285 | 2017-07-26 14:38:00 |       60.231  |       -152.285 | 2017-07-26 14:38:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 21 | 2017123001 | profile       |       60.0473 |       -152.52  | 2017-07-23 07:29:00 |       60.0473 |       -152.52  | 2017-07-23 07:29:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 22 | 2017124001 | profile       |       59.9828 |       -152.263 | 2017-07-27 10:56:00 |       59.9828 |       -152.263 | 2017-07-27 10:56:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 23 | 2017125001 | profile       |       59.919  |       -152.27  | 2017-07-22 12:41:00 |       59.919  |       -152.27  | 2017-07-22 12:41:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 24 | 2017125002 | profile       |       59.9439 |       -151.941 | 2017-07-22 16:08:00 |       59.9439 |       -151.941 | 2017-07-22 16:08:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 25 | 2017201001 | profile       |       59.6637 |       -151.801 | 2017-07-31 11:03:00 |       59.6637 |       -151.801 | 2017-07-31 11:03:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 26 | 2017204001 | profile       |       59.6447 |       -151.282 | 2017-07-20 11:57:00 |       59.6447 |       -151.282 | 2017-07-20 11:57:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 27 | 2017205001 | profile       |       59.6727 |       -151.197 | 2017-07-19 15:35:00 |       59.6727 |       -151.197 | 2017-07-19 15:35:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 28 | 2017206001 | profile       |       59.6599 |       -151.224 | 2017-07-19 11:39:00 |       59.6599 |       -151.224 | 2017-07-19 11:39:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 29 | 2017207001 | profile       |       59.5196 |       -151.462 | 2017-07-20 16:40:00 |       59.5196 |       -151.462 | 2017-07-20 16:40:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 30 | 2017212001 | profile       |       59.3781 |       -151.891 | 2017-07-28 17:05:00 |       59.3781 |       -151.891 | 2017-07-28 17:05:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 31 | 2017214001 | profile       |       59.5773 |       -151.363 | 2017-07-18 15:56:00 |       59.5773 |       -151.363 | 2017-07-18 15:56:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 32 | 2017220001 | profile       |       59.7454 |       -151.998 | 2017-07-31 14:42:00 |       59.7454 |       -151.998 | 2017-07-31 14:42:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 33 | 2017223001 | profile       |       59.5842 |       -151.512 | 2017-07-30 10:12:00 |       59.5842 |       -151.512 | 2017-07-30 10:12:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 34 | 2017224001 | profile       |       59.4971 |       -151.843 | 2017-07-30 17:34:00 |       59.4971 |       -151.843 | 2017-07-30 17:34:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 35 | 2017225001 | profile       |       59.3998 |       -152.119 | 2017-07-28 12:41:00 |       59.3998 |       -152.119 | 2017-07-28 12:41:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 36 | 2018104001 | profile       |       60.0669 |       -152.537 | 2018-07-14 19:31:00 |       60.0669 |       -152.537 | 2018-07-14 19:31:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 37 | 2018120001 | profile       |       60.2993 |       -152.223 | 2018-07-17 11:20:00 |       60.2993 |       -152.223 | 2018-07-17 11:20:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 38 | 2018121001 | profile       |       60.2658 |       -152.178 | 2018-07-17 16:39:00 |       60.2658 |       -152.178 | 2018-07-17 16:39:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 39 | 2018122001 | profile       |       60.166  |       -152.476 | 2018-07-15 18:53:00 |       60.166  |       -152.476 | 2018-07-15 18:53:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 40 | 2018123001 | profile       |       60.0947 |       -151.961 | 2018-07-15 14:06:00 |       60.0947 |       -151.961 | 2018-07-15 14:06:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 41 | 2018124001 | profile       |       59.9949 |       -152.297 | 2018-07-18 10:10:00 |       59.9949 |       -152.297 | 2018-07-18 10:10:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 42 | 2018125001 | profile       |       59.8945 |       -151.986 | 2018-07-18 14:30:00 |       59.8945 |       -151.986 | 2018-07-18 14:30:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 43 | 2018126001 | profile       |       59.8347 |       -152.416 | 2018-07-19 11:23:00 |       59.8347 |       -152.416 | 2018-07-19 11:23:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 44 | 2018203001 | profile       |       59.5806 |       -151.52  | 2018-07-12 17:20:00 |       59.5806 |       -151.52  | 2018-07-12 17:20:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 45 | 2018203002 | profile       |       59.5905 |       -151.423 | 2018-07-25 09:26:00 |       59.5905 |       -151.423 | 2018-07-25 09:26:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 46 | 2018205001 | profile       |       59.6932 |       -151.157 | 2018-07-24 15:53:00 |       59.6932 |       -151.157 | 2018-07-24 15:53:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 47 | 2018208001 | profile       |       59.5375 |       -151.518 | 2018-07-13 17:48:00 |       59.5375 |       -151.518 | 2018-07-13 17:48:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 48 | 2018214002 | profile       |       59.5746 |       -151.339 | 2018-07-13 11:28:00 |       59.5746 |       -151.339 | 2018-07-13 11:28:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 49 | 2018221001 | profile       |       59.6566 |       -151.881 | 2018-07-26 20:01:00 |       59.6566 |       -151.881 | 2018-07-26 20:01:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 50 | 2018223001 | profile       |       59.5818 |       -151.473 | 2018-07-23 11:19:00 |       59.5818 |       -151.473 | 2018-07-23 11:19:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 51 | 2018223002 | profile       |       59.5737 |       -151.73  | 2018-07-25 16:34:00 |       59.5737 |       -151.73  | 2018-07-25 16:34:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 52 | 2018225001 | profile       |       59.4071 |       -152.014 | 2018-07-27 14:49:00 |       59.4071 |       -152.014 | 2018-07-27 14:49:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 53 | 2019106001 | profile       |       59.8465 |       -152.807 | 2019-07-21 10:03:00 |       59.8465 |       -152.807 | 2019-07-21 10:03:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 54 | 2019121001 | profile       |       60.1817 |       -152.209 | 2019-07-19 09:35:00 |       60.1817 |       -152.209 | 2019-07-19 09:35:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 55 | 2019122001 | profile       |       60.1561 |       -152.379 | 2019-07-19 11:59:00 |       60.1561 |       -152.379 | 2019-07-19 11:59:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 56 | 2019123001 | profile       |       60.0269 |       -151.982 | 2019-07-19 13:32:00 |       60.0269 |       -151.982 | 2019-07-19 13:32:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 57 | 2019125001 | profile       |       59.928  |       -152.179 | 2019-07-17 12:43:00 |       59.928  |       -152.179 | 2019-07-17 12:43:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 58 | 2019126001 | profile       |       59.8979 |       -151.898 | 2019-07-21 17:38:00 |       59.8979 |       -151.898 | 2019-07-21 17:38:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 59 | 2019205001 | profile       |       59.6756 |       -151.205 | 2019-07-28 11:24:00 |       59.6756 |       -151.205 | 2019-07-28 11:24:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 60 | 2019210001 | profile       |       59.4996 |       -151.735 | 2019-07-26 12:20:00 |       59.4996 |       -151.735 | 2019-07-26 12:20:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 61 | 2019221001 | profile       |       59.6465 |       -152.216 | 2019-07-22 13:47:00 |       59.6465 |       -152.216 | 2019-07-22 13:47:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 62 | 2019223001 | profile       |       59.5795 |       -151.4   | 2019-07-24 13:01:00 |       59.5795 |       -151.4   | 2019-07-24 13:01:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 63 | 2019223002 | profile       |       59.5726 |       -151.765 | 2019-07-27 16:45:00 |       59.5726 |       -151.765 | 2019-07-27 16:45:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 64 | 2019226001 | profile       |       59.3545 |       -152.231 | 2019-07-27 11:06:00 |       59.3545 |       -152.231 | 2019-07-27 11:06:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 65 | 2021105001 | profile       |       60.0328 |       -152.547 | 2021-07-18 17:37:00 |       60.0328 |       -152.547 | 2021-07-18 17:37:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 66 | 2021122001 | profile       |       60.1651 |       -152.314 | 2021-07-20 15:17:00 |       60.1651 |       -152.314 | 2021-07-20 15:17:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 67 | 2021123001 | profile       |       60.0727 |       -152.062 | 2021-07-21 16:40:00 |       60.0727 |       -152.062 | 2021-07-21 16:40:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 68 | 2021124001 | profile       |       60.0058 |       -152.25  | 2021-07-21 11:20:00 |       60.0058 |       -152.25  | 2021-07-21 11:20:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 69 | 2021125001 | profile       |       59.8989 |       -151.97  | 2021-07-18 10:13:00 |       59.8989 |       -151.97  | 2021-07-18 10:13:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 70 | 2021126001 | profile       |       59.8513 |       -152.565 | 2021-07-23 10:20:00 |       59.8513 |       -152.565 | 2021-07-23 10:20:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 71 | 2021205001 | profile       |       59.7194 |       -151.104 | 2021-07-25 09:01:00 |       59.7194 |       -151.104 | 2021-07-25 09:01:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 72 | 2021210001 | profile       |       59.5051 |       -151.586 | 2021-07-27 19:09:00 |       59.5051 |       -151.586 | 2021-07-27 19:09:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 73 | 2021221001 | profile       |       59.667  |       -152.202 | 2021-07-30 15:41:00 |       59.667  |       -152.202 | 2021-07-30 15:41:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 74 | 2021223001 | profile       |       59.582  |       -151.579 | 2021-07-29 11:48:00 |       59.582  |       -151.579 | 2021-07-29 11:48:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 75 | 2021223002 | profile       |       59.5683 |       -151.419 | 2021-07-29 17:10:00 |       59.5683 |       -151.419 | 2021-07-29 17:10:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 76 | 2021224001 | profile       |       59.4972 |       -152.164 | 2021-07-26 14:43:00 |       59.4972 |       -152.164 | 2021-07-26 14:43:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+| 77 | 2021226001 | profile       |       59.3349 |       -152.047 | 2021-07-27 12:25:00 |       59.3349 |       -152.047 | 2021-07-27 12:25:00 | https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv |
+
+</details>
+
+
 
 ```{code-cell}
 cat = intake.open_catalog(chr.CAT_NAME("ctd_profiles_usgs_boem"))
@@ -134,6 +140,8 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_usgs_boem")("ctd_profiles_usg
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016102001'].plot.data()
 ```
 
@@ -141,6 +149,8 @@ cat['2016102001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016106001'].plot.data()
 ```
 
@@ -148,6 +158,8 @@ cat['2016106001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016120001'].plot.data()
 ```
 
@@ -155,6 +167,8 @@ cat['2016120001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016122201'].plot.data()
 ```
 
@@ -162,6 +176,8 @@ cat['2016122201'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016123001'].plot.data()
 ```
 
@@ -169,6 +185,8 @@ cat['2016123001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016123002'].plot.data()
 ```
 
@@ -176,6 +194,8 @@ cat['2016123002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016125001'].plot.data()
 ```
 
@@ -183,6 +203,8 @@ cat['2016125001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016126001'].plot.data()
 ```
 
@@ -190,6 +212,8 @@ cat['2016126001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016126002'].plot.data()
 ```
 
@@ -197,6 +221,8 @@ cat['2016126002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016205701'].plot.data()
 ```
 
@@ -204,6 +230,8 @@ cat['2016205701'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016206001'].plot.data()
 ```
 
@@ -211,6 +239,8 @@ cat['2016206001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016221001'].plot.data()
 ```
 
@@ -218,6 +248,8 @@ cat['2016221001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016223001'].plot.data()
 ```
 
@@ -225,6 +257,8 @@ cat['2016223001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016223002'].plot.data()
 ```
 
@@ -232,6 +266,8 @@ cat['2016223002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016224001'].plot.data()
 ```
 
@@ -239,6 +275,8 @@ cat['2016224001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016225001'].plot.data()
 ```
 
@@ -246,6 +284,8 @@ cat['2016225001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2016226001'].plot.data()
 ```
 
@@ -257,6 +297,8 @@ cat['2016226001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017101001'].plot.data()
 ```
 
@@ -264,6 +306,8 @@ cat['2017101001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017103001'].plot.data()
 ```
 
@@ -271,6 +315,8 @@ cat['2017103001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017120001'].plot.data()
 ```
 
@@ -278,6 +324,8 @@ cat['2017120001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017122001'].plot.data()
 ```
 
@@ -285,6 +333,8 @@ cat['2017122001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017123001'].plot.data()
 ```
 
@@ -292,6 +342,8 @@ cat['2017123001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017124001'].plot.data()
 ```
 
@@ -299,6 +351,8 @@ cat['2017124001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017125001'].plot.data()
 ```
 
@@ -306,6 +360,8 @@ cat['2017125001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017125002'].plot.data()
 ```
 
@@ -313,6 +369,8 @@ cat['2017125002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017201001'].plot.data()
 ```
 
@@ -320,6 +378,8 @@ cat['2017201001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017204001'].plot.data()
 ```
 
@@ -327,6 +387,8 @@ cat['2017204001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017205001'].plot.data()
 ```
 
@@ -334,6 +396,8 @@ cat['2017205001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017206001'].plot.data()
 ```
 
@@ -341,6 +405,8 @@ cat['2017206001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017207001'].plot.data()
 ```
 
@@ -348,6 +414,8 @@ cat['2017207001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017212001'].plot.data()
 ```
 
@@ -355,6 +423,8 @@ cat['2017212001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017214001'].plot.data()
 ```
 
@@ -362,6 +432,8 @@ cat['2017214001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017220001'].plot.data()
 ```
 
@@ -369,6 +441,8 @@ cat['2017220001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017223001'].plot.data()
 ```
 
@@ -376,6 +450,8 @@ cat['2017223001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017224001'].plot.data()
 ```
 
@@ -383,6 +459,8 @@ cat['2017224001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2017225001'].plot.data()
 ```
 
@@ -394,6 +472,8 @@ cat['2017225001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018104001'].plot.data()
 ```
 
@@ -401,6 +481,8 @@ cat['2018104001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018120001'].plot.data()
 ```
 
@@ -408,6 +490,8 @@ cat['2018120001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018121001'].plot.data()
 ```
 
@@ -415,6 +499,8 @@ cat['2018121001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018122001'].plot.data()
 ```
 
@@ -422,6 +508,8 @@ cat['2018122001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018123001'].plot.data()
 ```
 
@@ -429,6 +517,8 @@ cat['2018123001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018124001'].plot.data()
 ```
 
@@ -436,6 +526,8 @@ cat['2018124001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018125001'].plot.data()
 ```
 
@@ -443,6 +535,8 @@ cat['2018125001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018126001'].plot.data()
 ```
 
@@ -450,6 +544,8 @@ cat['2018126001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018203001'].plot.data()
 ```
 
@@ -457,6 +553,8 @@ cat['2018203001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018203002'].plot.data()
 ```
 
@@ -464,6 +562,8 @@ cat['2018203002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018205001'].plot.data()
 ```
 
@@ -471,6 +571,8 @@ cat['2018205001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018208001'].plot.data()
 ```
 
@@ -478,6 +580,8 @@ cat['2018208001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018214002'].plot.data()
 ```
 
@@ -485,6 +589,8 @@ cat['2018214002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018221001'].plot.data()
 ```
 
@@ -492,6 +598,8 @@ cat['2018221001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018223001'].plot.data()
 ```
 
@@ -499,6 +607,8 @@ cat['2018223001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018223002'].plot.data()
 ```
 
@@ -506,6 +616,8 @@ cat['2018223002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2018225001'].plot.data()
 ```
 
@@ -517,6 +629,8 @@ cat['2018225001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019106001'].plot.data()
 ```
 
@@ -524,6 +638,8 @@ cat['2019106001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019121001'].plot.data()
 ```
 
@@ -531,6 +647,8 @@ cat['2019121001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019122001'].plot.data()
 ```
 
@@ -538,6 +656,8 @@ cat['2019122001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019123001'].plot.data()
 ```
 
@@ -545,6 +665,8 @@ cat['2019123001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019125001'].plot.data()
 ```
 
@@ -552,6 +674,8 @@ cat['2019125001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019126001'].plot.data()
 ```
 
@@ -559,6 +683,8 @@ cat['2019126001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019205001'].plot.data()
 ```
 
@@ -566,6 +692,8 @@ cat['2019205001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019210001'].plot.data()
 ```
 
@@ -573,6 +701,8 @@ cat['2019210001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019221001'].plot.data()
 ```
 
@@ -580,6 +710,8 @@ cat['2019221001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019223001'].plot.data()
 ```
 
@@ -587,6 +719,8 @@ cat['2019223001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019223002'].plot.data()
 ```
 
@@ -594,6 +728,8 @@ cat['2019223002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2019226001'].plot.data()
 ```
 
@@ -605,6 +741,8 @@ cat['2019226001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021105001'].plot.data()
 ```
 
@@ -612,6 +750,8 @@ cat['2021105001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021122001'].plot.data()
 ```
 
@@ -619,6 +759,8 @@ cat['2021122001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021123001'].plot.data()
 ```
 
@@ -626,6 +768,8 @@ cat['2021123001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021124001'].plot.data()
 ```
 
@@ -633,6 +777,8 @@ cat['2021124001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021125001'].plot.data()
 ```
 
@@ -640,6 +786,8 @@ cat['2021125001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021126001'].plot.data()
 ```
 
@@ -647,6 +795,8 @@ cat['2021126001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021205001'].plot.data()
 ```
 
@@ -654,6 +804,8 @@ cat['2021205001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021210001'].plot.data()
 ```
 
@@ -661,6 +813,8 @@ cat['2021210001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021221001'].plot.data()
 ```
 
@@ -668,6 +822,8 @@ cat['2021221001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021223001'].plot.data()
 ```
 
@@ -675,6 +831,8 @@ cat['2021223001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021223002'].plot.data()
 ```
 
@@ -682,6 +840,8 @@ cat['2021223002'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021224001'].plot.data()
 ```
 
@@ -689,5 +849,7 @@ cat['2021224001'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['2021226001'].plot.data()
 ```

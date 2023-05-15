@@ -8,6 +8,8 @@ jupytext:
 ---
 
 ```{code-cell}
+:tags: [remove-input]
+
 import intake
 import ciofs_hindcast_report as chr
 import hvplot.pandas  # noqa
@@ -16,7 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
-# NOAA: Single CTD profiles across Cook Inlet
+# CTD Profiles (NOAA): across Cook Inlet
 
 * CTD profiles 2005 - NOAA
 * ctd_profiles_2005_noaa
@@ -27,34 +29,38 @@ CTD Profiles from NOAA.
 
 
 
-Dataset metadata:
-|    |   Dataset | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             |
-|---:|----------:|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|
-|  0 |       501 | profile       |       60.722  |       -151.647 | 2005-06-16 15:34:00 |       60.722  |       -151.647 | 2005-06-16 15:34:00 |
-|  1 |       502 | profile       |       60.7207 |       -151.557 | 2005-06-16 15:08:00 |       60.7207 |       -151.557 | 2005-06-16 15:08:00 |
-|  2 |       503 | profile       |       60.7173 |       -151.433 | 2005-06-16 14:34:00 |       60.7173 |       -151.433 | 2005-06-16 14:34:00 |
-|  3 |       504 | profile       |       60.6834 |       -151.418 | 2005-06-16 14:01:00 |       60.6834 |       -151.418 | 2005-06-16 14:01:00 |
-|  4 |       505 | profile       |       60.5967 |       -151.739 | 2005-06-16 16:33:00 |       60.5967 |       -151.739 | 2005-06-16 16:33:00 |
-|  5 |       506 | profile       |       60.5871 |       -151.445 | 2005-06-16 12:47:00 |       60.5871 |       -151.445 | 2005-06-16 12:47:00 |
-|  6 |       507 | profile       |       60.5517 |       -152.128 | 2005-06-16 18:14:00 |       60.5517 |       -152.128 | 2005-06-16 18:14:00 |
-|  7 |       508 | profile       |       60.483  |       -151.673 | 2005-06-16 11:07:00 |       60.483  |       -151.673 | 2005-06-16 11:07:00 |
-|  8 |       509 | profile       |       60.3792 |       -152.182 | 2005-06-16 20:07:00 |       60.3792 |       -152.182 | 2005-06-16 20:07:00 |
-|  9 |       510 | profile       |       60.248  |       -151.755 | 2005-06-16 09:05:00 |       60.248  |       -151.755 | 2005-06-16 09:05:00 |
-| 10 |       511 | profile       |       60.0233 |       -152.12  | 2005-07-28 20:04:00 |       60.0233 |       -152.12  | 2005-07-28 20:04:00 |
-| 11 |       512 | profile       |       59.5661 |       -153.422 | 2005-07-29 05:12:00 |       59.5661 |       -153.422 | 2005-07-29 05:12:00 |
-| 12 |       513 | profile       |       59.4828 |       -151.755 | 2005-07-30 23:40:00 |       59.4828 |       -151.755 | 2005-07-30 23:40:00 |
-| 13 |       514 | profile       |       59.3018 |       -152.92  | 2005-07-29 10:51:00 |       59.3018 |       -152.92  | 2005-07-29 10:51:00 |
-| 14 |       515 | profile       |       59.3149 |       -152.365 | 2005-07-30 19:51:00 |       59.3149 |       -152.365 | 2005-07-30 19:51:00 |
-| 15 |       516 | profile       |       59.4001 |       -151.966 | 2005-07-30 22:32:00 |       59.4001 |       -151.966 | 2005-07-30 22:32:00 |
-| 16 |       517 | profile       |       58.8901 |       -153.184 | 2005-07-29 14:36:00 |       58.8901 |       -153.184 | 2005-07-29 14:36:00 |
-| 17 |       518 | profile       |       58.9305 |       -152.728 | 2005-07-30 09:24:00 |       58.9305 |       -152.728 | 2005-07-30 09:24:00 |
-| 18 |       519 | profile       |       58.808  |       -152.408 | 2005-07-30 04:08:00 |       58.808  |       -152.408 | 2005-07-30 04:08:00 |
-| 19 |       520 | profile       |       59.0492 |       -152.152 | 2005-07-30 11:51:00 |       59.0492 |       -152.152 | 2005-07-30 11:51:00 |
-| 20 |       521 | profile       |       59.1207 |       -151.895 | 2005-07-30 17:33:00 |       59.1207 |       -151.895 | 2005-07-30 17:33:00 |
-| 21 |       522 | profile       |       59.2112 |       -151.787 | 2005-07-30 15:36:00 |       59.2112 |       -151.787 | 2005-07-30 15:36:00 |
-| 22 |       523 | profile       |       59.0129 |       -151.775 | 2005-07-30 16:03:00 |       59.0129 |       -151.775 | 2005-07-30 16:03:00 |
-| 23 |       524 | profile       |       59.1339 |       -151.706 | 2005-07-30 16:51:00 |       59.1339 |       -151.706 | 2005-07-30 16:51:00 |
-    
+<details><summary>Dataset metadata:</summary>
+
+|    |   Dataset | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                     |
+|---:|----------:|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------|
+|  0 |       501 | profile       |       60.722  |       -151.647 | 2005-06-16 15:34:00 |       60.722  |       -151.647 | 2005-06-16 15:34:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  1 |       502 | profile       |       60.7207 |       -151.557 | 2005-06-16 15:08:00 |       60.7207 |       -151.557 | 2005-06-16 15:08:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  2 |       503 | profile       |       60.7173 |       -151.433 | 2005-06-16 14:34:00 |       60.7173 |       -151.433 | 2005-06-16 14:34:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  3 |       504 | profile       |       60.6834 |       -151.418 | 2005-06-16 14:01:00 |       60.6834 |       -151.418 | 2005-06-16 14:01:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  4 |       505 | profile       |       60.5967 |       -151.739 | 2005-06-16 16:33:00 |       60.5967 |       -151.739 | 2005-06-16 16:33:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  5 |       506 | profile       |       60.5871 |       -151.445 | 2005-06-16 12:47:00 |       60.5871 |       -151.445 | 2005-06-16 12:47:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  6 |       507 | profile       |       60.5517 |       -152.128 | 2005-06-16 18:14:00 |       60.5517 |       -152.128 | 2005-06-16 18:14:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  7 |       508 | profile       |       60.483  |       -151.673 | 2005-06-16 11:07:00 |       60.483  |       -151.673 | 2005-06-16 11:07:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  8 |       509 | profile       |       60.3792 |       -152.182 | 2005-06-16 20:07:00 |       60.3792 |       -152.182 | 2005-06-16 20:07:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+|  9 |       510 | profile       |       60.248  |       -151.755 | 2005-06-16 09:05:00 |       60.248  |       -151.755 | 2005-06-16 09:05:00 | https://researchworkspace.com/files/39886023/noaa_north.txt |
+| 10 |       511 | profile       |       60.0233 |       -152.12  | 2005-07-28 20:04:00 |       60.0233 |       -152.12  | 2005-07-28 20:04:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 11 |       512 | profile       |       59.5661 |       -153.422 | 2005-07-29 05:12:00 |       59.5661 |       -153.422 | 2005-07-29 05:12:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 12 |       513 | profile       |       59.4828 |       -151.755 | 2005-07-30 23:40:00 |       59.4828 |       -151.755 | 2005-07-30 23:40:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 13 |       514 | profile       |       59.3018 |       -152.92  | 2005-07-29 10:51:00 |       59.3018 |       -152.92  | 2005-07-29 10:51:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 14 |       515 | profile       |       59.3149 |       -152.365 | 2005-07-30 19:51:00 |       59.3149 |       -152.365 | 2005-07-30 19:51:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 15 |       516 | profile       |       59.4001 |       -151.966 | 2005-07-30 22:32:00 |       59.4001 |       -151.966 | 2005-07-30 22:32:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 16 |       517 | profile       |       58.8901 |       -153.184 | 2005-07-29 14:36:00 |       58.8901 |       -153.184 | 2005-07-29 14:36:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 17 |       518 | profile       |       58.9305 |       -152.728 | 2005-07-30 09:24:00 |       58.9305 |       -152.728 | 2005-07-30 09:24:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 18 |       519 | profile       |       58.808  |       -152.408 | 2005-07-30 04:08:00 |       58.808  |       -152.408 | 2005-07-30 04:08:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 19 |       520 | profile       |       59.0492 |       -152.152 | 2005-07-30 11:51:00 |       59.0492 |       -152.152 | 2005-07-30 11:51:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 20 |       521 | profile       |       59.1207 |       -151.895 | 2005-07-30 17:33:00 |       59.1207 |       -151.895 | 2005-07-30 17:33:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 21 |       522 | profile       |       59.2112 |       -151.787 | 2005-07-30 15:36:00 |       59.2112 |       -151.787 | 2005-07-30 15:36:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 22 |       523 | profile       |       59.0129 |       -151.775 | 2005-07-30 16:03:00 |       59.0129 |       -151.775 | 2005-07-30 16:03:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+| 23 |       524 | profile       |       59.1339 |       -151.706 | 2005-07-30 16:51:00 |       59.1339 |       -151.706 | 2005-07-30 16:51:00 | https://researchworkspace.com/files/39886022/noaa_south.txt |
+
+</details>
+
+
 
 ```{code-cell}
 cat = intake.open_catalog(chr.CAT_NAME("ctd_profiles_2005_noaa"))
@@ -72,6 +78,8 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_2005_noaa")("ctd_profiles_200
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['501'].plot.data()
 ```
 
@@ -79,6 +87,8 @@ cat['501'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['502'].plot.data()
 ```
 
@@ -86,6 +96,8 @@ cat['502'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['503'].plot.data()
 ```
 
@@ -93,6 +105,8 @@ cat['503'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['504'].plot.data()
 ```
 
@@ -100,6 +114,8 @@ cat['504'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['505'].plot.data()
 ```
 
@@ -107,6 +123,8 @@ cat['505'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['506'].plot.data()
 ```
 
@@ -114,6 +132,8 @@ cat['506'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['507'].plot.data()
 ```
 
@@ -121,6 +141,8 @@ cat['507'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['508'].plot.data()
 ```
 
@@ -128,6 +150,8 @@ cat['508'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['509'].plot.data()
 ```
 
@@ -135,6 +159,8 @@ cat['509'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['510'].plot.data()
 ```
 
@@ -142,6 +168,8 @@ cat['510'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['511'].plot.data()
 ```
 
@@ -149,6 +177,8 @@ cat['511'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['512'].plot.data()
 ```
 
@@ -156,6 +186,8 @@ cat['512'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['513'].plot.data()
 ```
 
@@ -163,6 +195,8 @@ cat['513'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['514'].plot.data()
 ```
 
@@ -170,6 +204,8 @@ cat['514'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['515'].plot.data()
 ```
 
@@ -177,6 +213,8 @@ cat['515'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['516'].plot.data()
 ```
 
@@ -184,6 +222,8 @@ cat['516'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['517'].plot.data()
 ```
 
@@ -191,6 +231,8 @@ cat['517'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['518'].plot.data()
 ```
 
@@ -198,6 +240,8 @@ cat['518'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['519'].plot.data()
 ```
 
@@ -205,6 +249,8 @@ cat['519'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['520'].plot.data()
 ```
 
@@ -212,6 +258,8 @@ cat['520'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['521'].plot.data()
 ```
 
@@ -219,6 +267,8 @@ cat['521'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['522'].plot.data()
 ```
 
@@ -226,6 +276,8 @@ cat['522'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['523'].plot.data()
 ```
 
@@ -233,5 +285,7 @@ cat['523'].plot.data()
         
 
 ```{code-cell}
+:tags: [full-width]
+
 cat['524'].plot.data()
 ```
