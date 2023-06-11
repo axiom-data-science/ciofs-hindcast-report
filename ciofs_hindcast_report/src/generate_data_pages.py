@@ -16,8 +16,11 @@ def make_source_metadata_table(cat):
         mdfs.append(pd.DataFrame.from_dict(metadata_no_plots, orient="index"))
         # print(metadata_no_plots)
         # source_metadata_table.update(metadata_no_plots)
-    mdf = pd.concat(mdfs, axis=1)
-    mdf = mdf.T.reset_index(drop=True)
+    if len(mdfs) > 0:
+        mdf = pd.concat(mdfs, axis=1)
+        mdf = mdf.T.reset_index(drop=True)
+    else:
+        mdf = pd.DataFrame()
     return mdf
 
 
@@ -49,16 +52,23 @@ import cmocean.cm as cmo"""
 
 {metadata["notes"]}
 
-Dataset metadata:
+<details><summary>Dataset metadata:</summary>
+
 {make_source_metadata_table(intake.open_catalog(chr.CAT_NAME(slug))).to_markdown()}
-    """
+
+</details>
+
+
+"""
 
     # Open catalog
     code = f"""\
 cat = intake.open_catalog(chr.CAT_NAME("{slug}"))"""
 
     # Add these cells to the notebook
-    nb['cells'] = [nbf.v4.new_code_cell(imports),
+    imports_cell = nbf.v4.new_code_cell(imports)
+    imports_cell['metadata']['tags'] = ["remove-input"]  # don't show imports cell
+    nb['cells'] = [imports_cell,
                    nbf.v4.new_markdown_cell(text),
                    nbf.v4.new_code_cell(code),]
 
@@ -129,14 +139,32 @@ getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
         for plot in cat[source_name].metadata["plots"]:
             source_code_1 += f"cat['{source_name}'].plot.{plot}() + "
         source_code_1 = source_code_1.rstrip(" + ")
-
-        # if plottypes == 3:
-        #     source_code_1 = f"cat['{source_name}'].plot.map() + cat['{source_name}'].plot.salt() + cat['{source_name}'].plot.temp()"
-        # elif plottypes == 2:
-        #     source_code_1 = f"cat['{source_name}'].plot.salt() + cat['{source_name}'].plot.temp()"
-        # elif plottypes == 1:
-        #     source_code_1 = f"cat['{source_name}'].plot.data()"
-        nb['cells'].extend([nbf.v4.new_code_cell(source_code_1),])
+        
+        # for line plots, have one column and all subplots since otherwise
+        # are huge files
+        if "data" in cat[source_name].metadata["plots"]:
+            if "line" in cat[source_name].metadata["plots"]["data"]["kind"]:
+                # just for large enough widtg
+                if cat[source_name].metadata["plots"]["data"]["width"] > 400:
+                    # source_code_1 = f"({source_code_1}).cols(1)"
+                    # make sure there are two y variables
+                    if len(cat[source_name].metadata["plots"]["data"]["y"]) > 1:
+                        source_code_1 = f"({source_code_1}).cols(1)"
+                    
+                # # make sure time is the x axis by checking the column name for time
+                # if "T" in pd.DataFrame(columns=[cat[source_name].metadata["plots"]["data"]["x"]]).cf.axes:
+        
+        plot_cell = nbf.v4.new_code_cell(source_code_1)
+        # # make plot wide for certain catalogs
+        # if slug in ["adcp_moored_noaa_coi_2005",
+        #             "adcp_moored_noaa_coi_other",
+        #             "adcp_moored_noaa_kod_1",
+        #             "adcp_moored_noaa_kod_2",
+        #             "ctd_towed_otf_kbnerr"]:
+        #     plot_cell['metadata']['tags'] = ["full-width"]
+        # make all plot cells full width
+        plot_cell['metadata']['tags'] = ["full-width"]
+        nb['cells'].extend([plot_cell,])
 
     nbf.write(nb, f'{chr.DATA_PAGE_PATH(slug)}.ipynb')
 
@@ -178,11 +206,11 @@ import numpy as np
 
     for slug in chr.slugs:
         cat = intake.open_catalog(chr.CAT_NAME(slug))
-        
+        # print(slug)
         text = f"""
-### {cat.metadata["project_name"]}
+### {cat.description}
 
-* {cat.description}
+* {cat.metadata["project_name"]}
 * {cat.metadata["time"]}
 * Slug: {slug}
 * Included: {cat.metadata["included"]}
@@ -193,6 +221,14 @@ import numpy as np
 Notes:
 
 {cat.metadata["notes"]}
+
+
+<details><summary>Dataset metadata:</summary>
+
+{make_source_metadata_table(intake.open_catalog(chr.CAT_NAME(slug))).to_markdown()}
+
+</details>
+
 
 **Map of {cat.metadata["map_description"]}**
 """

@@ -1,3 +1,4 @@
+from typing import Union
 import pandas as pd
 import xarray as xr
 import pyproj
@@ -41,3 +42,23 @@ def calculate_distance(lons, lats):
     distance = np.hstack((np.array([0]), distance))
     distance = distance.cumsum()/1000 # km
     return distance
+
+
+# Snippet to use for renaming model cache files
+# import pathlib
+# import re
+
+# # # rename files to update Z index
+# # paths = pathlib.Path("/Users/kthyng/Library/Caches/ocean-model-skill-assessor/nwgoa/model_output/").glob("*s_rho_-1.nc")
+# # # path = list(paths)[0]
+# # for path in paths:
+# #     path.rename(str(path).replace("s_rho_-1","s_rho_49"))
+# #     # path.rename(str(path).replace("s_rho_-1","s_rho_29"))
+# # #     path.rename(path.with_suffix('.txt'))
+
+
+# # rename files to remove times and leave dates
+# paths = pathlib.Path("/Users/kthyng/Library/Caches/ocean-model-skill-assessor/nwgoa/model_output/").glob("*.nc")
+# # path = list(paths)[0]
+# for path in paths:
+#     path.rename(re.sub("(T\d\d:\d\d)", "", str(path)))

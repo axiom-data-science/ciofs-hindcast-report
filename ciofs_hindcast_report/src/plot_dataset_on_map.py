@@ -6,6 +6,8 @@ import ciofs_hindcast_report as chr
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
+import fsspec
+import xarray as xr
 
 def select_colorsdata():
     # make n distinct colors for the points
@@ -178,24 +180,25 @@ def ctd_towed_ferry_noaa_pmel(slug):
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-156, -150.5, 57, 59.75],
                     width_ratios=[0.4, 1.6])
 
-    cat = intake.open_catalog(chr.CAT_NAME(slug + "_initial"))
-    ds = cat[slug](doresampling=False).read().cf.sel(T=slice(None,None, 500))
+    url = "https://researchworkspace.com/files/42203278/Tustumena_t_s_chl_cdom_tr_final_data_subsetted.nc"
+    with fsspec.open(url) as f:
+        ds = xr.open_dataset(f).cf.sel(T=slice(None,None, 100))
+    
+        maps = np.vstack((ds.cf["longitude"].values, ds.cf["longitude"].values, 
+                        ds.cf["latitude"].values, ds.cf["latitude"].values,
+                        [""] * len(ds.cf["longitude"]),
+                        ["point"] * len(ds.cf["longitude"]),
+                        )).T
 
-    maps = np.vstack((ds.cf["longitude"].values, ds.cf["longitude"].values, 
-                      ds.cf["latitude"].values, ds.cf["latitude"].values,
-                      [""] * len(ds.cf["longitude"]),
-                      ["point"] * len(ds.cf["longitude"]),
-                     )).T
-
-    omsa.plot.map.plot_map(maps,
-                           figname=f"Map of {slug}",
-                                  label_with_station_name=True, 
-                                  two_maps=two_maps,
-                                  figsize=chr.figsize, 
-                                  map_font_size=chr.map_font_size,
-                                  legend=False,
-                                  annotate=False,
-                           )
+        omsa.plot.map.plot_map(maps,
+                            figname=f"Map of {slug}",
+                                    label_with_station_name=True, 
+                                    two_maps=two_maps,
+                                    figsize=chr.figsize, 
+                                    map_font_size=chr.map_font_size,
+                                    legend=False,
+                                    annotate=False,
+                            )
 
 
 def ctd_profiles_otf_kbnerr(slug):
@@ -263,12 +266,12 @@ def ctd_profiles_cmi_kbnerr(slug):
     
     source_names = [
         # 'Kbay_timeseries',
-                    'cmi_full_v2-Cruise_16-Line_1',
-                    'cmi_full_v2-Cruise_16-Line_2',
-                    'cmi_full_v2-Cruise_16-Line_3',
-                    'cmi_full_v2-Cruise_16-Line_4',
-                    'cmi_full_v2-Cruise_16-Line_6',
-                    'cmi_full_v2-Cruise_16-Line_7',
+                    'Cruise_16-Line_1',
+                    'Cruise_16-Line_2',
+                    'Cruise_16-Line_3',
+                    'Cruise_16-Line_4',
+                    'Cruise_16-Line_6',
+                    'Cruise_16-Line_7',
                     # 'sue_shelikof',
     ]
 
@@ -297,7 +300,7 @@ def ctd_profiles_cmi_kbnerr(slug):
                     )
           )
 
-    dds = [(-10000,-40000), (-40000, 20000), (-20000, 20000), (5000,10000), (0, 35000), (25000, 5000), (-92500, -30000), (-80000,-5000)]
+    dds = [(-10000,-40000), (-40000, 30000), (-20000, 20000), (5000,10000), (0, 35000), (25000, 5000), (-92500, -30000), (-80000,-5000)]
 
     omsa.plot.map.plot_map(np.asarray(maps),
                             figname=f"Map of {slug}",
@@ -369,7 +372,7 @@ def ctd_moored_kbnerr(slug):
                         )
 
 
-def ctd_time_series_uaf(slug):
+def ctd_profiles_uaf(slug):
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = source_names[0]
@@ -416,20 +419,25 @@ def ctd_profiles_2005_osu(slug):
 
 def ctd_towed_gwa(slug):
 
-    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.5, -150.0, 58.6, 59.5],
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.7, -150.0, 58.5, 61],
                     width_ratios=[1, 1])
 
-    cat = intake.open_catalog(chr.CAT_NAME(slug))
-    source_name = chr.src.utils.get_source_names(cat)[0]
-    df = cat[source_name].read()
+    # want to show all the data so just read it in
+    urls = ["https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv",
+            "https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv",
+            "https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv",
+            "https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv",
+            ]
+    maps = []
+    for url in urls:
+        df = pd.read_csv(url)
+        maps.extend(np.vstack((df.cf["longitude"].values, df.cf["longitude"].values, 
+                    df.cf["latitude"].values, df.cf["latitude"].values,
+                    [""] * len(df.cf["longitude"]),
+                    ["point"] * len(df.cf["longitude"]),
+                    )).T.tolist())
 
-    maps = np.vstack((df.cf["longitude"].values, df.cf["longitude"].values, 
-                      df.cf["latitude"].values, df.cf["latitude"].values,
-                      [""] * len(df.cf["longitude"]),
-                      ["point"] * len(df.cf["longitude"]),
-                     )).T
-
-    omsa.plot.map.plot_map(maps,
+    omsa.plot.map.plot_map(np.asarray(maps),
                            figname=f"Map of {slug}",
                                   label_with_station_name=True, 
                                   two_maps=two_maps,
@@ -440,22 +448,36 @@ def ctd_towed_gwa(slug):
                            )
 
 
-def temp_towed_gwa(slug):
+def ctd_towed_gwa_temp(slug):
 
-    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.5, -150.0, 58.6, 59.5],
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.5, -150.0, 58.5, 61],
                     width_ratios=[1, 1])
 
-    cat = intake.open_catalog(chr.CAT_NAME(slug))
-    source_name = chr.src.utils.get_source_names(cat)[0]
-    df = cat[source_name].read()
+    urls = ["https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv",
+            "https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv",
+            "https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv",
+            "https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv",
+            "https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv",
+            "https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv",]
+    maps = []
+    for url in urls:
+        df = pd.read_csv(url)
+        maps.extend(np.vstack((df.cf["longitude"].values, df.cf["longitude"].values, 
+                    df.cf["latitude"].values, df.cf["latitude"].values,
+                    [""] * len(df.cf["longitude"]),
+                    ["point"] * len(df.cf["longitude"]),
+                    )).T.tolist())
+    # cat = intake.open_catalog(chr.CAT_NAME(slug))
+    # source_name = chr.src.utils.get_source_names(cat)[0]
+    # df = cat[source_name].read()
 
-    maps = np.vstack((df.cf["longitude"].values, df.cf["longitude"].values, 
-                      df.cf["latitude"].values, df.cf["latitude"].values,
-                      [""] * len(df.cf["longitude"]),
-                      ["point"] * len(df.cf["longitude"]),
-                     )).T
+    # maps = np.vstack((df.cf["longitude"].values, df.cf["longitude"].values, 
+    #                   df.cf["latitude"].values, df.cf["latitude"].values,
+    #                   [""] * len(df.cf["longitude"]),
+    #                   ["point"] * len(df.cf["longitude"]),
+    #                  )).T
 
-    omsa.plot.map.plot_map(maps,
+    omsa.plot.map.plot_map(np.asarray(maps),
                            figname=f"Map of {slug}",
                                   label_with_station_name=True, 
                                   two_maps=two_maps,

@@ -5,9 +5,13 @@ import pandas as pd
 import ciofs_hindcast_report as chr
 import pathlib
 import numpy as np
+import xarray as xr
+import fsspec
 
 
-def line_depth_dict(x, y, dd, hover=True):
+key_variables = ["u","v","east","north","along","across", "ssh", "temp","salt"]
+
+def line_depth_dict(x, y, dd, hover=True, title=None, xlabel=None):
     """for property(ies) vs. depth"""
 
     d = {"kind": "line",
@@ -20,11 +24,13 @@ def line_depth_dict(x, y, dd, hover=True):
         "height": 400,
         "shared_axes": False,
         "hover": hover,
+        "title": title,
+        "value_label": xlabel,
     }
     return d
 
 
-def line_time_dict(x, y, dd=None, hover=True):
+def line_time_dict(x, y, dd=None, hover=True, subplots=True, title=None):
     """for property(ies) vs. time"""
     if dd is None:
         xuse = x
@@ -37,27 +43,30 @@ def line_time_dict(x, y, dd=None, hover=True):
         "x": xuse,
         # "invert": True,
         # "flip_yaxis": True,
-        "subplots": True,
-        "width": 600,
+        "subplots": subplots,
+        "width": 900,
         "height": 300,
         "shared_axes": False,
         "hover": hover,
+        "title": title,
+        "legend": "top",  # legend at top of plot on outside
     }
     return d
 
 
-def scatter_dict(var, dd, x, y, flip_yaxis=False, hover=False):
+def scatter_dict(var, dd, x, y, flip_yaxis=False, hover=False, title=None):
     d = {"kind": "scatter",
           "x": dd.cf[x].name,
           "y": dd.cf[y].name,
           "c": [dd.cf[ele].name for ele in var] if isinstance(var, list) else dd.cf[var].name,
           "clabel": dd.cf[var].name,
           "cmap": chr.cmap[var],
-          "width": 400,# 500,
+          "width": 500,# 500,
           "height": 300,#400,
           "flip_yaxis": flip_yaxis,
           "shared_axes": False,
           "hover": hover,
+          "title": title,
           }
     return d
 
@@ -107,7 +116,6 @@ def quadmesh_dict(var, x, y, cmap=None, flip_yaxis=True,dd=None, ):
 
 
 def add_metadata(dd, maptype, featuretype):
-    # import pdb; pdb.set_trace()
     d = {"minLongitude": float(dd.cf["longitude"].min()),
         "minLatitude": float(dd.cf["latitude"].min()),
         "maxLongitude": float(dd.cf["longitude"].max()),
@@ -115,7 +123,9 @@ def add_metadata(dd, maptype, featuretype):
         "minTime": str(dd.cf["T"].values.min()),
         "maxTime": str(dd.cf["T"].values.max()),
         "maptype": maptype,
-        "featuretype": featuretype}
+        "featuretype": featuretype,
+        "key_variables": [key_variable for key_variable in key_variables if key_variable in dd.cf.keys()],
+        }
     return d
 
 
@@ -146,19 +156,6 @@ def ctd_profiles_gwa(slug):
     time = "Quarterly repeats from 2012 to 2021"
     included = True
     notes = "Not used in the NWGOA model/data comparison."
-    urls = ["https://workspace.aoos.org/published/file/fb5057ac-0c59-42cf-bf35-efbb38089ee9/CookInletKachemakBay_CTD_2012.csv",
-            "https://workspace.aoos.org/published/file/476d2d43-02b2-48ef-8a74-5b6ab1f0eee0/CookInletKachemakBay_CTD_2013.csv",
-            "https://workspace.aoos.org/published/file/1a5d6c6c-7f5a-4277-8107-84906a05f60b/CookInletKachemakBay_CTD_2014.csv",
-            "https://workspace.aoos.org/published/file/09fbcf0e-7f69-4d1a-a152-798134b16a93/CookInletKachemakBay_CTD_2015.csv",
-            "https://workspace.aoos.org/published/file/3c574a94-b352-4f80-8025-0162643a9fed/CookInletKachemakBay_CTD_2016.csv",
-            "https://workspace.aoos.org/published/file/9694df98-9f53-4754-839f-89a8905b4360/CookInletKachemakBay_CTD_2017.csv",
-            "https://workspace.aoos.org/published/file/f0702df6-c57e-4b79-bb71-02aad49f95c7/CookInletKachemakBay_CTD_2018.csv",
-            "https://workspace.aoos.org/published/file/7b956e3a-0be4-4a43-af1f-36694027a321/CookInletKachemakBay_CTD_2019.csv",
-            "https://workspace.aoos.org/published/file/8d870168-43ae-4825-a7d6-5b13282814a8/CookInletKachemakBay_CTD_2020.csv",
-            "https://workspace.aoos.org/published/file/83a85c3c-8b83-4cc4-a5ee-ccaa00107252/CookInletKachemakBay_CTD_2021.csv",
-            "https://workspace.aoos.org/published/file/582f3a27-04b3-4e03-940f-9122f83fd6bc/CookInletKachemakBay_CTD_2022.csv"]
-    cols = ["Date", "Time", "Latitude_DD", "Longitude_DD", "Transect", "StationN", "Bottom.Depth", "Depth", 'Temperature_ITS90_DegC', 'Salinity_PSU']
-    csv_kwargs = dict(header=1, usecols=cols, dtype={'Transect': 'object', 'Bottom.Depth': 'float64'}, parse_dates=[["Date","Time"]])
     maptype = "line"
     featuretype = "trajectoryProfile"
     map_description = "Transects"
@@ -169,56 +166,52 @@ Surveys are conducted annually along five primary transects; two in Kachemak Bay
 
 Project files and further description can be found here: https://gulf-of-alaska.portal.aoos.org/#metadata/4e28304c-22a1-4976-8881-7289776e4173/project
     """
-
-    # read in all data together
-    dfs = []
-    for url in urls:
-        dfs.append(pd.read_csv(url, **csv_kwargs))
-    df = pd.concat(dfs)
-
-    # assess transect occurrences 
-    # transect_list = [sorted(list(set(df["Transect"])))[-2]]
-    # transects = {}  # defines transects for dataset
-    # # A transect is defined by an identifying number and a date
-    # for transect in transect_list:
-    #     itransect = df["Transect"] == transect
-    #     dates = list(set(df.loc[itransect,:]["Date_Time"].dt.date))
-    #     transects[transect] = [dates[i] for i in [0,1,-2,-1]]
-    #     # transects[transect] = dates
-    # header_names = ["transect_9"]
-    # header_names = ["Transect 3", "Transect 4", "Transect 6", "Transect 7", "Transect 9", "Transect AlongBay"]
     header_names = ["transect_3", "transect_4", "transect_6", "transect_7", "transect_9", "transect_AlongBay"]
-    # assess transect occurrences 
-    transect_list = list(set(df["Transect"]))
-    transects = {}  # defines transects for dataset
-    # A transect is defined by an identifying number and a date
-    for transect in transect_list:
-        itransect = df["Transect"] == transect
-        dates = list(set(df.loc[itransect,:]["Date_Time"].dt.date))
-        transects[transect] = dates
+    
+    urls = ["https://researchworkspace.com/files/42203150/CookInletKachemakBay_CTD_2012_subsetted.csv",
+            "https://researchworkspace.com/files/42203152/CookInletKachemakBay_CTD_2013_subsetted.csv",
+            "https://researchworkspace.com/files/42203153/CookInletKachemakBay_CTD_2014_subsetted.csv",
+            "https://researchworkspace.com/files/42203154/CookInletKachemakBay_CTD_2015_subsetted.csv",
+            "https://researchworkspace.com/files/42203155/CookInletKachemakBay_CTD_2016_subsetted.csv",
+            "https://researchworkspace.com/files/42203156/CookInletKachemakBay_CTD_2017_subsetted.csv",
+            "https://researchworkspace.com/files/42203157/CookInletKachemakBay_CTD_2018_subsetted.csv",
+            "https://researchworkspace.com/files/42203158/CookInletKachemakBay_CTD_2019_subsetted.csv",
+            "https://researchworkspace.com/files/42203159/CookInletKachemakBay_CTD_2020_subsetted.csv",
+            "https://researchworkspace.com/files/42203160/CookInletKachemakBay_CTD_2021_subsetted.csv",
+            "https://researchworkspace.com/files/42203161/CookInletKachemakBay_CTD_2022_subsetted.csv",
+    ]
+    csv_kwargs = dict(parse_dates=[0], dtype={'Transect': 'object'})
 
     entries = {}
-    for transect, dates in transects.items():
-        for date in dates:
-            name = f"transect_{transect}-{date}"
-            # title = f"Date {date}, Transect {transect}"
-            
+    for url in urls:
+        year = pathlib.Path(url).stem.split("_")[-2]
+        df = pd.read_csv(url, **csv_kwargs)
+        # "Visit" and "Transect" uniquely identify each transect
+        for i in set(df.set_index(["Visit", "Transect"]).index):
+            visit, transect = i
+            name = f"transect_{transect}-{visit}"
             # select transect/date to get metadata
-            ddf = getattr(chr.src.process, slug)(df, transect, date)
-
-            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
+            ddf = getattr(chr.src.process, slug)(df, i)
+            
+            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True, title=name),
+                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True, title=name),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
-            entries[name] = {"description": f"Transect {transect}, {date}",
+            metadata.update({"urlpath": url})
+            entries[name] = {"description": f"Transect {transect}, {visit}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                            "args": {"targets": [f"{name}_base"],
+                            "args": {"targets": [f"{year}_base"],
                                     "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                    "transform_kwargs": dict(transect=transect, date=date),},
+                                    "transform_kwargs": dict(visit_transect=i),
+                                    },
                             "metadata": metadata}
-            entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                    "driver": "csv",
-                                    "args": {"urlpath": [url for url in urls if str(pd.Timestamp(date).year) in url][0],
-                                             "csv_kwargs": csv_kwargs}}
+        entries[f"{year}_base"] = {"description": f"Base for {year}",
+                                "driver": "csv",
+                                "args": {"urlpath": f"simplecache::{url}",
+                                        "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                    }
+        }
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -236,7 +229,7 @@ Project files and further description can be found here: https://gulf-of-alaska.
 
 def ctd_profiles_2005_noaa(slug):
     project_name = "CTD profiles 2005 - NOAA"
-    overall_desc = "CTD Profiles (NOAA): Single CTD profiles across Cook Inlet"
+    overall_desc = "CTD Profiles (NOAA): across Cook Inlet"
     time = "One-off CTD profiles in June and July 2005"
     included = True
     notes = ""
@@ -246,70 +239,55 @@ def ctd_profiles_2005_noaa(slug):
     map_description = "CTD Profiles"
     summary = """CTD Profiles from NOAA.
 """
-
     urls = ["https://researchworkspace.com/files/39886023/noaa_north.txt",
             "https://researchworkspace.com/files/39886022/noaa_south.txt"]
     csv_kwargs = dict(encoding = "ISO-8859-1", sep="\t", parse_dates={'date_time' : [3, 4]})
-        
-    # read in all data together
-    dfs = []
-    for url in urls:
-        dfs.append(pd.read_csv(url, **csv_kwargs))
-    df = pd.concat(dfs)
-
-
-    # split into single CTD cast units by station
-    stations = sorted(list(set(df["Station"])))
-
+    
     entries = {}
+    for url in urls:
+        df = pd.read_csv(url, **csv_kwargs)
 
-    # inds = [0,1,-2,-1]
-    # for ind in inds:
-    #     station = stations[ind]
-    for station in stations:
-        name = f"{station}"
-        # name = f"station_{station}"
-        title = f"Station {station}" 
+        # split into single CTD cast units by station
+        stations = sorted(list(set(df["Station"])))
+        for station in stations:
+            name = f"{station}"
+            # select transect/date to get metadata
+            ddf = getattr(chr.src.process, slug)(df, station)
+            xlabel = str(ddf.cf["T"].iloc[0])
+            metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
+            metadata.update(add_metadata(ddf, maptype, featuretype))
+            metadata.update({"urlpath": url})
+            entries[name] = {"description": f"Station {station}",
+                            "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
+                            "args": {"targets": [f"{name}_base"],
+                                    "transform": f"ciofs_hindcast_report.src.process.{slug}",
+                                    "transform_kwargs": dict(station=station),},
+                            "metadata": metadata}
+            entries[f"{name}_base"] = {"description": f"Base for {name}",
+                                    "driver": "csv",
+                                    "args": {"urlpath": f"simplecache::{url}",
+                                                "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                                }}
 
-        # select transect/date to get metadata
-        ddf = getattr(chr.src.process, slug)(df, station)
-        lon, lat = float(ddf.cf["longitude"].min()), float(ddf.cf["latitude"].min())
-        # use *_south file for lat<60.2
-        if lat < 60.2:
-            urlpath = [url for url in urls if "south" in url][0]
-        else:
-            urlpath = [url for url in urls if "north" in url][0]
-
-        metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf),}}
-        metadata.update(add_metadata(ddf, maptype, featuretype))
-        entries[name] = {"description": f"Station {station}",
-                        "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{name}_base"],
-                                "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                "transform_kwargs": dict(station=station),},
-                        "metadata": metadata}
-        entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                "driver": "csv",
-                                "args": {"urlpath": urlpath,
-                                            "csv_kwargs": csv_kwargs}}
-
-    # more catalog-level metadata
-    cat_meta = {"map_description": map_description,
-                "summary": summary,
-                "header_names": header_names,
-                "project_name": project_name,
-                "time": time,
-                "included": included,
-                "notes": notes,
-                "featuretype": featuretype,
-                }
-        
-    save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
+        # more catalog-level metadata
+        cat_meta = {"map_description": map_description,
+                    "summary": summary,
+                    "header_names": header_names,
+                    "project_name": project_name,
+                    "time": time,
+                    "included": included,
+                    "notes": notes,
+                    "featuretype": featuretype,
+                    }
+            
+        save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
 def ctd_profiles_usgs_boem(slug):
     project_name = "CTD profiles - USGS BOEM"
-    overall_desc = "CTD Profiles (USGS BOEM): Single CTD profiles across Cook Inlet"
+    overall_desc = "CTD Profiles (USGS BOEM): across Cook Inlet"
     time = "One-off CTD profiles from 2016 to 2021 in July"
     included = True
     notes = ""
@@ -324,42 +302,35 @@ CTD profiles collected in Cook Inlet from 2016-2021 by Mayumi Arimitsu as part o
 The scientific project is described here: https://www.usgs.gov/centers/alaska-science-center/science/cook-inlet-seabird-and-forage-fish-study#overview.
 """
 
-    url = "https://researchworkspace.com/files/41842273/Arimitsu_CookInlet_CTD.csv"
-    cols = ["date","ctd_time [local]", 'station_number', 'location', 'ctd_latitude',
-        'ctd_longitude', 'PrdM', 'Tv290C', 'Sal00']
-    csv_kwargs = dict(usecols=cols)
-
-    # read in data 
-    df = pd.read_csv(url, **csv_kwargs)
-    df = getattr(chr.src.process, slug)(df)
-    df = df.sort_values(df.cf["T"].name)
-
+    url = "https://researchworkspace.com/files/42202136/Arimitsu_CookInlet_CTD.csv"
+    csv_kwargs = dict(parse_dates=[0])
+    df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
     stations = sorted(list(set(df["station_number"])))
 
     entries = {}
 
-    # inds = [0,1,-2,-1]
-    # for ind in inds:
-    #     station = stations[ind]
     for station in stations:
         name = f"{station}"
-        # name = f"station_{station}"
-        # title = f"Station {station}" 
         # process dataframe so can get metadata
-        ddf = df[df["station_number"] == station]
-        metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf),}}
+        ddf = getattr(chr.src.process, slug)(df, station)
+        xlabel = str(ddf.cf["T"].iloc[0])
+        metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
+        metadata.update({"urlpath": url})
         entries[name] = {"description": f"Station {station}",
                         "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{name}_base"],
+                        "args": {"targets": [f"{slug}_base"],
                                 "transform": f"ciofs_hindcast_report.src.process.{slug}",
                                 "transform_kwargs": dict(station=station),},
                         "metadata": metadata}
-        entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                "driver": "csv",
-                                "args": {"urlpath": url,
-                                            "csv_kwargs": csv_kwargs}}
+    entries[f"{slug}_base"] = {"description": f"Base for {name}",
+                            "driver": "csv",
+                            "args": {"urlpath": f"simplecache::{url}",
+                                        "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -377,55 +348,53 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
 
 def ctd_towed_otf_kbnerr(slug):
     project_name = "CTD Towed 2003 - OTF KBNERR"
-    overall_desc = "Towed CTD (OTF KBNERR): Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths"
+    overall_desc = "Towed CTD (OTF KBNERR): central Cook Inlet"
     time = "July 2003, 5min sampling frequency"
     included = True
     notes = "Two files that were about 30 minutes long were not included (mic071203 and mic072803_4-5). These data were not included in the NWGOA model/data comparison. Resampled from 5sec to 5min sampling frequency."
     maptype = "point"
     featuretype = "trajectoryProfile"
-    header_names = None
+    # header_names = None
     map_description = "Towed CTD Profiles"
     summary = """Towed CTD Profiles.
+
+Short, high resolution towed CTD in the middle of Cook Inlet at nominal 4 and 10m depths
 """
 
-    urls = [
-            # "https://researchworkspace.com/files/39891466/mic071203.txt",  # about 30 min long — too short so skipping!
-            "https://researchworkspace.com/files/39891468/mic071303.txt",
-            "https://researchworkspace.com/files/39891469/mic071903.txt",
-            "https://researchworkspace.com/files/39891471/mic072003.txt",
-            "https://researchworkspace.com/files/39891473/mic072103.txt",
-            "https://researchworkspace.com/files/39891475/mic072203.txt",
-            "https://researchworkspace.com/files/39891476/mic072403.txt",
-            "https://researchworkspace.com/files/39891478/mic072503.txt",
-            "https://researchworkspace.com/files/39891480/mic072603.txt",
-            # "https://researchworkspace.com/files/39891481/mic072803_4-5.txt",  # about 30 min long — too short so skipping!
-            "https://researchworkspace.com/files/39891483/mic072803_65-8.txt",
-            "https://researchworkspace.com/files/39891484/mic072903.txt",
-            "https://researchworkspace.com/files/39891464/mic073003.txt",
-        ]
-    csv_kwargs = dict(sep="\t", parse_dates={"date_time": ['date ', ' time ']}, na_values='      NaN ')
+    urls = ["https://researchworkspace.com/files/42202371/mic071303_subsampled.csv",
+            "https://researchworkspace.com/files/42202372/mic071903_subsampled.csv",
+            "https://researchworkspace.com/files/42202373/mic072003_subsampled.csv",
+            "https://researchworkspace.com/files/42202374/mic072103_subsampled.csv",
+            "https://researchworkspace.com/files/42202375/mic072203_subsampled.csv",
+            "https://researchworkspace.com/files/42202376/mic072403_subsampled.csv",
+            "https://researchworkspace.com/files/42202377/mic072503_subsampled.csv",
+            "https://researchworkspace.com/files/42202378/mic072603_subsampled.csv",
+            "https://researchworkspace.com/files/42202379/mic072803_65-8_subsampled.csv",
+            "https://researchworkspace.com/files/42202380/mic072903_subsampled.csv",
+            "https://researchworkspace.com/files/42202381/mic073003_subsampled.csv",]
+    csv_kwargs = dict(parse_dates=[0])
 
     entries = {}
+    header_names = []
     for url in urls:
         name = pathlib.PurePath(url).stem
 
         df = pd.read_csv(url, **csv_kwargs)
-        df = getattr(chr.src.process, slug)(df)
-
-        metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
-                            "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),
+        title = str(df.cf["T"].iloc[0])
+        metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True, title=title),
+                            "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True, title=title),
                             "map": map_dict(df),}}
         metadata.update(add_metadata(df, maptype, featuretype))
+        metadata.update({"urlpath": url})
         entries[name] = {"description": f"File {name}",
-                        "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{name}_base"],
-                                "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                "transform_kwargs": dict()},
+                        "driver": "csv",
+                        "args": {"urlpath": f"simplecache::{url}",
+                                "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                },
                         "metadata": metadata,}
-        entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                "driver": "csv",
-                                "args": {"urlpath": url,
-                                         "csv_kwargs": csv_kwargs}}
+        header_names.extend([name.rstrip("_subsampled")])
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -443,19 +412,18 @@ def ctd_towed_otf_kbnerr(slug):
 
 def ctd_towed_ferry_noaa_pmel(slug):
     project_name = "CTD Towed 2004-2008 Ferry in-line - NOAA PMEL"
-    overall_desc = "Underway CTD (NOAA PMEL): Towed CTD on ferry at nominal 4m depth"
+    overall_desc = "Underway CTD (NOAA PMEL): Towed on ferry"
     time = "Continuous 2004 to 2008, 5min sampling frequency"
     included = True
     notes = "The ferry regularly traveled outside of the domain of interest and those times are not included. Data was resampled from 30s to 5min sampling frequency."
     maptype = "point"
     featuretype = "trajectory"
-    url = "https://www.nodc.noaa.gov/archive/arc0031/0070122/1.1/data/0-data/Tustumena_t_s_chl_cdom_tr_final_data.nc"
-    xarray_kwargs = dict(drop_variables=["CHLOROPHYLL","CDOM","C_C_FW"])
     map_description = "Towed CTD Paths"
-    bbox = [-156.0, 57.0, -150.5, 61.5]
     summary = """
 An oceanographic monitoring system aboard the Alaska Marine Highway System ferry Tustumena operated for four years in the Alaska Coastal Current (ACC) with funding from the Exxon Valdez Oil Spill Trustee Council's Gulf Ecosystem Monitoring Program, the North Pacific Research Board and the National Oceanic and Atmospheric Administration. An electronic public display aboard the ferry educated passengers about the local oceanography and mapped the ferry's progress. Sampling water at 4 m, the underway system measured: (1) temperature and salinity (used in the present report), and (2) nitrate,
 (3) chlorophyll fluorescence, (4) colored dissolved organic matter fluorescence, and (5) optical beam transmittance (not used in report).
+
+Nominal 4 meter depth.
 
 NORTH PACIFIC RESEARCH BOARD PROJECT FINAL REPORT
 Alaskan Ferry Oceanographic Monitoring in the Gulf of Alaska
@@ -475,62 +443,38 @@ Archive: https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noa
 
 ![pic](https://www.nodc.noaa.gov/archive/arc0031/0070122/1.1/about/0070122_map.jpg)
 """
+    
+    url = "https://researchworkspace.com/files/42202265/Tustumena_t_s_chl_cdom_tr_final_data_subsetted.nc"
+    with fsspec.open(url) as f:
+        ds = xr.open_dataset(f)
+        months = [1,2,3,4,5,6,7,8,9,10,11,12]
+        entries = {}
+        header_names = ["2004", "2005", "2006", "2007", "2008"]
+        for year in header_names:
+            for month in months:
 
-    # Make an initial catalog because it's easier to read in the data that way
-    # then make another catalog that is curated for monthly datasets
-    entries = {}
-    name = slug
-    entries[name] = {"description": f"{project_name}",
-                    "driver": "ciofs_hindcast_report.src.process.DatasetTransform",
-                    "args": {"targets": [f"{name}_base"],
-                             "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                             "transform_kwargs": dict(doresampling=False)},
-                    "metadata": {"maptype": "point",
-                                "minLongitude": bbox[0],
-                                "minLatitude": bbox[1],
-                                "maxLongitude": bbox[2],
-                                "maxLatitude": bbox[3]},
-                    }
-    entries[f"{name}_base"] = {"description": f"Base for {name}",
-                               "driver": "netcdf",
-                               "args": {"urlpath": url,
-                                        "xarray_kwargs": xarray_kwargs}}
-    cat_name_initial = f"{slug}_initial"
-    save_catalog(entries, cat_name=cat_name_initial, cat_desc=overall_desc)
+                dsd = getattr(chr.src.process, slug)(ds, year, month)
+                # not all month-years present in data
+                if dsd["T_30_EQ_AX"].size == 0:
+                    continue
 
-    # read in data (more easily from intake) to get yearmonth to create individual monthly sources for dataset
-    catname = chr.CAT_NAME(cat_name_initial)
-    cat = intake.open_catalog(catname)
-    ds = cat[slug].read()
-
-    yearmonths = sorted(list(set([(pd.Timestamp(t).year, str(pd.Timestamp(t).month).zfill(2)) for t in ds.cf["T"].values])))
-
-    entries = {}
-    header_names = ["2004", "2005", "2006", "2007", "2008"]
-    # header_names = ["2004", "2008"]
-    # make one entry per month
-    # for ind in [0,1,-2,-1]:
-    #     year, month = yearmonths[ind]
-    for year, month in yearmonths:
-
-        # dsd = getattr(chr.src.process, slug)(ds, yearmonth=(year,month))
-        dsd = ds.cf.sel(T=slice(f"{year}-{month}", f"{year}-{month}"))
-
-        name = f"{year}-{month}"
-        
-        metadata = {"plots": {"salt": scatter_dict("salt", dsd, x="longitude", y="latitude", flip_yaxis=False),
-                              "temp": scatter_dict("temp", dsd, x="longitude", y="latitude", flip_yaxis=False),}}
-        metadata.update(add_metadata(dsd, maptype, featuretype))
-        entries[name] = {"description": f"{year}, month {month}",
-                        "driver": "ciofs_hindcast_report.src.process.DatasetTransform",
-                        "args": {"targets": [f"{slug}_base"],
-                                 "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                 "transform_kwargs": dict(yearmonth=(year, month))},
-                        "metadata": metadata}
+                name = f"{year}-{month}"
+                metadata = {"plots": {"salt": scatter_dict("salt", dsd, x="longitude", y="latitude", flip_yaxis=False),
+                                    "temp": scatter_dict("temp", dsd, x="longitude", y="latitude", flip_yaxis=False),}}
+                metadata.update(add_metadata(dsd, maptype, featuretype))
+                metadata.update({"urlpath": url})
+                entries[name] = {"description": f"{year}, month {month}",
+                                "driver": "ciofs_hindcast_report.src.process.DatasetTransform",
+                                "args": {"targets": [f"{slug}_base"],
+                                        "transform": f"ciofs_hindcast_report.src.process.{slug}",
+                                        "transform_kwargs": dict(year=year, month=month),
+                                            "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                    "same_names": True,}}
+                                        },
+                                "metadata": metadata}
     entries[f"{slug}_base"] = {"description": f"Base for {slug}",
                                "driver": "netcdf",
-                               "args": {"urlpath": url,
-                                        "xarray_kwargs": xarray_kwargs}}
+                               "args": {"urlpath": f"simplecache::{url}"}}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -548,13 +492,13 @@ Archive: https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noa
 
 def ctd_profiles_otf_kbnerr(slug):
     project_name = "CTD profiles 2003-2006 - OTF KBNERR"
-    overall_desc = "CTD Transect (OTF KBNERR): Repeat CTD transect from Anchor Point in Cook Inlet"
+    overall_desc = "CTD Transect (OTF KBNERR): Repeated from Anchor Point"
     time = "Daily in July, 2003 to 2006"
     included = True
     notes = "These data were not included in the NWGOA model/data comparison"
     maptype = "point"
     featuretype = "trajectoryProfile"
-    header_names = None
+    header_names = ["2003", "2004", "2005", "2006"]
     map_description = "CTD Profiles in Consistent Transect"
     summary = """CTD Profiles Across Anchor Point Transect, for GEM Project 030670.
 
@@ -593,18 +537,12 @@ Project description: https://evostc.state.ak.us/restoration-projects/project-sea
             df = pd.read_csv(url, **csv_kwargs)
             ddf = getattr(chr.src.process, slug)(df, year, day)
             # at least one day is missed
-            if len(ddf) == 0:
+            if len(ddf.dropna(subset="date_time")) == 0:
                 continue
-            # ddf = df.set_index("date_time").loc[f"{year}-{month}-{day}"].reset_index()
-
-            metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),}}
-            # metadata.update({"minLongitude": minlon, "minLatitude": minlat, 
-            #                  "maxLongitude": maxlon, "maxLatitude": maxlat,
-            #                  "minTime": str(ddf.cf["T"].values.min()),
-            #                  "maxTime": str(ddf.cf["T"].values.max()),
-            #                  "maptype": maptype, "featuretype": featuretype})
+            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
+            metadata.update({"urlpath": url})
             entries[name] = {"description": f"{name}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                             "args": {"targets": [f"{name}_base"],
@@ -613,13 +551,16 @@ Project description: https://evostc.state.ak.us/restoration-projects/project-sea
                             "metadata": metadata}
             entries[f"{name}_base"] = {"description": f"Base for {name}",
                                     "driver": "csv",
-                                    "args": {"urlpath": url,
-                                             "csv_kwargs": csv_kwargs}}
+                                    "args": {"urlpath": f"simplecache::{url}",
+                                             "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                             }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
                 "summary": summary,
-                "header_names": ["2003", "2004", "2005", "2006"],
+                "header_names": header_names,
                 "project_name": project_name,
                 "time": time,
                 "included": included,
@@ -632,13 +573,13 @@ Project description: https://evostc.state.ak.us/restoration-projects/project-sea
 
 def ctd_profiles_cmi_uaf(slug):
     project_name = "CTD profiles 2004-2005 - CMI UAF"
-    overall_desc = "CTD Transect (CMI UAF): CTD transect from East Foreland Lighthouse in Cook Inlet"
+    overall_desc = "CTD Transect (CMI UAF): from East Foreland Lighthouse"
     time = "10 cruises, approximately monthly for summer months, in 2004 and 2005"
     included = True
     notes = "Used in the NWGOA model/data comparison."
     maptype = "point"
     featuretype = "trajectoryProfile"
-    header_names = ["2004", "2005"]
+    header_names = None
     map_description = "CTD Profiles in a Transect"
     summary = """Seasonality of Boundary Conditions for Cook Inlet, Alaska: Transect (3) at East Foreland Lighthouse.
 
@@ -657,22 +598,20 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     entries = {}
     url = "https://researchworkspace.com/files/39886038/all_forelands_ctd.txt"
     csv_kwargs = dict(sep="\t", dtype={"Month": "str", "Year": "str", "Day": "str", "Hour": "str", "Minute": "str"})
-    # df = pd.read_csv(url, **csv_kwargs)
-    # df = getattr(chr.src.process, slug)(df)
+    df = pd.read_csv(url, **csv_kwargs)
     # we can just know this
     cruises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     for cruise in cruises:
 
         # select cruise to get metadata
-        df = pd.read_csv(url, **csv_kwargs)
-        ddf = getattr(chr.src.process, slug)(df, cruise)
-        name = f"Cruise-{str(cruise).zfill(2)}_{str(ddf.cf['T'].iloc[0].date())}"
-
-        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
-                            "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
+        ddf = getattr(chr.src.process, slug)(df.copy(), cruise)
+        name = f"Cruise-{str(cruise).zfill(2)}"
+        title = f"{str(ddf.cf['T'].iloc[0].date())}"
+        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True, title=title),
+                            "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True, title=title),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
-
+        metadata.update({"urlpath": url})
         entries[name] = {"description": f"Cruise {cruise}",
                         "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                         "args": {"targets": [f"{slug}_base"],
@@ -681,8 +620,11 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
                         "metadata": metadata}
     entries[f"{slug}_base"] = {"description": f"Base for all sources",
                             "driver": "csv",
-                            "args": {"urlpath": url,
-                                        "csv_kwargs": csv_kwargs}}
+                            "args": {"urlpath": f"simplecache::{url}",
+                                        "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -700,28 +642,20 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 def ctd_profiles_cmi_kbnerr(slug):
     project_name = "CTD profiles 2004-2006 - CMI KBNERR"
-    overall_desc = "CTD Transects, 1 Moored CTD (CMI KBNERR): Six repeat transects, one single transect, and one time series of CTD profiles in Cook Inlet"
+    overall_desc = "CTD Transects, Moored CTD (CMI KBNERR): Six repeat, one single transect, one moored CTD"
     time = "From 2004 to 2006"
     included = True
     notes = "Used in the NWGOA model/data comparison."
     maptype = "point"
     featuretype = "trajectoryProfile"
-    header_names = ["Kbay_timeseries", "Cruise_00", "Cruise_01", "Cruise_02", "Cruise_03", "Cruise_04", "Cruise_05", "Cruise_06", "Cruise_07",
-                    "Cruise_08", "Cruise_09", "Cruise_10", "Cruise_11", "Cruise_12", "Cruise_13", "Cruise_14", "Cruise_15", "Cruise_16", "sue_shelikof"]
+    header_names = ["Cruise_00", "Cruise_01", "Cruise_02", "Cruise_03", "Cruise_05", "Cruise_06", "Cruise_07",
+                    "Cruise_08", "Cruise_09", "Cruise_10", "Cruise_11", "Cruise_12", "Cruise_13", "Cruise_14", "Cruise_15", "Cruise_16", "Kbay_timeseries", "sue_shelikof"]
     map_description = "CTD Profiles in Transects"
     summary = f"""Seasonality of Boundary Conditions for Cook Inlet, Alaska
 
 During 2004 to 2006 we collected hydrographic measurements along transect lines crossing: 1) Kennedy Entrance and Stevenson Entrance from Port Chatham to Shuyak Island; 2) Shelikof Strait from Shuyak Island to Cape Douglas; 3) Cook Inlet from Red River to Anchor Point; 4) Kachemak Bay from Barbara Point to Bluff Point, and 5) the Forelands from East Foreland to West Foreland. During the third year we added two additional lines; 6) Cape Douglas to Cape Adams, and 7) Magnet Rock to Mount Augustine. The sampling in 2006 focused on the differences in properties during the spring and neap tide periods.
 
 CTD profiles 2004-2005 - CMI UAF seems to be transect 5 of this project.
-
-Note
-Line 4 has an incorrect latitude for station 65. This can be seen with the following if the correction is not made:
-```
-df = cat['cmi_full_v2-Cruise_16-Line_4'].read()
-df.drop_duplicates(subset="Station")
-```
-because the longitude is fixed and the latitude increases linearly until station 65 and then repeats the latitude value of station 56. The values are the same for the line in all datasets, and in the report. Since the difference in latitude across line 4 is about 0.0167, I will apply that difference from station 64 and use the resulting latitude for line 4, station 65.
 
 Part of the project:
 Seasonality of Boundary Conditions for Cook Inlet, Alaska
@@ -734,16 +668,13 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 <img src="https://user-images.githubusercontent.com/3487237/233167915-c0b2b0e1-151e-4cef-a647-e6311345dbf9.jpg" alt="alt text" width="300"/>
 """
-    urls = ["https://researchworkspace.com/files/39885976/cmi_full_v2.txt",
+    urls = ["https://researchworkspace.com/files/42202067/cmi_full_v2.csv",
             "https://researchworkspace.com/files/39886046/Kbay_timeseries.txt",
             "https://researchworkspace.com/files/39886061/sue_shelikof.txt",
             ]
 
-    cols = ['hh:mm', 'mon/day/yr', 'Cruise', 'Station', 'Type', 'Longitude [degrees_east]',
-        'Latitude [degrees_north]', 'Bot. Depth [m]', 
-        'Temperature [C]', 'Depth [m]', 'Salinity [psu]']
     csv_kwargs = []
-    csv_kwargs.append(dict(header=2, sep="\t", parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, usecols=cols, na_values=-9999.0))
+    csv_kwargs.append(dict(parse_dates=[0]))
     csv_kwargs.append(dict(encoding = "ISO-8859-1", sep="\t", parse_dates={"date_time": ["mon/day/yr","hh:mm [utc]"]}))
     csv_kwargs.append(dict(encoding = "ISO-8859-1", sep="\t", parse_dates={"date_time": ["mon/day/yr","hh:mm"]}))
     
@@ -751,15 +682,26 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     
     # sue_shelikof
     name, ind = "sue_shelikof", 2
+    process_function = "ctd_profiles_cmi_kbnerr_sue_shelikof"
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
-    metadata = {"plots": {"salt": scatter_dict("salt", df, x="distance", y="Z", flip_yaxis=True),
-                        "temp": scatter_dict("temp", df, x="distance", y="Z", flip_yaxis=True),}}
-    metadata.update(add_metadata(df, maptype, featuretype))
+    ddf = getattr(chr.src.process, process_function)(df)
+    metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
+                        "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
+    metadata.update(add_metadata(ddf, maptype, featuretype))
+    metadata.update({"urlpath": urls[ind]})
     entries[name] = {"description": f"{name} line",
-                    "driver": "csv",
-                    "args": {"urlpath": urls[ind],
-                             "csv_kwargs": csv_kwargs[ind]},
+                    "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
+                            "args": {"targets": [f"{name}_base"],
+                                    "transform": f"ciofs_hindcast_report.src.process.{process_function}",
+                                    "transform_kwargs": dict(),},
                     "metadata": metadata}
+    entries[f"{name}_base"] = {"description": f"Base for {name} sources",
+                               "driver": "csv",
+                               "args": {"urlpath": f"simplecache::{urls[ind]}",
+                                        "csv_kwargs": csv_kwargs[ind],
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
     
     # Kbay_timeseries
     name, ind = "Kbay_timeseries", 1
@@ -767,56 +709,46 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     metadata = {"plots": {"salt": scatter_dict("salt", df, x="T", y="Z", flip_yaxis=True),
                         "temp": scatter_dict("temp", df, x="T", y="Z", flip_yaxis=True),}}
     metadata.update(add_metadata(df, maptype, featuretype))
+    metadata.update({"urlpath": urls[ind]})
     entries[name] = {"description": f"{name} line",
                     "driver": "csv",
-                    "args": {"urlpath": urls[ind],
-                             "csv_kwargs": csv_kwargs[ind]},
+                    "args": {"urlpath": f"simplecache::{urls[ind]}",
+                             "csv_kwargs": csv_kwargs[ind],
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                             },
                     "metadata": metadata}
     
     # cmi_full_v2
     name, ind = "cmi_full_v2", 0
     cruises = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-    # stations making up lines/transects
-    lines = {1: np.arange(1,23).tolist(),
-            2: np.arange(23,39).tolist(),
-            3: np.arange(39,56).tolist(),
-            4: np.arange(56,66).tolist(),
-            6: np.arange(90,118).tolist(),
-            7: np.arange(66,90).tolist(),
-            }
-    # easier to use this way
-    inverse_lines = { v: k for k, l in lines.items() for v in l }
+    lines = [1,2,3,4,6,7]
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
-    df.cf["longitude"] -= 360
-    df = df.sort_values("date_time").reset_index(drop=True)
-    df["line"] = [inverse_lines[station] for station in df["Station"]]
-    
-    # data to delete:
-    # Line 4 in May 2004 is repeated under Cruise 1 when it should only be under Cruise 2
-    inds = df.index[(df["date_time"] > "2004-05") & (df["date_time"] < "2004-06") & (df["Cruise"] == 1) & (df["line"] == 4)]
-    df.drop(index=inds, inplace=True)
     
     entries[f"{name}_base"] = {"description": f"Base for {name} sources",
                                "driver": "csv",
-                               "args": {"urlpath": urls[ind],
-                                        "csv_kwargs": csv_kwargs[ind]}}
+                               "args": {"urlpath": f"simplecache::{urls[ind]}",
+                                        "csv_kwargs": csv_kwargs[ind],
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
     for cruise in cruises:
         for line in lines:
-            # import pdb; pdb.set_trace()
-            name_line = f"{name}-Cruise_{str(cruise).zfill(2)}-Line_{line}"
-            # pull out source by Cruise and the stations making up the line/transect
-            ddf = df[(df["Cruise"] == cruise) & (df.Station.isin(lines[line]))]
+            name_line = f"Cruise_{str(cruise).zfill(2)}-Line_{line}"
+            ddf = getattr(chr.src.process, slug)(df, cruise, line)
             # some cruise-line combinations don't exist
-            if len(ddf)==0:
+            if len(ddf.dropna())==0:
                 continue
-            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
-                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
+            title = f"Cruise {str(cruise)}, Line {line} ({str(ddf.cf['T'].dt.date.iloc[0])})"
+            metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True, title=title),
+                                "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True, title=title),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
+            metadata.update({"urlpath": urls[ind]})
             entries[name_line] = {"description": f"{name_line}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                             "args": {"targets": [f"{name}_base"],
                                     "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                    "transform_kwargs": dict(cruise=cruise, line=line, stations=lines[line]),},
+                                    "transform_kwargs": dict(cruise=cruise, line=line),},
                             "metadata": metadata}
 
     # more catalog-level metadata
@@ -872,10 +804,14 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     entries = {} 
     entries[f"{slug}_base"] = {"description": f"Base for {slug}",
                                "driver": "csv",
-                               "args": {"urlpath": url,
-                                        "csv_kwargs": csv_kwargs}}
-    metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], ddf),}}
+                               "args": {"urlpath": f"simplecache::{url}",
+                                        "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
+    metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], ddf, subplots=True),}}
     metadata.update(add_metadata(ddf, maptype, featuretype))
+    metadata.update({"urlpath": url})
     entries[slug] = {"description": f"{project_name}",
                     "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                     "args": {"targets": [f"{slug}_base"],
@@ -941,10 +877,14 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
         
         entries[f"{name}_base"] = {"description": f"Base for {name}",
                                 "driver": "csv",
-                                "args": {"urlpath": url,
-                                         "csv_kwargs": csv_kwargs}}
-        metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], ddf),}}
+                                "args": {"urlpath": f"simplecache::{url}",
+                                         "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                         }}
+        metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], ddf, subplots=True),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
+        metadata.update({"urlpath": url})
         entries[name] = {"description": f"{name}",
                         "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                         "args": {"targets": [f"{name}_base"],
@@ -966,9 +906,9 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
-def ctd_time_series_uaf(slug):
+def ctd_profiles_uaf(slug):
     project_name = "CTD time series UAF"
-    overall_desc = "CTD Transects (UAF): Repeat CTD profile transect along an east-west section in central Cook Inlet"
+    overall_desc = "CTD Transects (UAF): Repeated in central Cook Inlet"
     time = "26-hour period on 9-10 August 2003"
     included = True
     notes = "Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison."
@@ -989,20 +929,20 @@ University of Alaska Fairbanks
 Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-currents-in-Cook-Inlet.pdf
 """
 
-    url = "https://researchworkspace.com/files/41842203/TS%20downcasts.txt"
-    csv_kwargs = dict(sep="\t", parse_dates={"date_time": ["mon/day/yr", "hh:mm [utc]"]})
+    csv_kwargs = dict(parse_dates=True)
+    url = "https://researchworkspace.com/files/42202256/TS%20downcasts.csv"
     df = pd.read_csv(url, **csv_kwargs)
-    df = getattr(chr.src.process, slug)(df)
 
-    transects = [1,2,3,4,5,6,7,8,9]
-    
+    transects = [1,2,3,4,5,6,7,8,9]    
     entries = {}
     for transect in transects:
         name = f"Transect_{str(transect).zfill(2)}"
-        ddf = df[df["transect"] == transect]
-        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True),
-                              "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True),}}
+        ddf = getattr(chr.src.process, slug)(df, transect)
+        title = f"{str(ddf.cf['T'].iloc[0])}"
+        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True, title=title),
+                              "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True, title=title),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
+        metadata.update({"urlpath": url})
         entries[name] = {"description": f"{name}",
                          "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                          "args": {"targets": [f"{slug}_base"],
@@ -1011,8 +951,11 @@ Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-c
                         "metadata": metadata}
     entries[f"{slug}_base"] = {"description": f"Base for {slug}",
                                "driver": "csv",
-                               "args": {"urlpath": url,
-                                        "csv_kwargs": csv_kwargs}}
+                               "args": {"urlpath": f"simplecache::{url}",
+                                        "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                        }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1081,6 +1024,7 @@ def ctd_profiles_2005_osu(slug):
             metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="T", y="Z", flip_yaxis=True),
                                 "temp": scatter_dict("temp", ddf, x="T", y="Z", flip_yaxis=True),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
+            metadata.update({"urlpath": url})
             entries[name] = {"description": f"{name}",
                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                             "args": {"targets": [f"{name}_base"],
@@ -1089,8 +1033,11 @@ def ctd_profiles_2005_osu(slug):
                             "metadata": metadata}
             entries[f"{name}_base"] = {"description": f"Base for {name}",
                                     "driver": "csv",
-                                    "args": {"urlpath": url,
-                                                "csv_kwargs": csv_kwargs}}
+                                    "args": {"urlpath": f"simplecache::{url}",
+                                                "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                                }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1108,7 +1055,7 @@ def ctd_profiles_2005_osu(slug):
 
 def ctd_towed_gwa(slug):
     project_name = "CTD Towed 2017-2019 - GWA"
-    overall_desc = "Underway CTD (GWA): Towed CTD at nominal 7m depth"
+    overall_desc = "Underway CTD (GWA): Towed CTD"
     time = "Approximately monthly in summer from 2017 to 2020, 5min sampling frequency"
     included = True
     notes = "Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min."
@@ -1125,64 +1072,36 @@ Nominal 7m depth, 2017-2020. 2017 and 2018 have salinity and temperature, 2019 a
 Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d-4373-944e-94de748b6d4b/project
 """
     
-    # 2017
-    urls = ["https://researchworkspace.com/files/42182639/2017_AprCTD.csv",
-            "https://researchworkspace.com/files/42182642/2017_MayCTD.csv",
-            "https://researchworkspace.com/files/42182641/2017_JulCTD.csv",
-            "https://researchworkspace.com/files/42182640/2017_AugCTD.csv",
-            "https://researchworkspace.com/files/42182614/2017_SepCTD.csv",
-            "https://researchworkspace.com/files/42182643/2017_OctCTD.csv"]
-    csv_kwargs = dict(parse_dates=[0])
+    urls = ["https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv",
+            "https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv",
+            "https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv",
+            "https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv",
+            ]
     entries = {}
+    csv_kwargs = dict(parse_dates=[0])
     for url in urls:
-        df = pd.read_csv(url, **csv_kwargs)
-        ddf = getattr(chr.src.process, f"{slug}_2017")(df)
-        name = f"{str(ddf.cf['T'].dt.date[0])}"
-        metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="longitude", y="latitude", flip_yaxis=False),
-                              "temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False)}}
-        metadata.update(add_metadata(ddf, maptype, featuretype))
-        entries[name] = {"description": f"{name}",
-                        "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{name}_base"],
-                                "transform": f"ciofs_hindcast_report.src.process.{slug}_2017",
-                                "transform_kwargs": {},},
-                        "metadata": metadata}
-        entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                "driver": "csv",
-                                "args": {"urlpath": url,
-                                            "csv_kwargs": csv_kwargs}}
-    
-    urls = [
-        "https://workspace.aoos.org/published/file/a58fd5f1-fc56-4bcb-9fac-8006cc610a9a/CPR_physical_data_2018.csv",
-        "https://workspace.aoos.org/published/file/9be9b538-1b51-44a8-9f50-b2db2562adaa/CPR_physical_data_2019.csv",
-        "https://workspace.aoos.org/published/file/14a9999c-d952-47ee-ad29-aeb6fa66b1d6/CPR_physical_data_2020.csv"]
-
-    # 2018, 2019, 2020
-    years = [2018, 2019, 2020]
-    months = {2018: [4,5,6,7],
-              2019: [4,5,8,9],
-              2020: [7,8,9],}
-    for year, url in zip(years, urls):
-        if year == 2019:
-            csv_kwargs = {}
-        else:
-            csv_kwargs = dict(parse_dates=[0])
+        year = pathlib.Path(url).stem.split("_")[-2]
         entries[f"{slug}_{year}_base"] = {"description": f"Base for {slug}_{year}",
                                 "driver": "csv",
-                                "args": {"urlpath": url,
-                                            "csv_kwargs": csv_kwargs}}
-        for month in months[year]:
-                df = pd.read_csv(url, **csv_kwargs)
-                ddf = getattr(chr.src.process, f"{slug}_{year}")(df, month)
+                                "args": {"urlpath": f"simplecache::{url}",
+                                            "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                            }}
+        df = pd.read_csv(url, **csv_kwargs)
+        # loop over months
+        for month in sorted(set(df.cf["T"].dt.month)):
+                ddf = getattr(chr.src.process, f"{slug}")(df, month)
                 name = f"{str(ddf.cf['T'].dt.date[0])}"
-                metadata = {"plots": {"temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False)}}
-                if year == 2018:
-                    metadata["plots"].update({"salt": scatter_dict("salt", ddf, x="longitude", y="latitude", flip_yaxis=False),})
+                metadata = {"plots": {"temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False, title=name)}}
+                if int(year) in [2017,2018]:
+                    metadata["plots"].update({"salt": scatter_dict("salt", ddf, x="longitude", y="latitude", flip_yaxis=False, title=name),})
                 metadata.update(add_metadata(ddf, maptype, featuretype))
+                metadata.update({"urlpath": url})
                 entries[name] = {"description": f"{name}",
                                 "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
                                 "args": {"targets": [f"{slug}_{year}_base"],
-                                        "transform": f"ciofs_hindcast_report.src.process.{slug}_{year}",
+                                        "transform": f"ciofs_hindcast_report.src.process.{slug}",
                                         "transform_kwargs": {"month": month},},
                                 "metadata": metadata}
 
@@ -1200,9 +1119,9 @@ Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d
     save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
-def temp_towed_gwa(slug):
+def ctd_towed_gwa_temp(slug):
     project_name = "Temperature towed 2011-2016 - GWA"
-    overall_desc = "Underway CTD (GWA): Towed CTD at nominal 7m depth, temperature only"
+    overall_desc = "Underway CTD (GWA): Towed, temperature only"
     time = "Approximately monthly in summer from 2011 to 2016, 5min sampling frequency"
     included = True
     notes = "Converted some local times, ship track outside domain is not included."
@@ -1218,83 +1137,36 @@ Nominal 7m depth, 2011-2016.
 
 Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d-4373-944e-94de748b6d4b/project
 """
-    entries = {}
-    # 2011. months 6, 7, 8 (skip 2 rows in 9)
-    year = 2011
-    slug_year = f"{slug}_{year}"
-    url = "https://workspace.aoos.org/published/file/15f607c5-405e-4db8-b83b-0ce70a6015ac/CPR_TemperatureData_2011.csv"
-    csv_kwargs = dict(encoding="ISO-8859-1")
-    df = pd.read_csv(url, **csv_kwargs)
-    df = getattr(chr.src.process, slug_year)(df)
-    months = [6, 7, 8]
-    for month in months:
-        # df = chr.src.process.temp_towed_gwa(df, month=month)
-        # df = pd.read_csv(url, **csv_kwargs)
-        # ddf = getattr(chr.src.process, f"{slug}_2011")(df, month=month)
-        ddf = df.set_index(df.cf["T"].name).loc[f"{year}-{month}"].reset_index()
-        name = f"{str(ddf.cf['T'].dt.date[0])}"
-        metadata = {"plots": {"temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False)}}
-        metadata.update(add_metadata(ddf, maptype, featuretype))
-        entries[name] = {"description": f"{name}",
-                        "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{slug_year}_base"],
-                                "transform": f"ciofs_hindcast_report.src.process.{slug_year}",
-                                "transform_kwargs": {"month": month},},
-                        "metadata": metadata}
-    entries[f"{slug_year}_base"] = {"description": f"Base for {name}",
-                            "driver": "csv",
-                            "args": {"urlpath": url,
-                                        "csv_kwargs": csv_kwargs}}
     
-    # 2012, 2013, 2014, 2015, 2016
-    urls = ["https://researchworkspace.com/files/42182615/2012_Apr.csv",
-            "https://researchworkspace.com/files/42182617/2012_May.csv",
-            "https://researchworkspace.com/files/42182616/2012_Jun.csv",
-            "https://researchworkspace.com/files/42182619/2012_Sep.csv",
-            "https://researchworkspace.com/files/42182618/2012_Oct.csv",
-            "https://researchworkspace.com/files/42182620/2013_Apr.csv",
-            "https://researchworkspace.com/files/42182624/2013_May.csv",
-            "https://researchworkspace.com/files/42182623/2013_Jun.csv",
-            "https://researchworkspace.com/files/42182622/2013_Jul.csv",
-            "https://researchworkspace.com/files/42182621/2013_Aug.csv",
-            "https://researchworkspace.com/files/42182625/2014_Apr.csv",
-            "https://researchworkspace.com/files/42182629/2014_May.csv",
-            "https://researchworkspace.com/files/42182628/2014_Jun.csv",
-            "https://researchworkspace.com/files/42182627/2014_Jul.csv",
-            "https://researchworkspace.com/files/42182626/2014_Aug.csv",
-            "https://researchworkspace.com/files/42182630/2015_AugA.csv",
-            "https://researchworkspace.com/files/42182631/2015_AugB.csv",
-            "https://researchworkspace.com/files/42182632/2016_Apr.csv",
-            "https://researchworkspace.com/files/42182637/2016_May.csv",
-            "https://researchworkspace.com/files/42182636/2016_Jun.csv",
-            "https://researchworkspace.com/files/42182635/2016_Jul.csv",
-            "https://researchworkspace.com/files/42182633/2016_Aug.csv",
-            "https://researchworkspace.com/files/42182638/2016_Sep.csv",]
-    csv_kwargs = dict(encoding = "ISO-8859-1")
-    # csv_kwargs = dict(parse_dates= [[0,1]], encoding = "ISO-8859-1", skip_blank_lines=True)
-    # # df = pd.read_csv(urls[22], )
-    # df = pd.read_csv(url, **csv_kwargs)
-    # df = getattr(chr.src.process, slug_year)(df)
-    # months = [6, 7, 8]
+    urls = ["https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv",
+            "https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv",
+            "https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv",
+            "https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv",
+            "https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv",
+            "https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv",]
+    csv_kwargs = dict(parse_dates=[0])
+    entries = {}
     for url in urls:
-        # print(url)
         df = pd.read_csv(url, **csv_kwargs)
-        ddf = chr.src.process.temp_towed_gwa_others(df)
-        # ddf = getattr(chr.src.process, f"{slug}_2011")(df, month=month)
-        # ddf = df.set_index(df.cf["T"].name).loc[f"{year}-{month}"].reset_index()
-        name = f"{str(ddf.cf['T'].dt.date[0])}"
-        metadata = {"plots": {"temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False)}}
-        metadata.update(add_metadata(ddf, maptype, featuretype))
-        entries[name] = {"description": f"{name}",
-                        "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                        "args": {"targets": [f"{name}_base"],
-                                "transform": f"ciofs_hindcast_report.src.process.{slug}_others",
-                                "transform_kwargs": {},},
-                        "metadata": metadata}
-        entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                "driver": "csv",
-                                "args": {"urlpath": url,
-                                            "csv_kwargs": csv_kwargs}}
+        for month in sorted(set(df.cf["T"].dt.month)):
+            ddf = getattr(chr.src.process, slug)(df, month)
+            name = f"{str(ddf.cf['T'].dt.date[0])}"
+            metadata = {"plots": {"temp": scatter_dict("temp", ddf, x="longitude", y="latitude", flip_yaxis=False, title=name)}}
+            metadata.update(add_metadata(ddf, maptype, featuretype))
+            metadata.update({"urlpath": url})
+            entries[name] = {"description": f"{name}",
+                            "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
+                            "args": {"targets": [f"{name}_base"],
+                                    "transform": f"ciofs_hindcast_report.src.process.{slug}",
+                                    "transform_kwargs": dict(month=month),},
+                            "metadata": metadata}
+            entries[f"{name}_base"] = {"description": f"Base for {name}",
+                                    "driver": "csv",
+                                    "args": {"urlpath": f"simplecache::{url}",
+                                                "csv_kwargs": csv_kwargs,
+                                        "storage_options": {"simplecache": {"cache_storage": f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}",
+                                                                                "same_names": True,}}
+                                                }}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1347,7 +1219,8 @@ Report: https://evostc.state.ak.us/media/2176/2004-040670-final.pdf
 
 
 def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
-                        header_names, map_description, summary, stations, open_kwargs):
+                        header_names, map_description, summary, stations, open_kwargs,
+                        transform_source_names=None, transform_function=None, transform_kwargs=None):
     
     cat = intake.open_erddap_cat(server="https://erddap.sensors.ioos.us/erddap", 
                                  search_for=stations, 
@@ -1359,6 +1232,7 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
                                  open_kwargs=open_kwargs,
                                  dropna=True,
                                  mask_failed_qartod=True,
+                                 cache_kwargs=dict(cache_storage=f"{chr.PATH_OUTPUTS_DATA_CACHE / slug}")#, same_names=True)
                                  )
     source_names = chr.src.utils.get_source_names(cat)
     
@@ -1390,12 +1264,12 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
 
         cat[source_name].describe()["metadata"].update({"maptype": maptype,
                                      "featuretype": featuretype,
-                                     "plots": {"data": line_time_dict("T", vars_to_use, ddf),}})
+                                     "plots": {"data": line_time_dict("T", vars_to_use, ddf, subplots=True),},
+                                     "urlpath": cat[source_name].metadata["tabledap"],
+                                     "key_variables": vars_to_use,},
+                                                       )
 
-        cat[source_name].describe()["args"].update({"variables": var_names})
-        
-        # read in the last 2 hours of data and make another entry that is exactly like this one but subsampled
-        # for plotting
+        cat[source_name].describe()["args"].update({"variables": var_names})        
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1409,67 +1283,36 @@ def make_erddap_catalog(slug, project_name, overall_desc, time, included, notes,
                 }
     cat.metadata.update(cat_meta)
     cat.save(chr.CAT_NAME(slug))
-
-
-# def make_axds_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
-#                         header_names, map_description, summary, stations, open_kwargs):
     
-#     cat = intake.open_axds_cat(datatype="sensor_station", 
-#                            search_for=stations, 
-#                            page_size=1,
-#                         query_type="union",
-#                         name=slug,
-#                         description=overall_desc,
-#                         )
-    
-#     # cat = intake.open_erddap_cat(server="https://erddap.sensors.ioos.us/erddap", 
-#     #                              search_for=stations, 
-#     #                              query_type="union",
-#     #                              name=slug,
-#     #                              description=overall_desc,
-#     #                              use_source_constraints=True,
-#     #                              start_time = "1999-01-01T00:00:00Z",
-#     #                              open_kwargs=open_kwargs)
-#     source_names = chr.src.utils.get_source_names(cat)
-    
-#     for source_name in source_names:
-#         # this creates an empty DataFrame with column names of the variables in the dataset
-#         # these can be checked with cf-pandas to fill in variable names in the metadata plots
-#         ddf = pd.DataFrame(columns=cat[source_name].metadata["variables"] + ["Time [s]",])
-        
-#         # add some metadata
-#         # first find which variables are available to use in plots for metadata
-#         all_vars = ["ssh","temp","salt","u","v","speed"]
-#         vars_to_use = []
-#         for Var in all_vars:
-#             try:
-#                 # print(source_name, Var, ddf.cf[Var].shape)
-#                 ddf.cf[Var].name
-#                 vars_to_use.append(Var)
-#             except ValueError:
-#                 pass
+    # # for select source names, duplicate the entry, make one _base and the other a transform of the base entry
+    # # have to recreate the catalog entirely to do this though
+    # if transform_source_names is not None:
+    #     entries = {}
+    #     for source_name in source_names:        
+            
+    #         if source_name in transform_source_names:
+    #             entries[source_name] = {"description": cat[source_name].describe()["description"],
+    #                             "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
+    #                             "args": {"targets": [f"{source_name}_base"],
+    #                                     "transform": f"ciofs_hindcast_report.src.process.{transform_function}",
+    #                                     "transform_kwargs": transform_kwargs,},
+    #                             "metadata": cat[source_name].describe()["metadata"]}
+    #             entries[f"{source_name}_base"] = {"description": f"Base for {cat[source_name].describe()['description']}",
+    #                                     "driver": cat[source_name].describe()["driver"],
+    #                                     "args": cat[source_name].describe()["args"],}
+    #         else:
+    #             entries[source_name] = {"description": cat[source_name].describe()["description"],
+    #                             "driver": cat[source_name].describe()["driver"],
+    #                             "args": cat[source_name].describe()["args"],
+    #                             "metadata": cat[source_name].describe()["metadata"],}
 
-#         cat[source_name].describe()["metadata"].update({"maptype": maptype,
-#                                      "featuretype": featuretype,
-#                                      "plots": {"data": line_time_dict("T", vars_to_use, ddf),}})
+    # save_catalog(entries, cat_name=slug, cat_desc=cat.description, cat_meta=cat.metadata)
 
-#     # more catalog-level metadata
-#     cat_meta = {"map_description": map_description,
-#                 "summary": summary,
-#                 "header_names": header_names,
-#                 "project_name": project_name,
-#                 "time": time,
-#                 "included": included,
-#                 "notes": notes,
-#                 "featuretype": featuretype,
-#                 }
-#     cat.metadata.update(cat_meta)
-#     cat.save(chr.CAT_NAME(slug))
 
 
 def moorings_aoos_cdip(slug):
     project_name = "Moorings from Alaska Ocean Observing System (AOOS)/ Coastal Data Information Program (CDIP)"
-    overall_desc = "Moorings (CDIP): Lower Cook Inlet, Kodiak, Central Cook Inlet"
+    overall_desc = "Moorings (CDIP): Lower and Central Cook Inlet, Kodiak Island"
     time = "From 2011 to 2023, variable"
     included = True
     notes = ""
@@ -1491,7 +1334,7 @@ def moorings_aoos_cdip(slug):
 
 def moorings_noaa(slug):
     project_name = "Moorings from NOAA"
-    overall_desc = "Moorings (NOAA): Miscellaneous locations"
+    overall_desc = "Moorings (NOAA): across Cook Inlet"
     time = "From 1999 (and earlier) to 2023, variable"
     included = True
     notes = ""
@@ -1517,13 +1360,25 @@ Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Se
                 "wmo_46077",]
     open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}
     
+    # # if I want to transform any sources
+    # transform_source_names=["noaa_nos_co_ops_9455500",
+    #                         "noaa_nos_co_ops_9455920",
+    #                         "noaa_nos_co_ops_9457804",
+    #                         "noaa_nos_co_ops_kdaa2",
+    #                         "old-harbor-1",
+    #                         "wmo_46077",]
+    # transform_function="calculate_anomaly"
+    # transform_kwargs = dict()
+    
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
-                        header_names, map_description, summary, stations, open_kwargs)
+                        header_names, map_description, summary, stations, open_kwargs,)
+                        # transform_source_names=transform_source_names, transform_function=transform_function,
+                        # transform_kwargs=transform_kwargs)
 
 
 def moorings_nps(slug):
     project_name = "Moorings from National Parks Service (NPS)"
-    overall_desc = "Moorings (NPS): Chinitna Bay and Aguchik Island, Cook Inlet"
+    overall_desc = "Moorings (NPS): Chinitna Bay, Aguchik Island"
     time = "From 2018 to 2019, variable"
     included = True
     notes = ""
@@ -1543,7 +1398,7 @@ def moorings_nps(slug):
 
 def moorings_uaf(slug):
     project_name = "Moorings from University of Alaska Fairbanks (UAF)"
-    overall_desc = "Moorings (UAF): Kodiak Island and Peterson Bay, Cook Inlet"
+    overall_desc = "Moorings (UAF): Kodiak Island, Peterson Bay"
     time = "From 2013 to present, variable"
     included = True
     notes = ""
@@ -1565,7 +1420,7 @@ def moorings_uaf(slug):
     
 def moorings_kbnerr_bear_cove_seldovia(slug):
     project_name = "Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)"
-    overall_desc = "Moorings (KBNERR): Kachemak Bay, Bear Cove and Seldovia"
+    overall_desc = "Moorings (KBNERR): Kachemak Bay: Bear Cove, Seldovia"
     time = "From 2004 to present day, variable"
     included = True
     notes = "These are accessed through AOOS portal/ERDDAP server."
@@ -1636,47 +1491,26 @@ def moorings_kbnerr_historical(slug):
     
 More information: https://accs.uaa.alaska.edu/kbnerr/
 """
- 
-    # set up location info
-    loc = "https://researchworkspace.com/files/40335130/sampling_stations.csv"
-    sites = pd.read_csv(loc, encoding = "ISO-8859-1")
-    # strip white space
-    sites["Station Code"] = sites["Station Code"].str.strip()
 
-    stations = {"kacbcwq": ["https://researchworkspace.com/files/40335131/kacbcwq2002.csv",
-                        "https://researchworkspace.com/files/40335132/kacbcwq2003.csv",],
-            "kacdlwq": ["https://researchworkspace.com/files/40335133/kacdlwq2002.csv",],
-            "kachowq": ["https://researchworkspace.com/files/40335163/kachowq2001.csv",
-                        "https://researchworkspace.com/files/40335164/kachowq2002.csv",],
-            "kacpgwq": ["https://researchworkspace.com/files/40335173/kacpgwq2002.csv",
-                        "https://researchworkspace.com/files/40335174/kacpgwq2003.csv",],
-            "kacsewq": ["https://researchworkspace.com/files/40335192/kacsewq2001.csv",
-                        "https://researchworkspace.com/files/40335193/kacsewq2002.csv",
-                        "https://researchworkspace.com/files/40335194/kacsewq2003.csv",],}
-    cols = ["DateTimeStamp","StationCode","Temp","Sal","Depth","F_Temp","F_Sal","F_Depth"]
-    csv_kwargs = dict(parse_dates=["DateTimeStamp"], usecols=cols)
+    urls = ["https://researchworkspace.com/files/42202441/kacbcwq_subsetted.csv",
+            "https://researchworkspace.com/files/42202443/kacdlwq_subsetted.csv",
+            "https://researchworkspace.com/files/42202445/kachowq_subsetted.csv",
+            "https://researchworkspace.com/files/42202447/kacpgwq_subsetted.csv",
+            "https://researchworkspace.com/files/42202449/kacsewq_subsetted.csv",
+    ]
+    csv_kwargs = dict(parse_dates=[0])
     entries = {}
-    for station_name, urls in stations.items():
-        for url in urls:
-            df = pd.read_csv(url, **csv_kwargs)
-            lat, lon = sites[sites["Station Code"] == station_name][["Latitude "," Longitude"]].values[0].tolist()
-            # functionname = "add_location_columns"
-            ddf = getattr(chr.src.process, slug)(df, lon, lat)
-            name = pathlib.PurePath(url).stem
-            
-            entries[f"{name}_base"] = {"description": f"Base for {name}",
-                                    "driver": "csv",
-                                    "args": {"urlpath": url,
-                                            "csv_kwargs": csv_kwargs}}
-            metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], ddf),}}
-            metadata.update(add_metadata(ddf, maptype, featuretype))
-            entries[name] = {"description": f"{name}",
-                            "driver": "ciofs_hindcast_report.src.process.DataFrameTransform",
-                            "args": {"targets": [f"{name}_base"],
-                                    "transform": f"ciofs_hindcast_report.src.process.{slug}",
-                                    "transform_kwargs": {"lon": lon,
-                                                        "lat": lat},},
-                            "metadata": metadata}
+    for url in urls:
+        name = pathlib.PurePath(url).stem.rstrip("_subsetted")
+        df = pd.read_csv(url, **csv_kwargs)
+        metadata = {"plots": {"data": line_time_dict("T", ["temp", "salt"], df, subplots=True, title=name),}}
+        metadata.update(add_metadata(df, maptype, featuretype))
+        metadata.update({"urlpath": url})
+        entries[name] = {"description": f"{name}",
+                        "driver": "csv",
+                        "args": {"urlpath": url,
+                                "csv_kwargs": csv_kwargs},
+                        "metadata": metadata}
 
     # more catalog-level metadata
     cat_meta = {"map_description": map_description,
@@ -1703,6 +1537,8 @@ def adcp_moored_noaa_coi_2005(slug):
     header_names = None
     map_description = "Moored ADCPs"
     summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+
+ADCP data has been converted to eastward, northward velocities as well as along- and across-channel velocities, in the latter case using the NOAA-provided rotation angle for the rotation. The along- and across-channel velocities are additionally filtered to show the subtidal signal, which is what is plotted in the dataset page.
 """
 
     station_list = ["COI0501", "COI0502", "COI0503", "COI0504", "COI0505",
@@ -1720,10 +1556,16 @@ def adcp_moored_noaa_coi_2005(slug):
                     "maxLongitude": cat[source_name].metadata["lon"],
                     "minLatitude": cat[source_name].metadata["lat"],
                     "maxLatitude": cat[source_name].metadata["lat"],
+                    "minTime": cat[source_name].metadata["first_good_data"],
+                    "maxTime": cat[source_name].metadata["last_good_data"],
                     "maptype": maptype,
-                    "featuretype": featuretype,}
+                    "featuretype": featuretype,
+                    "key_variables": ["east","north","along","across","speed"],
+                    "depths": [bin["depth"] for bin in cat[source_name].s.metadata["bins"]["bins"]],
+                    }
         md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
-                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),},
+                       "urlpath": f"https://tidesandcurrents.noaa.gov/stationhome.html?id={source_name}"})
         cat[source_name].describe()["metadata"].update(md_new)
 
     # more catalog-level metadata
@@ -1752,6 +1594,8 @@ def adcp_moored_noaa_coi_other(slug):
     header_names = None
     map_description = "Moored ADCPs"
     summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+
+ADCP data has been converted to eastward, northward velocities as well as along- and across-channel velocities, in the latter case using the NOAA-provided rotation angle for the rotation. The along- and across-channel velocities are additionally filtered to show the subtidal signal, which is what is plotted in the dataset page.
 """
 
     station_list = ["COI0206", "COI0207", "COI0213", "COI0301", "COI0302", "COI0303",
@@ -1768,10 +1612,16 @@ def adcp_moored_noaa_coi_other(slug):
                     "maxLongitude": cat[source_name].metadata["lon"],
                     "minLatitude": cat[source_name].metadata["lat"],
                     "maxLatitude": cat[source_name].metadata["lat"],
+                    "minTime": cat[source_name].metadata["first_good_data"],
+                    "maxTime": cat[source_name].metadata["last_good_data"],
                     "maptype": maptype,
-                    "featuretype": featuretype,}
+                    "featuretype": featuretype,
+                    "key_variables": ["east","north","along","across","speed"],
+                    "depths": [bin["depth"] for bin in cat[source_name].s.metadata["bins"]["bins"]],
+                    }
         md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
-                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),},
+                       "urlpath": f"https://tidesandcurrents.noaa.gov/stationhome.html?id={source_name}"})
         cat[source_name].describe()["metadata"].update(md_new)
 
     # more catalog-level metadata
@@ -1801,6 +1651,8 @@ def adcp_moored_noaa_kod_1(slug):
     map_description = "Moored ADCPs"
     summary = f"""Moored NOAA ADCP surveys in Cook Inlet
 
+ADCP data has been converted to eastward, northward velocities as well as along- and across-channel velocities, in the latter case using the NOAA-provided rotation angle for the rotation. The along- and across-channel velocities are additionally filtered to show the subtidal signal, which is what is plotted in the dataset page.
+
 Stations "KOD0914", "KOD0915", "KOD0916", "KOD0917", "KOD0918", "KOD0919", "KOD0920" are not included because they are just outside or along the model domain boundary.
 """
 
@@ -1821,10 +1673,16 @@ Stations "KOD0914", "KOD0915", "KOD0916", "KOD0917", "KOD0918", "KOD0919", "KOD0
                     "maxLongitude": cat[source_name].metadata["lon"],
                     "minLatitude": cat[source_name].metadata["lat"],
                     "maxLatitude": cat[source_name].metadata["lat"],
+                    "minTime": cat[source_name].metadata["first_good_data"],
+                    "maxTime": cat[source_name].metadata["last_good_data"],
                     "maptype": maptype,
-                    "featuretype": featuretype,}
+                    "featuretype": featuretype,
+                    "key_variables": ["east","north","along","across","speed"],
+                    "depths": [bin["depth"] for bin in cat[source_name].s.metadata["bins"]["bins"]],
+                    }
         md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
-                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),},
+                       "urlpath": f"https://tidesandcurrents.noaa.gov/stationhome.html?id={source_name}"})
         cat[source_name].describe()["metadata"].update(md_new)
 
     # more catalog-level metadata
@@ -1853,6 +1711,8 @@ def adcp_moored_noaa_kod_2(slug):
     header_names = None
     map_description = "Moored ADCPs"
     summary = f"""Moored NOAA ADCP surveys in Cook Inlet
+
+ADCP data has been converted to eastward, northward velocities as well as along- and across-channel velocities, in the latter case using the NOAA-provided rotation angle for the rotation. The along- and across-channel velocities are additionally filtered to show the subtidal signal, which is what is plotted in the dataset page.
 """
 
     station_list = [
@@ -1872,10 +1732,16 @@ def adcp_moored_noaa_kod_2(slug):
                     "maxLongitude": cat[source_name].metadata["lon"],
                     "minLatitude": cat[source_name].metadata["lat"],
                     "maxLatitude": cat[source_name].metadata["lat"],
+                    "minTime": cat[source_name].metadata["first_good_data"],
+                    "maxTime": cat[source_name].metadata["last_good_data"],
                     "maptype": maptype,
-                    "featuretype": featuretype,}
+                    "featuretype": featuretype,
+                    "key_variables": ["east","north","along","across","speed"],
+                    "depths": [bin["depth"] for bin in cat[source_name].s.metadata["bins"]["bins"]],
+                    }
         md_new.update({"plots": {"ualong": quadmesh_dict("ualong_subtidal", "t", "depth", chr.cmap["u"]),
-                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),}})
+                                 "vacross": quadmesh_dict("vacross_subtidal", "t", "depth", chr.cmap["u"]),},
+                       "urlpath": f"https://tidesandcurrents.noaa.gov/stationhome.html?id={source_name}"})
         cat[source_name].describe()["metadata"].update(md_new)
 
     # more catalog-level metadata
