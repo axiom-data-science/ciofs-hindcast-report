@@ -41,8 +41,10 @@ def CAT_NAME(slug):
 def DATA_PAGE_PATH(slug):
     return PATH_OUTPUTS_DATA_PAGES / slug
 
-def COMP_PAGE_PATH(slug):
-    return PATH_OUTPUTS_COMP_PAGES / slug
+def COMP_PAGE_DIR(slug):
+    path = PATH_OUTPUTS_COMP_PAGES / slug
+    path.mkdir(parents=True, exist_ok=True)
+    return path
 
 
 # Global parameters

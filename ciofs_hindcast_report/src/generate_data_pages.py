@@ -42,6 +42,7 @@ import pandas as pd
 import cmocean.cm as cmo"""
 
     text = f"""\
+(page:{slug})=
 # {desc}
 
 * {metadata["project_name"]}
@@ -52,25 +53,29 @@ import cmocean.cm as cmo"""
 
 {metadata["notes"]}
 
-<details><summary>Dataset metadata:</summary>
+```{{dropdown}} Dataset metadata
 
 {make_source_metadata_table(intake.open_catalog(chr.CAT_NAME(slug))).to_markdown()}
 
-</details>
+```
 
 
 """
 
     # Open catalog
+    # cat = intake.open_catalog(chr.CAT_NAME(slug))
     code = f"""\
 cat = intake.open_catalog(chr.CAT_NAME("{slug}"))"""
 
     # Add these cells to the notebook
     imports_cell = nbf.v4.new_code_cell(imports)
     imports_cell['metadata']['tags'] = ["remove-input"]  # don't show imports cell
+    codecell = nbf.v4.new_code_cell(code)
+    codecell['metadata']['tags'] = ["remove-input"]
     nb['cells'] = [imports_cell,
                    nbf.v4.new_markdown_cell(text),
-                   nbf.v4.new_code_cell(code),]
+                   codecell,
+                   ]
 
     
     ## Map of Datasets
@@ -80,10 +85,12 @@ cat = intake.open_catalog(chr.CAT_NAME("{slug}"))"""
 
     code = f"""\
 getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
-    """
+"""
+    codecell = nbf.v4.new_code_cell(code)
+    codecell['metadata']['tags'] = ["remove-input"]
 
     nb['cells'].extend([nbf.v4.new_markdown_cell(text),
-                        nbf.v4.new_code_cell(code),])
+                        codecell,])
 
     # import pdb; pdb.set_trace()
     ## REST OF IT
@@ -164,6 +171,7 @@ getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
         #     plot_cell['metadata']['tags'] = ["full-width"]
         # make all plot cells full width
         plot_cell['metadata']['tags'] = ["full-width"]
+        plot_cell['metadata']['tags'] = ["remove-input"]
         nb['cells'].extend([plot_cell,])
 
     nbf.write(nb, f'{chr.DATA_PAGE_PATH(slug)}.ipynb')
@@ -215,6 +223,7 @@ import numpy as np
 * Slug: {slug}
 * Included: {cat.metadata["included"]}
 * Feature type: {cat.metadata["featuretype"]}
+* See the full dataset page for more information: {{ref}}`page:{slug}`
 
 {cat.metadata["summary"]}
 
@@ -223,11 +232,11 @@ Notes:
 {cat.metadata["notes"]}
 
 
-<details><summary>Dataset metadata:</summary>
+```{{dropdown}} Dataset metadata
 
 {make_source_metadata_table(intake.open_catalog(chr.CAT_NAME(slug))).to_markdown()}
 
-</details>
+```
 
 
 **Map of {cat.metadata["map_description"]}**
@@ -235,7 +244,7 @@ Notes:
 
         code = f"""\
 getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
-        """
+"""
         
         nb['cells'].extend([nbf.v4.new_markdown_cell(text),
                             nbf.v4.new_code_cell(code)])

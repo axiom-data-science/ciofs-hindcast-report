@@ -3,6 +3,9 @@ import pandas as pd
 import xarray as xr
 import pyproj
 import numpy as np
+import intake
+import regex
+import ciofs_hindcast_report as chr
 
 
 def get_source_names(cat):
@@ -43,6 +46,35 @@ def calculate_distance(lons, lats):
     distance = distance.cumsum()/1000 # km
     return distance
 
+
+def decode_path(path):
+    loc = path.stem
+    base = path.parent
+    suffix = path.suffix
+    slug = [slug for slug in chr.slugs if slug in loc][0]
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+    source_name = [source_name for source_name in source_names if source_name in loc][0]
+    key_variable = [key_variable for key_variable in chr.vocab.vocab.keys() if key_variable in loc][0]
+    stem = f"{slug}_{source_name}_{key_variable}"
+    therest = loc.split(stem)[1]
+    if len(therest)>0:
+        # if there are numbers in the remainder of the file name, we know there is a start and end date
+        # and we know the form of it
+        if bool(regex.search(r'\d', therest)):
+            start_time, end_time = therest.split("_")[1:3]
+            ts_mods = "_".join(therest.split("_")[3:])
+        else:
+            start_time, end_time = None, None
+            ts_mods = "_".join(therest.split("_")[1:])
+
+    return slug, source_name, key_variable, ts_mods, start_time, end_time, base, suffix, path
+
+
+def group_decoded_paths(paths):
+    cols = ["slug", "source_name", "key_variable", "ts_mods", "start_time", "end_time", "base", "suffix", "path"]
+    all_desc = pd.DataFrame([chr.src.utils.decode_path(path) for path in paths], columns=cols)
+    return all_desc
 
 # Snippet to use for renaming model cache files
 # import pathlib

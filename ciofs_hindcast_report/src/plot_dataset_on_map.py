@@ -512,7 +512,8 @@ def surface_otf_adfg(slug):
                            )
 
 
-def moorings_uaf(slug):
+def moorings_uaf(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.6, -149.3, 57.5, 59.8],
                     width_ratios=[0.9, 1.1])
@@ -526,10 +527,12 @@ def moorings_uaf(slug):
                                 # dd=dds, 
                                 # annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_nps(slug):
+def moorings_nps(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-155, -152, 58, 60],
                     width_ratios=[0.9, 1.1])
@@ -543,10 +546,12 @@ def moorings_nps(slug):
                                 dd=dds, 
                                 # annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_noaa(slug):
+def moorings_noaa(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-155, -152, 57, 60],
                     width_ratios=[0.9, 1.1])
@@ -565,10 +570,12 @@ def moorings_noaa(slug):
                                 # dd=dds, 
                                 annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_aoos_cdip(slug):
+def moorings_aoos_cdip(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.5, -149.5, 57, 60],
                     width_ratios=[0.9, 1.1])
@@ -582,10 +589,12 @@ def moorings_aoos_cdip(slug):
                                 # dd=dds, 
                                 # annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_kbnerr_bear_cove_seldovia(slug):
+def moorings_kbnerr_bear_cove_seldovia(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152, -150.5, 59, 60],
                     width_ratios=[0.9, 1.1])
@@ -600,10 +609,12 @@ def moorings_kbnerr_bear_cove_seldovia(slug):
                                 dd=dds, 
                                 # annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_kbnerr_homer(slug):
+def moorings_kbnerr_homer(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152, -150.5, 59, 60],
                     width_ratios=[0.9, 1.1])
@@ -618,10 +629,12 @@ def moorings_kbnerr_homer(slug):
                                 dd=dds, 
                                 # annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def moorings_kbnerr_historical(slug):
+def moorings_kbnerr_historical(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.3, -150.8, 59, 60],
                     width_ratios=[0.9, 1.1])
@@ -640,7 +653,7 @@ def moorings_kbnerr_historical(slug):
     maps = np.vstack((lon, lon, lat, lat, station_names, ["point"] * len(lon),)).T
 
     omsa.plot.map.plot_map(maps,
-                           figname=f"Map of {slug}",
+                        #    figname=f"Map of {slug}",
                                   label_with_station_name=True, 
                                   two_maps=two_maps,
                                   figsize=chr.figsize, 
@@ -649,10 +662,12 @@ def moorings_kbnerr_historical(slug):
                                   dd=dds,
                                 #   colors_data=select_colorsdata(),
                                   annotate=True,
+                                  figname=figname,
                            )
 
 
-def adcp_moored_noaa_coi_2005(slug):
+def adcp_moored_noaa_coi_2005(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
@@ -671,7 +686,7 @@ def adcp_moored_noaa_coi_2005(slug):
            (0,0),(0,0),(0,0),(0,0),(0,0), (0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),
            (0,-10000), (0,10000), (5000,5000), (10000,0)]
     omsa.plot.map.plot_map(np.asarray(maps),
-                           figname=f"Map of {slug}",
+                        #    figname=f"Map of {slug}",
                                   label_with_station_name=True, 
                                   two_maps=two_maps,
                                   figsize=chr.figsize, 
@@ -681,10 +696,12 @@ def adcp_moored_noaa_coi_2005(slug):
                                   dd=dds,
                                   annotate=True,
                                   tight_layout=True,
+                                  figname=figname,
                            )
 
 
-def adcp_moored_noaa_coi_other(slug):
+def adcp_moored_noaa_coi_other(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
@@ -703,7 +720,7 @@ def adcp_moored_noaa_coi_other(slug):
     #        (0,0),(0,0),(0,0),(0,0),(0,0), (0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),
     #        (0,-10000), (0,10000), (5000,5000), (10000,0)]
     omsa.plot.map.plot_map(np.asarray(maps),
-                           figname=f"Map of {slug}",
+                        #    figname=f"Map of {slug}",
                                   label_with_station_name=True, 
                                   two_maps=two_maps,
                                   figsize=chr.figsize, 
@@ -716,10 +733,12 @@ def adcp_moored_noaa_coi_other(slug):
                            colors_data=select_colorsdata(),
                            loc = "lower right",
                            markersize=8,
+                           figname=figname,
                            )
 
 
-def adcp_moored_noaa_kod_1(slug):
+def adcp_moored_noaa_kod_1(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-155.75, -152, 56.6, 57.9],
                     width_ratios=[0.4, 1.6])
@@ -739,11 +758,12 @@ def adcp_moored_noaa_kod_1(slug):
                                 colors_data=select_colorsdata(),
                                 markersize=8,
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
 
 
-def adcp_moored_noaa_kod_2(slug):
-
+def adcp_moored_noaa_kod_2(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-154.0, -151.75, 57.8, 58.75],
                     width_ratios=[0.4, 1.6])
     
@@ -762,4 +782,5 @@ def adcp_moored_noaa_kod_2(slug):
                                 colors_data=select_colorsdata(),
                                 markersize=8,
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,)
