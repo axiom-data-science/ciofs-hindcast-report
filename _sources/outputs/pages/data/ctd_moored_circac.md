@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:ctd_moored_circac)=
 # Mooring (CIRCAC): Central Cook Inlet Mooring
 
 * CTD Moored 2006 - CIRCAC
@@ -45,17 +46,19 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset           | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                           |
-|---:|:------------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------|
-|  0 | ctd_moored_circac | timeSeries    |       60.7617 |       -151.505 | 2006-08-28 18:32:00 |       60.7617 |       -151.505 | 2006-08-11 23:32:00 | https://researchworkspace.com/files/39886029/xto_mooring_2006.txt |
+|    | Dataset           | featuretype   | key_variables    |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                           |
+|---:|:------------------|:--------------|:-----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------|
+|  0 | ctd_moored_circac | timeSeries    | ['temp', 'salt'] |       60.7617 |       -151.505 | 2006-08-28 18:32:00 |       60.7617 |       -151.505 | 2006-08-11 23:32:00 | https://researchworkspace.com/files/39886029/xto_mooring_2006.txt |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_circac"))
 ```
 
@@ -63,15 +66,16 @@ cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_circac"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "ctd_moored_circac")("ctd_moored_circac")
-    
 ```
 
 ## ctd_moored_circac
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['ctd_moored_circac'].plot.data()).cols(1)
 ```

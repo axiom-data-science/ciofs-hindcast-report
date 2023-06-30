@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:moorings_kbnerr_historical)=
 # Moorings (KBNERR): Historical, Kachemak Bay
 
 * Historical moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
@@ -31,21 +32,23 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
 
 These are accessed from Research Workspace.
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset   | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                            |
-|---:|:----------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:-------------------------------------------------------------------|
-|  0 | kacbcwq   | timeSeries    |       59.7057 |       -151.109 | 2003-09-24 17:30:00 |       59.7057 |       -151.109 | 2002-06-18 11:30:00 | https://researchworkspace.com/files/42202441/kacbcwq_subsetted.csv |
-|  1 | kacdlwq   | timeSeries    |       59.6023 |       -151.41  | 2002-12-31 23:30:00 |       59.6023 |       -151.41  | 2002-10-24 10:00:00 | https://researchworkspace.com/files/42202443/kacdlwq_subsetted.csv |
-|  2 | kachowq   | timeSeries    |       59.6023 |       -151.41  | 2002-11-20 12:30:00 |       59.6023 |       -151.41  | 2001-07-12 07:45:00 | https://researchworkspace.com/files/42202445/kachowq_subsetted.csv |
-|  3 | kacpgwq   | timeSeries    |       59.3705 |       -151.896 | 2003-09-24 15:30:00 |       59.3705 |       -151.896 | 2002-06-21 10:00:00 | https://researchworkspace.com/files/42202447/kacpgwq_subsetted.csv |
-|  4 | kacsewq   | timeSeries    |       59.441  |       -151.721 | 2003-12-31 23:30:00 |       59.441  |       -151.721 | 2001-08-17 15:15:00 | https://researchworkspace.com/files/42202449/kacsewq_subsetted.csv |
+|    | Dataset   | featuretype   | key_variables    |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                            |
+|---:|:----------|:--------------|:-----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:-------------------------------------------------------------------|
+|  0 | kacbcwq   | timeSeries    | ['temp', 'salt'] |       59.7057 |       -151.109 | 2003-09-24 17:30:00 |       59.7057 |       -151.109 | 2002-06-18 11:30:00 | https://researchworkspace.com/files/42202441/kacbcwq_subsetted.csv |
+|  1 | kacdlwq   | timeSeries    | ['temp', 'salt'] |       59.6023 |       -151.41  | 2002-12-31 23:30:00 |       59.6023 |       -151.41  | 2002-10-24 10:00:00 | https://researchworkspace.com/files/42202443/kacdlwq_subsetted.csv |
+|  2 | kachowq   | timeSeries    | ['temp', 'salt'] |       59.6023 |       -151.41  | 2002-11-20 12:30:00 |       59.6023 |       -151.41  | 2001-07-12 07:45:00 | https://researchworkspace.com/files/42202445/kachowq_subsetted.csv |
+|  3 | kacpgwq   | timeSeries    | ['temp', 'salt'] |       59.3705 |       -151.896 | 2003-09-24 15:30:00 |       59.3705 |       -151.896 | 2002-06-21 10:00:00 | https://researchworkspace.com/files/42202447/kacpgwq_subsetted.csv |
+|  4 | kacsewq   | timeSeries    | ['temp', 'salt'] |       59.441  |       -151.721 | 2003-12-31 23:30:00 |       59.441  |       -151.721 | 2001-08-17 15:15:00 | https://researchworkspace.com/files/42202449/kacsewq_subsetted.csv |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("moorings_kbnerr_historical"))
 ```
 
@@ -53,15 +56,16 @@ cat = intake.open_catalog(chr.CAT_NAME("moorings_kbnerr_historical"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbnerr_historical")
-    
 ```
 
 ## kacbcwq
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['kacbcwq'].plot.data()).cols(1)
 ```
@@ -70,7 +74,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbn
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['kacdlwq'].plot.data()).cols(1)
 ```
@@ -79,7 +83,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbn
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['kachowq'].plot.data()).cols(1)
 ```
@@ -88,7 +92,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbn
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['kacpgwq'].plot.data()).cols(1)
 ```
@@ -97,7 +101,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_historical")("moorings_kbn
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['kacsewq'].plot.data()).cols(1)
 ```

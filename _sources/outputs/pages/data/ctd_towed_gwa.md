@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:ctd_towed_gwa)=
 # Underway CTD (GWA): Towed CTD
 
 * CTD Towed 2017-2019 - GWA
@@ -35,32 +36,34 @@ Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d
 
 Made all longitudes negative west values, converted some local times, 2019 and 2020 only have temperature, ship track outside domain is not included, resampled from 2min to 5min.
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset    | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                           |
-|---:|:-----------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:----------------------------------------------------------------------------------|
-|  0 | 2017-04-30 | trajectory    |       59.355  |       -150.5   | 2017-04-30 11:30:00 |        58.79  |       -152.08  | 2017-04-30 07:30:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
-|  1 | 2017-05-30 | trajectory    |       59.3067 |       -150.51  | 2017-05-30 11:40:00 |        58.795 |       -152.08  | 2017-05-30 08:00:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
-|  2 | 2017-08-01 | trajectory    |       59.02   |       -150.52  | 2017-08-01 03:20:00 |        58.81  |       -151.38  | 2017-08-01 01:35:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
-|  3 | 2017-09-03 | trajectory    |       59.03   |       -150.52  | 2017-09-03 04:35:00 |        58.8   |       -151.55  | 2017-09-03 02:25:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
-|  4 | 2017-10-03 | trajectory    |       59.17   |       -150.5   | 2017-10-24 04:10:00 |        58.79  |       -152.08  | 2017-10-03 00:10:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
-|  5 | 2018-04-17 | trajectory    |       59.16   |       -150.5   | 2018-04-17 11:35:00 |        58.81  |       -152.11  | 2018-04-17 08:10:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
-|  6 | 2018-05-19 | trajectory    |       59.11   |       -150.5   | 2018-05-19 19:00:00 |        58.81  |       -151.7   | 2018-05-19 15:20:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
-|  7 | 2018-06-18 | trajectory    |       59.965  |       -150.5   | 2018-06-18 19:20:00 |        58.8   |       -152.13  | 2018-06-18 14:20:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
-|  8 | 2018-07-21 | trajectory    |       59.475  |       -150.5   | 2018-07-21 21:00:00 |        58.8   |       -152.08  | 2018-07-21 17:00:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
-|  9 | 2019-04-13 | trajectory    |       59.38   |       -150.52  | 2019-04-13 21:20:00 |        58.81  |       -152.13  | 2019-04-13 18:00:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
-| 10 | 2019-05-13 | trajectory    |       58.94   |       -150.5   | 2019-05-13 19:40:00 |        58.8   |       -151.01  | 2019-05-13 18:40:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
-| 11 | 2019-08-17 | trajectory    |       59.37   |       -150.51  | 2019-08-17 21:25:00 |        58.82  |       -152.17  | 2019-08-17 18:15:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
-| 12 | 2019-09-16 | trajectory    |       59.34   |       -150.51  | 2019-09-16 23:00:00 |        58.57  |       -152.12  | 2019-09-16 19:10:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
-| 13 | 2020-07-07 | trajectory    |       59.42   |       -150.512 | 2020-07-07 05:30:00 |        58.79  |       -152.153 | 2020-07-07 01:25:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
-| 14 | 2020-08-09 | trajectory    |       59.4    |       -150.513 | 2020-08-09 08:00:00 |        58.79  |       -152.133 | 2020-08-09 04:05:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
-| 15 | 2020-09-08 | trajectory    |       60.52   |       -150.516 | 2020-09-08 23:05:00 |        58.77  |       -152.2   | 2020-09-08 15:05:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
+|    | Dataset    | featuretype   | key_variables    |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                           |
+|---:|:-----------|:--------------|:-----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:----------------------------------------------------------------------------------|
+|  0 | 2017-04-30 | trajectory    | ['temp', 'salt'] |       59.355  |       -150.5   | 2017-04-30 11:30:00 |        58.79  |       -152.08  | 2017-04-30 07:30:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
+|  1 | 2017-05-30 | trajectory    | ['temp', 'salt'] |       59.3067 |       -150.51  | 2017-05-30 11:40:00 |        58.795 |       -152.08  | 2017-05-30 08:00:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
+|  2 | 2017-08-01 | trajectory    | ['temp', 'salt'] |       59.02   |       -150.52  | 2017-08-01 03:20:00 |        58.81  |       -151.38  | 2017-08-01 01:35:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
+|  3 | 2017-09-03 | trajectory    | ['temp', 'salt'] |       59.03   |       -150.52  | 2017-09-03 04:35:00 |        58.8   |       -151.55  | 2017-09-03 02:25:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
+|  4 | 2017-10-03 | trajectory    | ['temp', 'salt'] |       59.17   |       -150.5   | 2017-10-24 04:10:00 |        58.79  |       -152.08  | 2017-10-03 00:10:00 | https://researchworkspace.com/files/42202335/CPR_physical_data_2017_subsetted.csv |
+|  5 | 2018-04-17 | trajectory    | ['temp', 'salt'] |       59.16   |       -150.5   | 2018-04-17 11:35:00 |        58.81  |       -152.11  | 2018-04-17 08:10:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
+|  6 | 2018-05-19 | trajectory    | ['temp', 'salt'] |       59.11   |       -150.5   | 2018-05-19 19:00:00 |        58.81  |       -151.7   | 2018-05-19 15:20:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
+|  7 | 2018-06-18 | trajectory    | ['temp', 'salt'] |       59.965  |       -150.5   | 2018-06-18 19:20:00 |        58.8   |       -152.13  | 2018-06-18 14:20:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
+|  8 | 2018-07-21 | trajectory    | ['temp', 'salt'] |       59.475  |       -150.5   | 2018-07-21 21:00:00 |        58.8   |       -152.08  | 2018-07-21 17:00:00 | https://researchworkspace.com/files/42202337/CPR_physical_data_2018_subsetted.csv |
+|  9 | 2019-04-13 | trajectory    | ['temp']         |       59.38   |       -150.52  | 2019-04-13 21:20:00 |        58.81  |       -152.13  | 2019-04-13 18:00:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
+| 10 | 2019-05-13 | trajectory    | ['temp']         |       58.94   |       -150.5   | 2019-05-13 19:40:00 |        58.8   |       -151.01  | 2019-05-13 18:40:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
+| 11 | 2019-08-17 | trajectory    | ['temp']         |       59.37   |       -150.51  | 2019-08-17 21:25:00 |        58.82  |       -152.17  | 2019-08-17 18:15:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
+| 12 | 2019-09-16 | trajectory    | ['temp']         |       59.34   |       -150.51  | 2019-09-16 23:00:00 |        58.57  |       -152.12  | 2019-09-16 19:10:00 | https://researchworkspace.com/files/42202339/CPR_physical_data_2019_subsetted.csv |
+| 13 | 2020-07-07 | trajectory    | ['temp']         |       59.42   |       -150.512 | 2020-07-07 05:30:00 |        58.79  |       -152.153 | 2020-07-07 01:25:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
+| 14 | 2020-08-09 | trajectory    | ['temp']         |       59.4    |       -150.513 | 2020-08-09 08:00:00 |        58.79  |       -152.133 | 2020-08-09 04:05:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
+| 15 | 2020-09-08 | trajectory    | ['temp']         |       60.52   |       -150.516 | 2020-09-08 23:05:00 |        58.77  |       -152.2   | 2020-09-08 15:05:00 | https://researchworkspace.com/files/42202341/CPR_physical_data_2020_subsetted.csv |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("ctd_towed_gwa"))
 ```
 
@@ -68,8 +71,9 @@ cat = intake.open_catalog(chr.CAT_NAME("ctd_towed_gwa"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "ctd_towed_gwa")("ctd_towed_gwa")
-    
 ```
 
 ## 2017
@@ -80,7 +84,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_towed_gwa")("ctd_towed_gwa")
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2017-04-30'].plot.salt() + cat['2017-04-30'].plot.temp()
 ```
@@ -89,7 +93,7 @@ cat['2017-04-30'].plot.salt() + cat['2017-04-30'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2017-05-30'].plot.salt() + cat['2017-05-30'].plot.temp()
 ```
@@ -98,7 +102,7 @@ cat['2017-05-30'].plot.salt() + cat['2017-05-30'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2017-08-01'].plot.salt() + cat['2017-08-01'].plot.temp()
 ```
@@ -107,7 +111,7 @@ cat['2017-08-01'].plot.salt() + cat['2017-08-01'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2017-09-03'].plot.salt() + cat['2017-09-03'].plot.temp()
 ```
@@ -116,7 +120,7 @@ cat['2017-09-03'].plot.salt() + cat['2017-09-03'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2017-10-03'].plot.salt() + cat['2017-10-03'].plot.temp()
 ```
@@ -129,7 +133,7 @@ cat['2017-10-03'].plot.salt() + cat['2017-10-03'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2018-04-17'].plot.salt() + cat['2018-04-17'].plot.temp()
 ```
@@ -138,7 +142,7 @@ cat['2018-04-17'].plot.salt() + cat['2018-04-17'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2018-05-19'].plot.salt() + cat['2018-05-19'].plot.temp()
 ```
@@ -147,7 +151,7 @@ cat['2018-05-19'].plot.salt() + cat['2018-05-19'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2018-06-18'].plot.salt() + cat['2018-06-18'].plot.temp()
 ```
@@ -156,7 +160,7 @@ cat['2018-06-18'].plot.salt() + cat['2018-06-18'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2018-07-21'].plot.salt() + cat['2018-07-21'].plot.temp()
 ```
@@ -169,7 +173,7 @@ cat['2018-07-21'].plot.salt() + cat['2018-07-21'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2019-04-13'].plot.temp()
 ```
@@ -178,7 +182,7 @@ cat['2019-04-13'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2019-05-13'].plot.temp()
 ```
@@ -187,7 +191,7 @@ cat['2019-05-13'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2019-08-17'].plot.temp()
 ```
@@ -196,7 +200,7 @@ cat['2019-08-17'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2019-09-16'].plot.temp()
 ```
@@ -209,7 +213,7 @@ cat['2019-09-16'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2020-07-07'].plot.temp()
 ```
@@ -218,7 +222,7 @@ cat['2020-07-07'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2020-08-09'].plot.temp()
 ```
@@ -227,7 +231,7 @@ cat['2020-08-09'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2020-09-08'].plot.temp()
 ```

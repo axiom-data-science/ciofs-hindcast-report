@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:ctd_moored_kbnerr)=
 # Mooring (KBNERR): Lower Cook Inlet Mooring
 
 * CTD Moored 2006-2008 - KBNERR
@@ -43,18 +44,20 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
 
 
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset     | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                          |
-|---:|:------------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:---------------------------------------------------------------------------------|
-|  0 | Deployment1 | timeSeries    |       59.2027 |       -151.848 | 2006-10-28 10:22:00 |       59.2027 |       -151.848 | 2006-08-12 18:22:00 | https://researchworkspace.com/files/39886044/chrome_bay_mooring_deployment_1.txt |
-|  1 | Deployment2 | timeSeries    |       59.2027 |       -151.848 | 2008-02-25 05:28:00 |       59.2027 |       -151.848 | 2007-06-20 21:00:00 | https://researchworkspace.com/files/39886045/chrome_bay_mooring_deployment_2.txt |
+|    | Dataset     | featuretype   | key_variables    |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                          |
+|---:|:------------|:--------------|:-----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:---------------------------------------------------------------------------------|
+|  0 | Deployment1 | timeSeries    | ['temp', 'salt'] |       59.2027 |       -151.848 | 2006-10-28 10:22:00 |       59.2027 |       -151.848 | 2006-08-12 18:22:00 | https://researchworkspace.com/files/39886044/chrome_bay_mooring_deployment_1.txt |
+|  1 | Deployment2 | timeSeries    | ['temp', 'salt'] |       59.2027 |       -151.848 | 2008-02-25 05:28:00 |       59.2027 |       -151.848 | 2007-06-20 21:00:00 | https://researchworkspace.com/files/39886045/chrome_bay_mooring_deployment_2.txt |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_kbnerr"))
 ```
 
@@ -62,15 +65,16 @@ cat = intake.open_catalog(chr.CAT_NAME("ctd_moored_kbnerr"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
-    
 ```
 
 ## Deployment1
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['Deployment1'].plot.data()).cols(1)
 ```
@@ -79,7 +83,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_moored_kbnerr")("ctd_moored_kbnerr")
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['Deployment2'].plot.data()).cols(1)
 ```

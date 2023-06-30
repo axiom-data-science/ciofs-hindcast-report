@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:ctd_towed_gwa_temp)=
 # Underway CTD (GWA): Towed, temperature only
 
 * Temperature towed 2011-2016 - GWA
@@ -35,42 +36,44 @@ Project overview: https://gulf-of-alaska.portal.aoos.org/#metadata/87f56b09-2c7d
 
 Converted some local times, ship track outside domain is not included.
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset    | featuretype   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                             |
-|---:|:-----------|:--------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------------------------|
-|  0 | 2011-06-20 | trajectory    |       59.2073 |       -150.532 | 2011-06-20 17:40:00 |       58.8066 |       -152.133 | 2011-06-20 14:50:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
-|  1 | 2011-07-23 | trajectory    |       59.0286 |       -150.526 | 2011-07-23 18:00:00 |       58.8215 |       -151.448 | 2011-07-23 16:25:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
-|  2 | 2011-08-22 | trajectory    |       59.1542 |       -150.5   | 2011-08-22 18:05:00 |       58.8112 |       -152.048 | 2011-08-22 15:20:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
-|  3 | 2012-04-09 | trajectory    |       60.58   |       -150.52  | 2012-04-10 02:05:00 |       58.82   |       -152.13  | 2012-04-09 19:30:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
-|  4 | 2012-05-13 | trajectory    |       59.41   |       -150.52  | 2012-05-13 03:30:00 |       58.82   |       -152.14  | 2012-05-13 00:15:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
-|  5 | 2012-06-11 | trajectory    |       59.34   |       -150.51  | 2012-06-12 03:10:00 |       58.81   |       -152.13  | 2012-06-11 23:55:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
-|  6 | 2012-09-16 | trajectory    |       59.54   |       -150.52  | 2012-09-16 05:15:00 |       58.82   |       -152.13  | 2012-09-16 00:25:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
-|  7 | 2012-10-16 | trajectory    |       60.5    |       -150.51  | 2012-10-16 09:45:00 |       58.81   |       -152.13  | 2012-10-16 01:50:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
-|  8 | 2013-04-14 | trajectory    |       60.51   |       -150.53  | 2013-04-14 11:00:00 |       58.81   |       -152.13  | 2013-04-14 03:05:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
-|  9 | 2013-05-13 | trajectory    |       59.73   |       -150.5   | 2013-05-14 02:15:00 |       58.81   |       -152.13  | 2013-05-13 21:35:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
-| 10 | 2013-06-15 | trajectory    |       59.47   |       -150.52  | 2013-06-16 02:00:00 |       58.81   |       -152.13  | 2013-06-15 22:15:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
-| 11 | 2013-07-15 | trajectory    |       59.2    |       -150.51  | 2013-07-16 02:40:00 |       58.82   |       -152.1   | 2013-07-15 23:55:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
-| 12 | 2013-08-17 | trajectory    |       59.43   |       -150.5   | 2013-08-18 02:30:00 |       58.8    |       -152.13  | 2013-08-17 22:35:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
-| 13 | 2014-04-27 | trajectory    |       59.22   |       -150.53  | 2014-04-27 04:20:00 |       58.82   |       -152.13  | 2014-04-27 01:00:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
-| 14 | 2014-05-27 | trajectory    |       59.11   |       -150.51  | 2014-05-27 03:55:00 |       58.8    |       -151.99  | 2014-05-27 01:10:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
-| 15 | 2014-06-29 | trajectory    |       59.01   |       -150.51  | 2014-06-29 04:45:00 |       58.77   |       -151.66  | 2014-06-29 02:35:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
-| 16 | 2014-07-29 | trajectory    |       59.52   |       -150.52  | 2014-07-29 05:00:00 |       58.81   |       -152.28  | 2014-07-29 00:35:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
-| 17 | 2014-08-31 | trajectory    |       59.05   |       -150.51  | 2014-08-31 03:50:00 |       58.82   |       -151.82  | 2014-08-31 01:40:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
-| 18 | 2015-08-23 | trajectory    |       59.56   |       -150.5   | 2015-08-23 14:35:00 |       58.78   |       -152.13  | 2015-08-23 10:05:00 | https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv |
-| 19 | 2015-09-01 | trajectory    |       60.53   |       -150.5   | 2015-09-01 16:10:00 |       58.66   |       -152.13  | 2015-09-01 08:05:00 | https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv |
-| 20 | 2016-04-17 | trajectory    |       59.34   |       -150.53  | 2016-04-17 03:35:00 |       58.82   |       -152.16  | 2016-04-17 00:15:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
-| 21 | 2016-05-16 | trajectory    |       59.39   |       -150.5   | 2016-05-17 03:30:00 |       58.79   |       -152.18  | 2016-05-16 23:15:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
-| 22 | 2016-06-19 | trajectory    |       59.23   |       -150.5   | 2016-06-19 03:35:00 |       58.78   |       -152.15  | 2016-06-19 00:10:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
-| 23 | 2016-07-19 | trajectory    |       59.07   |       -150.51  | 2016-07-19 03:50:00 |       58.8    |       -151.9   | 2016-07-19 01:05:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
-| 24 | 2016-08-29 | trajectory    |       59.22   |       -150.52  | 2016-08-30 03:20:00 |       58.81   |       -152.14  | 2016-08-29 23:45:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
-| 25 | 2016-10-02 | trajectory    |       59.15   |       -150.5   | 2016-10-02 04:55:00 |       58.81   |       -152.03  | 2016-10-02 01:55:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+|    | Dataset    | featuretype   | key_variables   |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                                             |
+|---:|:-----------|:--------------|:----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:------------------------------------------------------------------------------------|
+|  0 | 2011-06-20 | trajectory    | ['temp']        |       59.2073 |       -150.532 | 2011-06-20 17:40:00 |       58.8066 |       -152.133 | 2011-06-20 14:50:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
+|  1 | 2011-07-23 | trajectory    | ['temp']        |       59.0286 |       -150.526 | 2011-07-23 18:00:00 |       58.8215 |       -151.448 | 2011-07-23 16:25:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
+|  2 | 2011-08-22 | trajectory    | ['temp']        |       59.1542 |       -150.5   | 2011-08-22 18:05:00 |       58.8112 |       -152.048 | 2011-08-22 15:20:00 | https://researchworkspace.com/files/42202616/CPR_TemperatureData_2011_subsetted.csv |
+|  3 | 2012-04-09 | trajectory    | ['temp']        |       60.58   |       -150.52  | 2012-04-10 02:05:00 |       58.82   |       -152.13  | 2012-04-09 19:30:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
+|  4 | 2012-05-13 | trajectory    | ['temp']        |       59.41   |       -150.52  | 2012-05-13 03:30:00 |       58.82   |       -152.14  | 2012-05-13 00:15:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
+|  5 | 2012-06-11 | trajectory    | ['temp']        |       59.34   |       -150.51  | 2012-06-12 03:10:00 |       58.81   |       -152.13  | 2012-06-11 23:55:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
+|  6 | 2012-09-16 | trajectory    | ['temp']        |       59.54   |       -150.52  | 2012-09-16 05:15:00 |       58.82   |       -152.13  | 2012-09-16 00:25:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
+|  7 | 2012-10-16 | trajectory    | ['temp']        |       60.5    |       -150.51  | 2012-10-16 09:45:00 |       58.81   |       -152.13  | 2012-10-16 01:50:00 | https://researchworkspace.com/files/42202618/CPR_TemperatureData_2012_subsetted.csv |
+|  8 | 2013-04-14 | trajectory    | ['temp']        |       60.51   |       -150.53  | 2013-04-14 11:00:00 |       58.81   |       -152.13  | 2013-04-14 03:05:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
+|  9 | 2013-05-13 | trajectory    | ['temp']        |       59.73   |       -150.5   | 2013-05-14 02:15:00 |       58.81   |       -152.13  | 2013-05-13 21:35:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
+| 10 | 2013-06-15 | trajectory    | ['temp']        |       59.47   |       -150.52  | 2013-06-16 02:00:00 |       58.81   |       -152.13  | 2013-06-15 22:15:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
+| 11 | 2013-07-15 | trajectory    | ['temp']        |       59.2    |       -150.51  | 2013-07-16 02:40:00 |       58.82   |       -152.1   | 2013-07-15 23:55:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
+| 12 | 2013-08-17 | trajectory    | ['temp']        |       59.43   |       -150.5   | 2013-08-18 02:30:00 |       58.8    |       -152.13  | 2013-08-17 22:35:00 | https://researchworkspace.com/files/42202620/CPR_TemperatureData_2013_subsetted.csv |
+| 13 | 2014-04-27 | trajectory    | ['temp']        |       59.22   |       -150.53  | 2014-04-27 04:20:00 |       58.82   |       -152.13  | 2014-04-27 01:00:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
+| 14 | 2014-05-27 | trajectory    | ['temp']        |       59.11   |       -150.51  | 2014-05-27 03:55:00 |       58.8    |       -151.99  | 2014-05-27 01:10:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
+| 15 | 2014-06-29 | trajectory    | ['temp']        |       59.01   |       -150.51  | 2014-06-29 04:45:00 |       58.77   |       -151.66  | 2014-06-29 02:35:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
+| 16 | 2014-07-29 | trajectory    | ['temp']        |       59.52   |       -150.52  | 2014-07-29 05:00:00 |       58.81   |       -152.28  | 2014-07-29 00:35:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
+| 17 | 2014-08-31 | trajectory    | ['temp']        |       59.05   |       -150.51  | 2014-08-31 03:50:00 |       58.82   |       -151.82  | 2014-08-31 01:40:00 | https://researchworkspace.com/files/42202622/CPR_TemperatureData_2014_subsetted.csv |
+| 18 | 2015-08-23 | trajectory    | ['temp']        |       59.56   |       -150.5   | 2015-08-23 14:35:00 |       58.78   |       -152.13  | 2015-08-23 10:05:00 | https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv |
+| 19 | 2015-09-01 | trajectory    | ['temp']        |       60.53   |       -150.5   | 2015-09-01 16:10:00 |       58.66   |       -152.13  | 2015-09-01 08:05:00 | https://researchworkspace.com/files/42202624/CPR_TemperatureData_2015_subsetted.csv |
+| 20 | 2016-04-17 | trajectory    | ['temp']        |       59.34   |       -150.53  | 2016-04-17 03:35:00 |       58.82   |       -152.16  | 2016-04-17 00:15:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+| 21 | 2016-05-16 | trajectory    | ['temp']        |       59.39   |       -150.5   | 2016-05-17 03:30:00 |       58.79   |       -152.18  | 2016-05-16 23:15:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+| 22 | 2016-06-19 | trajectory    | ['temp']        |       59.23   |       -150.5   | 2016-06-19 03:35:00 |       58.78   |       -152.15  | 2016-06-19 00:10:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+| 23 | 2016-07-19 | trajectory    | ['temp']        |       59.07   |       -150.51  | 2016-07-19 03:50:00 |       58.8    |       -151.9   | 2016-07-19 01:05:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+| 24 | 2016-08-29 | trajectory    | ['temp']        |       59.22   |       -150.52  | 2016-08-30 03:20:00 |       58.81   |       -152.14  | 2016-08-29 23:45:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
+| 25 | 2016-10-02 | trajectory    | ['temp']        |       59.15   |       -150.5   | 2016-10-02 04:55:00 |       58.81   |       -152.03  | 2016-10-02 01:55:00 | https://researchworkspace.com/files/42202626/CPR_TemperatureData_2016_subsetted.csv |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("ctd_towed_gwa_temp"))
 ```
 
@@ -78,8 +81,9 @@ cat = intake.open_catalog(chr.CAT_NAME("ctd_towed_gwa_temp"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "ctd_towed_gwa_temp")("ctd_towed_gwa_temp")
-    
 ```
 
 ## 2011
@@ -90,7 +94,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_towed_gwa_temp")("ctd_towed_gwa_temp")
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2011-06-20'].plot.temp()
 ```
@@ -99,7 +103,7 @@ cat['2011-06-20'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2011-07-23'].plot.temp()
 ```
@@ -108,7 +112,7 @@ cat['2011-07-23'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2011-08-22'].plot.temp()
 ```
@@ -121,7 +125,7 @@ cat['2011-08-22'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2012-04-09'].plot.temp()
 ```
@@ -130,7 +134,7 @@ cat['2012-04-09'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2012-05-13'].plot.temp()
 ```
@@ -139,7 +143,7 @@ cat['2012-05-13'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2012-06-11'].plot.temp()
 ```
@@ -148,7 +152,7 @@ cat['2012-06-11'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2012-09-16'].plot.temp()
 ```
@@ -157,7 +161,7 @@ cat['2012-09-16'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2012-10-16'].plot.temp()
 ```
@@ -170,7 +174,7 @@ cat['2012-10-16'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2013-04-14'].plot.temp()
 ```
@@ -179,7 +183,7 @@ cat['2013-04-14'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2013-05-13'].plot.temp()
 ```
@@ -188,7 +192,7 @@ cat['2013-05-13'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2013-06-15'].plot.temp()
 ```
@@ -197,7 +201,7 @@ cat['2013-06-15'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2013-07-15'].plot.temp()
 ```
@@ -206,7 +210,7 @@ cat['2013-07-15'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2013-08-17'].plot.temp()
 ```
@@ -219,7 +223,7 @@ cat['2013-08-17'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2014-04-27'].plot.temp()
 ```
@@ -228,7 +232,7 @@ cat['2014-04-27'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2014-05-27'].plot.temp()
 ```
@@ -237,7 +241,7 @@ cat['2014-05-27'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2014-06-29'].plot.temp()
 ```
@@ -246,7 +250,7 @@ cat['2014-06-29'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2014-07-29'].plot.temp()
 ```
@@ -255,7 +259,7 @@ cat['2014-07-29'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2014-08-31'].plot.temp()
 ```
@@ -268,7 +272,7 @@ cat['2014-08-31'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2015-08-23'].plot.temp()
 ```
@@ -277,7 +281,7 @@ cat['2015-08-23'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2015-09-01'].plot.temp()
 ```
@@ -290,7 +294,7 @@ cat['2015-09-01'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-04-17'].plot.temp()
 ```
@@ -299,7 +303,7 @@ cat['2016-04-17'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-05-16'].plot.temp()
 ```
@@ -308,7 +312,7 @@ cat['2016-05-16'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-06-19'].plot.temp()
 ```
@@ -317,7 +321,7 @@ cat['2016-06-19'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-07-19'].plot.temp()
 ```
@@ -326,7 +330,7 @@ cat['2016-07-19'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-08-29'].plot.temp()
 ```
@@ -335,7 +339,7 @@ cat['2016-08-29'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['2016-10-02'].plot.temp()
 ```

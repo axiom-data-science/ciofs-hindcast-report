@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:moorings_kbnerr_bear_cove_seldovia)=
 # Moorings (KBNERR): Kachemak Bay: Bear Cove, Seldovia
 
 * Moorings from Kachemak Bay National Estuarine Research Reserve (KBNERR)
@@ -37,19 +38,21 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
 
 These are accessed through AOOS portal/ERDDAP server.
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset             | datasetID           | featuretype   | griddap   | info_url                                                                 | institution                                               |   maxLatitude |   maxLongitude | maxTime                   |   minLatitude |   minLongitude | minTime                   | summary                                                                    | tabledap                                                           | title                               | urlpath                                                            |
-|---:|:--------------------|:--------------------|:--------------|:----------|:-------------------------------------------------------------------------|:----------------------------------------------------------|--------------:|---------------:|:--------------------------|--------------:|---------------:|:--------------------------|:---------------------------------------------------------------------------|:-------------------------------------------------------------------|:------------------------------------|:-------------------------------------------------------------------|
-|  0 | cdmo_nerrs_bearcove | cdmo_nerrs_bearcove | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/cdmo_nerrs_bearcove/index.csv | Kachemak Bay National Estuarine Research Reserve (KBNERR) |       59.7262 |       -151.049 | 2015-11-20 17:15:00+00:00 |       59.7262 |       -151.049 | 2015-05-05 14:00:00+00:00 | Timeseries data from 'Bear Cove Water Quality' (cdmo_nerrs_bearcove)       | https://erddap.sensors.ioos.us/erddap/tabledap/cdmo_nerrs_bearcove | Bear Cove Water Quality             | https://erddap.sensors.ioos.us/erddap/tabledap/cdmo_nerrs_bearcove |
-|  1 | nerrs_kacsdwq       | nerrs_kacsdwq       | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/nerrs_kacsdwq/index.csv       | Kachemak Bay National Estuarine Research Reserve (KBNERR) |       59.441  |       -151.721 | 2023-05-12 19:00:00+00:00 |       59.441  |       -151.721 | 2004-01-01 09:00:00+00:00 | Timeseries data from 'Seldovia Deep Water Quality (SEQA2)' (nerrs_kacsdwq) | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsdwq       | Seldovia Deep Water Quality (SEQA2) | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsdwq       |
-|  2 | nerrs_kacsswq       | nerrs_kacsswq       | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/nerrs_kacsswq/index.csv       | Kachemak Bay National Estuarine Research Reserve (KBNERR) |       59.441  |       -151.721 | 2023-05-12 19:00:00+00:00 |       59.441  |       -151.721 | 2004-01-01 09:00:00+00:00 | Timeseries data from 'Seldovia Surface Water Quality' (nerrs_kacsswq)      | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsswq       | Seldovia Surface Water Quality      | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsswq       |
+|    | Dataset             | datasetID           | featuretype   | griddap   | info_url                                                                 | institution                                               | key_variables           |   maxLatitude |   maxLongitude | maxTime                   |   minLatitude |   minLongitude | minTime                   | summary                                                                    | tabledap                                                           | title                               | urlpath                                                            |
+|---:|:--------------------|:--------------------|:--------------|:----------|:-------------------------------------------------------------------------|:----------------------------------------------------------|:------------------------|--------------:|---------------:|:--------------------------|--------------:|---------------:|:--------------------------|:---------------------------------------------------------------------------|:-------------------------------------------------------------------|:------------------------------------|:-------------------------------------------------------------------|
+|  0 | cdmo_nerrs_bearcove | cdmo_nerrs_bearcove | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/cdmo_nerrs_bearcove/index.csv | Kachemak Bay National Estuarine Research Reserve (KBNERR) | ['temp', 'salt']        |       59.7262 |       -151.049 | 2015-11-20 17:15:00+00:00 |       59.7262 |       -151.049 | 2015-05-05 14:00:00+00:00 | Timeseries data from 'Bear Cove Water Quality' (cdmo_nerrs_bearcove)       | https://erddap.sensors.ioos.us/erddap/tabledap/cdmo_nerrs_bearcove | Bear Cove Water Quality             | https://erddap.sensors.ioos.us/erddap/tabledap/cdmo_nerrs_bearcove |
+|  1 | nerrs_kacsdwq       | nerrs_kacsdwq       | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/nerrs_kacsdwq/index.csv       | Kachemak Bay National Estuarine Research Reserve (KBNERR) | ['ssh', 'temp', 'salt'] |       59.441  |       -151.721 | 2023-05-12 19:00:00+00:00 |       59.441  |       -151.721 | 2004-01-01 09:00:00+00:00 | Timeseries data from 'Seldovia Deep Water Quality (SEQA2)' (nerrs_kacsdwq) | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsdwq       | Seldovia Deep Water Quality (SEQA2) | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsdwq       |
+|  2 | nerrs_kacsswq       | nerrs_kacsswq       | timeSeries    |           | https://erddap.sensors.ioos.us/erddap/info/nerrs_kacsswq/index.csv       | Kachemak Bay National Estuarine Research Reserve (KBNERR) | ['ssh', 'temp', 'salt'] |       59.441  |       -151.721 | 2023-05-12 19:00:00+00:00 |       59.441  |       -151.721 | 2004-01-01 09:00:00+00:00 | Timeseries data from 'Seldovia Surface Water Quality' (nerrs_kacsswq)      | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsswq       | Seldovia Surface Water Quality      | https://erddap.sensors.ioos.us/erddap/tabledap/nerrs_kacsswq       |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("moorings_kbnerr_bear_cove_seldovia"))
 ```
 
@@ -57,15 +60,16 @@ cat = intake.open_catalog(chr.CAT_NAME("moorings_kbnerr_bear_cove_seldovia"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_bear_cove_seldovia")("moorings_kbnerr_bear_cove_seldovia")
-    
 ```
 
 ## cdmo_nerrs_bearcove
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['cdmo_nerrs_bearcove'].plot.data()).cols(1)
 ```
@@ -74,7 +78,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_bear_cove_seldovia")("moor
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['nerrs_kacsdwq'].plot.data()).cols(1)
 ```
@@ -83,7 +87,7 @@ getattr(chr.src.plot_dataset_on_map, "moorings_kbnerr_bear_cove_seldovia")("moor
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 (cat['nerrs_kacsswq'].plot.data()).cols(1)
 ```

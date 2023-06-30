@@ -18,6 +18,7 @@ import pandas as pd
 import cmocean.cm as cmo
 ```
 
+(page:ctd_profiles_uaf)=
 # CTD Transects (UAF): Repeated in central Cook Inlet
 
 * CTD time series UAF
@@ -39,25 +40,27 @@ Report: https://www.circac.org/wp-content/uploads/Okkonen_2005_hydrography-and-c
 
 Year for day 2 was corrected from 2004 to 2003. Not used in the NWGOA model/data comparison.
 
-<details><summary>Dataset metadata:</summary>
+```{dropdown} Dataset metadata
 
-|    | Dataset     | featuretype       |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                         |
-|---:|:------------|:------------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:----------------------------------------------------------------|
-|  0 | Transect_01 | trajectoryProfile |       60.4837 |       -151.3   | 2003-08-09 23:03:00 |       60.4815 |       -151.8   | 2003-08-09 20:36:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  1 | Transect_02 | trajectoryProfile |       60.4843 |       -151.301 | 2003-08-10 01:25:00 |       60.4816 |       -151.765 | 2003-08-09 23:12:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  2 | Transect_03 | trajectoryProfile |       60.4842 |       -151.336 | 2003-08-10 04:06:00 |       60.4827 |       -151.8   | 2003-08-10 01:35:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  3 | Transect_04 | trajectoryProfile |       60.4858 |       -151.3   | 2003-08-10 07:06:00 |       60.4823 |       -151.766 | 2003-08-10 04:14:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  4 | Transect_05 | trajectoryProfile |       60.4836 |       -151.334 | 2003-08-10 10:02:00 |       60.4827 |       -151.799 | 2003-08-10 07:16:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  5 | Transect_06 | trajectoryProfile |       60.4833 |       -151.3   | 2003-08-10 12:37:00 |       60.4825 |       -151.766 | 2003-08-10 10:11:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  6 | Transect_07 | trajectoryProfile |       60.4842 |       -151.3   | 2003-08-10 16:58:00 |       60.4823 |       -151.8   | 2003-08-10 14:01:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  7 | Transect_08 | trajectoryProfile |       60.4845 |       -151.3   | 2003-08-10 20:17:00 |       60.482  |       -151.767 | 2003-08-10 17:09:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
-|  8 | Transect_09 | trajectoryProfile |       60.484  |       -151.317 | 2003-08-10 22:59:00 |       60.4827 |       -151.8   | 2003-08-10 20:26:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|    | Dataset     | featuretype       | key_variables    |   maxLatitude |   maxLongitude | maxTime             |   minLatitude |   minLongitude | minTime             | urlpath                                                         |
+|---:|:------------|:------------------|:-----------------|--------------:|---------------:|:--------------------|--------------:|---------------:|:--------------------|:----------------------------------------------------------------|
+|  0 | Transect_01 | trajectoryProfile | ['temp', 'salt'] |       60.4837 |       -151.3   | 2003-08-09 23:03:00 |       60.4815 |       -151.8   | 2003-08-09 20:36:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  1 | Transect_02 | trajectoryProfile | ['temp', 'salt'] |       60.4843 |       -151.301 | 2003-08-10 01:25:00 |       60.4816 |       -151.765 | 2003-08-09 23:12:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  2 | Transect_03 | trajectoryProfile | ['temp', 'salt'] |       60.4842 |       -151.336 | 2003-08-10 04:06:00 |       60.4827 |       -151.8   | 2003-08-10 01:35:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  3 | Transect_04 | trajectoryProfile | ['temp', 'salt'] |       60.4858 |       -151.3   | 2003-08-10 07:06:00 |       60.4823 |       -151.766 | 2003-08-10 04:14:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  4 | Transect_05 | trajectoryProfile | ['temp', 'salt'] |       60.4836 |       -151.334 | 2003-08-10 10:02:00 |       60.4827 |       -151.799 | 2003-08-10 07:16:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  5 | Transect_06 | trajectoryProfile | ['temp', 'salt'] |       60.4833 |       -151.3   | 2003-08-10 12:37:00 |       60.4825 |       -151.766 | 2003-08-10 10:11:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  6 | Transect_07 | trajectoryProfile | ['temp', 'salt'] |       60.4842 |       -151.3   | 2003-08-10 16:58:00 |       60.4823 |       -151.8   | 2003-08-10 14:01:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  7 | Transect_08 | trajectoryProfile | ['temp', 'salt'] |       60.4845 |       -151.3   | 2003-08-10 20:17:00 |       60.482  |       -151.767 | 2003-08-10 17:09:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
+|  8 | Transect_09 | trajectoryProfile | ['temp', 'salt'] |       60.484  |       -151.317 | 2003-08-10 22:59:00 |       60.4827 |       -151.8   | 2003-08-10 20:26:00 | https://researchworkspace.com/files/42202256/TS%20downcasts.csv |
 
-</details>
+```
 
 
 
 ```{code-cell}
+:tags: [remove-input]
+
 cat = intake.open_catalog(chr.CAT_NAME("ctd_profiles_uaf"))
 ```
 
@@ -65,15 +68,16 @@ cat = intake.open_catalog(chr.CAT_NAME("ctd_profiles_uaf"))
     
 
 ```{code-cell}
+:tags: [remove-input]
+
 getattr(chr.src.plot_dataset_on_map, "ctd_profiles_uaf")("ctd_profiles_uaf")
-    
 ```
 
 ## Transect_01
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_01'].plot.salt() + cat['Transect_01'].plot.temp()
 ```
@@ -82,7 +86,7 @@ cat['Transect_01'].plot.salt() + cat['Transect_01'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_02'].plot.salt() + cat['Transect_02'].plot.temp()
 ```
@@ -91,7 +95,7 @@ cat['Transect_02'].plot.salt() + cat['Transect_02'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_03'].plot.salt() + cat['Transect_03'].plot.temp()
 ```
@@ -100,7 +104,7 @@ cat['Transect_03'].plot.salt() + cat['Transect_03'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_04'].plot.salt() + cat['Transect_04'].plot.temp()
 ```
@@ -109,7 +113,7 @@ cat['Transect_04'].plot.salt() + cat['Transect_04'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_05'].plot.salt() + cat['Transect_05'].plot.temp()
 ```
@@ -118,7 +122,7 @@ cat['Transect_05'].plot.salt() + cat['Transect_05'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_06'].plot.salt() + cat['Transect_06'].plot.temp()
 ```
@@ -127,7 +131,7 @@ cat['Transect_06'].plot.salt() + cat['Transect_06'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_07'].plot.salt() + cat['Transect_07'].plot.temp()
 ```
@@ -136,7 +140,7 @@ cat['Transect_07'].plot.salt() + cat['Transect_07'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_08'].plot.salt() + cat['Transect_08'].plot.temp()
 ```
@@ -145,7 +149,7 @@ cat['Transect_08'].plot.salt() + cat['Transect_08'].plot.temp()
         
 
 ```{code-cell}
-:tags: [full-width]
+:tags: [remove-input]
 
 cat['Transect_09'].plot.salt() + cat['Transect_09'].plot.temp()
 ```

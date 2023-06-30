@@ -1,0 +1,5 @@
+(page:references)=
+# References
+
+```{bibliography}
+```
