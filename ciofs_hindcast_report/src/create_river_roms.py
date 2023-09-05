@@ -568,6 +568,9 @@ def find_discharge(station: str, start: str, end: str, ndays: int, window: int =
         if flags.any():
             logging.info("Replacing discharge values flagged as iced or equipment malfunction with nan.")
             data.loc[flags, "00060"] = np.nan
+
+        # catch all non-data values in data and make sure they are nans
+        data["00060"] = data["00060"].where(data["00060"] != -999999.0, np.nan)
         
         # # Fill Eqp flags with nans (to be filled in later)
         # flags = (data["00060_cd"] == "P, Eqp") | (data["00060_cd"] == "A, Eqp")
