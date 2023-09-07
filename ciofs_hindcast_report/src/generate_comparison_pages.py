@@ -17,27 +17,30 @@ import cf_pandas as cfp
 # sns.set_theme()
 
 models = ["ciofs", "nwgoa"]
-key_variables = ["ssh", "temp", "salt"]
-dsm = xr.open_zarr("http://xpublish-ciofs.srv.axds.co/datasets/ciofs_hindcast/zarr/")
-time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
-                  ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp(dsm.ocean_time[-1].values)])
+key_variables = ["ssh", "temp", "salt", "along", "across", "speed"]
+# dsm = xr.open_zarr("http://xpublish-ciofs.srv.axds.co/datasets/ciofs_hindcast/zarr/")
+# time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
+#                   ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp(dsm.ocean_time[-1].values)])
 
 def project_name(slug, model):
     return f"{slug}_{model}"
 def outdir(slug, model):
     return chr.COMP_PAGE_DIR(slug) / project_name(slug, model)
 def translate(ts_mods):
-    ts_mods = ts_mods.split("_")
     words = ""
-    for ts_mod in ts_mods:
-        if len(words) > 0:
-            words += ", then "
-        if ts_mod == "subtidal":
-            words += "tidally-filtered"
-        elif ts_mod == "subtract-monthly-mean":
-            words += "monthly mean from data subtracted"
-        elif ts_mod == "subtract-mean":
-            words += "mean subtracted"
+    # import pdb; pdb.set_trace()
+    if isinstance(ts_mods, str):
+    # if ts_mods is not None and not np.isnan(ts_mods):
+        ts_mods = ts_mods.split("_")
+        for ts_mod in ts_mods:
+            if len(words) > 0:
+                words += ", then "
+            if ts_mod == "subtidal":
+                words += "tidally-filtered"
+            elif ts_mod == "subtract-monthly-mean":
+                words += "monthly mean from data subtracted"
+            elif ts_mod == "subtract-mean":
+                words += "mean subtracted"
     return words
 def translate_var(key_variable):
     if key_variable == "ssh":
@@ -46,17 +49,39 @@ def translate_var(key_variable):
         return "Sea water temperature"
     if key_variable == "salt":
         return "Sea water salinity"
+    if key_variable == "across":
+        return "Across-channel velocity"
+    if key_variable == "along":
+        return "Along-channel velocity"
+    if key_variable == "speed":
+        return "Horizontal speed"
 
 def mk_fig(path, label, caption):
 
     text = f"""
-                
+
 ```{{figure}} {path}
 ---
 name: {label}
 ---
 {caption}
 ```
+
+"""
+    return text
+
+def mk_fig_wide(path, label, caption):
+
+    text = f"""
+
+````{{div}} full-width                
+```{{figure}} {path}
+---
+name: {label}
+---
+{caption}
+```
+````
 
 """
     return text
@@ -92,9 +117,12 @@ def aggregate_overall_stats(slug):
 
 
 def plot_overall_stats(df, figname):
-    fig = plt.figure()
+    figsize = (6,len(df)*.5)
+    fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(111)
-    sns.heatmap(df, annot=True, linewidths=.5, vmin=0, vmax=1, cmap="cmo.matter_r", fmt='.2f', )
+    cbar_ax = fig.add_axes([0.95, 0.11, 0.02, 0.77])
+    sns.heatmap(df, annot=True, linewidths=.5, vmin=0, vmax=1, cmap="cmo.matter_r", fmt='.2f', 
+                cbar_ax=cbar_ax, ax=ax)#, cbar_kws=dict(pad=0.001))
     ax.tick_params(axis='both', which='major', labelsize=14, labelbottom = False, bottom=False, top = False, labeltop=True)
     ax.tick_params(axis='y', rotation=0)
     ax.set_ylabel("")
@@ -103,12 +131,14 @@ def plot_overall_stats(df, figname):
 
 
 def plot_mean(df, varname, figname):
-    monthly_mean = df[varname].groupby(df.cf["T"].dt.month).mean()
+    monthly_mean = df[varname].groupby(df.cf["T"].month).mean()
+    # monthly_mean = df[varname].groupby(df.cf["T"].dt.month).mean()
     # unclear why I have to shift this
     monthly_mean_shifted = monthly_mean.copy()
     monthly_mean_shifted.index = monthly_mean_shifted.index - 1
 
-    df = df.set_index(df.cf["T"].dt.month)
+    df = df.set_index(df.cf["T"].month)
+    # df = df.set_index(df.cf["T"].dt.month)
     fig = plt.figure()
     ax = fig.add_subplot(111)
     sns.violinplot(data=df, x=df.index, y=varname, inner="quartile", color="orange")
@@ -147,14 +177,17 @@ def aggregate_stats(slug):
 
 
 def plot_source_stats(df, source_name, figname):
-    fig = plt.figure()
+    figsize = (6,len(df)*.5)
+    fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(111)
-    sns.heatmap(df, annot=True, linewidths=.5, vmin=0, vmax=1, cmap="cmo.matter_r", fmt='.2f', )#, ax=ax)
+    cbar_ax = fig.add_axes([0.95, 0.11, 0.02, 0.77])
+    sns.heatmap(df, annot=True, linewidths=.5, vmin=0, vmax=1, cmap="cmo.matter_r", fmt='.2f', 
+                cbar_ax=cbar_ax, ax=ax)#, cbar_kws=dict(pad=0.001))
     ax.tick_params(axis='both', which='major', labelsize=14, labelbottom = False, bottom=False, top = False, labeltop=True)
     ax.tick_params(axis='y', rotation=0)
     ax.set_ylabel("")
-    fig.suptitle(source_name)
-    plt.tight_layout()
+    fig.suptitle(source_name, y=1.1)
+    # plt.tight_layout()
     # import pdb; pdb.set_trace()
     fig.savefig(figname, dpi=100, bbox_inches="tight")
     plt.close(fig)
@@ -180,6 +213,11 @@ Overall, the salinity from the CIOFS model demonstrates much less high frequency
 
 
 def generate_page(slug):   
+    dsm = xr.open_zarr("http://xpublish-ciofs.srv.axds.co/datasets/ciofs_hindcast/zarr/")
+    
+    time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
+                  ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp(dsm.ocean_time[-1].values)])
+
      
 # def moorings_noaa(slug):    
     # link project out directories to comparison page dir so can use the 
@@ -243,7 +281,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
     text = f"""\
 ## Map of {cat.metadata["map_description"]}
 
-{mk_fig(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
+{mk_fig_wide(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
 
 """
 #Then refer to the figure with {{numref}}`Figure {{number}}<fig-map>`
@@ -289,7 +327,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
         text = f"""\
 ### {translate_var(key_variable)}: {translate(ts_mods)}
 
-{mk_fig(figname.name, label, caption)}
+{mk_fig_wide(figname.name, label, caption)}
 
 """
         nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
@@ -348,7 +386,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                 plot_source_stats(dfs.reset_index().set_index("start_time")[models], source_name, figname)
                 label = f"fig-{source_name}-{key_variable}-{ts_mods}"
                 caption = f"Skill score by year for {translate_var(key_variable).lower()}, {translate(ts_mods)}"
-                text = mk_fig(figname.name, label, caption)
+                text = mk_fig_wide(figname.name, label, caption)
                 nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
                 
                 # if this is an anomaly calculation, show mean
@@ -359,7 +397,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                     plot_mean(dfd, dfd.cf[key_variable].name, figname)      
                     label = f"fig-{source_name}-{key_variable}"
                     caption = f"{translate_var(key_variable)} averaged monthly across data range with variation across years included."
-                    text = mk_fig(figname.name, label, caption)
+                    text = mk_fig_wide(figname.name, label, caption)
                     nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
                 
             for model in models:
@@ -377,6 +415,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                 if len(dfs) > 1:
                     header += """
 
+`````{div} full-width 
 ````{dropdown} Comparison plots by year
 
 """
@@ -407,7 +446,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                     header += """
 
 ````
-
+`````
 """
 
 
@@ -418,8 +457,11 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
 
 # Generate comparison pages
 if __name__ == "__main__":
-
-    for slug in ["moorings_noaa","moorings_kbnerr_bear_cove_seldovia","moorings_kbnerr_historical"]:#chr.slugs:
+    slugs = ["moorings_noaa","moorings_kbnerr_bear_cove_seldovia","moorings_kbnerr_homer",
+             "moorings_kbnerr_historical",
+                 "ctd_profiles_2005_noaa","adcp_moored_noaa_coi_2005","adcp_moored_noaa_coi_other"] #chr.slugs:
+    # slugs = ["moorings_noaa"]
+    for slug in slugs:
         print(slug)
         chr.src.generate_comparison_pages.generate_page(slug)
         # if hasattr(chr.src.generate_comparison_pages, slug):

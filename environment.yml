@@ -12,9 +12,11 @@ dependencies:
   - cmocean
   - dask
   - dataretrieval
+  - datetimerange
   # - datashader  # need dev github version of holoviews to avoid nanosecond bug using datashader with ADCP plots: https://github.com/holoviz/holoviews/pull/5662
   # - geoviews
   - ghp-import
+  - h5netcdf
   - hvplot
   # - intake-axds  # going to install locally
   # - intake-erddap  # going to install locally
@@ -25,6 +27,8 @@ dependencies:
   # - ocean-model-skill-assessor  # get from pypi until conda-forge is updated
   - pandas
   - pip
+  - python-oceans
+  - seaborn
   - xarray
   # - xcmocean
   - pip:
@@ -34,3 +38,4 @@ dependencies:
     - noaa_coops  # should be included with intake-coops in the future
     - git+https://github.com/axiom-data-science/intake-coops
     - git+https://github.com/intake/intake
+    - git+https://github.com/moflaher/ttide_py.git@newversionstring

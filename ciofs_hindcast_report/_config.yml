@@ -15,10 +15,10 @@ only_build_toc_files        : true
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: cache
+  execute_notebooks: force
   timeout: 1800
   exclude_patterns          : ["*.ipynb"]    # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
-  allow_errors              : false # If `False`, when a code cell raises an error the execution is stopped, otherwise all cells are always run.
+  allow_errors              : true # If `False`, when a code cell raises an error the execution is stopped, otherwise all cells are always run.
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -27,8 +27,16 @@ latex:
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
-  - references.bib
-
+  - bib.bib
+sphinx:
+  config:
+    bibtex_reference_style: author_year
+# # In _config.yml
+# sphinx:
+#   config:
+#     bibtex_reference_style: author_year
+#     bibtex_bibfiles: "bib.bib"
+  
 # Information about where the book exists on the web
 repository:
   url: https://github.com/axiom-data-science/ciofs-hindcast-report  # Online location of your book
@@ -42,6 +50,12 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
+    - dollarmath
 
 sphinx:
   config: 

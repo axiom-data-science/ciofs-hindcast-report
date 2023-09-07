@@ -1,10 +1,13 @@
 #!/bin/sh
 
-# Run script to generate catalogs
-python ciofs_hindcast_report/src/generate_catalogs.py
+# # Run script to generate catalogs
+# python ciofs_hindcast_report/src/generate_catalogs.py
 
 # Run script to generate pages describing datasets
 python ciofs_hindcast_report/src/generate_data_pages.py
+
+# Run script to generate comparison pages
+python ciofs_hindcast_report/src/generate_comparison_pages.py
 
 # Convert all notebooks to markdown
 

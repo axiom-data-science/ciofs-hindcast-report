@@ -4,13 +4,40 @@
 format: jb-book
 root: intro
 parts:
-- caption: Report
-  chapters:
-  - file: report/summarize_datasets
-  - file: report/river_forcing_demo
+# - caption: Report
+  # chapters:
+  # - file: report/river_forcing_demo
+  # - file: report/summarize_datasets
+  # - file: report/intro_comparisons
+    # sections:
+    # - glob: outputs/pages/comparison/*/*
+  # - file: report/references
 - caption: Appendix
   chapters:
-  - file: appendix/river_forcing_make_files
+  # - file: outputs/pages/data/hfradar
+  # - file: outputs/pages/data/ctd_transects_misc_2002
+#   # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
+#   # - file: outputs/pages/data/ctd_profiles_emap_2002
+#   - file: appendix/river_forcing_make_files
   - file: appendix/included_datasets
     sections:
-    - glob: outputs/pages/data/*
+    # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
+    - glob: outputs/pages/data/ctd_transects_*
+
+
+# # this is the correct version to save:
+# parts:
+# - caption: Report
+#   chapters:
+#   - file: report/river_forcing_demo
+#   - file: report/summarize_datasets
+#   - file: report/intro_comparisons
+#     sections:
+#     - glob: outputs/pages/comparison/*/*
+#   - file: report/references
+# - caption: Appendix
+#   chapters:
+#   - file: appendix/river_forcing_make_files
+#   - file: appendix/included_datasets
+#     sections:
+#     - glob: outputs/pages/data/*

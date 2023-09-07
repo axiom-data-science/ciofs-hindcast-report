@@ -18,7 +18,7 @@ def select_colorsdata():
 
 
 # Plot discovered data locations
-def ctd_profiles_gwa(slug):
+def ctd_transects_gwa(slug):
     # def remove_duplicates(maps):
     #     mapsdf = pd.DataFrame(maps, columns=["minLon","minLat","maxLon","maxLat","name","maptype"])
     #     # overwrite name column to base dropping duplicates (by transect name but without date)
@@ -46,8 +46,8 @@ def ctd_profiles_gwa(slug):
         # print(sn)
         df = cat[sn].read()
         # import pdb; pdb.set_trace()
-        maps.append((df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
-                     df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
+        maps.append((df.cf["longitude"][0], df.cf["longitude"][-1], 
+                     df.cf["latitude"][0], df.cf["latitude"][-1],
                      f"Transect {sn.split('-')[0].split('_')[1]}", "line"))
     
     # maps = np.vstack((ds.cf["longitude"].values, ds.cf["longitude"].values, 
@@ -78,8 +78,10 @@ def ctd_profiles_gwa(slug):
     #                               map_font_size=chr.map_font_size)
 
 
-def ctd_profiles_2005_noaa(slug):
-    
+def ctd_profiles_2005_noaa(slug, figname=None):
+
+    figname = figname or f"map_of_{slug}"
+
     two_maps = dict(extent_left=[-155.6, -148.2, 56.3, 61.5], extent_right=[-153.5, -151, 58.7, 60.9])
 
     # points are in order
@@ -93,7 +95,9 @@ def ctd_profiles_2005_noaa(slug):
                                 dd=dds, 
                                 annotate_fontsize=10, 
                                 figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+                                map_font_size=chr.map_font_size,
+                                figname=figname,
+                                )
 
 
 def ctd_profiles_usgs_boem(slug):
@@ -144,6 +148,120 @@ def ctd_profiles_usgs_boem(slug):
     omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2018, suptitle="2018")
     omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2019, suptitle="2019")
     omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2021, suptitle="2021")
+
+
+def ctd_profiles_piatt_speckman_1999(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    # source_names = chr.src.utils.get_source_names(cat)
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=35, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600) * \
+            ddf.hvplot.labels(x="Lon", y="Lat", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_emap_2002(slug, figname=None):
+
+    figname = figname or f"map_of_{slug}"
+
+    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
+                                project_name="",
+                                label_with_station_name=True,
+                                extent=chr.extent_whole, 
+                                annotate_fontsize=10, 
+                                figsize=chr.figsize, 
+                                map_font_size=chr.map_font_size,
+                                figname=figname,
+                                )
+
+
+def ctd_profiles_emap_2008(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["StationID","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="StationID", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["StationID","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+            ddf.hvplot.labels(x="Lon", y="Lat", text="StationID", geo=True, text_alpha=0.5,
+                            hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_kb_small_mesh_2006(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+        ddf.hvplot.labels(x="Lon", y="Lat", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_kbay_osu_2007(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+        ddf.hvplot.labels(x="Lon", y="Lat", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_north_gulf_small_mesh_2005(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+        ddf.hvplot.labels(x="Lon", y="Lat", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_pogibshi_2002(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Long (E)","Lat (N)","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Long (E)", y="Lat (N)", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+        ddf.hvplot.labels(x="Long (E)", y="Lat (N)", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
+
+
+def ctd_profiles_kachemack_kuletz_2005_2007(slug, figname=None):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    df = cat[f"{slug}_all"].read()
+    ddf = df.reset_index()[["Station","Lon","Lat","date_time"]].drop_duplicates()
+    plot = ddf.hvplot.points(x="Lon", y="Lat", c="Station", s="date_time", color="k",
+                    legend=False, geo=True, tiles=True, size=5, hover_cols=["Station","date_time"],
+                    coastline=False, xlabel="Longitude", ylabel="Latitude", title=slug,
+                    width=600, height=600, padding=0.2) * \
+        ddf.hvplot.labels(x="Lon", y="Lat", text="Station", geo=True, text_alpha=0.5,
+                        hover=False, text_baseline='bottom', fontscale=1.5, text_font_size='9pt')
+    return plot
 
 
 def ctd_towed_otf_kbnerr(slug):
@@ -201,7 +319,7 @@ def ctd_towed_ferry_noaa_pmel(slug):
                             )
 
 
-def ctd_profiles_otf_kbnerr(slug):
+def ctd_transects_otf_kbnerr(slug):
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
 
@@ -229,7 +347,7 @@ def ctd_profiles_otf_kbnerr(slug):
                         )
 
 
-def ctd_profiles_cmi_uaf(slug):
+def ctd_transects_cmi_uaf(slug):
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
 
@@ -237,7 +355,7 @@ def ctd_profiles_cmi_uaf(slug):
                     width_ratios=[.85,1.15])
 
     df = cat[source_names[0]].read()
-    ddf = df.drop_duplicates(subset=["Longitude", "Latitude", "Station"])
+    ddf = df.reset_index(drop=True).drop_duplicates(subset=["Longitude", "Latitude", "Station"])
 
     maps = np.vstack((ddf.cf["longitude"].values, ddf.cf["longitude"].values, 
                     ddf.cf["latitude"].values, ddf.cf["latitude"].values,
@@ -258,7 +376,7 @@ def ctd_profiles_cmi_uaf(slug):
                         )
 
 
-def ctd_profiles_cmi_kbnerr(slug):
+def ctd_transects_cmi_kbnerr(slug):
     cat = intake.open_catalog(chr.CAT_NAME(slug))
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.5, -151.0, 58.3, 60.1],
@@ -278,8 +396,8 @@ def ctd_profiles_cmi_kbnerr(slug):
     maps = []
     for source_name in source_names:
         df = cat[source_name].read()
-        maps.append( (df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
-                    df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
+        maps.append( (df.cf["longitude"][0], df.cf["longitude"][-1], 
+                    df.cf["latitude"][0], df.cf["latitude"][-1],
                     f"Transect {df.cf['line'].iloc[0]}",
                     "line",) )
 
@@ -372,7 +490,7 @@ def ctd_moored_kbnerr(slug):
                         )
 
 
-def ctd_profiles_uaf(slug):
+def ctd_transects_uaf(slug):
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = source_names[0]
@@ -381,8 +499,8 @@ def ctd_profiles_uaf(slug):
                     width_ratios=[.85,1.15])
 
     df = cat[source_name].read()
-    maps = (df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
-                df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
+    maps = (df.cf["longitude"][0], df.cf["longitude"][-1], 
+                df.cf["latitude"][0], df.cf["latitude"][-1],
                 slug,
                 "line",) 
 
@@ -399,22 +517,66 @@ def ctd_profiles_uaf(slug):
                         )
 
 
-def ctd_profiles_2005_osu(slug):
-    
-    two_maps = dict(extent_left=[-155.6, -148.2, 56.3, 61.5], extent_right=[-153.5, -151, 58.7, 60.9])
+def ctd_transects_misc_2002(slug):
 
-    # # points are in order
-    # dds = [[-15000, 5000], [0, 10000], [8000, 0], [5000, -6000]]
-    # dds += [[3000, 3000]]*20
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
 
-    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
-                                label_with_station_name=True, 
-                                # two_maps=two_maps,
-                                # dd=dds, 
-                                annotate_fontsize=10, 
-                                figsize=chr.figsize, 
-                                map_font_size=chr.map_font_size)
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.3, -150.9, 59.15, 59.85],
+                    width_ratios=[.85,1.15])
+
+    maps = []
+    for source_name in source_names:
+        df = cat[source_name].read()
+        maps.append( (df.cf["longitude"][0], df.cf["longitude"][-1], 
+                    df.cf["latitude"][0], df.cf["latitude"][-1],
+                    source_name,
+                    "line",) )
+
+    # dds = [(-10000,40000), (-40000, -30000), (0,0), (-5000,10000), (0, 35000)]
+
+    omsa.plot.map.plot_map(np.asarray(maps),
+                            figname=f"Map of {slug}",
+                            label_with_station_name=True, 
+                            two_maps=two_maps,
+                           # dd=dds,
+                            figsize=chr.figsize, 
+                            map_font_size=chr.map_font_size,
+                            markersize=6,
+                            legend=True,
+                            annotate=False,
+                            colors_data=select_colorsdata()
+                        )
+
+
+def ctd_transects_barabara_to_bluff_2002_2003(slug):
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-152.0, -151.3, 59.4, 59.7],
+                    width_ratios=[.85,1.15])
+
+    df = cat[source_names[0]].read()
+    station, lat, lon = list(zip(*df.reset_index(drop=True).set_index(["Station","Lat (N)", "Long (E)"]).index.unique().values))
+    maps = np.vstack((lon, lon, 
+                lat, lat,
+                [station] * len(lon),
+                ["point"] * len(lon),
+                )).T.tolist()
+
+    omsa.plot.map.plot_map(np.asarray(maps),
+                            figname=f"Map of {slug}",
+                            label_with_station_name=True, 
+                            two_maps=two_maps,
+                           # dd=dds,
+                            figsize=chr.figsize, 
+                            map_font_size=chr.map_font_size,
+                            markersize=6,
+                            legend=True,
+                            annotate=False,
+                            colors_data=chr.src.plot_dataset_on_map.select_colorsdata()
+                        )
 
 
 def ctd_towed_gwa(slug):
@@ -784,3 +946,36 @@ def adcp_moored_noaa_kod_2(slug, figname=None):
                                 figsize=chr.figsize, 
                                 map_font_size=chr.map_font_size,
                                 figname=figname,)
+
+
+def hfradar(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
+
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    # just use 2 of 3 since one is a repeat
+    source_names = ['lower-ci_system-B_2006-2007', 'upper-ci_system-A_2009']
+    names_to_use = ["Lower CI/System B", "Upper CI/System A"]
+    maps = []
+    for source_name, name_to_use in zip(source_names, names_to_use):
+        maps.append([cat[source_name].metadata["minLongitude"],
+                            cat[source_name].metadata["maxLongitude"],
+                            cat[source_name].metadata["minLatitude"],
+                            cat[source_name].metadata["maxLatitude"],
+                            name_to_use,
+                            cat[source_name].metadata["maptype"]])
+    two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.5, -151.0, 59, 61],
+                    width_ratios=[1, 1])
+    omsa.plot.map.plot_map(np.asarray(maps),
+                                  label_with_station_name=True, 
+                                  two_maps=two_maps,
+                                  figsize=chr.figsize, 
+                                  map_font_size=chr.map_font_size+2,
+                                  legend=True,
+                                  annotate_fontsize=9,
+                                  annotate=False,
+                                  tight_layout=True,
+                           colors_data=select_colorsdata(),
+                           loc = "upper left",
+                           markersize=8,
+                           figname=figname,
+                           )

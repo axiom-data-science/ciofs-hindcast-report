@@ -1,7 +1,6 @@
 from typing import Union
 import pandas as pd
 import xarray as xr
-import pyproj
 import numpy as np
 import intake
 import regex
@@ -9,7 +8,7 @@ import ciofs_hindcast_report as chr
 
 
 def get_source_names(cat):
-    return sorted([source_name for source_name in list(cat) if "_base" not in source_name])
+    return sorted([source_name for source_name in list(cat) if "_base" not in source_name and "_all" not in source_name])
 
 
 def calculate_julian_days(date_time):
@@ -35,16 +34,6 @@ def resample(dd, to="5T"):
         # as coordinates afterward.
         # Not sure this solution will work for gridded datasets — might need another case for that
         return dd.reset_coords([zkey, ykey, xkey]).resample({tkey: to}).mean(keep_attrs=True).assign_coords({xkey: dd[xkey], ykey: dd[ykey], zkey: dd[zkey]})
-    
-
-def calculate_distance(lons, lats):
-    """Calculate distance (km), esp for transects."""
-
-    G = pyproj.Geod(ellps='WGS84')
-    distance = G.inv(lons[:-1], lats[:-1], lons[1:], lats[1:], )[2]
-    distance = np.hstack((np.array([0]), distance))
-    distance = distance.cumsum()/1000 # km
-    return distance
 
 
 def decode_path(path):
@@ -67,7 +56,8 @@ def decode_path(path):
         else:
             start_time, end_time = None, None
             ts_mods = "_".join(therest.split("_")[1:])
-
+    else:
+        start_time, end_time, ts_mods = None, None, None
     return slug, source_name, key_variable, ts_mods, start_time, end_time, base, suffix, path
 
 

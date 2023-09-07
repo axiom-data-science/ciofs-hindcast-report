@@ -56,6 +56,8 @@ cmap = {}
 cmap["salt"] = "cmo.haline"
 cmap["temp"] = "cmo.thermal"
 cmap["u"] = "cmo.delta"
+cmap["diff"] = "cmo.balance"
+cmap["speed"] = "cmo.tempo"
 extent_whole = [-156.5, -148.5, 56.3, 61.5]
 
 # Comprehensive list of dataset slugs
@@ -65,20 +67,31 @@ slugs = [
         "adcp_moored_noaa_coi_other",
         "adcp_moored_noaa_kod_1",
         "adcp_moored_noaa_kod_2",
+        "adcp_towed_otf_kbnerr",
         "ctd_moored_circac",
         "ctd_moored_kbnerr",
         "ctd_profiles_2005_noaa",
         "ctd_profiles_2005_osu",
-        "ctd_profiles_cmi_kbnerr",
-        "ctd_profiles_cmi_uaf",
-        "ctd_profiles_gwa",
-        "ctd_profiles_otf_kbnerr",
+        "ctd_profiles_emap_2002",
+        "ctd_profiles_emap_2008",
+        "ctd_profiles_kachemack_kuletz_2005_2007",
+        "ctd_profiles_kb_small_mesh_2006",
+        "ctd_profiles_kbay_osu_2007",
+        "ctd_profiles_north_gulf_small_mesh_2005",
+        "ctd_profiles_piatt_speckman_1999",
         "ctd_profiles_usgs_boem",
-        "ctd_profiles_uaf",
         "ctd_towed_otf_kbnerr",
         "ctd_towed_ferry_noaa_pmel",
         "ctd_towed_gwa",
         "ctd_towed_gwa_temp",
+        "ctd_transects_barabara_to_bluff_2002_2003",
+        "ctd_transects_cmi_kbnerr",
+        "ctd_transects_cmi_uaf",
+        "ctd_transects_gwa",
+        "ctd_transects_misc_2002",
+        "ctd_transects_otf_kbnerr",
+        "ctd_transects_uaf",
+        "hfradar",
         "moorings_aoos_cdip",
         "moorings_kbnerr_bear_cove_seldovia",
         "moorings_kbnerr_historical",
@@ -102,10 +115,10 @@ vocab.make_entry("dir", ["dir","d$"], attr="name")
 reg = cfp.Reg(include_or=["sea_surface_height","zeta"], exclude=["qc","sea_surface_height_amplitude_due_to_geocentric_ocean_tide_geoid_mllw"], ignore_case=True)
 vocab.make_entry("ssh", reg.pattern(), attr="name")
 
-reg = cfp.Reg(include="ualong_subtidal", ignore_case=True)
-vocab.make_entry("usubtidal", reg.pattern(), attr="name")
-reg = cfp.Reg(include="vacross_subtidal", ignore_case=True)
-vocab.make_entry("vsubtidal", reg.pattern(), attr="name")
+reg = cfp.Reg(include="along", exclude=["subtidal"], ignore_case=True)
+vocab.make_entry("along", reg.pattern(), attr="name")
+reg = cfp.Reg(include="across", exclude=["subtidal"], ignore_case=True)
+vocab.make_entry("across", reg.pattern(), attr="name")
 
 # reg = cfp.Reg(include="u$", ignore_case=True)
 # vocab.make_entry("u", reg.pattern(), attr="name")
