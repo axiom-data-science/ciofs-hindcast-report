@@ -167,10 +167,30 @@ Model-data comparison for boulder-point of sea surface height
 ## geese-island-gps-tide-buoy
 
 
-CIOFS: Data time range is 2016-06-25 to 2016-07-30 but model ends 2008-08-25.
-
-
 NWGOA: Data time range is 2016-06-25 to 2016-07-30 but model ends 2009-01-01.
+
+
++++
+
+### Sea surface height: mean subtracted
+
++++
+
+#### ciofs
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_geese-island-gps-tide-buoy_ssh_subtract-mean.png
+---
+name: fig-ciofs-geese-island-gps-tide-buoy-ssh-subtract-mean
+---
+Model-data comparison for geese-island-gps-tide-buoy of sea surface height
+```
+
+
++++
+
+#### nwgoa
 
 
 +++
@@ -302,6 +322,105 @@ Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2006
 name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2007
 ---
 Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2010-01-01_2011-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2011-01-01_2012-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2012-01-01_2013-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2013-01-01_2014-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea surface height for 2016
 ```
 
 
@@ -557,6 +676,105 @@ Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2
 name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2007
 ---
 Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2016
 ```
 
 
@@ -828,6 +1046,105 @@ name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2007
 Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455500_temp_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455500-temp-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2016
+```
+
 
 
 ````
@@ -968,8 +1285,53 @@ Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2
 
 +++
 
+
+
+````{div} full-width                
+```{figure} moorings_noaa_noaa_nos_co_ops_9455595_ssh_subtract-mean_subtidal.png
+---
+name: fig-noaa_nos_co_ops_9455595-ssh-subtract-mean_subtidal
+---
+Skill score by year for sea surface height, mean subtracted, then tidally-filtered
+```
+````
+
+
++++
+
 #### ciofs
 
+
+
+`````{div} full-width 
+````{dropdown} Comparison plots by year
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455595_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455595-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455595 of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455595_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455595-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455595 of sea surface height for 2009
+```
+
+
+
+````
+`````
 
 +++
 
@@ -977,13 +1339,24 @@ Model-data comparison for noaa_nos_co_ops_9455500 of sea water temperature for 2
 
 
 
+`````{div} full-width 
+````{dropdown} Comparison plots by year
+
+##### 2008
+
+
+
 ```{figure} moorings_noaa_nwgoa/moorings_noaa_noaa_nos_co_ops_9455595_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
 ---
-name: fig-nwgoa-noaa_nos_co_ops_9455595-ssh-subtract-mean_subtidal
+name: fig-nwgoa-noaa_nos_co_ops_9455595-ssh-subtract-mean_subtidal-2008
 ---
-Model-data comparison for noaa_nos_co_ops_9455595 of sea surface height
+Model-data comparison for noaa_nos_co_ops_9455595 of sea surface height for 2008
 ```
 
+
+
+````
+`````
 
 +++
 
@@ -1114,6 +1487,105 @@ Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2006
 name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2007
 ---
 Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2010-01-01_2011-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2011-01-01_2012-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2012-01-01_2013-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2013-01-01_2014-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea surface height for 2016
 ```
 
 
@@ -1369,6 +1841,105 @@ Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2
 name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2007
 ---
 Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2016
 ```
 
 
@@ -1640,6 +2211,105 @@ name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2007
 Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9455920_temp_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9455920-temp-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for noaa_nos_co_ops_9455920 of sea water temperature for 2016
+```
+
 
 
 ````
@@ -1823,6 +2493,105 @@ name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2007
 Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2010-01-01_2011-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2011-01-01_2012-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2012-01-01_2013-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2013-01-01_2014-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea surface height for 2016
+```
+
 
 
 ````
@@ -1922,6 +2691,105 @@ Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2
 name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2007
 ---
 Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2008
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2009
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2010
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2011
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2012
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2013
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2014
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2015
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal-2016
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2016
 ```
 
 
@@ -2039,6 +2907,105 @@ name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2007
 Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_noaa_nos_co_ops_9457804_temp_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-noaa_nos_co_ops_9457804-temp-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2016
+```
+
 
 
 ````
@@ -2096,10 +3063,10 @@ Model-data comparison for noaa_nos_co_ops_9457804 of sea water temperature for 2
 ## noaa_nos_co_ops_kdaa2
 
 
-CIOFS: Data time range is 2018-03-03 to 2023-06-28 but model ends 2008-08-25.
+CIOFS: Data time range is 2018-03-03 to 2023-09-05 but model ends 2017-11-16.
 
 
-NWGOA: Data time range is 2018-03-03 to 2023-06-28 but model ends 2009-01-01.
+NWGOA: Data time range is 2018-03-03 to 2023-09-05 but model ends 2009-01-01.
 
 
 +++
@@ -2107,18 +3074,91 @@ NWGOA: Data time range is 2018-03-03 to 2023-06-28 but model ends 2009-01-01.
 ## old-harbor-1
 
 
-CIOFS: Data time range is 2014-09-20 to 2018-08-27 but model ends 2008-08-25.
-
-
 NWGOA: Data time range is 2014-09-20 to 2018-08-27 but model ends 2009-01-01.
 
 
 +++
 
+### Sea surface height: mean subtracted, then tidally-filtered
+
++++
+
+
+
+````{div} full-width                
+```{figure} moorings_noaa_old-harbor-1_ssh_subtract-mean_subtidal.png
+---
+name: fig-old-harbor-1-ssh-subtract-mean_subtidal
+---
+Skill score by year for sea surface height, mean subtracted, then tidally-filtered
+```
+````
+
+
++++
+
+#### ciofs
+
+
+
+`````{div} full-width 
+````{dropdown} Comparison plots by year
+
+##### 2014
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_old-harbor-1_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-old-harbor-1-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for old-harbor-1 of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_old-harbor-1_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-old-harbor-1-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for old-harbor-1 of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_old-harbor-1_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-old-harbor-1-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for old-harbor-1 of sea surface height for 2016
+```
+
+
+
+````
+`````
+
++++
+
+#### nwgoa
+
+
+
+`````{div} full-width 
+````{dropdown} Comparison plots by year
+
+
+
+````
+`````
+
++++
+
 ## sitkalidak-island-gps-tide-bu
-
-
-CIOFS: Data time range is 2016-06-25 to 2016-07-27 but model ends 2008-08-25.
 
 
 NWGOA: Data time range is 2016-06-25 to 2016-07-27 but model ends 2009-01-01.
@@ -2126,10 +3166,30 @@ NWGOA: Data time range is 2016-06-25 to 2016-07-27 but model ends 2009-01-01.
 
 +++
 
+### Sea surface height: mean subtracted
+
++++
+
+#### ciofs
+
+
+
+```{figure} moorings_noaa_ciofs/moorings_noaa_sitkalidak-island-gps-tide-bu_ssh_subtract-mean.png
+---
+name: fig-ciofs-sitkalidak-island-gps-tide-bu-ssh-subtract-mean
+---
+Model-data comparison for sitkalidak-island-gps-tide-bu of sea surface height
+```
+
+
++++
+
+#### nwgoa
+
+
++++
+
 ## wmo_46077
 
 
-CIOFS: Data time range is 2017-06-14 to 2023-06-28 but model ends 2008-08-25.
-
-
-NWGOA: Data time range is 2017-06-14 to 2023-06-28 but model ends 2009-01-01.
+NWGOA: Data time range is 2017-06-14 to 2023-09-05 but model ends 2009-01-01.

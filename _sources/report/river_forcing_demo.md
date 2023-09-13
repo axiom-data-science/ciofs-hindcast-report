@@ -12,6 +12,8 @@ kernelspec:
 ---
 
 ```{code-cell} ipython3
+:tags: [remove-input]
+
 import dataretrieval.nwis as nwis
 import xarray as xr
 import numpy as np
@@ -61,6 +63,8 @@ We followed what we saw in two river forcing files from the CIOFS group, and asc
 River input locations are shown on this map from the development report:
 
 ```{code-cell} ipython3
+:tags: [remove-input]
+
 from IPython import display
 display.Image(f"{chr.PATH_INPUTS_RIVER}/river_inputs.png")
 ```
@@ -116,6 +120,8 @@ Details for each point are below.
 The NOAA Report states that they used Station 15292000 discharge multiplied by 2 to replace discharge from Station 15292780 since Station 15292780 has a relatively short lifespan. We do the same in our simulations. Here is the comparison of the daily means for these two time series, including the multiplication factor. The match is reasonable.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 station = "15292780"
 start = "2012-1-1"
 end = "2020-12-31"
@@ -125,7 +131,7 @@ df2 = nwis.get_record(sites=station, service='dv', start=start, end=end)
 ax = df1["00060_Mean"].loc[:"2019"].plot(figsize=(15,5), label="15292780", lw=3)
 (df2["00060_Mean"]*2).loc[:"2019"].plot(ax=ax, label="15292000 * 2", lw=3)
 plt.legend()
-plt.ylabel("River discharge [ft$^3$/s]")
+plt.ylabel("River discharge [ft$^3$/s]");
 ```
 
 ### Geographic variation of water temperature
@@ -143,30 +149,34 @@ ds = ds.swap_dims({"time": "river_time"})
 unique_inds = list(set([station_list_file.index(station_list_file[i]) for i in range(nrivers)]))
 labels = [station_list_file[i] for i in unique_inds]
 ds["river_temp"].isel(s_rho=0, river=unique_inds).plot.line(x="river_time", lw=3, figsize=(15,7));
-plt.legend(labels)
+plt.legend(labels);
 ```
 
 ### Mean time series
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 station = "15266300"
 # start and end are for returning the desired window of values, not for computing the mean time series
 start, end = "2010-1-1T00:00", "2010-12-31T00:00"
 df = find_mean_time_series(station, start, end, "00060")
 df.plot(rot=70)
 plt.ylabel("Discharge [ft$^3$/s]")
-plt.title(f"Mean time series for Station {station}")
+plt.title(f"Mean time series for Station {station}");
 ```
 
 The impact of substituting the mean time series data in for the discharge when needed is that there could be a jump between the two signals. We simply perform a 12 hour rolling mean on the discharge signal at the end of processing in order to improve this, but it is a small measure; there will still be some unrealistic jumps in the river signals. However, we think it is worth it to have more freshwater entering the model domain when we know it is present and important to the region.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 start, end = "1998-11-01T00:00", "1998-12-31T00:00"
 station = "15266300"
 df = find_discharge(station, start, end, ndays=8)
 df.plot()
 plt.ylabel("Discharge [ft$^3$/s]")
-plt.title(f"Estimated discharge for Station {station}")
+plt.title(f"Estimated discharge for Station {station}");
 ```
 
 ## Comparing Axiom and NOAA versions of two river forcing files
@@ -261,7 +271,7 @@ The total amount of discharge input over the 4 days in the forcing file is much 
 River temperature data is all 1s in the NOAA file but we allow for spatial variation and see in the comparison ("River temps for Axiom rivers above 1 C") this variation. Note than any temperatures below 1 degree are set to 1 degree.
 
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-output, hide-input]
 
 loc = f'{chr.PATH_INPUTS_RIVER}/nos.ciofs.river.20221216.t00z.nc'
 ds = xr.open_dataset(loc)
@@ -276,6 +286,8 @@ dscompare = dscompare.swap_dims({"time": "river_time"})
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 plot_comparison(ds, dscompare)
 ```
 
@@ -284,7 +296,7 @@ plot_comparison(ds, dscompare)
 For the same reasons previously listed, the discharge is much higher from the Axiom file: 0.06 km$^3$ compared with 0.001 km$^3$ from the NOAA file. For the rivers that we estimate in the same way as NOAA, we get similar results.
 
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-output, hide-input]
 
 loc = f"{chr.PATH_INPUTS_RIVER}/nos.ciofs.river.20230201.t00z.nc"
 ds = xr.open_dataset(loc)
@@ -299,5 +311,7 @@ dscompare = dscompare.swap_dims({"time": "river_time"})
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 plot_comparison(ds, dscompare)
 ```

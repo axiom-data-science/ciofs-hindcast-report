@@ -16,6 +16,8 @@ import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
 import cmocean.cm as cmo
+import holoviews as hv
+from holoviews import opts
 ```
 
 (page:adcp_moored_noaa_kod_1)=
@@ -78,7 +80,7 @@ getattr(chr.src.plot_dataset_on_map, "adcp_moored_noaa_kod_1")("adcp_moored_noaa
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0901'].plot.ualong() + cat['KOD0901'].plot.vacross()
 ```
@@ -87,7 +89,7 @@ cat['KOD0901'].plot.ualong() + cat['KOD0901'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0902'].plot.ualong() + cat['KOD0902'].plot.vacross()
 ```
@@ -96,7 +98,7 @@ cat['KOD0902'].plot.ualong() + cat['KOD0902'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0903'].plot.ualong() + cat['KOD0903'].plot.vacross()
 ```
@@ -105,7 +107,7 @@ cat['KOD0903'].plot.ualong() + cat['KOD0903'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0904'].plot.ualong() + cat['KOD0904'].plot.vacross()
 ```
@@ -114,7 +116,7 @@ cat['KOD0904'].plot.ualong() + cat['KOD0904'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0905'].plot.ualong() + cat['KOD0905'].plot.vacross()
 ```
@@ -123,7 +125,7 @@ cat['KOD0905'].plot.ualong() + cat['KOD0905'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0906'].plot.ualong() + cat['KOD0906'].plot.vacross()
 ```
@@ -132,7 +134,7 @@ cat['KOD0906'].plot.ualong() + cat['KOD0906'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0907'].plot.ualong() + cat['KOD0907'].plot.vacross()
 ```
@@ -141,7 +143,7 @@ cat['KOD0907'].plot.ualong() + cat['KOD0907'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0910'].plot.ualong() + cat['KOD0910'].plot.vacross()
 ```
@@ -150,7 +152,7 @@ cat['KOD0910'].plot.ualong() + cat['KOD0910'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0911'].plot.ualong() + cat['KOD0911'].plot.vacross()
 ```
@@ -159,7 +161,7 @@ cat['KOD0911'].plot.ualong() + cat['KOD0911'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0912'].plot.ualong() + cat['KOD0912'].plot.vacross()
 ```
@@ -168,7 +170,7 @@ cat['KOD0912'].plot.ualong() + cat['KOD0912'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0913'].plot.ualong() + cat['KOD0913'].plot.vacross()
 ```
@@ -177,7 +179,7 @@ cat['KOD0913'].plot.ualong() + cat['KOD0913'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0921'].plot.ualong() + cat['KOD0921'].plot.vacross()
 ```
@@ -186,7 +188,7 @@ cat['KOD0921'].plot.ualong() + cat['KOD0921'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0922'].plot.ualong() + cat['KOD0922'].plot.vacross()
 ```
@@ -195,7 +197,7 @@ cat['KOD0922'].plot.ualong() + cat['KOD0922'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0923'].plot.ualong() + cat['KOD0923'].plot.vacross()
 ```
@@ -204,7 +206,7 @@ cat['KOD0923'].plot.ualong() + cat['KOD0923'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0924'].plot.ualong() + cat['KOD0924'].plot.vacross()
 ```
@@ -213,7 +215,7 @@ cat['KOD0924'].plot.ualong() + cat['KOD0924'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['KOD0925'].plot.ualong() + cat['KOD0925'].plot.vacross()
 ```

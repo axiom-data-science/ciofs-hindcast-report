@@ -16,6 +16,8 @@ import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
 import cmocean.cm as cmo
+import holoviews as hv
+from holoviews import opts
 ```
 
 (page:ctd_profiles_2005_noaa)=
@@ -82,7 +84,7 @@ getattr(chr.src.plot_dataset_on_map, "ctd_profiles_2005_noaa")("ctd_profiles_200
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['501'].plot.data()
 ```
@@ -91,7 +93,7 @@ cat['501'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['502'].plot.data()
 ```
@@ -100,7 +102,7 @@ cat['502'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['503'].plot.data()
 ```
@@ -109,7 +111,7 @@ cat['503'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['504'].plot.data()
 ```
@@ -118,7 +120,7 @@ cat['504'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['505'].plot.data()
 ```
@@ -127,7 +129,7 @@ cat['505'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['506'].plot.data()
 ```
@@ -136,7 +138,7 @@ cat['506'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['507'].plot.data()
 ```
@@ -145,7 +147,7 @@ cat['507'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['508'].plot.data()
 ```
@@ -154,7 +156,7 @@ cat['508'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['509'].plot.data()
 ```
@@ -163,7 +165,7 @@ cat['509'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['510'].plot.data()
 ```
@@ -172,7 +174,7 @@ cat['510'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['511'].plot.data()
 ```
@@ -181,7 +183,7 @@ cat['511'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['512'].plot.data()
 ```
@@ -190,7 +192,7 @@ cat['512'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['513'].plot.data()
 ```
@@ -199,7 +201,7 @@ cat['513'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['514'].plot.data()
 ```
@@ -208,7 +210,7 @@ cat['514'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['515'].plot.data()
 ```
@@ -217,7 +219,7 @@ cat['515'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['516'].plot.data()
 ```
@@ -226,7 +228,7 @@ cat['516'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['517'].plot.data()
 ```
@@ -235,7 +237,7 @@ cat['517'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['518'].plot.data()
 ```
@@ -244,7 +246,7 @@ cat['518'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['519'].plot.data()
 ```
@@ -253,7 +255,7 @@ cat['519'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['520'].plot.data()
 ```
@@ -262,7 +264,7 @@ cat['520'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['521'].plot.data()
 ```
@@ -271,7 +273,7 @@ cat['521'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['522'].plot.data()
 ```
@@ -280,7 +282,7 @@ cat['522'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['523'].plot.data()
 ```
@@ -289,7 +291,7 @@ cat['523'].plot.data()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['524'].plot.data()
 ```

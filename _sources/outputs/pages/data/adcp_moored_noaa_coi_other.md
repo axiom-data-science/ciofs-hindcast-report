@@ -16,6 +16,8 @@ import hvplot.pandas  # noqa
 import ocean_model_skill_assessor as omsa
 import pandas as pd
 import cmocean.cm as cmo
+import holoviews as hv
+from holoviews import opts
 ```
 
 (page:adcp_moored_noaa_coi_other)=
@@ -84,7 +86,7 @@ getattr(chr.src.plot_dataset_on_map, "adcp_moored_noaa_coi_other")("adcp_moored_
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0206'].plot.ualong() + cat['COI0206'].plot.vacross()
 ```
@@ -93,7 +95,7 @@ cat['COI0206'].plot.ualong() + cat['COI0206'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0207'].plot.ualong() + cat['COI0207'].plot.vacross()
 ```
@@ -102,7 +104,7 @@ cat['COI0207'].plot.ualong() + cat['COI0207'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0213'].plot.ualong() + cat['COI0213'].plot.vacross()
 ```
@@ -111,7 +113,7 @@ cat['COI0213'].plot.ualong() + cat['COI0213'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0301'].plot.ualong() + cat['COI0301'].plot.vacross()
 ```
@@ -120,7 +122,7 @@ cat['COI0301'].plot.ualong() + cat['COI0301'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0302'].plot.ualong() + cat['COI0302'].plot.vacross()
 ```
@@ -129,7 +131,7 @@ cat['COI0302'].plot.ualong() + cat['COI0302'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0303'].plot.ualong() + cat['COI0303'].plot.vacross()
 ```
@@ -138,7 +140,7 @@ cat['COI0303'].plot.ualong() + cat['COI0303'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0306'].plot.ualong() + cat['COI0306'].plot.vacross()
 ```
@@ -147,7 +149,7 @@ cat['COI0306'].plot.ualong() + cat['COI0306'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0307'].plot.ualong() + cat['COI0307'].plot.vacross()
 ```
@@ -156,7 +158,7 @@ cat['COI0307'].plot.ualong() + cat['COI0307'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0418'].plot.ualong() + cat['COI0418'].plot.vacross()
 ```
@@ -165,7 +167,7 @@ cat['COI0418'].plot.ualong() + cat['COI0418'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0419'].plot.ualong() + cat['COI0419'].plot.vacross()
 ```
@@ -174,7 +176,7 @@ cat['COI0419'].plot.ualong() + cat['COI0419'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0420'].plot.ualong() + cat['COI0420'].plot.vacross()
 ```
@@ -183,7 +185,7 @@ cat['COI0420'].plot.ualong() + cat['COI0420'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0421'].plot.ualong() + cat['COI0421'].plot.vacross()
 ```
@@ -192,7 +194,7 @@ cat['COI0421'].plot.ualong() + cat['COI0421'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0422'].plot.ualong() + cat['COI0422'].plot.vacross()
 ```
@@ -201,7 +203,7 @@ cat['COI0422'].plot.ualong() + cat['COI0422'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0801'].plot.ualong() + cat['COI0801'].plot.vacross()
 ```
@@ -210,7 +212,7 @@ cat['COI0801'].plot.ualong() + cat['COI0801'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI0802'].plot.ualong() + cat['COI0802'].plot.vacross()
 ```
@@ -219,7 +221,7 @@ cat['COI0802'].plot.ualong() + cat['COI0802'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1201'].plot.ualong() + cat['COI1201'].plot.vacross()
 ```
@@ -228,7 +230,7 @@ cat['COI1201'].plot.ualong() + cat['COI1201'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1202'].plot.ualong() + cat['COI1202'].plot.vacross()
 ```
@@ -237,7 +239,7 @@ cat['COI1202'].plot.ualong() + cat['COI1202'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1203'].plot.ualong() + cat['COI1203'].plot.vacross()
 ```
@@ -246,7 +248,7 @@ cat['COI1203'].plot.ualong() + cat['COI1203'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1204'].plot.ualong() + cat['COI1204'].plot.vacross()
 ```
@@ -255,7 +257,7 @@ cat['COI1204'].plot.ualong() + cat['COI1204'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1205'].plot.ualong() + cat['COI1205'].plot.vacross()
 ```
@@ -264,7 +266,7 @@ cat['COI1205'].plot.ualong() + cat['COI1205'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1207'].plot.ualong() + cat['COI1207'].plot.vacross()
 ```
@@ -273,7 +275,7 @@ cat['COI1207'].plot.ualong() + cat['COI1207'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1208'].plot.ualong() + cat['COI1208'].plot.vacross()
 ```
@@ -282,7 +284,7 @@ cat['COI1208'].plot.ualong() + cat['COI1208'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1209'].plot.ualong() + cat['COI1209'].plot.vacross()
 ```
@@ -291,7 +293,7 @@ cat['COI1209'].plot.ualong() + cat['COI1209'].plot.vacross()
         
 
 ```{code-cell}
-:tags: [remove-input]
+:tags: [full-width, remove-input]
 
 cat['COI1210'].plot.ualong() + cat['COI1210'].plot.vacross()
 ```

@@ -148,10 +148,53 @@ Skill score for sea water temperature, tidally-filtered, then monthly mean from 
 ## cdmo_nerrs_bearcove
 
 
-CIOFS: Data time range is 2015-05-05 to 2015-11-20 but model ends 2008-08-25.
-
-
 NWGOA: Data time range is 2015-05-05 to 2015-11-20 but model ends 2009-01-01.
+
+
++++
+
+### Sea water salinity: tidally-filtered
+
++++
+
+#### ciofs
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_cdmo_nerrs_bearcove_salt_subtidal.png
+---
+name: fig-ciofs-cdmo_nerrs_bearcove-salt-subtidal
+---
+Model-data comparison for cdmo_nerrs_bearcove of sea water salinity
+```
+
+
++++
+
+#### nwgoa
+
+
++++
+
+### Sea water temperature: tidally-filtered
+
++++
+
+#### ciofs
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_cdmo_nerrs_bearcove_temp_subtidal.png
+---
+name: fig-ciofs-cdmo_nerrs_bearcove-temp-subtidal
+---
+Model-data comparison for cdmo_nerrs_bearcove of sea water temperature
+```
+
+
++++
+
+#### nwgoa
 
 
 +++
@@ -228,6 +271,105 @@ Model-data comparison for nerrs_kacsdwq of sea water salinity for 2006
 name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2007
 ---
 Model-data comparison for nerrs_kacsdwq of sea water salinity for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2008
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2009
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2010
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2011
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2012
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2013
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2014
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2015
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal-2016
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2016
 ```
 
 
@@ -389,6 +531,105 @@ name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2007
 Model-data comparison for nerrs_kacsdwq of sea water salinity for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_salt_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-salt-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for nerrs_kacsdwq of sea water salinity for 2016
+```
+
 
 
 ````
@@ -534,6 +775,105 @@ name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2007
 Model-data comparison for nerrs_kacsdwq of sea surface height for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2010-01-01_2011-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2010
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2011-01-01_2012-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2011
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2012-01-01_2013-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2012
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2013-01-01_2014-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2013
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for nerrs_kacsdwq of sea surface height for 2016
+```
+
 
 
 ````
@@ -677,6 +1017,105 @@ Model-data comparison for nerrs_kacsdwq of sea water temperature for 2006
 name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2007
 ---
 Model-data comparison for nerrs_kacsdwq of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2008
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2009
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2010
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2011
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2012
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2013
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2014
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2015
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal-2016
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2016
 ```
 
 
@@ -838,6 +1277,105 @@ name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2007
 Model-data comparison for nerrs_kacsdwq of sea water temperature for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsdwq_temp_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsdwq-temp-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for nerrs_kacsdwq of sea water temperature for 2016
+```
+
 
 
 ````
@@ -986,6 +1524,105 @@ Model-data comparison for nerrs_kacsswq of sea water salinity for 2006
 name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2007
 ---
 Model-data comparison for nerrs_kacsswq of sea water salinity for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2008
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2009
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2010
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2011
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2012
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2013
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2014
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2015
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal-2016
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2016
 ```
 
 
@@ -1147,6 +1784,105 @@ name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2007
 Model-data comparison for nerrs_kacsswq of sea water salinity for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_salt_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-salt-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for nerrs_kacsswq of sea water salinity for 2016
+```
+
 
 
 ````
@@ -1292,6 +2028,105 @@ name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2007
 Model-data comparison for nerrs_kacsswq of sea surface height for 2007
 ```
 
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2008-01-01_2009-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2008
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2009-01-01_2010-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2009
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2010-01-01_2011-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2010
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2011-01-01_2012-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2011
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2012-01-01_2013-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2012
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2013-01-01_2014-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2013
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2014-01-01_2015-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2014
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2015-01-01_2016-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2015
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_ssh_2016-01-01_2017-01-01_subtract-mean_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-ssh-subtract-mean_subtidal-2016
+---
+Model-data comparison for nerrs_kacsswq of sea surface height for 2016
+```
+
 
 
 ````
@@ -1435,6 +2270,105 @@ Model-data comparison for nerrs_kacsswq of sea water temperature for 2006
 name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2007
 ---
 Model-data comparison for nerrs_kacsswq of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2008-01-01_2009-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2008
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2009-01-01_2010-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2009
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2010-01-01_2011-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2010
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2011-01-01_2012-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2011
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2012-01-01_2013-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2012
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2013-01-01_2014-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2013
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2014-01-01_2015-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2014
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2015-01-01_2016-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2015
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2016-01-01_2017-01-01_subtidal.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal-2016
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2016
 ```
 
 
@@ -1594,6 +2528,105 @@ Model-data comparison for nerrs_kacsswq of sea water temperature for 2006
 name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2007
 ---
 Model-data comparison for nerrs_kacsswq of sea water temperature for 2007
+```
+
+##### 2008
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2008-01-01_2009-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2008
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2008
+```
+
+##### 2009
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2009-01-01_2010-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2009
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2009
+```
+
+##### 2010
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2010-01-01_2011-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2010
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2010
+```
+
+##### 2011
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2011-01-01_2012-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2011
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2011
+```
+
+##### 2012
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2012-01-01_2013-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2012
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2012
+```
+
+##### 2013
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2013-01-01_2014-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2013
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2013
+```
+
+##### 2014
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2014-01-01_2015-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2014
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2014
+```
+
+##### 2015
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2015-01-01_2016-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2015
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2015
+```
+
+##### 2016
+
+
+
+```{figure} moorings_kbnerr_bear_cove_seldovia_ciofs/moorings_kbnerr_bear_cove_seldovia_nerrs_kacsswq_temp_2016-01-01_2017-01-01_subtidal_subtract-monthly-mean.png
+---
+name: fig-ciofs-nerrs_kacsswq-temp-subtidal_subtract-monthly-mean-2016
+---
+Model-data comparison for nerrs_kacsswq of sea water temperature for 2016
 ```
 
 
