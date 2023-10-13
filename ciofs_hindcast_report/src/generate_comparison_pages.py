@@ -56,36 +56,6 @@ def translate_var(key_variable):
     if key_variable == "speed":
         return "Horizontal speed"
 
-def mk_fig(path, label, caption):
-
-    text = f"""
-
-```{{figure}} {path}
----
-name: {label}
----
-{caption}
-```
-
-"""
-    return text
-
-def mk_fig_wide(path, label, caption):
-
-    text = f"""
-
-````{{div}} full-width                
-```{{figure}} {path}
----
-name: {label}
----
-{caption}
-```
-````
-
-"""
-    return text
-
 
 def aggregate_overall_stats(slug):
 
@@ -281,7 +251,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
     text = f"""\
 ## Map of {cat.metadata["map_description"]}
 
-{mk_fig_wide(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
+{chr.src.utils.mk_fig_wide(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
 
 """
 #Then refer to the figure with {{numref}}`Figure {{number}}<fig-map>`
@@ -327,7 +297,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
         text = f"""\
 ### {translate_var(key_variable)}: {translate(ts_mods)}
 
-{mk_fig_wide(figname.name, label, caption)}
+{chr.src.utils.mk_fig_wide(figname.name, label, caption)}
 
 """
         nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
@@ -386,7 +356,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                 plot_source_stats(dfs.reset_index().set_index("start_time")[models], source_name, figname)
                 label = f"fig-{source_name}-{key_variable}-{ts_mods}"
                 caption = f"Skill score by year for {translate_var(key_variable).lower()}, {translate(ts_mods)}"
-                text = mk_fig_wide(figname.name, label, caption)
+                text = chr.src.utils.mk_fig_wide(figname.name, label, caption)
                 nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
                 
                 # if this is an anomaly calculation, show mean
@@ -397,7 +367,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                     plot_mean(dfd, dfd.cf[key_variable].name, figname)      
                     label = f"fig-{source_name}-{key_variable}"
                     caption = f"{translate_var(key_variable)} averaged monthly across data range with variation across years included."
-                    text = mk_fig_wide(figname.name, label, caption)
+                    text = chr.src.utils.mk_fig_wide(figname.name, label, caption)
                     nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
                 
             for model in models:
@@ -440,7 +410,7 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
                     if len(dfs) > 1:
                         label += f"-{row['start_time']}"
                         caption += f" for {row ['start_time']}"
-                    header += mk_fig(path, label, caption)
+                    header += chr.src.utils.mk_fig(path, label, caption)
 
                 if len(dfs) > 1:
                     header += """

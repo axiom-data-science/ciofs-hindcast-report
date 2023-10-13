@@ -17,6 +17,7 @@ dependencies:
   # - geoviews
   - ghp-import
   - h5netcdf
+  - holoviews
   - hvplot
   # - intake-axds  # going to install locally
   # - intake-erddap  # going to install locally
@@ -34,6 +35,7 @@ dependencies:
   - pip:
     - datashader
     - jupyter_bokeh
+    - pillow==9.4.0  # Otherwise get error ImportError: libtiff.so.5: cannot open shared object file: No such file or directory
     - ocean-model-skill-assessor
     - noaa_coops  # should be included with intake-coops in the future
     - git+https://github.com/axiom-data-science/intake-coops

@@ -3,26 +3,51 @@
 
 format: jb-book
 root: intro
+# this is the correct version to save:
 parts:
-# - caption: Report
-  # chapters:
-  # - file: report/river_forcing_demo
-  # - file: report/summarize_datasets
-  # - file: report/intro_comparisons
-    # sections:
-    # - glob: outputs/pages/comparison/*/*
-  # - file: report/references
-- caption: Appendix
+- caption: Report
   chapters:
-  # - file: outputs/pages/data/hfradar
-  # - file: outputs/pages/data/ctd_transects_misc_2002
-#   # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
-#   # - file: outputs/pages/data/ctd_profiles_emap_2002
+  - file: outputs/pages/descriptive/currents/page
+  # - file: report/rip_plots
+#   - file: report/river_forcing_demo
+#   - file: report/summarize_datasets
+#   - file: report/intro_comparisons
+#     sections:
+#     - file: outputs/pages/comparison/moorings_kbnerr_bear_cove_seldovia/moorings_kbnerr_bear_cove_seldovia
+#     - file: outputs/pages/comparison/moorings_kbnerr_homer/moorings_kbnerr_homer
+#     - file: outputs/pages/comparison/moorings_noaa/moorings_noaa
+#   #   # - glob: outputs/pages/comparison/*/*
+#   #   - glob: outputs/pages/comparison/moorings_*
+#   - file: report/references
+# - caption: Appendix
+#   chapters:
 #   - file: appendix/river_forcing_make_files
-  - file: appendix/included_datasets
-    sections:
-    # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
-    - glob: outputs/pages/data/ctd_transects_*
+#   - file: appendix/included_datasets
+#     sections:
+#     - glob: outputs/pages/data/*
+
+
+
+# parts:
+# # - caption: Report
+#   # chapters:
+#   # - file: report/river_forcing_demo
+#   # - file: report/summarize_datasets
+#   # - file: report/intro_comparisons
+#     # sections:
+#     # - glob: outputs/pages/comparison/*/*
+#   # - file: report/references
+# - caption: Appendix
+#   chapters:
+#   # - file: outputs/pages/data/hfradar
+#   # - file: outputs/pages/data/ctd_transects_misc_2002
+# #   # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
+# #   # - file: outputs/pages/data/ctd_profiles_emap_2002
+# #   - file: appendix/river_forcing_make_files
+#   - file: appendix/included_datasets
+#     sections:
+#     # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
+#     - glob: outputs/pages/data/ctd_transects_*
 
 
 # # this is the correct version to save:

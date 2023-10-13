@@ -7,6 +7,38 @@ import regex
 import ciofs_hindcast_report as chr
 
 
+
+def mk_fig(path, label, caption):
+
+    text = f"""
+
+```{{figure}} {path}
+---
+name: {label}
+---
+{caption}
+```
+
+"""
+    return text
+
+def mk_fig_wide(path, label, caption):
+
+    text = f"""
+
+````{{div}} full-width                
+```{{figure}} {path}
+---
+name: {label}
+---
+{caption}
+```
+````
+
+"""
+    return text
+
+
 def get_source_names(cat):
     return sorted([source_name for source_name in list(cat) if "_base" not in source_name and "_all" not in source_name])
 

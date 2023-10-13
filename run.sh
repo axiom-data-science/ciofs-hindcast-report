@@ -9,6 +9,10 @@ python ciofs_hindcast_report/src/generate_data_pages.py
 # Run script to generate comparison pages
 python ciofs_hindcast_report/src/generate_comparison_pages.py
 
+# descriptive plots
+python ciofs_hindcast_report/src/plot_descriptive_currents.py
+python ciofs_hindcast_report/src/generate_descriptive_pages.py
+
 # Convert all notebooks to markdown
 
 # find all ipynb files in ciofs_hindcast_report except under _build and .ipynb_checkpoints

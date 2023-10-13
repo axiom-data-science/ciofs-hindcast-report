@@ -20,9 +20,12 @@ PATH_OUTPUTS = base / "outputs"
 PATH_OUTPUTS_RIVER = PATH_OUTPUTS / "river"
 PATH_OUTPUTS_CATALOGS = PATH_OUTPUTS / "catalogs"
 PATH_OUTPUTS_DATA_CACHE = PATH_OUTPUTS / "data_cache"
+
 PATH_OUTPUTS_PAGES = PATH_OUTPUTS / "pages"
 PATH_OUTPUTS_DATA_PAGES = PATH_OUTPUTS_PAGES / "data"
 PATH_OUTPUTS_COMP_PAGES = PATH_OUTPUTS_PAGES / "comparison"
+PATH_OUTPUTS_DESCRIPTIVE_PAGES = PATH_OUTPUTS_PAGES / "descriptive"
+PATH_OUTPUTS_DESCRIPTIVE_PAGES_CURRENTS = PATH_OUTPUTS_DESCRIPTIVE_PAGES / "currents"
 
 PATH_REPORT = base / "report"
 
@@ -33,6 +36,7 @@ PATH_OUTPUTS_CATALOGS.mkdir(parents=True, exist_ok=True)
 PATH_OUTPUTS_PAGES.mkdir(parents=True, exist_ok=True)
 PATH_OUTPUTS_DATA_PAGES.mkdir(parents=True, exist_ok=True)
 PATH_OUTPUTS_COMP_PAGES.mkdir(parents=True, exist_ok=True)
+PATH_OUTPUTS_DESCRIPTIVE_PAGES.mkdir(parents=True, exist_ok=True)
 PATH_OUTPUTS_DATA_CACHE.mkdir(parents=True, exist_ok=True)
 
 def CAT_NAME(slug):

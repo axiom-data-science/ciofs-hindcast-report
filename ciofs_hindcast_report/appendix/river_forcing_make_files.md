@@ -23,7 +23,7 @@ from IPython.display import Code
 plt.rc('font', size=16)
 ```
 
-# Make monthly river forcing files for 1998–2018
+# Make monthly river forcing files for 1998–2022
 
 ```{code-cell} ipython3
 base = chr.PATH_OUTPUTS_RIVER
@@ -357,6 +357,54 @@ run_year(year)
 plot_year(year)
 ```
 
-```{code-cell} ipython3
+## 2019
 
+```{code-cell} ipython3
+:tags: [hide-output]
+
+year = 2019
+run_year(year)
+```
+
+```{code-cell} ipython3
+plot_year(year)
+```
+
+## 2020
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+year = 2020
+run_year(year)
+```
+
+```{code-cell} ipython3
+plot_year(year)
+```
+
+## 2021
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+year = 2021
+run_year(year)
+```
+
+```{code-cell} ipython3
+plot_year(year)
+```
+
+## 2022
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+year = 2022
+run_year(year)
+```
+
+```{code-cell} ipython3
+plot_year(year)
 ```

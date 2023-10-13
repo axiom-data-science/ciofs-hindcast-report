@@ -285,7 +285,8 @@ def ctd_profiles_2005_noaa(slug):
     cols = ["Cruise", "Station", "Type", "mon/day/yr", "hh:mm", "Lon (°E)",	"Lat (°N)", 
             "Temperature [C]", "tran [v]", "fluor [v]", "Depth [m]",  "Salinity [psu]",]
     csv_kwargs = dict(encoding = "ISO-8859-1", sep="\t", parse_dates={'date_time' : [3, 4]},
-                      index_col=["date_time","Depth [m]"], usecols=cols)
+                      usecols=cols)
+                    #   index_col=["date_time","Depth [m]"], usecols=cols)
     
     entries = {}
     for url in urls:
@@ -297,7 +298,7 @@ def ctd_profiles_2005_noaa(slug):
             name = f"{station}"
             # select transect/date to get metadata
             ddf = getattr(chr.src.process, slug)(df, station)
-            xlabel = str(ddf.cf["T"][0])
+            xlabel = str(ddf.cf["T"].iloc[0])
             # xlabel = str(ddf.cf["T"].iloc[0])
             metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
             metadata.update(add_metadata(ddf, maptype, featuretype))
@@ -352,7 +353,8 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
        'ctd_longitude', 'pressure', 'temp', 'C0Sm', 'DzdtM', 'Par',
        'Sbeox0MgL', 'Sbeox0PS', 'SvCM', 'CStarAt0', 'CStarTr0', 'salt',
        'FlECOAFL', 'TurbWETntu0', 'Ph', 'OxsatMgL']
-    csv_kwargs = dict(parse_dates=[0], index_col=["date_time","pressure"], usecols=usecols)
+    csv_kwargs = dict(parse_dates=[0], usecols=usecols)
+    # csv_kwargs = dict(parse_dates=[0], index_col=["date_time","pressure"], usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
     stations = sorted(list(set(df["station_number"])))
@@ -363,7 +365,7 @@ The scientific project is described here: https://www.usgs.gov/centers/alaska-sc
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, slug)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -414,7 +416,7 @@ def ctd_profiles_piatt_speckman_1999(slug):
     usecols = ['Cruise', 'Station', 'Type', 'mon/day/yr', 'hh:mm', 'Lon', 'Lat', 'Bot. Depth',
         'Depth [m]', 'Temperature [C]', 'Salinity [psu]', 'Backscatter', 'CHL']
     csv_kwargs = dict(encoding = 'unicode_escape', names=names, header=0, usecols=usecols,
-                      parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, index_col=["date_time", "Depth [m]"])
+                      parse_dates={"date_time": ["mon/day/yr","hh:mm"]})#, index_col=["date_time", "Depth [m]"])
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
     stations = sorted(df["Station"].unique())
@@ -428,7 +430,7 @@ def ctd_profiles_piatt_speckman_1999(slug):
         name = station
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -490,7 +492,7 @@ def ctd_profiles_emap_2002(slug):
        'chl [mg/m3]']
     csv_kwargs = dict(encoding = 'unicode_escape',
                       parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, 
-                      index_col=["date_time", "Depth [m]"],
+                    #   index_col=["date_time", "Depth [m]"],
                       header=0, names=names, usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
@@ -583,6 +585,10 @@ def ctd_profiles_emap_2008(slug):
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
+        # at least one station (AKCI08-026) is missing location data. 
+        # check for this and skip if missing.
+        if ddf.cf["longitude"].isnull().all() or ddf.cf["latitude"].isnull().all():
+            continue
         xlabel = str(ddf.cf["T"][0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
@@ -859,7 +865,7 @@ def ctd_profiles_kachemack_kuletz_2005_2007(slug):
     map_description = "CTD Profiles"
     summary = """CTD Profiles in Cook Inlet"""
     
-    url = "https://researchworkspace.com/files/42400618/Kuletz.csv"
+    url = "https://researchworkspace.com/files/42403574/Kuletz.csv"
 
     csv_kwargs = dict(parse_dates=["date_time"], 
                       index_col=["date_time", "Depth [m]"],)
@@ -1347,7 +1353,6 @@ def ctd_transects_cmi_kbnerr(slug):
     included = True
     notes = "Used in the NWGOA model/data comparison."
     maptype = "point"
-    featuretype = "trajectoryProfile"
     header_names = ["Cruise_00", "Cruise_01", "Cruise_02", "Cruise_03", "Cruise_05", "Cruise_06", "Cruise_07",
                     "Cruise_08", "Cruise_09", "Cruise_10", "Cruise_11", "Cruise_12", "Cruise_13", "Cruise_14", "Cruise_15", "Cruise_16", "Kbay_timeseries", "sue_shelikof"]
     map_description = "CTD Transects"
@@ -1382,6 +1387,7 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     
     # sue_shelikof
     name, ind = "sue_shelikof", 2
+    featuretype = "trajectoryProfile"
     process_function = "ctd_transects_cmi_kbnerr_sue_shelikof"
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
     ddf = getattr(chr.src.process, process_function)(df)
@@ -1405,6 +1411,7 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     
     # Kbay_timeseries
     name, ind = "Kbay_timeseries", 1
+    featuretype = "trajectoryProfile"
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
     metadata = {"plots": {"salt": scatter_dict("salt", df, x="T", y="Z", flip_yaxis=True),
                         "temp": scatter_dict("temp", df, x="T", y="Z", flip_yaxis=True),}}
@@ -1421,6 +1428,7 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     
     # cmi_full_v2
     name, ind = "cmi_full_v2", 0
+    featuretype = "trajectoryProfile"
     cruises = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     lines = [1,2,3,4,6,7]
     df = pd.read_csv(urls[ind], **csv_kwargs[ind])
@@ -1828,7 +1836,7 @@ def ctd_transects_barabara_to_bluff_2002_2003(slug):
 """
 
     url = "https://researchworkspace.com/files/42396691/barabara.csv"
-    csv_kwargs = dict(parse_dates=True, index_col="date_time") 
+    csv_kwargs = dict(parse_dates=True)#, index_col="date_time") 
     df = pd.read_csv(url, **csv_kwargs)
 
     # each file is a transect so this is easier than usual for transects
@@ -2179,7 +2187,7 @@ Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Se
                 "boulder-point",
                 # "wmo_46078",  # outside domain
                 "wmo_46077",]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     # # if I want to transform any sources
     # transform_source_names=["noaa_nos_co_ops_9455500",
@@ -2665,6 +2673,7 @@ Some of the data is written up in reports:
             metadata.update({"maptype": maptype, "featuretype": featuretype})
         else:
             # speed is changed into holomap (static plot) in the data page
+            # import pdb; pdb.set_trace()
             metadata = {"plots": {"speed": quadmesh_dict("speed_subtidal", ds.cf["longitude"].name, ds.cf["latitude"].name, 
                                                         chr.cmap["speed"], width=700, height=550,flip_yaxis=False, rasterize=False, 
                                                         vmax=round(float(ds.speed_subtidal.max())), symmetric=False,
