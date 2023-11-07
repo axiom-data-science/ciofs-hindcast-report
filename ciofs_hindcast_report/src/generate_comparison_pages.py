@@ -21,7 +21,40 @@ key_variables = ["ssh", "temp", "salt", "along", "across", "speed"]
 # dsm = xr.open_zarr("http://xpublish-ciofs.srv.axds.co/datasets/ciofs_hindcast/zarr/")
 # time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
 #                   ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp(dsm.ocean_time[-1].values)])
+time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
+                ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp("2022-12-31")])
 
+
+def imports_cell():
+    imports = f"""\
+import intake
+import ciofs_hindcast_report as chr
+import hvplot.pandas  # noqa
+import ocean_model_skill_assessor as omsa
+import pandas as pd
+import cmocean.cm as cmo
+from IPython.display import Image, display
+"""
+
+    # Add these cells to the notebook
+    imports_cell = nbf.v4.new_code_cell(imports)
+    imports_cell['metadata']['tags'] = ["remove-input"]  # don't show imports cell
+    
+    return imports_cell
+
+def isin_time_range(data_min_time, data_max_time, model):
+    # import pdb; pdb.set_trace()
+    data_min_time, data_max_time = pd.Timestamp(data_min_time.replace("Z","")), pd.Timestamp(data_max_time.replace("Z",""))
+    data_min_time_str, data_max_time_str = str(data_min_time.date()), str(data_max_time.date())
+    msg = f"""
+{model.upper()}: Data time range is {data_min_time_str} to {data_max_time_str} but model ends {time_range[model][1].date()}.
+
+"""
+    if time_range[model][1] < data_min_time:
+        return False, msg
+    else:
+        return True, ""
+    
 def project_name(slug, model):
     return f"{slug}_{model}"
 def outdir(slug, model):
@@ -57,12 +90,12 @@ def translate_var(key_variable):
         return "Horizontal speed"
 
 
-def aggregate_overall_stats(slug):
+def aggregate_overall_stats(slug, source_names=None):
 
     dfmodels = []
     for model in models:
         statspaths = sorted(list(outdir(slug, model).glob(f"*.yaml")))
-        all_desc = chr.src.utils.group_decoded_paths(statspaths)
+        all_desc = chr.src.utils.group_decoded_paths(statspaths, source_names)
         all_desc = all_desc.set_index(['slug', 'source_name', 'key_variable', 'ts_mods']).sort_index()
         
         # loop over sets of indices defining different groupings of filenames
@@ -185,18 +218,18 @@ Overall, the salinity from the CIOFS model demonstrates much less high frequency
 def generate_page(slug):   
     dsm = xr.open_zarr("http://xpublish-ciofs.srv.axds.co/datasets/ciofs_hindcast/zarr/")
     
-    time_range = dict(nwgoa=[pd.Timestamp("1999-01-01"), pd.Timestamp("2009-01-01")],
-                  ciofs=[pd.Timestamp("1999-01-01"), pd.Timestamp(dsm.ocean_time[-1].values)])
 
      
 # def moorings_noaa(slug):    
     # link project out directories to comparison page dir so can use the 
     # images as relative paths
     for model in models:
+        paths = omsa.paths.Paths(project_name(slug, model))
         here = outdir(slug,model)
         # import pdb; pdb.set_trace()
         if not here.exists():
-            here.symlink_to(omsa.paths.OUT_DIR(project_name(slug, model)))
+            here.symlink_to(paths.OUT_DIR)
+            # here.symlink_to(omsa.paths.OUT_DIR(project_name(slug, model)))
     
     # also symbolically link in DATA PAGE HERE
 # def project_name(slug, model):
@@ -215,16 +248,6 @@ def generate_page(slug):
 
     ## INITIAL STUFF
 
-    imports = f"""\
-import intake
-import ciofs_hindcast_report as chr
-import hvplot.pandas  # noqa
-import ocean_model_skill_assessor as omsa
-import pandas as pd
-import cmocean.cm as cmo
-from IPython.display import Image, display
-"""
-
     text = f"""\
 # {cat.description}
 
@@ -234,30 +257,14 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
 """
 
     # Add these cells to the notebook
-    imports_cell = nbf.v4.new_code_cell(imports)
-    imports_cell['metadata']['tags'] = ["remove-input"]  # don't show imports cell
-    nb['cells'] = [imports_cell,
+    nb['cells'] = [imports_cell(),
                    nbf.v4.new_markdown_cell(text),
                 #    nbf.v4.new_code_cell(code),
                    ]
 
-    # run the map code
-    figname = chr.COMP_PAGE_DIR(slug) / f"map_of_{slug}.png"
-    # import pdb; pdb.set_trace()
-    if not pathlib.Path(figname).exists():
-        getattr(chr.src.plot_dataset_on_map, slug)(slug, figname)
-    
-    ## Map of Datasets
-    text = f"""\
-## Map of {cat.metadata["map_description"]}
-
-{chr.src.utils.mk_fig_wide(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
-
-"""
 #Then refer to the figure with {{numref}}`Figure {{number}}<fig-map>`
-
-    nb['cells'].extend([nbf.v4.new_markdown_cell(text),])
-    
+    # Add map markdown cell
+    nb['cells'].extend([map_cell(slug, cat.metadata["map_description"]),])
     
     ## Overall summary of statistics
     dfstats = aggregate_overall_stats(slug)
@@ -424,16 +431,202 @@ See the full dataset page for more information: {{ref}}`page:{slug}`
 
     nbf.write(nb, f'{chr.COMP_PAGE_DIR(slug) / slug}.ipynb')
 
+def map_cell(slug, map_description):
+    # run the map code
+    figname = chr.COMP_PAGE_DIR(slug) / f"map_of_{slug}.png"
+    # import pdb; pdb.set_trace()
+    if not pathlib.Path(figname).exists():
+        getattr(chr.src.plot_dataset_on_map, slug)(slug, figname)
+    
+    ## Map of Datasets
+    text = f"""\
+## Map of {map_description}
+
+{chr.src.utils.mk_fig_wide(figname.relative_to(chr.COMP_PAGE_DIR(slug)), f"fig-map-{slug}", f"Map of {slug} data locations")}
+
+"""
+
+    return nbf.v4.new_markdown_cell(text)
+    
+    
+def overview_hfradar():
+    
+    # slugs = ["hfradar"]
+    slug = "hfradar"
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+
+    #symlink in map from data comp dir
+    there = chr.COMP_PAGE_DIR(slug) / f"map_of_{slug}.png"
+    here = chr.COMP_PAGE_DIR("overview_hfradar") / f"map_of_{slug}.png"
+    if not here.exists():
+        here.symlink_to(there)
+    
+    nb = nbf.v4.new_notebook()
+
+    ## INITIAL STUFF
+
+    text = f"""\
+# Overview of Model Performance for HF Radar Data
+
+Detailed model-data comparison page: {{ref}}`HF Radar model-data comparison page <page:{slug}-comparison>`
+
+Full dataset page: {{ref}}`HF Radar dataset page <page:{slug}>`
+"""
+
+    # Add these cells to the notebook
+    nb['cells'] = [imports_cell(),
+                   nbf.v4.new_markdown_cell(text),
+                #    nbf.v4.new_code_cell(code),
+                   ]
+
+
+#Then refer to the figure with {{numref}}`Figure {{number}}<fig-map>`
+
+    # Add map markdown cell
+    nb['cells'].extend([map_cell(slug, cat.metadata["map_description"]),])
+
+    ## Loop over models first
+    for model_name in [ "ciofs","nwgoa"]:            
+
+        cell_md = f"""\
+## {model_name.upper()}
+
+"""
+        for source_name in source_names:
+            data_min_time, data_max_time = cat[source_name].metadata["minTime"], cat[source_name].metadata["maxTime"]
+            cell_md += f"""\
+### {source_name}
+
+"""
+            for which in ["tidal","subtidal"]:
+                cell_md += f"""\
+#### {which.capitalize()}
+
+"""
+                intimerange, msg = isin_time_range(data_min_time, data_max_time, model_name)
+                if not intimerange:
+                    cell_md += msg
+                    continue
+
+                loc = chr.COMP_PAGE_DIR("overview_hfradar") / f"{slug}_{source_name}_{model_name}_{which}.png"
+                loc = loc.relative_to(chr.COMP_PAGE_DIR("overview_hfradar"))
+                label = f"fig-overview-hfradar-{source_name}-{model_name}-{which}"
+                caption = f""#Skill score by year for {translate_var(key_variable).lower()}, {translate(ts_mods)}"
+                cell_md += chr.src.utils.mk_fig_wide(loc, label, caption)
+        nb['cells'].extend([nbf.v4.new_markdown_cell(cell_md),])
+    
+    nbf.write(nb, f'{chr.COMP_PAGE_DIR("overview_hfradar") / "page"}.ipynb')
+    
+    
+def hfradar(slug):   
+
+    # link project out directories to comparison page dir so can use the 
+    # images as relative paths
+    for model in models:
+        paths = omsa.paths.Paths(project_name(slug, model))
+        here = outdir(slug,model)
+        if not here.exists():
+            here.symlink_to(paths.OUT_DIR)
+    
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+    
+    nb = nbf.v4.new_notebook()
+
+    ## INITIAL STUFF
+
+    text = f"""\
+(page:{slug}-comparison)=
+# {cat.description}
+
+* {slug}
+
+See the full dataset page for more information: {{ref}}`page:{slug}`
+"""
+
+    # Add these cells to the notebook
+    nb['cells'] = [imports_cell(),
+                   nbf.v4.new_markdown_cell(text),
+                #    nbf.v4.new_code_cell(code),
+                   ]
+
+
+#Then refer to the figure with {{numref}}`Figure {{number}}<fig-map>`
+
+    # Add map markdown cell
+    nb['cells'].extend([map_cell(slug, cat.metadata["map_description"]),])
+
+    ## Loop over source names
+    for source_name in source_names:
+        data_min_time, data_max_time = cat[source_name].metadata["minTime"], cat[source_name].metadata["maxTime"]
+        
+        cell_md = f"""\
+## {source_name}
+
+"""
+
+        which_plot = ["Subtidal Mean", "Hourly", "Subtidal, 6-Hourly"]
+        nameparts = ["_all_east_north_remove-under-50-percent-data_units-to-meters_subtidal_mean.png",
+                    "_all_east_north_remove-under-50-percent-data_units-to-meters.mp4", 
+                     "_all_east_north_remove-under-50-percent-data_units-to-meters_subtidal_resample-6H.mp4",
+        ]
+
+        for plot, namepart in zip(which_plot, nameparts):
+            cell_md += f"""\
+### {plot}
+
+"""
+            for model in models:
+                cell_md += f"""\
+#### {model.upper()}
+
+"""
+
+                intimerange, msg = isin_time_range(data_min_time, data_max_time, model)
+                if not intimerange:
+                    cell_md += msg
+                    continue
+
+                if ".mp4" in namepart:
+                    loc = f"https://files.axds.co/ciofs/hfradar_{model}/{slug}_{source_name}{namepart}"
+                    label = f"fig-{source_name}-{model}-{plot}"
+                    caption = f""#Skill score by year for {translate_var(key_variable).lower()}, {translate(ts_mods)}"
+                    cell_md += f"""
+```{{div}} full-width
+<video controls width=1000px src="{loc}"></video>
+```
+"""
+                    # cell_md += chr.src.utils.mk_fig_wide(loc, label, caption)
+                    # import pdb; pdb.set_trace()
+                else:
+                    # loc = paths.OUT_DIR / f"{source_name}{namepart}"
+                    # loc = loc.relative_to(chr.COMP_PAGE_DIR(slug))
+                    # loc = pathlib.Path(f"{slug}_{model}") / f"{source_name}{namepart}"
+                    # import pdb; pdb.set_trace()
+                    loc = chr.COMP_PAGE_DIR(slug) / f"{slug}_{model}" / f"{slug}_{source_name}{namepart}"
+                    # loc = loc.relative_to(chr.base)
+                    loc = loc.relative_to(chr.COMP_PAGE_DIR(slug))
+                    label = f"fig-{source_name}-{model}-{'_'.join(which_plot)}"
+                    caption = f""#Skill score by year for {translate_var(key_variable).lower()}, {translate(ts_mods)}"
+                    cell_md += chr.src.utils.mk_fig_wide(loc, label, caption)
+        nb['cells'].extend([nbf.v4.new_markdown_cell(cell_md),])
+
+    nbf.write(nb, f'{chr.COMP_PAGE_DIR(slug) / slug}.ipynb')
+
 
 # Generate comparison pages
 if __name__ == "__main__":
-    slugs = ["moorings_noaa","moorings_kbnerr_bear_cove_seldovia","moorings_kbnerr_homer",
-             "moorings_kbnerr_historical",
-                 "ctd_profiles_2005_noaa","adcp_moored_noaa_coi_2005","adcp_moored_noaa_coi_other"] #chr.slugs:
-    # slugs = ["moorings_noaa"]
-    for slug in slugs:
-        print(slug)
-        chr.src.generate_comparison_pages.generate_page(slug)
-        # if hasattr(chr.src.generate_comparison_pages, slug):
-        #     print(slug)
-        #     getattr(chr.src.generate_comparison_pages, slug)(slug)
+    slug = "hfradar"
+    chr.src.generate_comparison_pages.hfradar(slug)
+    chr.src.generate_comparison_pages.overview_hfradar()
+#     # slugs = ["moorings_noaa","moorings_kbnerr_bear_cove_seldovia","moorings_kbnerr_homer",
+#     #          "moorings_kbnerr_historical",
+#     #              "ctd_profiles_2005_noaa","adcp_moored_noaa_coi_2005","adcp_moored_noaa_coi_other"] #chr.slugs:
+#     # slugs = ["moorings_noaa"]
+#     # for slug in slugs:
+#     #     print(slug)
+#     #     chr.src.generate_comparison_pages.generate_page(slug)
+#     #     # if hasattr(chr.src.generate_comparison_pages, slug):
+#     #     #     print(slug)
+#     #     #     getattr(chr.src.generate_comparison_pages, slug)(slug)
