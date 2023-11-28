@@ -6,7 +6,7 @@
 #######################################################################################
 # Book settings
 title                       : CIOFS Hindcast Report  # The title of the book. Will be placed in the left navbar.
-author                      : Kristen M. Thyng, Chang Liu, Elizabeth L. Dobbins, Axiom Data Science  # The author of the book
+author                      : Kristen M. Thyng, Chang Liu, Melanie Feen, Elizabeth L. Dobbins, Axiom Data Science  # The author of the book
 copyright                   : "2023"  # Copyright year to be placed in the footer
 logo                        : Tt_Axiom_logo_hori_blk.jpg  # A path to the book logo
 # Auto-exclude files not in the toc
@@ -24,6 +24,14 @@ execute:
 latex:
   latex_documents:
     targetname: book.tex
+  
+# override figure numbering so it isn't across the whole book
+# https://github.com/orgs/executablebooks/discussions/1032
+sphinx:
+  config:
+    numfig: true
+    numfig_format: {'figure':'Figure %s'}
+    numfig_secnum_depth: 1 #eg 0:1 1:2.1 2:3.2.1
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:

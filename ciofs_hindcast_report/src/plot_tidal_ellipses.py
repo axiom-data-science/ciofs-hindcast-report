@@ -147,7 +147,7 @@ def plot_surfaces(cat, source_name, extent, model, obs, tide, which, unit, cmap_
 
 def plot_ellipse(cat, source_name, figsize_ell, proj, extent, dd, tide, obs, 
                  model, legend, model_name,model_file_name1, denom):
-    suptitle = f'Surface currents from {cat[source_name].metadata["minTime"][:10]} to {cat[source_name].metadata["maxTime"][:10]}'
+    suptitle = f'{tide} tidal ellipses from surface currents in dataset {source_name} ({cat[source_name].metadata["minTime"][:10]} to {cat[source_name].metadata["maxTime"][:10]})'
     
 
     fig, axes = plt.subplots(
@@ -218,7 +218,7 @@ def plot_ellipse(cat, source_name, figsize_ell, proj, extent, dd, tide, obs,
     plt.close(fig)
 
 
-model_name = "nwgoa"  # "ciofs"
+model_name = "ciofs"  # "ciofs"
 
 slug = "hfradar"
 

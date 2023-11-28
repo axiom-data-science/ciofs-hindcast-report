@@ -23,6 +23,7 @@ from IPython.display import Code
 plt.rc('font', size=16)
 ```
 
+(page:river2)=
 # Make monthly river forcing files for 1998–2022
 
 ```{code-cell} ipython3

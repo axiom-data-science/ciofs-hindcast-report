@@ -4,61 +4,68 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Report
+  - caption: Contents
     chapters:
     - file: front_matter/executive_summary
-  # - caption: Model Overview and Setup
-    # chapters:
-    - file: model_overview_and_setup/intro
-      sections:
-      - file: model_overview_and_setup/description_of_models
-      - file: model_overview_and_setup/open_boundary_forcing_and_initial_conditions
-      - file: model_overview_and_setup/river_forcing_demo
-  # - caption: Descriptive Plots
-    # chapters:
+    - file: model_overview_and_setup/description_of_models
     - file: descriptive/intro
+      title: Model-Model Comparisons
       sections:
       - file: descriptive/mean
       - file: outputs/pages/descriptive/currents/page
       - file: descriptive/descriptive_rips
     - file: report/summarize_datasets
-  - caption: Model-Data Comparisons
-    chapters:
-    - file: report/intro_comparisons
-    - file: outputs/pages/comparison/overview_hfradar/page
+      title: Datasets
       sections:
-      - file: outputs/pages/comparison/hfradar/hfradar
-    # - glob: outputs/pages/comparison/*/*
-  # - caption: References
-  #   chapters:
-    - file: report/references
-  - caption: Appendix
-    chapters:
-      - file: appendix/river_forcing_make_files
-      - file: appendix/included_datasets
+      - glob: outputs/pages/data/*
+    - file: report/intro_comparisons
+      title: Model-Data Comparisons
+      sections:
+      - file: report/model_assessment
+      - file: outputs/pages/comparison/overview_moorings/page
+        title: Summary Moorings
         sections:
-        - glob: outputs/pages/data/*
-
-
-
-# parts:
-# # - caption: Report
-#   # chapters:
-#   # - file: report/river_forcing_demo
-#   # - file: report/summarize_datasets
-#   # - file: report/intro_comparisons
-#     # sections:
-#     # - glob: outputs/pages/comparison/*/*
-#   # - file: report/references
-# - caption: Appendix
-#   chapters:
-#   # - file: outputs/pages/data/hfradar
-#   # - file: outputs/pages/data/ctd_transects_misc_2002
-# #   # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
-# #   # - file: outputs/pages/data/ctd_profiles_emap_2002
-# #   - file: appendix/river_forcing_make_files
-#   - file: appendix/included_datasets
-#     sections:
-#     # - file: outputs/pages/data/ctd_profiles_piatt_speckman_1999
-#     - glob: outputs/pages/data/ctd_transects_*
+        - file: outputs/pages/comparison/moorings_aoos_cdip/moorings_aoos_cdip
+        - file: outputs/pages/comparison/moorings_circac/moorings_circac
+        - file: outputs/pages/comparison/moorings_kbnerr/moorings_kbnerr
+        - file: outputs/pages/comparison/moorings_kbnerr_bear_cove_seldovia/moorings_kbnerr_bear_cove_seldovia
+        - file: outputs/pages/comparison/moorings_kbnerr_historical/moorings_kbnerr_historical
+        - file: outputs/pages/comparison/moorings_kbnerr_homer/moorings_kbnerr_homer
+        - file: outputs/pages/comparison/moorings_noaa/moorings_noaa
+        - file: outputs/pages/comparison/moorings_nps/moorings_nps
+        - file: outputs/pages/comparison/moorings_uaf/moorings_uaf
+      - file: outputs/pages/comparison/overview_ctd_transects/page
+        sections:
+        - file: outputs/pages/comparison/ctd_transects_barabara_to_bluff_2002_2003/ctd_transects_barabara_to_bluff_2002_2003
+        - file: outputs/pages/comparison/ctd_transects_cmi_kbnerr/ctd_transects_cmi_kbnerr
+        - file: outputs/pages/comparison/ctd_transects_cmi_uaf/ctd_transects_cmi_uaf
+        - file: outputs/pages/comparison/ctd_transects_gwa/ctd_transects_gwa
+        - file: outputs/pages/comparison/ctd_transects_misc_2002/ctd_transects_misc_2002
+        - file: outputs/pages/comparison/ctd_transects_otf_kbnerr/ctd_transects_otf_kbnerr
+        - file: outputs/pages/comparison/ctd_transects_uaf/ctd_transects_uaf
+      - file: outputs/pages/comparison/overview_hfradar/page
+        sections:
+        - file: outputs/pages/comparison/hfradar/hfradar
+      - file: outputs/pages/comparison/overview_adcp/page
+        sections:
+        - file: outputs/pages/comparison/adcp_moored_noaa_coi_2005/adcp_moored_noaa_coi_2005
+        - file: outputs/pages/comparison/adcp_moored_noaa_coi_other/adcp_moored_noaa_coi_other
+        - file: outputs/pages/comparison/adcp_moored_noaa_kod_1/adcp_moored_noaa_kod_1
+        - file: outputs/pages/comparison/adcp_moored_noaa_kod_2/adcp_moored_noaa_kod_2
+      - file: outputs/pages/comparison/overview_ctd_profiles/page
+        sections:
+        - file: outputs/pages/comparison/ctd_profiles_2005_noaa/ctd_profiles_2005_noaa
+        - file: outputs/pages/comparison/ctd_profiles_emap_2002/ctd_profiles_emap_2002
+        - file: outputs/pages/comparison/ctd_profiles_emap_2008/ctd_profiles_emap_2008
+        - file: outputs/pages/comparison/ctd_profiles_kachemack_kuletz_2005_2007/ctd_profiles_kachemack_kuletz_2005_2007
+        - file: outputs/pages/comparison/ctd_profiles_kb_small_mesh_2006/ctd_profiles_kb_small_mesh_2006
+        - file: outputs/pages/comparison/ctd_profiles_kbay_osu_2007/ctd_profiles_kbay_osu_2007
+        - file: outputs/pages/comparison/ctd_profiles_piatt_speckman_1999/ctd_profiles_piatt_speckman_1999
+        - file: outputs/pages/comparison/ctd_profiles_usgs_boem/ctd_profiles_usgs_boem
+    - file: report/references
+    - file: appendix/appendix
+      sections:
+      - file: model_overview_and_setup/open_boundary_forcing_and_initial_conditions
+      - file: model_overview_and_setup/river_forcing_demo
+      - file: appendix/river_forcing_make_files
 

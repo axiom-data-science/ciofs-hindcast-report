@@ -2,6 +2,7 @@
 import ciofs_hindcast_report.src.process
 import ciofs_hindcast_report.src.utils
 import ciofs_hindcast_report.src.plot_dataset_on_map
+import ciofs_hindcast_report.src.page_utils
 import ciofs_hindcast_report.src.generate_catalogs
 import ciofs_hindcast_report.src.generate_data_pages
 import ciofs_hindcast_report.src.generate_comparison_pages
@@ -72,8 +73,6 @@ slugs = [
         "adcp_moored_noaa_kod_1",
         "adcp_moored_noaa_kod_2",
         "adcp_towed_otf_kbnerr",
-        "ctd_moored_circac",
-        "ctd_moored_kbnerr",
         "ctd_profiles_2005_noaa",
         "ctd_profiles_2005_osu",
         "ctd_profiles_emap_2002",
@@ -97,6 +96,8 @@ slugs = [
         "ctd_transects_uaf",
         "hfradar",
         "moorings_aoos_cdip",
+        "moorings_circac",
+        "moorings_kbnerr",
         "moorings_kbnerr_bear_cove_seldovia",
         "moorings_kbnerr_historical",
         "moorings_kbnerr_homer",
@@ -137,6 +138,8 @@ reg = cfp.Reg(include_exact="u", ignore_case=True)
 vocab.make_entry("east", reg.pattern(), attr="name")
 reg = cfp.Reg(include_exact="u_eastward", ignore_case=True)
 vocab.make_entry("east", reg.pattern(), attr="name")
+reg = cfp.Reg(include_exact="east", ignore_case=True)
+vocab.make_entry("east", reg.pattern(), attr="name")
 # reg = cfp.Reg(include_or=["sea_water_x_velocity"], ignore_case=True)
 # vocab.make_entry("east", reg.pattern(), attr="standard_name")
 
@@ -144,9 +147,12 @@ reg = cfp.Reg(include_exact="v", ignore_case=True)
 vocab.make_entry("north", reg.pattern(), attr="name")
 reg = cfp.Reg(include_exact="v_northward", ignore_case=True)
 vocab.make_entry("north", reg.pattern(), attr="name")
+reg = cfp.Reg(include_exact="north", ignore_case=True)
+vocab.make_entry("north", reg.pattern(), attr="name")
 # reg = cfp.Reg(include_or=["sea_water_y_velocity"], ignore_case=True)
 # vocab.make_entry("north", reg.pattern(), attr="standard_name")
 
+vocab.make_entry("M2-major",["M2-major$"], attr="name")
 
 
 vocab.make_entry("jday", ["julian", "yearday"], attr="name")  # julian or decimal days

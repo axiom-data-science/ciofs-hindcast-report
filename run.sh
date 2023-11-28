@@ -17,7 +17,8 @@ python ciofs_hindcast_report/src/generate_descriptive_pages.py
 
 # find all ipynb files in ciofs_hindcast_report except under _build and .ipynb_checkpoints
 # https://www.theunixschool.com/2012/07/find-command-15-examples-to-exclude.html
-notebooks=$(find ciofs_hindcast_report -type d \( -name _build -o -name .ipynb_checkpoints \) -prune -o -name "*.ipynb" -print)
+notebooks=$(find ciofs_hindcast_report -type d \( -name _build -o -name .ipynb_checkpoints  -o -name _save_notebooks \) -prune -o -name "*.ipynb" -print)
+# notebooks=$(find ciofs_hindcast_report -type d \( -name _build -o -name .ipynb_checkpoints \) -prune -o -name "*.ipynb" -print)
 # to list back: echo "$notebooks"
 
 for notebook in $( echo "$notebooks" )

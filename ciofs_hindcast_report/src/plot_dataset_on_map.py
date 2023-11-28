@@ -8,6 +8,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import fsspec
 import xarray as xr
+import hvplot.pandas
 
 def select_colorsdata():
     # make n distinct colors for the points
@@ -18,7 +19,7 @@ def select_colorsdata():
 
 
 # Plot discovered data locations
-def ctd_transects_gwa(slug):
+def ctd_transects_gwa(slug, figname=None):
     # def remove_duplicates(maps):
     #     mapsdf = pd.DataFrame(maps, columns=["minLon","minLat","maxLon","maxLat","name","maptype"])
     #     # overwrite name column to base dropping duplicates (by transect name but without date)
@@ -26,6 +27,7 @@ def ctd_transects_gwa(slug):
     #     mapsdf = mapsdf.drop_duplicates(subset=["name"], keep="first")
     #     maps = mapsdf.to_numpy()
     #     return maps
+    figname = figname or f"map_of_{slug}"
         
     two_maps = dict(extent_left=[-155.6, -148.2, 56.3, 61.5], extent_right=[-153.3, -150.9, 58.7, 60.2])
 
@@ -46,8 +48,8 @@ def ctd_transects_gwa(slug):
         # print(sn)
         df = cat[sn].read()
         # import pdb; pdb.set_trace()
-        maps.append((df.cf["longitude"][0], df.cf["longitude"][-1], 
-                     df.cf["latitude"][0], df.cf["latitude"][-1],
+        maps.append((df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
+                     df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
                      f"Transect {sn.split('-')[0].split('_')[1]}", "line"))
     
     # maps = np.vstack((ds.cf["longitude"].values, ds.cf["longitude"].values, 
@@ -57,7 +59,7 @@ def ctd_transects_gwa(slug):
     #                  )).T
 
     omsa.plot.map.plot_map(np.asarray(maps),
-                           figname=f"Map of {slug}",
+                           figname=figname,
                                   label_with_station_name=True, 
                                   two_maps=two_maps,
                                 #   figsize=chr.figsize, 
@@ -68,7 +70,7 @@ def ctd_transects_gwa(slug):
                                   legend=False)
 
     # omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-    #                               project_name="",
+    #                               paths=omsa.Paths(""), 
     #                               remove_duplicates=remove_duplicates, 
     #                               label_with_station_name=True, 
     #                               two_maps=two_maps,
@@ -89,7 +91,7 @@ def ctd_profiles_2005_noaa(slug, figname=None):
     dds += [[3000, 3000]]*20
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                               paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 dd=dds, 
@@ -100,7 +102,7 @@ def ctd_profiles_2005_noaa(slug, figname=None):
                                 )
 
 
-def ctd_profiles_usgs_boem(slug):
+def ctd_profiles_usgs_boem(slug, figname=None):
         
     extent_right_large=[-153.9, -151, 58.7, 60.9]
     two_maps = dict(extent_left=[-155.6, -148.2, 56.3, 61.5], extent_right=extent_right_large,
@@ -129,7 +131,7 @@ def ctd_profiles_usgs_boem(slug):
 
     
     kwargs = dict(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 annotate=False,
                                 # remove_duplicates=remove_duplicates,
@@ -140,14 +142,19 @@ def ctd_profiles_usgs_boem(slug):
                                 legend=True,
                                 markersize=5,
                                 markeredgewidth=0.5,
+                                # figname=figname,
                                 colors_data=select_colorsdata(),
                                 loc = "lower left")
-
-    omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2016, suptitle="2016")
-    omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2017, suptitle="2017")
-    omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2018, suptitle="2018")
-    omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2019, suptitle="2019")
-    omsa.plot.map.plot_cat_on_map(**kwargs, remove_duplicates=remove_duplicates2021, suptitle="2021")
+    figname2016 = figname.parent / f"{figname.stem}_2016.png"
+    omsa.plot.map.plot_cat_on_map(**kwargs, figname=figname2016, remove_duplicates=remove_duplicates2016, suptitle="2016")
+    figname2017 = figname.parent / f"{figname.stem}_2017.png"
+    omsa.plot.map.plot_cat_on_map(**kwargs, figname=figname2017, remove_duplicates=remove_duplicates2017, suptitle="2017")
+    figname2018 = figname.parent / f"{figname.stem}_2018.png"
+    omsa.plot.map.plot_cat_on_map(**kwargs, figname=figname2018, remove_duplicates=remove_duplicates2018, suptitle="2018")
+    figname2019 = figname.parent / f"{figname.stem}_2019.png"
+    omsa.plot.map.plot_cat_on_map(**kwargs, figname=figname2019, remove_duplicates=remove_duplicates2019, suptitle="2019")
+    figname2021 = figname.parent / f"{figname.stem}_2021.png"
+    omsa.plot.map.plot_cat_on_map(**kwargs, figname=figname2021, remove_duplicates=remove_duplicates2021, suptitle="2021")
 
 
 def ctd_profiles_piatt_speckman_1999(slug, figname=None):
@@ -168,9 +175,12 @@ def ctd_profiles_piatt_speckman_1999(slug, figname=None):
 def ctd_profiles_emap_2002(slug, figname=None):
 
     figname = figname or f"map_of_{slug}"
-
-    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+    cat = intake.open_catalog(chr.CAT_NAME(slug))
+    source_names = chr.src.utils.get_source_names(cat)
+    # import pdb; pdb.set_trace()
+    omsa.plot.map.plot_cat_on_map(catalog=cat, 
+                                paths=omsa.Paths(""), 
+                                source_names=source_names,
                                 label_with_station_name=True,
                                 extent=chr.extent_whole, 
                                 annotate_fontsize=10, 
@@ -178,6 +188,7 @@ def ctd_profiles_emap_2002(slug, figname=None):
                                 map_font_size=chr.map_font_size,
                                 figname=figname,
                                 )
+    return plot
 
 
 def ctd_profiles_emap_2008(slug, figname=None):
@@ -319,7 +330,8 @@ def ctd_towed_ferry_noaa_pmel(slug):
                             )
 
 
-def ctd_transects_otf_kbnerr(slug):
+def ctd_transects_otf_kbnerr(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
 
@@ -335,7 +347,7 @@ def ctd_transects_otf_kbnerr(slug):
                     )).T
 
     omsa.plot.map.plot_map(maps,
-                           figname=f"Map of {slug}",
+                           figname=figname,
                            label_with_station_name=True, 
                            two_maps=two_maps,
                            figsize=chr.figsize, 
@@ -347,7 +359,8 @@ def ctd_transects_otf_kbnerr(slug):
                         )
 
 
-def ctd_transects_cmi_uaf(slug):
+def ctd_transects_cmi_uaf(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
 
@@ -364,7 +377,7 @@ def ctd_transects_cmi_uaf(slug):
                     )).T
 
     omsa.plot.map.plot_map(maps,
-                            figname=f"Map of {slug}",
+                            figname=figname,
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 figsize=chr.figsize, 
@@ -376,7 +389,8 @@ def ctd_transects_cmi_uaf(slug):
                         )
 
 
-def ctd_transects_cmi_kbnerr(slug):
+def ctd_transects_cmi_kbnerr(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
     cat = intake.open_catalog(chr.CAT_NAME(slug))
 
     two_maps = dict(extent_left=chr.extent_whole, extent_right=[-153.5, -151.0, 58.3, 60.1],
@@ -396,8 +410,8 @@ def ctd_transects_cmi_kbnerr(slug):
     maps = []
     for source_name in source_names:
         df = cat[source_name].read()
-        maps.append( (df.cf["longitude"][0], df.cf["longitude"][-1], 
-                    df.cf["latitude"][0], df.cf["latitude"][-1],
+        maps.append( (df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
+                    df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
                     f"Transect {df.cf['line'].iloc[0]}",
                     "line",) )
 
@@ -421,7 +435,7 @@ def ctd_transects_cmi_kbnerr(slug):
     dds = [(-10000,-40000), (-40000, 30000), (-20000, 20000), (5000,10000), (0, 35000), (25000, 5000), (-92500, -30000), (-80000,-5000)]
 
     omsa.plot.map.plot_map(np.asarray(maps),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                             label_with_station_name=True, 
                             two_maps=two_maps,
                            dd=dds,
@@ -434,7 +448,9 @@ def ctd_transects_cmi_kbnerr(slug):
                         )
 
 
-def ctd_moored_circac(slug):
+def moorings_circac(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
+    
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = source_names[0]
@@ -450,7 +466,7 @@ def ctd_moored_circac(slug):
                     )
 
     omsa.plot.map.plot_map(np.asarray([maps]),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 figsize=chr.figsize, 
@@ -462,7 +478,9 @@ def ctd_moored_circac(slug):
                         )
 
 
-def ctd_moored_kbnerr(slug):
+def moorings_kbnerr(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
+    
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = source_names[0]
@@ -478,7 +496,7 @@ def ctd_moored_kbnerr(slug):
                     )
 
     omsa.plot.map.plot_map(np.asarray([maps]),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 figsize=chr.figsize, 
@@ -490,7 +508,8 @@ def ctd_moored_kbnerr(slug):
                         )
 
 
-def ctd_transects_uaf(slug):
+def ctd_transects_uaf(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = source_names[0]
@@ -505,7 +524,7 @@ def ctd_transects_uaf(slug):
                 "line",) 
 
     omsa.plot.map.plot_map(np.asarray([maps]),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                             label_with_station_name=True, 
                             two_maps=two_maps,
                            dd=[(-50000,5000)],
@@ -517,7 +536,8 @@ def ctd_transects_uaf(slug):
                         )
 
 
-def ctd_transects_misc_2002(slug):
+def ctd_transects_misc_2002(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
@@ -528,15 +548,15 @@ def ctd_transects_misc_2002(slug):
     maps = []
     for source_name in source_names:
         df = cat[source_name].read()
-        maps.append( (df.cf["longitude"][0], df.cf["longitude"][-1], 
-                    df.cf["latitude"][0], df.cf["latitude"][-1],
+        maps.append( (df.cf["longitude"].iloc[0], df.cf["longitude"].iloc[-1], 
+                    df.cf["latitude"].iloc[0], df.cf["latitude"].iloc[-1],
                     source_name,
                     "line",) )
 
     # dds = [(-10000,40000), (-40000, -30000), (0,0), (-5000,10000), (0, 35000)]
 
     omsa.plot.map.plot_map(np.asarray(maps),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                             label_with_station_name=True, 
                             two_maps=two_maps,
                            # dd=dds,
@@ -549,7 +569,8 @@ def ctd_transects_misc_2002(slug):
                         )
 
 
-def ctd_transects_barabara_to_bluff_2002_2003(slug):
+def ctd_transects_barabara_to_bluff_2002_2003(slug, figname=None):
+    figname = figname or f"map_of_{slug}"
 
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
@@ -566,7 +587,7 @@ def ctd_transects_barabara_to_bluff_2002_2003(slug):
                 )).T.tolist()
 
     omsa.plot.map.plot_map(np.asarray(maps),
-                            figname=f"Map of {slug}",
+                            figname=figname,
                             label_with_station_name=True, 
                             two_maps=two_maps,
                            # dd=dds,
@@ -683,7 +704,7 @@ def moorings_uaf(slug, figname=None):
     dds = [(-50000, -10000), (-50000, 20000), (-50000, -20000), ]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 # dd=dds, 
@@ -702,7 +723,7 @@ def moorings_nps(slug, figname=None):
     dds = [(-50000, 10000), (-120000, 10000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 dd=dds, 
@@ -721,7 +742,7 @@ def moorings_noaa(slug, figname=None):
     dds = [(-50000, 10000), (-120000, 10000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 extent=chr.extent_whole,
                                 legend=True,
@@ -745,7 +766,7 @@ def moorings_aoos_cdip(slug, figname=None):
     dds = [(-50000, 10000), (-120000, 10000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 # dd=dds, 
@@ -765,7 +786,7 @@ def moorings_kbnerr_bear_cove_seldovia(slug, figname=None):
     # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 dd=dds, 
@@ -785,7 +806,7 @@ def moorings_kbnerr_homer(slug, figname=None):
     # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 dd=dds, 
@@ -908,8 +929,8 @@ def adcp_moored_noaa_kod_1(slug, figname=None):
     # dds = [(-10000, 11000), (0, -6000), (0, 4000), ]
     # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
 
-    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+    omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)),
+                                  paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 # dd=dds, 
@@ -933,7 +954,7 @@ def adcp_moored_noaa_kod_2(slug, figname=None):
     # dds = [(-20000, 5000), (-10000, 11000), (0, -6000), (0, 4000), (0, -6000), (0, 4000)]
 
     omsa.plot.map.plot_cat_on_map(catalog=intake.open_catalog(chr.CAT_NAME(slug)), 
-                                project_name="",
+                                  paths=omsa.Paths(""), 
                                 label_with_station_name=True, 
                                 two_maps=two_maps,
                                 # dd=dds, 

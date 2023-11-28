@@ -572,7 +572,7 @@ def ctd_profiles_emap_2008(slug):
     usecols = ['StationID', 'Lat', 'Lon', 'Temperature', 'Date', 'Time',"Depth (m)",
        'Salinity (PSU)', 'Oxygen (mg/L)']
     csv_kwargs = dict(parse_dates={"date_time": ["Date","Time"]}, 
-                      index_col=["date_time","Depth (m)"],
+                    #   index_col=["date_time","Depth (m)"],
                       usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
@@ -589,7 +589,7 @@ def ctd_profiles_emap_2008(slug):
         # check for this and skip if missing.
         if ddf.cf["longitude"].isnull().all() or ddf.cf["latitude"].isnull().all():
             continue
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -651,7 +651,7 @@ def ctd_profiles_kb_small_mesh_2006(slug):
        'oxconc', 'oxper [%]']
     csv_kwargs = dict(encoding = 'unicode_escape',
                       parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, 
-                      index_col=["date_time", "Depth [m]"],
+                    #   index_col=["date_time", "Depth [m]"],
                       header=0, names=names, usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
@@ -664,7 +664,7 @@ def ctd_profiles_kb_small_mesh_2006(slug):
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -726,7 +726,7 @@ def ctd_profiles_kbay_osu_2007(slug):
        'Depth', 'Salinity [PSU]', 'Decent Rate']
     csv_kwargs = dict(encoding = 'unicode_escape', sep="\t",
                       parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, 
-                      index_col=["date_time", "Depth"],
+                    #   index_col=["date_time", "Depth"],
                       header=0, names=names, usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
@@ -739,7 +739,7 @@ def ctd_profiles_kbay_osu_2007(slug):
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -801,7 +801,7 @@ def ctd_profiles_north_gulf_small_mesh_2005(slug):
        'Transmissometer [v]', 'PAR']
     csv_kwargs = dict(encoding = 'unicode_escape',
                       parse_dates={"date_time": ["mon/day/yr","hh:mm"]}, 
-                      index_col=["date_time", "Depth [m]"],
+                    #   index_col=["date_time", "Depth [m]"],
                       header=0, names=names, usecols=usecols)
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
@@ -814,7 +814,7 @@ def ctd_profiles_north_gulf_small_mesh_2005(slug):
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -868,7 +868,8 @@ def ctd_profiles_kachemack_kuletz_2005_2007(slug):
     url = "https://researchworkspace.com/files/42403574/Kuletz.csv"
 
     csv_kwargs = dict(parse_dates=["date_time"], 
-                      index_col=["date_time", "Depth [m]"],)
+                    #   index_col=["date_time", "Depth [m]"],
+                      )
     df = pd.read_csv(url, **csv_kwargs)    
     # split into single CTD cast units by station
     stations = df["Station"].unique().tolist()
@@ -880,7 +881,7 @@ def ctd_profiles_kachemack_kuletz_2005_2007(slug):
         name = f"{station}"
         # process dataframe so can get metadata
         ddf = getattr(chr.src.process, transform_name)(df, station)
-        xlabel = str(ddf.cf["T"][0])
+        xlabel = str(ddf.cf["T"].iloc[0])
         metadata = {"plots": {"data": line_depth_dict("Z", ["temp", "salt"], ddf, xlabel=xlabel),}}
         metadata.update(add_metadata(ddf, maptype, featuretype))
         metadata.update({"urlpath": url})
@@ -1312,7 +1313,7 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
         # select cruise to get metadata
         ddf = getattr(chr.src.process, slug)(df.copy(), cruise)
         name = f"Cruise-{str(cruise).zfill(2)}"
-        title = f"{str(ddf.cf['T'][0].date())}"
+        title = f"{str(ddf.cf['T'].iloc[0].date())}"
         # title = f"{str(ddf.cf['T'].iloc[0].date())}"
         metadata = {"plots": {"salt": scatter_dict("salt", ddf, x="distance", y="Z", flip_yaxis=True, title=title),
                             "temp": scatter_dict("temp", ddf, x="distance", y="Z", flip_yaxis=True, title=title),}}
@@ -1473,8 +1474,8 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
-def ctd_moored_circac(slug):
-    project_name = "CTD Moored 2006 - CIRCAC"
+def moorings_circac(slug):
+    project_name = "Mooring from CIRCAC"
     overall_desc = "Mooring (CIRCAC): Central Cook Inlet Mooring"
     time = "Two weeks in August 2006, 15 min sampling"
     included = True
@@ -1542,9 +1543,9 @@ Report: https://researchworkspace.com/files/39885971/2009_041.pdf
     save_catalog(entries, cat_name=slug, cat_desc=overall_desc, cat_meta=cat_meta)
 
 
-def ctd_moored_kbnerr(slug):
+def moorings_kbnerr(slug):
     
-    project_name = "CTD Moored 2006-2008 - KBNERR"
+    project_name = "Mooring from KBNERR"
     overall_desc = "Mooring (KBNERR): Lower Cook Inlet Mooring"
     time = "Aug to Oct 2006 and June 2007 to Feb 2008, 15 min sampling"
     included = True
@@ -1836,7 +1837,7 @@ def ctd_transects_barabara_to_bluff_2002_2003(slug):
 """
 
     url = "https://researchworkspace.com/files/42396691/barabara.csv"
-    csv_kwargs = dict(parse_dates=True)#, index_col="date_time") 
+    csv_kwargs = dict(parse_dates=["date_time"])#, index_col="date_time") 
     df = pd.read_csv(url, **csv_kwargs)
 
     # each file is a transect so this is easier than usual for transects
@@ -2155,7 +2156,7 @@ def moorings_aoos_cdip(slug):
     stations = ["aoos_204", 
                 "edu_ucsd_cdip_236",
                 "central-cook-inlet-175"]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
                         header_names, map_description, summary, stations, open_kwargs)
@@ -2180,7 +2181,8 @@ Geese Island, Sitkalidak Island, Bear Cove, Anchorage, Kodiak Island, Alitak, Se
                 "sitkalidak-island-gps-tide-bu", # ssh
                 "noaa_nos_co_ops_9455595", # ssh
                 "noaa_nos_co_ops_9455920", # ssh
-                "noaa_nos_co_ops_kdaa2",
+                # "noaa_nos_co_ops_kdaa2",  # not in our system anymore
+                "noaa_nos_co_ops_9457292",
                 "noaa_nos_co_ops_9457804",
                 "noaa_nos_co_ops_9455500",
                 "old-harbor-1",
@@ -2219,7 +2221,7 @@ def moorings_nps(slug):
 """
     stations = ["chinitna-bay-ak-tide-station-945",
                 "aguchik-island-ak-tide-station-9",]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
                         header_names, map_description, summary, stations, open_kwargs)
@@ -2241,7 +2243,7 @@ def moorings_uaf(slug):
     stations = ["uaf_ocean_acidification_resea_ko",
                 "kodiak-burke-o-lator-kodiak-ak",
                 "peterson-bay-ak-gnss-r",]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
                         header_names, map_description, summary, stations, open_kwargs)
@@ -2271,7 +2273,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
     stations = ["cdmo_nerrs_bearcove",
                 "nerrs_kacsdwq",
                 "nerrs_kacsswq"]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
                         header_names, map_description, summary, stations, open_kwargs)
@@ -2300,7 +2302,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
     stations = ["nerrs_kachdwq",
                 "homer-dolphin-surface-water-q",
                 "nerrs_kach3wq",]
-    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1], "index_col": "time"}
+    open_kwargs = {"parse_dates": [0], "response": "csv", "skiprows": [1]}#, "index_col": "time"}
     
     make_erddap_catalog(slug, project_name, overall_desc, time, included, notes, maptype, featuretype,
                         header_names, map_description, summary, stations, open_kwargs)
@@ -2327,7 +2329,7 @@ More information: https://accs.uaa.alaska.edu/kbnerr/
             "https://researchworkspace.com/files/42202447/kacpgwq_subsetted.csv",
             "https://researchworkspace.com/files/42202449/kacsewq_subsetted.csv",
     ]
-    csv_kwargs = dict(parse_dates=[0], index_col="DateTimeStamp")
+    csv_kwargs = dict(parse_dates=[0])#, index_col="DateTimeStamp")
     entries = {}
     for url in urls:
         name = pathlib.PurePath(url).stem.rstrip("_subsetted")
@@ -2635,12 +2637,27 @@ Some of the data is written up in reports:
 ![pic](https://researchworkspace.com/files/40338104/UAcoverage.gif)
 """
 
-    urls = ["https://researchworkspace.com/files/42394322/upper-ci_system-A_2002-2003_subtidal_weekly_mean.nc",
-            "https://researchworkspace.com/files/42393592/upper-ci_system-A_2002-2003_tidecons.nc",
-            "https://researchworkspace.com/files/42394327/lower-ci_system-B_2006-2007_subtidal_weekly_mean.nc",
-            "https://researchworkspace.com/files/42393598/lower-ci_system-B_2006-2007_tidecons.nc",
-            "https://researchworkspace.com/files/42394329/upper-ci_system-A_2009_subtidal_weekly_mean.nc",
-            "https://researchworkspace.com/files/42393604/upper-ci_system-A_2009_tidecons.nc"]
+    urls = ["https://researchworkspace.com/files/42712165/lower-ci_system-B_2006-2007.nc",
+            "https://researchworkspace.com/files/42712210/lower-ci_system-B_2006-2007_subtidal_weekly_mean.nc",
+            "https://researchworkspace.com/files/42712190/lower-ci_system-B_2006-2007_tidecons_base.nc",
+            "https://researchworkspace.com/files/42712163/upper-ci_system-A_2002-2003.nc",
+            "https://researchworkspace.com/files/42712206/upper-ci_system-A_2002-2003_subtidal_weekly_mean.nc",
+            "https://researchworkspace.com/files/42712182/upper-ci_system-A_2002-2003_tidecons_base.nc",
+            "https://researchworkspace.com/files/42712167/upper-ci_system-A_2009.nc",
+            "https://researchworkspace.com/files/42712214/upper-ci_system-A_2009_subtidal_weekly_mean.nc",
+            "https://researchworkspace.com/files/42712200/upper-ci_system-A_2009_tidecons_base.nc",
+            ]
+
+    # urls = ["https://researchworkspace.com/files/42394322/upper-ci_system-A_2002-2003_subtidal_weekly_mean.nc",
+    #         "https://researchworkspace.com/files/42393592/upper-ci_system-A_2002-2003_tidecons.nc",
+    #         "https://researchworkspace.com/files/42394327/lower-ci_system-B_2006-2007_subtidal_weekly_mean.nc",
+    #         "https://researchworkspace.com/files/42393598/lower-ci_system-B_2006-2007_tidecons.nc",
+    #         "https://researchworkspace.com/files/42394329/upper-ci_system-A_2009_subtidal_weekly_mean.nc",
+    #         "https://researchworkspace.com/files/42393604/upper-ci_system-A_2009_tidecons.nc",
+    #         "https://researchworkspace.com/files/42390223/upper-ci_system-A_2002-2003.nc",
+    #         "https://researchworkspace.com/files/42390219/lower-ci_system-B_2006-2007.nc",
+    #         "https://researchworkspace.com/files/42390224/upper-ci_system-A_2009.nc",
+    #         ]
             
 
     # urls = ["https://researchworkspace.com/files/42393590/upper-ci_system-A_2002-2003_subtidal_daily_mean.nc",
@@ -2663,17 +2680,22 @@ Some of the data is written up in reports:
 
         of_local = fsspec.open_local(f"simplecache://::{url}", mode="rb")
         ds = xr.open_dataset(of_local)              
-        name = pathlib.Path(url).stem.split("_subtidal")[0]
         if "tidecons" in url:
+            name = pathlib.Path(url).stem.split("_subtidal")[0]
             metadata = {"plots": {"tidecons": quadmesh_dict("tidecons", ds.cf["longitude"].name, ds.cf["latitude"].name, 
                                                         "cmo.tarn", flip_yaxis=False, rasterize=False, 
                                                         width=700, height=550, dynamic=False, geo=True, tiles=True,
                                                         xlabel="Longitude", ylabel="Latitude", hover=True),
                                                         }}
             metadata.update({"maptype": maptype, "featuretype": featuretype})
+        # picking out the full time resolution files so can use them in OMSA
+        elif "tidecons" not in url and "subtidal" not in url:
+            name = pathlib.Path(url).stem + f"_all"
+            metadata = add_metadata(ds, maptype, featuretype)
+            metadata["key_variables"] = ["east","north"]
         else:
+            name = pathlib.Path(url).stem.split("_subtidal")[0]
             # speed is changed into holomap (static plot) in the data page
-            # import pdb; pdb.set_trace()
             metadata = {"plots": {"speed": quadmesh_dict("speed_subtidal", ds.cf["longitude"].name, ds.cf["latitude"].name, 
                                                         chr.cmap["speed"], width=700, height=550,flip_yaxis=False, rasterize=False, 
                                                         vmax=round(float(ds.speed_subtidal.max())), symmetric=False,
@@ -2684,6 +2706,7 @@ Some of the data is written up in reports:
                                                         geo=True, tiles=True, dynamic=False, 
                                                         xlabel="Longitude", ylabel="Latitude"),}}
             metadata.update(add_metadata(ds, maptype, featuretype))
+            metadata["key_variables"] = ["east","north"]
         metadata.update({"urlpath": url})
         entries[name] = {"description": name,
                                 "driver": "netcdf",

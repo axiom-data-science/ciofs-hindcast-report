@@ -315,7 +315,7 @@ getattr(chr.src.plot_dataset_on_map, "{slug}")("{slug}")
 # Generate data pages
 if __name__ == "__main__":
     from time import time
-    for slug in chr.slugs:
+    for slug in ["moorings_noaa"]:#chr.slugs:
         cat = intake.open_catalog(chr.CAT_NAME(slug))
         # only make page if including dataset
         if cat.metadata["included"]:

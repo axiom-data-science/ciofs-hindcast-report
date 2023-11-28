@@ -38,9 +38,27 @@ name: {label}
 """
     return text
 
+def mk_video_wide(path, label, caption):
+
+    text = f"""
+
+````{{div}} full-width                
+```{{figure}} {path}
+---
+name: {label}
+class: video controls
+width: 1000px
+---
+{caption}
+```
+````
+
+"""
+    return text
+
 
 def get_source_names(cat):
-    return sorted([source_name for source_name in list(cat) if "_base" not in source_name and "_all" not in source_name])
+    return sorted([source_name for source_name in list(cat) if "_base" not in source_name and "_all" not in source_name and "_full" not in source_name])
 
 
 def calculate_julian_days(date_time):
@@ -72,7 +90,7 @@ def decode_path(path):
     loc = path.stem
     base = path.parent
     suffix = path.suffix
-    slug = [slug for slug in chr.slugs if slug in loc][0]
+    slug = [slug for slug in chr.slugs if slug in loc][-1]
     cat = intake.open_catalog(chr.CAT_NAME(slug))
     source_names = chr.src.utils.get_source_names(cat)
     source_name = [source_name for source_name in source_names if source_name in loc][0]

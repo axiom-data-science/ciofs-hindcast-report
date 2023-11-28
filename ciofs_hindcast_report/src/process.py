@@ -87,7 +87,7 @@ def ctd_transects_gwa(df, visit_transect):
     dft = df.loc[visit_transect].copy()
     dft["distance [km]"] = omsa.utils.calculate_distance(dft.cf["longitude"], 
                                               dft.cf["latitude"])
-    dft = dft.reset_index().set_index("Date_Time")#.set_index(["Date_Time", "Depth", "Latitude_DD", "Longitude_DD"], drop=False)
+    dft = dft.reset_index()#.set_index("Date_Time")#.set_index(["Date_Time", "Depth", "Latitude_DD", "Longitude_DD"], drop=False)
     return dft#.reset_index(drop=True)
 
 
@@ -105,11 +105,11 @@ def ctd_profiles_2005_noaa(df, station):
 
 
 def ctd_profiles_usgs_boem(df, station):
-    return df[df["station_number"] == station].reset_index(drop=True)
+    return df[df["station_number"] == station]#.reset_index(drop=True)
 
 
 def select_by_station(df, station):
-    return df[df.cf["station"] == station].reset_index(drop=True)
+    return df[df.cf["station"] == station]#.reset_index(drop=True)
 
 
 # def select_by_station_ak2utc(df, station):
@@ -168,13 +168,14 @@ def ctd_transects_cmi_uaf(df, cruise=None):
     df.drop(columns=["Month","Day","Year","Hour","Minute"], inplace=True)
     df.drop(columns=["Water Depth", "Sigma-t"], inplace=True)
     if cruise is not None:
-        dfd = df.loc[df["Cruise"] == cruise].copy().reset_index(drop=True)
+        dfd = df.loc[df["Cruise"] == cruise].copy()
+        # dfd = df.loc[df["Cruise"] == cruise].copy().reset_index(drop=True)
         dfd["distance [km]"] = omsa.utils.calculate_distance(dfd.cf["longitude"], 
                                                   dfd.cf["latitude"])
-        dfd = dfd.set_index(["date_time","Depth [m]", dfd.cf["latitude"].name, dfd.cf["longitude"].name], drop=False)
+        # dfd = dfd.set_index(["date_time","Depth [m]", dfd.cf["latitude"].name, dfd.cf["longitude"].name], drop=False)
         return dfd
     else:
-        df = df.set_index(["date_time","Depth [m]"], drop=False)
+        # df = df.set_index(["date_time","Depth [m]"], drop=False)
         return df
     
 
@@ -223,7 +224,7 @@ def ctd_transects_uaf(df, transect):
 
     dfd["distance [km]"] = omsa.utils.calculate_distance(dfd.cf["longitude"].values, 
                                         dfd.cf["latitude"].values)
-    dfd = dfd.set_index([dfd.cf["T"].name, dfd.cf["Z"].name, dfd.cf["latitude"].name, dfd.cf["longitude"].name], drop=False)
+    dfd = dfd.set_index([dfd.cf["T"].name, dfd.cf["Z"].name, dfd.cf["latitude"].name, dfd.cf["longitude"].name], drop=True)
     return dfd
 
 
@@ -242,7 +243,7 @@ def ctd_transects_misc_2002(df):
     df = df.tz_localize("US/Alaska").tz_convert("UTC").tz_localize(None)
     df["distance [km]"] = omsa.utils.calculate_distance(df.cf["longitude"], 
                                         df.cf["latitude"])
-    # df = df.reset_index()
+    df = df.reset_index()
     # df = df.reset_index().set_index(["date_time","Depth","Lat (N)","Long (E)"], drop=False)
     return df
 
