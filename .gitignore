@@ -1,0 +1,9 @@
+build
+save
+ciofs_hindcast_report/descriptive/descriptive_rips.ipynb
+ciofs_hindcast_report/appendix/river_forcing_make_files.ipynb
+_build
+*egg-info*
+.DS_STORE
+__pycache__
+.ipynb_checkpoints

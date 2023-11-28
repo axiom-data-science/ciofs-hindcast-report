@@ -60,6 +60,10 @@ Use the directories `inputs`, `outputs`, and `code` for placing dependencies or 
 
 ### Push static compiled files to update the report on github
 
+Ultimately we ended up storing the report on a local server so this stopped being updated.
+
+---
+
 Once you get the report in the form you want, with changes in the main branch, you can run the following to push the compiled html files to update the report at https://axiom-data-science.github.io/ciofs-hindcast-report:
 
     ghp-import -n -p -f ciofs_hindcast_report/_build/html
